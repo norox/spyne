@@ -160,7 +160,10 @@ greater than 1 will imply an iterable of objects as native Python type. Can be
 set to <tt class="docutils literal"><span class="pre">unbounded</span></tt> for arbitrary number of arguments</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">As of spyne-2.8.0, use <tt class="docutils literal"><span class="pre">float('inf')</span></tt> instead of <tt class="docutils literal"><span class="pre">unbounded</span></tt>.</p>
+<p class="last">As of spyne-2.8.0, use <tt class="docutils literal"><span class="pre">decimal.Decimal('inf')</span></tt> instead of <tt class="docutils literal"><span class="pre">unbounded</span></tt>
+as a <tt class="docutils literal"><span class="pre">max_occurs</span></tt> value.
+You should not use float(&#8216;inf&#8217;) as its behavior has inconsistencies between
+platforms and Python versions. See: <a class="reference external" href="https://github.com/arskom/spyne/pull/155">https://github.com/arskom/spyne/pull/155</a></p>
 </div>
 </li>
 </ul>
@@ -430,7 +433,7 @@ explicitly.</p>
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2011, Spyne Contributors.
+        &copy; Copyright Spyne Contributors.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div>
   </body>

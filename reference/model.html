@@ -28,7 +28,7 @@
     <link rel="top" title="spyne 2.8.0-rc documentation" href="../index.html" />
     <link rel="up" title="Spyne API Reference" href="index.html" />
     <link rel="next" title="Interfaces" href="interface.html" />
-    <link rel="prev" title="Fundamental Data Structures" href="base.html" /> 
+    <link rel="prev" title="RPC Decorators" href="decorator.html" /> 
   </head>
   <body>
     <div class="related">
@@ -44,7 +44,7 @@
           <a href="interface.html" title="Interfaces"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="base.html" title="Fundamental Data Structures"
+          <a href="decorator.html" title="RPC Decorators"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Spyne API Reference</a> &raquo;</li> 
@@ -109,7 +109,7 @@ mainly used for defining constraints on input values.</p>
 <tt class="descname">max_occurs</tt><em class="property"> = 1</em><a class="headerlink" href="#spyne.model._base.ModelBase.Attributes.max_occurs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Can be set to any strictly positive integer. Values greater than 1
 will imply an iterable of objects as native python type. Can be set to
-<tt class="docutils literal"><span class="pre">float(&quot;inf&quot;)</span></tt> for arbitrary number of arguments.</p>
+<tt class="docutils literal"><span class="pre">decimal.Decimal(&quot;inf&quot;)</span></tt> for arbitrary number of arguments.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -886,25 +886,25 @@ type.</p>
 
 <dl class="attribute">
 <dt id="spyne.model.primitive.Decimal.Attributes.ge">
-<tt class="descname">ge</tt><em class="property"> = -inf</em><a class="headerlink" href="#spyne.model.primitive.Decimal.Attributes.ge" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">ge</tt><em class="property"> = Decimal('-Infinity')</em><a class="headerlink" href="#spyne.model.primitive.Decimal.Attributes.ge" title="Permalink to this definition">¶</a></dt>
 <dd><p>The value should be greater than or equal to this number.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="spyne.model.primitive.Decimal.Attributes.gt">
-<tt class="descname">gt</tt><em class="property"> = -inf</em><a class="headerlink" href="#spyne.model.primitive.Decimal.Attributes.gt" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">gt</tt><em class="property"> = Decimal('-Infinity')</em><a class="headerlink" href="#spyne.model.primitive.Decimal.Attributes.gt" title="Permalink to this definition">¶</a></dt>
 <dd><p>The value should be greater than this number.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="spyne.model.primitive.Decimal.Attributes.le">
-<tt class="descname">le</tt><em class="property"> = inf</em><a class="headerlink" href="#spyne.model.primitive.Decimal.Attributes.le" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">le</tt><em class="property"> = Decimal('Infinity')</em><a class="headerlink" href="#spyne.model.primitive.Decimal.Attributes.le" title="Permalink to this definition">¶</a></dt>
 <dd><p>The value should be smaller than or equal to this number.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="spyne.model.primitive.Decimal.Attributes.lt">
-<tt class="descname">lt</tt><em class="property"> = inf</em><a class="headerlink" href="#spyne.model.primitive.Decimal.Attributes.lt" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">lt</tt><em class="property"> = Decimal('Infinity')</em><a class="headerlink" href="#spyne.model.primitive.Decimal.Attributes.lt" title="Permalink to this definition">¶</a></dt>
 <dd><p>The value should be smaller than this number.</p>
 </dd></dl>
 
@@ -1674,8 +1674,8 @@ type.</p>
 
 <dl class="attribute">
 <dt id="spyne.model.primitive.Unicode.Attributes.max_len">
-<tt class="descname">max_len</tt><em class="property"> = inf</em><a class="headerlink" href="#spyne.model.primitive.Unicode.Attributes.max_len" title="Permalink to this definition">¶</a></dt>
-<dd><p>Maximum length of string. Can be set to <tt class="docutils literal"><span class="pre">float('inf')</span></tt> to accept
+<tt class="descname">max_len</tt><em class="property"> = Decimal('Infinity')</em><a class="headerlink" href="#spyne.model.primitive.Unicode.Attributes.max_len" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum length of string. Can be set to <tt class="docutils literal"><span class="pre">decimal.Decimal('inf')</span></tt> to accept
 strings of arbitrary length.
 <tt class="xref py py-const docutils literal"><span class="pre">spyne.server.wsgi.MAX_CONTENT_LENGTH</span></tt>.</p>
 </dd></dl>
@@ -2160,8 +2160,8 @@ SQLAlchemy and its information alone.</p>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="base.html"
-                        title="previous chapter">Fundamental Data Structures</a></p>
+  <p class="topless"><a href="decorator.html"
+                        title="previous chapter">RPC Decorators</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="interface.html"
                         title="next chapter">Interfaces</a></p>
@@ -2200,14 +2200,14 @@ SQLAlchemy and its information alone.</p>
           <a href="interface.html" title="Interfaces"
              >next</a> |</li>
         <li class="right" >
-          <a href="base.html" title="Fundamental Data Structures"
+          <a href="decorator.html" title="RPC Decorators"
              >previous</a> |</li>
         <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
           <li><a href="index.html" >Spyne API Reference</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2011, Spyne Contributors.
+        &copy; Copyright Spyne Contributors.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div>
   </body>

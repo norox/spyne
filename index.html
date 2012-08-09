@@ -66,12 +66,15 @@ below.</p>
 own remote procedure call api and the application programmers the hassle of
 jumping through hoops just to expose their services using multiple protocols and
 transports.</p>
+<p>In other words, Spyne is framework for building distributed solutions that
+strictly follow the MVC pattern, where Model = <cite>spyne.model</cite>,
+View = <cite>spyne.protocol</cite> and Controller = <cite>user code</cite>.</p>
 <p>Spyne comes with the implementations of popular transport, protocol and
-interface document standards along with an easy-to-use API that lets you
+interface document standards along with a well-defined API that lets you
 build on existing functionality.</p>
 <p>Spyne currently supports the WSDL 1.1 interface description standard,
 along with SOAP 1.1 and the so-called HttpRpc and JsonObject protocols which
-can be transported via HTTP or ZeroMQ. The transports can be used in a both
+can be transported via Http or ZeroMQ. The transports can be used in both a
 client or server setting.</p>
 <p>The following are the primary sources of information about spyne:</p>
 <ul class="simple">
@@ -81,9 +84,9 @@ client or server setting.</p>
 <li>You can download Spyne packages from <a class="reference external" href="http://github.com/arskom/spyne/downloads">github</a>
 or <a class="reference external" href="http://pypi.python.org/pypi/spyne">pypi</a>.</li>
 </ul>
-<p>Spyne is a generalized version of a soap processing library known as soaplib.
-The following legacy versions of soaplib are also available in the source repository at github
-as branches.</p>
+<p>Spyne is a generalized version of a Soap library known as soaplib. The following
+legacy versions of soaplib are also available in the source repository at github
+as branches:</p>
 <ul class="simple">
 <li>Soaplib-0.8 branch: <a class="reference external" href="http://github.com/arskom/spyne/tree/soaplib-0_8">http://github.com/arskom/spyne/tree/soaplib-0_8</a></li>
 <li>Soaplib-1.0 branch: <a class="reference external" href="http://github.com/arskom/spyne/tree/soaplib-1_0">http://github.com/arskom/spyne/tree/soaplib-1_0</a></li>
@@ -104,7 +107,7 @@ Spyne service at all:</p>
 </ul>
 <p>both of which are available through <tt class="docutils literal"><span class="pre">easy_install</span></tt>.</p>
 <p>Additionally the following software packages are needed for various subsystems
-that Spyne supports:</p>
+of Spyne:</p>
 <ul class="simple">
 <li><a class="reference external" href="http://sqlalchemy.org">SQLAlchemy</a> for <a class="reference internal" href="reference/model.html#spyne.model.table.TableModel" title="spyne.model.table.TableModel"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.table.TableModel</span></tt></a>.</li>
 <li><a class="reference external" href="https://github.com/zeromq/pyzmq">pyzmq</a> for
@@ -114,7 +117,7 @@ that Spyne supports:</p>
 <li><a class="reference external" href="http://werkzeug.pocoo.org/">Werkzeug</a> is needed for <a class="reference internal" href="reference/protocol.html#spyne.protocol.http.HttpRpc" title="spyne.protocol.http.HttpRpc"><tt class="xref py py-class docutils literal"><span class="pre">spyne.protocol.http.HttpRpc</span></tt></a>.</li>
 </ul>
 <p>You are advised to add these as requirements to your own projects, as these are
-only optional dependencies of spyne, thus not handled in its setup script.</p>
+only optional dependencies of Spyne, thus not handled in its setup script.</p>
 </div>
 <div class="section" id="installing">
 <h2>Installing<a class="headerlink" href="#installing" title="Permalink to this headline">¶</a></h2>
@@ -138,11 +141,11 @@ use:</p>
 </div>
 <div class="section" id="contributing">
 <h2>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h2>
-<p>The main developers of spyne lurk in the official soap implementors forum
-in python.org, <a class="reference external" href="http://mail.python.org/mailman/listinfo/soap/">here</a>.
-That&#8217;s mostly because spyne is the continuation of soaplib, but also
-because soap is an important part of spyne.</p>
-<p>If you wish to contribute to spyne&#8217;s development, create a personal fork
+<p>The main developers of Spyne lurk in the <a class="reference external" href="http://mail.python.org/mailman/listinfo/soap/">official soap implementors
+forum</a>. kindly operated
+by python.org. That&#8217;s mostly because Spyne is the continuation of soaplib,
+but also because soap is an important part of Spyne.</p>
+<p>If you wish to contribute to Spyne&#8217;s development, create a personal fork
 on GitHub.  When you are ready to push to the upstream repository,
 submit a pull request to bring your work to the attention of the core
 committers. They will respond to review your patch and act accordingly.</p>
@@ -157,7 +160,7 @@ style guidelines for both source code and docstrings.</p>
 <p>We could also use help with the docs, which are built from
 <a class="reference external" href="http://docutils.sourceforge.net/rst.html">restructured text</a> using
 <a class="reference external" href="http://sphinx.pocoo.org">Sphinx</a>.</p>
-<p>Regular contributors may be invited to join as a core spyne committer on
+<p>Regular contributors may be invited to join as a core Spyne committer on
 GitHub. Even if this gives the core committers the power to commit directly
 to the core repository, we highly value code reviews and expect every
 significant change to be committed via pull requests.</p>
@@ -193,15 +196,16 @@ request to be reviewed.</p>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="reference/index.html">Spyne API Reference</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="reference/base.html">Fundamental Data Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/application.html">Application Definition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/service.html">Service Definition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/decorator.html">RPC Decorators</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/model.html">Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/interface.html">Interfaces</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/protocol.html">Protocols</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/client.html">Client Transports</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/server.html">Server Transports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/auxproc.html">Auxiliary Processors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/util.html">Miscellanous Spyne Utilities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/application.html">Application Definition</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/service.html">Service Definition</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/decorator.html">RPC Decorators</a></li>
 </ul>
 </li>
 </ul>
@@ -311,7 +315,7 @@ request to be reviewed.</p>
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2011, Spyne Contributors.
+        &copy; Copyright Spyne Contributors.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div>
   </body>

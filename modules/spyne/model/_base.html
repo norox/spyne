@@ -70,6 +70,7 @@
 
 <span class="kn">import</span> <span class="nn">spyne.const.xml_ns</span>
 
+<span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
 
 <span class="sd">&quot;&quot;&quot;This module contains the ModelBase class and other building blocks for</span>
 <span class="sd">defining models.</span>
@@ -141,7 +142,7 @@
         <span class="n">max_occurs</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="sd">&quot;&quot;&quot;Can be set to any strictly positive integer. Values greater than 1</span>
 <span class="sd">        will imply an iterable of objects as native python type. Can be set to</span>
-<span class="sd">        ``float(&quot;inf&quot;)`` for arbitrary number of arguments.&quot;&quot;&quot;</span>
+<span class="sd">        ``decimal.Decimal(&quot;inf&quot;)`` for arbitrary number of arguments.&quot;&quot;&quot;</span>
 
         <span class="n">schema_tag</span> <span class="o">=</span> <span class="s">&#39;{</span><span class="si">%s</span><span class="s">}element&#39;</span> <span class="o">%</span> <span class="n">spyne</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">xml_ns</span><span class="o">.</span><span class="n">xsd</span>
         <span class="sd">&quot;&quot;&quot;The tag used to add a primitives as child to a complex type in the</span>
@@ -268,7 +269,7 @@
         <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">cls_name</span><span class="p">,</span> <span class="n">cls_bases</span><span class="p">,</span> <span class="n">cls_dict</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span></div>
-    <span class="k">def</span> <span class="nf">_s_customize</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="o">**</span> <span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_s_customize</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;This function duplicates and customizes the class it belongs to. The</span>
 <span class="sd">        original class remains unchanged.</span>
 
@@ -289,6 +290,8 @@
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&quot;doc&quot;</span><span class="p">,</span> <span class="s">&quot;appinfo&quot;</span><span class="p">):</span>
                 <span class="nb">setattr</span><span class="p">(</span><span class="n">Annotations</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">k</span> <span class="o">==</span> <span class="s">&#39;max_occurs&#39;</span> <span class="ow">and</span> <span class="n">v</span> <span class="o">==</span> <span class="s">&#39;unbounded&#39;</span><span class="p">:</span>
+                <span class="nb">setattr</span><span class="p">(</span><span class="n">Attributes</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">Decimal</span><span class="p">(</span><span class="s">&#39;inf&#39;</span><span class="p">))</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="nb">setattr</span><span class="p">(</span><span class="n">Attributes</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
 
@@ -397,7 +400,7 @@
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2011, Spyne Contributors.
+        &copy; Copyright Spyne Contributors.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div>
   </body>

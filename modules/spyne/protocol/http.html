@@ -187,6 +187,9 @@
                     <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
                         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;HttpRpc protocol can only serialize &quot;</span>
                                          <span class="s">&quot;primitives, not </span><span class="si">%r</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">out_class</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">out_type_info</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">pass</span>
+
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;HttpRpc protocol can only serialize simple &quot;</span>
                                  <span class="s">&quot;return values.&quot;</span><span class="p">)</span>
@@ -237,7 +240,7 @@
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2011, Spyne Contributors.
+        &copy; Copyright Spyne Contributors.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div>
   </body>

@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../static/doctools.js"></script>
     <link rel="top" title="spyne 2.8.0-rc documentation" href="../index.html" />
     <link rel="up" title="Spyne API Reference" href="index.html" />
-    <link rel="next" title="Miscellanous Spyne Utilities" href="util.html" />
+    <link rel="next" title="Auxiliary Processors" href="auxproc.html" />
     <link rel="prev" title="Client Transports" href="client.html" /> 
   </head>
   <body>
@@ -41,7 +41,7 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="util.html" title="Miscellanous Spyne Utilities"
+          <a href="auxproc.html" title="Auxiliary Processors"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="client.html" title="Client Transports"
@@ -110,7 +110,7 @@ definition.</p>
 </div>
 <div class="section" id="module-spyne.server.wsgi">
 <span id="http-wsgi"></span><h2>HTTP (WSGI)<a class="headerlink" href="#module-spyne.server.wsgi" title="Permalink to this headline">¶</a></h2>
-<p>An rpc server that uses http as transport, and wsgi as bridge api.</p>
+<p>A server transport uses http as transport, and wsgi as bridge api.</p>
 <dl class="class">
 <dt id="spyne.server.wsgi.WsgiApplication">
 <em class="property">class </em><tt class="descclassname">spyne.server.wsgi.</tt><tt class="descname">WsgiApplication</tt><big>(</big><em>app</em>, <em>chunked=True</em><big>)</big><a class="reference internal" href="../modules/spyne/server/wsgi.html#WsgiApplication"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.server.wsgi.WsgiApplication" title="Permalink to this definition">¶</a></dt>
@@ -369,7 +369,7 @@ matched to.</p>
 
 <dl class="data">
 <dt id="spyne.server.zeromq.context">
-<tt class="descclassname">spyne.server.zeromq.</tt><tt class="descname">context</tt><em class="property"> = &lt;zmq.core.context.Context object at 0x49d9050&gt;</em><a class="headerlink" href="#spyne.server.zeromq.context" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">spyne.server.zeromq.</tt><tt class="descname">context</tt><em class="property"> = &lt;zmq.core.context.Context object at 0x4b54830&gt;</em><a class="headerlink" href="#spyne.server.zeromq.context" title="Permalink to this definition">¶</a></dt>
 <dd><p>The ZeroMQ context.</p>
 </dd></dl>
 
@@ -377,6 +377,7 @@ matched to.</p>
 <div class="section" id="module-spyne.server.null">
 <span id="nullserver"></span><h2>NullServer<a class="headerlink" href="#module-spyne.server.null" title="Permalink to this headline">¶</a></h2>
 <p>This module contains the NullServer class and its helper objects.</p>
+<p>The name comes from the &#8220;null modem connection&#8221;. Look it up.</p>
 <dl class="class">
 <dt id="spyne.server.null.NullServer">
 <em class="property">class </em><tt class="descclassname">spyne.server.null.</tt><tt class="descname">NullServer</tt><big>(</big><em>app</em><big>)</big><a class="reference internal" href="../modules/spyne/server/null.html#NullServer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.server.null.NullServer" title="Permalink to this definition">¶</a></dt>
@@ -452,8 +453,8 @@ ctx.out_object.</p>
   <p class="topless"><a href="client.html"
                         title="previous chapter">Client Transports</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="util.html"
-                        title="next chapter">Miscellanous Spyne Utilities</a></p>
+  <p class="topless"><a href="auxproc.html"
+                        title="next chapter">Auxiliary Processors</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../sources/reference/server.txt"
@@ -486,7 +487,7 @@ ctx.out_object.</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="util.html" title="Miscellanous Spyne Utilities"
+          <a href="auxproc.html" title="Auxiliary Processors"
              >next</a> |</li>
         <li class="right" >
           <a href="client.html" title="Client Transports"
@@ -496,7 +497,7 @@ ctx.out_object.</p>
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2011, Spyne Contributors.
+        &copy; Copyright Spyne Contributors.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div>
   </body>

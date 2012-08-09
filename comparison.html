@@ -83,13 +83,13 @@ to do with the ugliness of a raw wsdl document.</p>
 <li><p class="first">Does not support ZeroMQ.</p>
 </li>
 <li><p class="first">Uses standard python tools for xml parsing which is good for pure-python
-deployments. Spyne uses lxml, due to its excellent namespace support and
+deployments. Spyne uses lxml, due to its excellent xml namespace support and
 speed. So Spyne-based solutions are easier to develop and faster to work with
 but more difficult to deploy.</p>
 </li>
-<li><p class="first">Does not do input validation for SOAP.</p>
-</li>
-<li><p class="first">Does not support events.</p>
+<li><p class="first">Does not do declarative input validation. Traditional (imperative) input
+validation is possible via a code injection mechanism similar to Spyne&#8217;s
+events.</p>
 </li>
 <li><p class="first">Does not support HttpRpc.</p>
 </li>
@@ -258,7 +258,7 @@ than Spyne&#8217;s Soap client.</li>
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2011, Spyne Contributors.
+        &copy; Copyright Spyne Contributors.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div>
   </body>

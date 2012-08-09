@@ -28,7 +28,7 @@
     <link rel="top" title="spyne 2.8.0-rc documentation" href="../index.html" />
     <link rel="up" title="Spyne API Reference" href="index.html" />
     <link rel="next" title="Service Definition" href="service.html" />
-    <link rel="prev" title="Miscellanous Spyne Utilities" href="util.html" /> 
+    <link rel="prev" title="Fundamental Data Structures" href="base.html" /> 
   </head>
   <body>
     <div class="related">
@@ -44,7 +44,7 @@
           <a href="service.html" title="Service Definition"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="util.html" title="Miscellanous Spyne Utilities"
+          <a href="base.html" title="Fundamental Data Structures"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Spyne API Reference</a> &raquo;</li> 
@@ -62,7 +62,7 @@
 component is integrated.</p>
 <dl class="class">
 <dt id="spyne.application.Application">
-<em class="property">class </em><tt class="descclassname">spyne.application.</tt><tt class="descname">Application</tt><big>(</big><em>services</em>, <em>tns</em>, <em>in_protocol</em>, <em>out_protocol</em>, <em>interface=None</em>, <em>name=None</em><big>)</big><a class="reference internal" href="../modules/spyne/application.html#Application"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.application.Application" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">spyne.application.</tt><tt class="descname">Application</tt><big>(</big><em>services</em>, <em>tns</em>, <em>name=None</em>, <em>in_protocol=None</em>, <em>out_protocol=None</em>, <em>interface=None</em><big>)</big><a class="reference internal" href="../modules/spyne/application.html#Application"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.application.Application" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class is the glue between one or more service definitions,
 interface and protocol choices.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -74,14 +74,14 @@ interface and protocol choices.</p>
 the exposed services.</li>
 <li><strong>tns</strong> &#8211; The targetNamespace attribute of the exposed
 service.</li>
-<li><strong>interface</strong> &#8211; Ignored.</li>
-<li><strong>in_protocol</strong> &#8211; A ProtocolBase instance that defines the input
-protocol.</li>
-<li><strong>out_protocol</strong> &#8211; A ProtocolBase instance that defines the output
-protocol.</li>
 <li><strong>name</strong> &#8211; The optional name attribute of the exposed service.
 The default is the name of the application class
 which is, by default, &#8216;Application&#8217;.</li>
+<li><strong>in_protocol</strong> &#8211; A ProtocolBase instance that defines the input
+protocol. It&#8217;s only optional for NullServer transport.</li>
+<li><strong>out_protocol</strong> &#8211; A ProtocolBase instance that defines the output
+protocol. It&#8217;s only optional for NullServer transport.</li>
+<li><strong>interface</strong> &#8211; Ignored. Kept for backwards-compatibility purposes.</li>
 </ul>
 </td>
 </tr>
@@ -153,8 +153,8 @@ meant to be overridden unless you know what you&#8217;re doing.</p>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="util.html"
-                        title="previous chapter">Miscellanous Spyne Utilities</a></p>
+  <p class="topless"><a href="base.html"
+                        title="previous chapter">Fundamental Data Structures</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="service.html"
                         title="next chapter">Service Definition</a></p>
@@ -193,14 +193,14 @@ meant to be overridden unless you know what you&#8217;re doing.</p>
           <a href="service.html" title="Service Definition"
              >next</a> |</li>
         <li class="right" >
-          <a href="util.html" title="Miscellanous Spyne Utilities"
+          <a href="base.html" title="Fundamental Data Structures"
              >previous</a> |</li>
         <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
           <li><a href="index.html" >Spyne API Reference</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2011, Spyne Contributors.
+        &copy; Copyright Spyne Contributors.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div>
   </body>

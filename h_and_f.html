@@ -93,33 +93,12 @@ feature direction of spyne. Doing it in a text file in the source repository
 may not be the best approach for the job, but it should be enough to at least
 spark a discussion around this topic.</p>
 <p>So the following is missing in Spyne:</p>
-<div class="section" id="processing-pipeline">
-<h3>Processing Pipeline<a class="headerlink" href="#processing-pipeline" title="Permalink to this headline">¶</a></h3>
-<p>We think spyne package has one last missing element whose addition can result
-in touching most of the codebase: A proper lazily-evaluated pipeline for
-request processing.</p>
-<p>Currently, every artifact of the rpc processing pipeline remain in memory for the
-entire life time of the context object. This also results in having the whole
-message in memory while processing. While this is not a problem for small
-messages, which is spyne&#8217;s main target, it limits spyne capabilities.</p>
-<p>A prerequisite of having such a lazy pipeline is to have ProtocolBase offer a
-<tt class="docutils literal"><span class="pre">.feed()</span></tt> call, which accepts data fragments coming in from socket stream.
-Currently, spyne can only work with transports who support message semantics
-&#8211; i.e. those that offer a way of delimiting messages using without having to
-parse the contents. While the most popular transports support this, it prevents
-spyne from making use of low-level operating system primitives like tcp
-sockets.</p>
-</div>
 <div class="section" id="serializer-support">
 <h3>Serializer Support<a class="headerlink" href="#serializer-support" title="Permalink to this headline">¶</a></h3>
 <p>See the <a class="reference internal" href="manual/highlevel.html#manual-highlevel"><em>High-Level Introduction to Spyne</em></a> section for a small introductory paragraph about
 serializers.</p>
 <p>Currently, serializers are not distinguished in the spyne source code. Making
-them pluggable would:</p>
-<ol class="arabic simple">
-<li>Make spyne more flexible</li>
-<li>Make it easy to share code between protocols.</li>
-</ol>
+them pluggable would make it easy to share code between protocols.</p>
 <p>An initial attempt to make them pluggable would result in the lxml dependency
 for Soap being relaxed, which would make it possible to deploy spyne in
 pure-python environments. However, this is comparatively easy to do, given
@@ -130,26 +109,10 @@ exercise in oo interface design, but this may be a solution in search of a
 problem. Would anybody be interested using Soap over Json instead of Xml?
 Probably not :)</p>
 <p>It would, however, help newer serialization formats by reusing code from their
-more mature cousins. E.g. Soap already has a security layer defined. If the
-serializer is abstracted away, it could be easier to port security code from
-Soap to JsonRpc.</p>
-</div>
-<div class="section" id="models-need-yet-another-overhaul">
-<h3>Models need (yet another) overhaul<a class="headerlink" href="#models-need-yet-another-overhaul" title="Permalink to this headline">¶</a></h3>
-<p>Spyne should rely less on a class inheriting from ModelBase and more on a
-class having a predetermined attribute (like _type_info). The ComplexModel
-metaclass should just be responsible for filling out this information if it&#8217;s
-not already there (which is mostly the case now) and other parts of spyne
-should rely on this <em>one</em> class attribute to do all (de)serialization and
-constraint checking.</p>
-<p>When you call :func:<tt class="docutils literal"><span class="pre">customize</span></tt> function on a ModelBase child, a shallow
-copy of that class definition is created. While this works great if the class
-does not leave spyne code, (simply because spyne also looks for
-spyne-specific <tt class="docutils literal"><span class="pre">_is_clone_of</span></tt> attribute to match classes) it turned out that
-this is not what libraries that make heavy use of Python&#8217;s powerful
-metaprogramming features (like SQLAlchemy) expect. So the way Spyne breaks
-the &#8220;is&#8221; operator hinders Spyne&#8217;s interoperability prospects with other
-libraries.</p>
+more mature cousins. E.g. Xml already has a well-defined security protocol
+(XmlSec). If the serializer is abstracted away (and if somebody actually
+implements XmlSec in spyne) it could be easier to port security code from
+XmlObject to JsonObject.</p>
 </div>
 <div class="section" id="miscellanous">
 <h3>Miscellanous<a class="headerlink" href="#miscellanous" title="Permalink to this headline">¶</a></h3>
@@ -166,13 +129,12 @@ version number of the Spyne version once implemented.</p>
 <li>Support for EXI &#8211; The Efficient Xml Interchange as a serializer.</li>
 <li>SMTP as client/server transport.</li>
 <li>SPDY as client/server transport.</li>
-<li>WebSockets as client/server transport.</li>
 <li>Implement converting csv output to pdf.</li>
-<li>Implement DNS as transport</li>
 <li>Support security extensions to Soap (maybe using <a class="reference external" href="http://pypi.python.org/pypi/PyXMLSec/0.3.0">PyXMLSec</a> ?)</li>
 <li>Support addressing (routing) extensions to Soap</li>
 <li>Add WSDL Parsing support to Soap client</li>
 <li>Reflect transport and protocol pairs other than Soap/Http to the Wsdl.</li>
+<li>etc.</li>
 </ul>
 </div>
 </div>
@@ -209,13 +171,13 @@ to do with the ugliness of a raw wsdl document.</p>
 <li><p class="first">Does not support ZeroMQ.</p>
 </li>
 <li><p class="first">Uses standard python tools for xml parsing which is good for pure-python
-deployments. Spyne uses lxml, due to its excellent namespace support and
+deployments. Spyne uses lxml, due to its excellent xml namespace support and
 speed. So Spyne-based solutions are easier to develop and faster to work with
 but more difficult to deploy.</p>
 </li>
-<li><p class="first">Does not do input validation for SOAP.</p>
-</li>
-<li><p class="first">Does not support events.</p>
+<li><p class="first">Does not do declarative input validation. Traditional (imperative) input
+validation is possible via a code injection mechanism similar to Spyne&#8217;s
+events.</p>
 </li>
 <li><p class="first">Does not support HttpRpc.</p>
 </li>
@@ -328,11 +290,14 @@ than Spyne&#8217;s Soap client.</li>
 <div><ul>
 <li><p class="first">Rpclib is dead. Long live Spyne!</p>
 </li>
-<li><p class="first">Add support for JsonObject protocol.</p>
+<li><p class="first">Add support for JsonObject protocol. This initial version is expremental.</p>
+</li>
+<li><p class="first">Add support for MessagePackObject and MessagePackRpc protocols. These
+initial versions are expremental.</p>
 </li>
 <li><p class="first">Make DateTime string format customizable.</p>
 </li>
-<li><p class="first">Implement the server transport that exposes <tt class="docutils literal"><span class="pre">Application</span></tt> as a
+<li><p class="first">Implement TwistedWebResource that exposes an <tt class="docutils literal"><span class="pre">Application</span></tt> instance as a
 <tt class="docutils literal"><span class="pre">twisted.web.resource.Resource</span></tt> child.</p>
 </li>
 <li><p class="first">Remove Deprecated XMLAttribute and XMLAttributeRef. Use <tt class="docutils literal"><span class="pre">XmlAttribute</span></tt>
@@ -344,17 +309,17 @@ and <tt class="docutils literal"><span class="pre">XmlAttributeRef</span></tt> i
 </li>
 <li><p class="first">Interface documents are no longer subclasses of InterfaceBase. It&#8217;s up
 to the transport to expose the application using a given interface document
-standard now. The <tt class="docutils literal"><span class="pre">interface</span></tt> argument to the <tt class="docutils literal"><span class="pre">Application</span></tt> ctor is
-now ignored.</p>
+standard now. The <tt class="docutils literal"><span class="pre">interface</span></tt> argument to the <tt class="docutils literal"><span class="pre">Application</span></tt> constructor
+is now ignored.</p>
 </li>
-<li><p class="first">Html: Added a very simple lxml-based templating scheme called _HtmlPage.</p>
+<li><p class="first">Html: Added a very simple lxml-based templating scheme: <tt class="docutils literal"><span class="pre">HtmlPage</span></tt>.</p>
 </li>
 <li><p class="first">Html: Added row-based tables: They show fields in rows. It&#8217;s good for
 showing one object per table.</p>
 </li>
-<li><p class="first">Html: Added ImageUri support. They now render as &lt;img&gt; tags.</p>
+<li><p class="first">Html: Added ImageUri support. They render as &lt;img&gt; tags in Html output.</p>
 </li>
-<li><p class="first">Html: Added support for locales. You can now render field names as human
+<li><p class="first">Html: Added support for locales. You can now render field names as human-
 readable strings.</p>
 </li>
 <li><p class="first">Add support for async methods, which execute after the primary user code
@@ -365,25 +330,30 @@ themselves. Intermediate tags are in the parent&#8217;s namespace, just as befor
 </li>
 <li><p class="first">Xml &amp; friends: Make the &#8216;bare&#8217; mode work.</p>
 </li>
-<li><p class="first">rpclib.util.xml: <cite>get_object_as_xml</cite> can also get class suggestion.</p>
+<li><p class="first">spyne.util.xml: <cite>get_object_as_xml</cite> can also get class suggestion.</p>
 </li>
-<li><p class="first">rpclib.util.xml: <cite>get_xml_as_object</cite> has argument order swapped:
+<li><p class="first">spyne.util.xml: <cite>get_xml_as_object</cite> has argument order swapped:
 cls, elt -&gt; elt, cls. See ab91a3e2ad4756b71d1a2752e5b0d2af8551e061.</p>
 </li>
+<li><p class="first">There&#8217;s a final argument order change in Application ctor:</p>
+<blockquote>
+<div><p>in_protocol, out_protocol, interface, name</p>
+</div></blockquote>
+<p>becomes:</p>
+<blockquote>
+<div><p>name, in_protocol, out_protocol, interface</p>
+</div></blockquote>
+</li>
 <li><dl class="first docutils">
-<dt>Relevant pull requests:</dt>
+<dt>Relevant pull requests with new features and behavioral changes:</dt>
 <dd><ul class="first last simple">
 <li><a class="reference external" href="https://github.com/arskom/spyne/pull/128">https://github.com/arskom/spyne/pull/128</a></li>
 <li><a class="reference external" href="https://github.com/arskom/spyne/pull/129">https://github.com/arskom/spyne/pull/129</a></li>
-<li><a class="reference external" href="https://github.com/arskom/spyne/pull/133">https://github.com/arskom/spyne/pull/133</a></li>
-<li><a class="reference external" href="https://github.com/arskom/spyne/pull/137">https://github.com/arskom/spyne/pull/137</a></li>
-<li><a class="reference external" href="https://github.com/arskom/spyne/pull/138">https://github.com/arskom/spyne/pull/138</a></li>
 <li><a class="reference external" href="https://github.com/arskom/spyne/pull/139">https://github.com/arskom/spyne/pull/139</a></li>
-<li><a class="reference external" href="https://github.com/arskom/spyne/pull/141">https://github.com/arskom/spyne/pull/141</a></li>
 <li><a class="reference external" href="https://github.com/arskom/spyne/pull/142">https://github.com/arskom/spyne/pull/142</a></li>
-<li><a class="reference external" href="https://github.com/arskom/spyne/pull/144">https://github.com/arskom/spyne/pull/144</a></li>
-<li><a class="reference external" href="https://github.com/arskom/spyne/pull/146">https://github.com/arskom/spyne/pull/146</a></li>
-<li><a class="reference external" href="https://github.com/arskom/spyne/pull/145">https://github.com/arskom/spyne/pull/145</a></li>
+<li><a class="reference external" href="https://github.com/arskom/spyne/pull/148">https://github.com/arskom/spyne/pull/148</a></li>
+<li><a class="reference external" href="https://github.com/arskom/spyne/pull/157">https://github.com/arskom/spyne/pull/157</a></li>
+<li><a class="reference external" href="https://github.com/arskom/spyne/pull/173">https://github.com/arskom/spyne/pull/173</a></li>
 </ul>
 </dd>
 </dl>
@@ -960,9 +930,7 @@ on server start, and Service Definition is instantiated for each new request.</l
 <li><a class="reference internal" href="#">History and Future</a><ul>
 <li><a class="reference internal" href="#versioning">Versioning</a></li>
 <li><a class="reference internal" href="#roadmap-and-criticism">Roadmap and Criticism</a><ul>
-<li><a class="reference internal" href="#processing-pipeline">Processing Pipeline</a></li>
 <li><a class="reference internal" href="#serializer-support">Serializer Support</a></li>
-<li><a class="reference internal" href="#models-need-yet-another-overhaul">Models need (yet another) overhaul</a></li>
 <li><a class="reference internal" href="#miscellanous">Miscellanous</a></li>
 </ul>
 </li>
@@ -1074,7 +1042,7 @@ on server start, and Service Definition is instantiated for each new request.</l
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2011, Spyne Contributors.
+        &copy; Copyright Spyne Contributors.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div>
   </body>

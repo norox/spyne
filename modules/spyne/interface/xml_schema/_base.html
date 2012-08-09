@@ -86,7 +86,7 @@
 <span class="kn">from</span> <span class="nn">spyne.interface</span> <span class="kn">import</span> <span class="n">InterfaceDocumentBase</span>
 <span class="kn">from</span> <span class="nn">spyne.model</span> <span class="kn">import</span> <span class="n">SimpleModel</span>
 <span class="kn">from</span> <span class="nn">spyne.model.primitive</span> <span class="kn">import</span> <span class="n">Decimal</span>
-<span class="kn">from</span> <span class="nn">spyne.model.primitive</span> <span class="kn">import</span> <span class="n">String</span>
+<span class="kn">from</span> <span class="nn">spyne.model.primitive</span> <span class="kn">import</span> <span class="n">Unicode</span>
 <span class="kn">from</span> <span class="nn">spyne.model.complex</span> <span class="kn">import</span> <span class="n">ComplexModelBase</span>
 <span class="kn">from</span> <span class="nn">spyne.model.complex</span> <span class="kn">import</span> <span class="n">Alias</span>
 <span class="kn">from</span> <span class="nn">spyne.model.enum</span> <span class="kn">import</span> <span class="n">EnumBase</span>
@@ -100,7 +100,7 @@
 <span class="kn">from</span> <span class="nn">spyne.interface.xml_schema.model</span> <span class="kn">import</span> <span class="n">enum_add</span>
 
 <span class="kn">from</span> <span class="nn">spyne.interface.xml_schema.model</span> <span class="kn">import</span> <span class="n">simple_get_restriction_tag</span>
-<span class="kn">from</span> <span class="nn">spyne.interface.xml_schema.model</span> <span class="kn">import</span> <span class="n">string_get_restriction_tag</span>
+<span class="kn">from</span> <span class="nn">spyne.interface.xml_schema.model</span> <span class="kn">import</span> <span class="n">unicode_get_restriction_tag</span>
 <span class="kn">from</span> <span class="nn">spyne.interface.xml_schema.model</span> <span class="kn">import</span> <span class="n">decimal_get_restriction_tag</span>
 
 <span class="n">_add_handlers</span> <span class="o">=</span> <span class="n">cdict</span><span class="p">({</span>
@@ -115,7 +115,7 @@
 <span class="n">_get_restriction_tag_handlers</span> <span class="o">=</span> <span class="n">cdict</span><span class="p">({</span>
     <span class="nb">object</span><span class="p">:</span> <span class="k">lambda</span> <span class="bp">self</span><span class="p">,</span> <span class="n">cls</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
     <span class="n">SimpleModel</span><span class="p">:</span> <span class="n">simple_get_restriction_tag</span><span class="p">,</span>
-    <span class="n">String</span><span class="p">:</span> <span class="n">string_get_restriction_tag</span><span class="p">,</span>
+    <span class="n">Unicode</span><span class="p">:</span> <span class="n">unicode_get_restriction_tag</span><span class="p">,</span>
     <span class="n">Decimal</span><span class="p">:</span> <span class="n">decimal_get_restriction_tag</span><span class="p">,</span>
 <span class="p">})</span>
 
@@ -307,7 +307,7 @@
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2011, Spyne Contributors.
+        &copy; Copyright Spyne Contributors.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div>
   </body>

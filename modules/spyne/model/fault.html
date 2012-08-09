@@ -93,6 +93,14 @@
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">to_string_iterable</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">value</span><span class="o">.</span><span class="n">faultcode</span><span class="p">,</span> <span class="s">&#39;</span><span class="se">\n\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">faultstring</span><span class="p">]</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">cls</span><span class="o">.</span><span class="n">get_type_name</span><span class="p">():</span> <span class="p">{</span>
+            <span class="s">&quot;faultcode&quot;</span><span class="p">:</span> <span class="n">value</span><span class="o">.</span><span class="n">faultcode</span><span class="p">,</span>
+            <span class="s">&quot;faultstring&quot;</span><span class="p">:</span> <span class="n">value</span><span class="o">.</span><span class="n">faultstring</span><span class="p">,</span>
+            <span class="s">&quot;detail&quot;</span><span class="p">:</span> <span class="n">value</span><span class="o">.</span><span class="n">detail</span><span class="p">,</span>
+        <span class="p">}}</span>
 </pre></div></div>
 
           </div>
@@ -132,7 +140,7 @@
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2011, Spyne Contributors.
+        &copy; Copyright Spyne Contributors.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div>
   </body>

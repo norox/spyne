@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>spyne.util.simple &mdash; spyne 2.8.0-rc documentation</title>
+    <title>spyne.auxproc.sync &mdash; spyne 2.8.0-rc documentation</title>
     
     <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
@@ -49,7 +49,7 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <h1>Source code for spyne.util.simple</h1><div class="highlight"><pre>
+  <h1>Source code for spyne.auxproc.sync</h1><div class="highlight"><pre>
 <span class="c">#</span>
 <span class="c"># spyne - Copyright (C) Spyne contributors.</span>
 <span class="c">#</span>
@@ -68,28 +68,16 @@
 <span class="c"># Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301</span>
 <span class="c">#</span>
 
-<span class="sd">&quot;&quot;&quot;Contains functions that implement the most common protocol and transport</span>
-<span class="sd">combinations&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">spyne.application</span> <span class="kn">import</span> <span class="n">Application</span>
-<span class="kn">from</span> <span class="nn">spyne.interface.wsdl</span> <span class="kn">import</span> <span class="n">Wsdl11</span>
-<span class="kn">from</span> <span class="nn">spyne.protocol.soap</span> <span class="kn">import</span> <span class="n">Soap11</span>
-<span class="kn">from</span> <span class="nn">spyne.server.wsgi</span> <span class="kn">import</span> <span class="n">WsgiApplication</span>
+<span class="kn">from</span> <span class="nn">spyne.auxproc</span> <span class="kn">import</span> <span class="n">AuxProcBase</span>
 
-<span class="k">def</span> <span class="nf">wsgi_soap11_application</span><span class="p">(</span><span class="n">services</span><span class="p">,</span> <span class="n">tns</span><span class="o">=</span><span class="s">&#39;spyne.simple.soap&#39;</span><span class="p">,</span> <span class="n">validator</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-<div class="viewcode-block" id="wsgi_soap11_application"><a class="viewcode-back" href="../../../reference/util.html#spyne.util.simple.wsgi_soap11_application">[docs]</a>                                                                    <span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Wraps `services` argument inside a WsgiApplication that uses Wsdl 1.1 as</span>
-<span class="sd">    interface document and Soap 1.1 and both input and output protocols.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">application</span> <span class="o">=</span> <span class="n">Application</span><span class="p">(</span><span class="n">services</span><span class="p">,</span> <span class="n">tns</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">interface</span><span class="o">=</span><span class="n">Wsdl11</span><span class="p">(),</span>
-                <span class="n">in_protocol</span><span class="o">=</span><span class="n">Soap11</span><span class="p">(</span><span class="n">validator</span><span class="o">=</span><span class="n">validator</span><span class="p">),</span> <span class="n">out_protocol</span><span class="o">=</span><span class="n">Soap11</span><span class="p">())</span>
-
-    <span class="k">return</span> <span class="n">WsgiApplication</span><span class="p">(</span><span class="n">application</span><span class="p">)</span>
-
-<span class="n">wsgi_soap_application</span> <span class="o">=</span> <span class="n">wsgi_soap11_application</span></div>
-<span class="sd">&quot;&quot;&quot;DEPRECATED! Use :func:`wsgi_soap11_application` instead.&quot;&quot;&quot;</span>
-</pre></div>
+<span class="k">class</span> <span class="nc">SyncAuxProc</span><span class="p">(</span><span class="n">AuxProcBase</span><span class="p">):</span>
+<div class="viewcode-block" id="SyncAuxProc"><a class="viewcode-back" href="../../../reference/auxproc.html#spyne.auxproc.sync.SyncAuxProc">[docs]</a>    <span class="k">def</span> <span class="nf">process_context</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">server</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="n">ctx</span><span class="p">)</span>
+</pre></div></div>
 
           </div>
         </div>

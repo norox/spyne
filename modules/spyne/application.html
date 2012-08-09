@@ -79,6 +79,7 @@
 <span class="kn">from</span> <span class="nn">spyne.model.fault</span> <span class="kn">import</span> <span class="n">Fault</span>
 <span class="kn">from</span> <span class="nn">spyne.interface</span> <span class="kn">import</span> <span class="n">Interface</span>
 <span class="kn">from</span> <span class="nn">spyne._base</span> <span class="kn">import</span> <span class="n">EventManager</span>
+<span class="kn">from</span> <span class="nn">spyne.util.appreg</span> <span class="kn">import</span> <span class="n">register_application</span>
 
 
 <span class="k">class</span> <span class="nc">Application</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -89,14 +90,14 @@
 <span class="sd">                         the exposed services.</span>
 <span class="sd">    :param tns:          The targetNamespace attribute of the exposed</span>
 <span class="sd">                         service.</span>
-<span class="sd">    :param interface:    Ignored.</span>
-<span class="sd">    :param in_protocol:  A ProtocolBase instance that defines the input</span>
-<span class="sd">                         protocol.</span>
-<span class="sd">    :param out_protocol: A ProtocolBase instance that defines the output</span>
-<span class="sd">                         protocol.</span>
 <span class="sd">    :param name:         The optional name attribute of the exposed service.</span>
 <span class="sd">                         The default is the name of the application class</span>
 <span class="sd">                         which is, by default, &#39;Application&#39;.</span>
+<span class="sd">    :param in_protocol:  A ProtocolBase instance that defines the input</span>
+<span class="sd">                         protocol. It&#39;s only optional for NullServer transport.</span>
+<span class="sd">    :param out_protocol: A ProtocolBase instance that defines the output</span>
+<span class="sd">                         protocol. It&#39;s only optional for NullServer transport.</span>
+<span class="sd">    :param interface:    Ignored. Kept for backwards-compatibility purposes.</span>
 
 <span class="sd">    Supported events:</span>
 <span class="sd">        * method_call:</span>
@@ -118,15 +119,16 @@
 
     <span class="n">transport</span> <span class="o">=</span> <span class="bp">None</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">services</span><span class="p">,</span> <span class="n">tns</span><span class="p">,</span> <span class="n">in_protocol</span><span class="p">,</span> <span class="n">out_protocol</span><span class="p">,</span> <span class="n">interface</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-                                                                     <span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">services</span><span class="p">,</span> <span class="n">tns</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                           <span class="n">in_protocol</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">out_protocol</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">interface</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">services</span> <span class="o">=</span> <span class="n">services</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tns</span> <span class="o">=</span> <span class="n">tns</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="n">register_application</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">event_manager</span> <span class="o">=</span> <span class="n">EventManager</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">error_handler</span> <span class="o">=</span> <span class="bp">None</span>
@@ -213,6 +215,9 @@
             <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">aux</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">id</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">aux</span><span class="p">)</span> <span class="ow">in</span> <span class="n">aux_memo</span><span class="p">:</span>
                 <span class="n">d</span><span class="o">.</span><span class="n">aux</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">server</span><span class="p">)</span>
                 <span class="n">aux_memo</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">aux</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="nb">tuple</span><span class="p">([</span><span class="nb">id</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="p">]))</span>
 </pre></div></div>
 
           </div>
@@ -252,7 +257,7 @@
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2011, Spyne Contributors.
+        &copy; Copyright Spyne Contributors.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div>
   </body>

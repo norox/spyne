@@ -68,7 +68,7 @@
 <span class="c"># Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301</span>
 <span class="c">#</span>
 
-<span class="sd">&quot;&quot;&quot;An rpc server that uses http as transport, and wsgi as bridge api.&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;A server transport uses http as transport, and wsgi as bridge api.&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
@@ -209,7 +209,7 @@
         <span class="k">return</span> <span class="p">(</span>
             <span class="n">req_env</span><span class="p">[</span><span class="s">&#39;REQUEST_METHOD&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;GET&#39;</span>
             <span class="ow">and</span> <span class="p">(</span>
-                   <span class="n">req_env</span><span class="p">[</span><span class="s">&#39;QUERY_STRING&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;wsdl&#39;</span>
+                   <span class="n">req_env</span><span class="p">[</span><span class="s">&#39;QUERY_STRING&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;wsdl&#39;</span>
                 <span class="ow">or</span> <span class="n">req_env</span><span class="p">[</span><span class="s">&#39;PATH_INFO&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">&#39;.wsdl&#39;</span><span class="p">)</span>
             <span class="p">)</span>
         <span class="p">)</span>
@@ -230,7 +230,6 @@
                     <span class="n">wsdl</span> <span class="o">=</span> <span class="n">Wsdl11</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">interface</span><span class="p">)</span>
                     <span class="n">wsdl</span><span class="o">.</span><span class="n">build_interface_document</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
                     <span class="n">ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">wsdl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wsdl</span> <span class="o">=</span> <span class="n">wsdl</span><span class="o">.</span><span class="n">get_interface_document</span><span class="p">()</span>
-
 
             <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
@@ -267,6 +266,7 @@
 
         <span class="n">start_response</span><span class="p">(</span><span class="n">p_ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">resp_code</span><span class="p">,</span>
                                              <span class="n">p_ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">resp_headers</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+
         <span class="k">try</span><span class="p">:</span>
             <span class="n">process_contexts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">others</span><span class="p">,</span> <span class="n">p_ctx</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="n">error</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span><span class="n">e</span><span class="p">:</span>
@@ -323,18 +323,17 @@
         <span class="c"># implementation hook</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">event_manager</span><span class="o">.</span><span class="n">fire_event</span><span class="p">(</span><span class="s">&#39;wsgi_return&#39;</span><span class="p">,</span> <span class="n">p_ctx</span><span class="p">)</span>
 
-        <span class="c"># the client has not set a content-length, so we delete it as the input</span>
-        <span class="c"># is just an iterable.</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">chunked</span><span class="p">:</span>
+            <span class="c"># the client has not set a content-length, so we delete it as the</span>
+            <span class="c"># input is just an iterable.</span>
             <span class="k">if</span> <span class="s">&#39;Content-Length&#39;</span> <span class="ow">in</span> <span class="n">p_ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">resp_headers</span><span class="p">:</span>
                 <span class="k">del</span> <span class="n">p_ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">resp_headers</span><span class="p">[</span><span class="s">&#39;Content-Length&#39;</span><span class="p">]</span>
-
         <span class="k">else</span><span class="p">:</span>
             <span class="n">p_ctx</span><span class="o">.</span><span class="n">out_string</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">p_ctx</span><span class="o">.</span><span class="n">out_string</span><span class="p">)]</span>
 
         <span class="c"># if the out_string is a generator function, this hack lets the user</span>
         <span class="c"># code run until first yield, which lets it set response headers and</span>
-        <span class="c"># whatnot beforce calling start_response. yes it causes an additional</span>
+        <span class="c"># whatnot before calling start_response. Yes it causes an additional</span>
         <span class="c"># copy of the first fragment of the response to be made, but if you know</span>
         <span class="c"># a better way of having generator functions execute until first yield,</span>
         <span class="c"># just let us know.</span>
@@ -487,7 +486,7 @@
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2011, Spyne Contributors.
+        &copy; Copyright Spyne Contributors.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div>
   </body>

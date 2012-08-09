@@ -77,7 +77,7 @@
 
 <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span>
 
-<span class="kn">from</span> <span class="nn">spyne._base</span> <span class="kn">import</span> <span class="n">EventManager</span>
+<span class="kn">from</span> <span class="nn">spyne</span> <span class="kn">import</span> <span class="n">EventManager</span>
 
 <span class="kn">from</span> <span class="nn">spyne.const.http</span> <span class="kn">import</span> <span class="n">HTTP_400</span>
 <span class="kn">from</span> <span class="nn">spyne.const.http</span> <span class="kn">import</span> <span class="n">HTTP_404</span>
@@ -98,9 +98,11 @@
 
 <span class="k">def</span> <span class="nf">unwrap_messages</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">skip_depth</span><span class="p">):</span>
     <span class="n">out_type</span> <span class="o">=</span> <span class="n">cls</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">skip_depth</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">out_type</span><span class="o">.</span><span class="n">_type_info</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">skip_depth</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">out_type</span><span class="p">,</span> <span class="s">&quot;_type_info&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">out_type</span><span class="o">.</span><span class="n">_type_info</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">out_type</span> <span class="o">=</span> <span class="n">out_type</span><span class="o">.</span><span class="n">_type_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">break</span>
 
     <span class="k">return</span> <span class="n">out_type</span>
 
@@ -109,8 +111,8 @@
     <span class="n">out_type</span> <span class="o">=</span> <span class="n">cls</span>
     <span class="n">out_instance</span> <span class="o">=</span> <span class="n">inst</span>
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">skip_depth</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">out_type</span><span class="o">.</span><span class="n">_type_info</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">skip_depth</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">out_type</span><span class="p">,</span> <span class="s">&quot;_type_info&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">out_type</span><span class="o">.</span><span class="n">_type_info</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">out_type</span><span class="p">),</span> <span class="o">=</span> <span class="n">out_type</span><span class="o">.</span><span class="n">_type_info</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
             <span class="k">if</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">out_type</span><span class="p">,</span> <span class="n">ComplexModelBase</span><span class="p">):</span>
                 <span class="n">out_instance</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">out_instance</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
@@ -482,7 +484,7 @@
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2011, Spyne Contributors.
+        &copy; Copyright Spyne Contributors.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div>
   </body>
