@@ -8,9 +8,9 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>&lt;no title&gt; &mdash; spyne 2.8.0-rc documentation</title>
+    <title>Running Tests &mdash; spyne 2.8.0-rc documentation</title>
     
-    <link rel="stylesheet" href="static/default.css" type="text/css" />
+    <link rel="stylesheet" href="static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -47,20 +47,25 @@
              accesskey="P">previous</a> |</li>
         <li><a href="index.html">spyne 2.8.0-rc documentation</a> &raquo;</li> 
       </ul>
-    </div>  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body">
-            
-  
-
-          </div>
-        </div>
-      </div>
+    </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Running Tests</a><ul>
+<li><a class="reference internal" href="#run-tests-sh">run_tests.sh</a></li>
+<li><a class="reference internal" href="#requirements">Requirements</a></li>
+<li><a class="reference internal" href="#soap-interoperability-tests">SOAP Interoperability Tests</a><ul>
+<li><a class="reference internal" href="#python">Python</a></li>
+<li><a class="reference internal" href="#ruby">Ruby</a></li>
+<li><a class="reference internal" href="#net">.Net</a></li>
+<li><a class="reference internal" href="#java">Java</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="reference/util.html"
                         title="previous chapter">Miscellanous Spyne Utilities</a></p>
@@ -85,6 +90,102 @@
     </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="running-tests">
+<h1>Running Tests<a class="headerlink" href="#running-tests" title="Permalink to this headline">¶</a></h1>
+<p>While the test coverage for Spyne is not that bad, we always accept new tests
+that cover new use-cases. Please consider contributing tests even if your
+use-case is working fine! Given the nature of open-source projects, Spyne may
+shift focus or change maintainers in the future. This can result in patches
+which may cause incompatibilities with your existing code base. The only way to
+detect such corner cases is to have a great test suite.</p>
+<div class="section" id="run-tests-sh">
+<h2>run_tests.sh<a class="headerlink" href="#run-tests-sh" title="Permalink to this headline">¶</a></h2>
+<p>This is a shell script to make it easier to run all tests in one go. Twisted
+tests need to be run using trial. Interop tests start their own servers in the
+background, so they (currently) need to be run one by one in separate
+processes. This simple script considers all these little things and is the
+recommended way of running spyne tests.</p>
+</div>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<p>While simply executing test modules is normally enough to run Python tests,
+using py.test from pytest package is just a more pleasant way to run them.
+Simply easy_install pytest to get it. You can run the following command in the
+test directory:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">py</span><span class="o">.</span><span class="n">test</span> <span class="o">-</span><span class="n">v</span> <span class="o">--</span><span class="n">tb</span><span class="o">=</span><span class="n">short</span>
+</pre></div>
+</div>
+<p>You can use the module name as an argument:</p>
+<div class="highlight-python"><pre>py.test -v --tb=short test_sqla.py</pre>
+</div>
+<p>You can also choose which test to run:</p>
+<div class="highlight-python"><pre>py.test -v --tb=short test_sqla.py -k test_same_table_inheritance</pre>
+</div>
+<p>See <a class="reference external" href="http://pytest.org/latest/">pytest documentation</a> for more info.</p>
+<p>Note that you need to do several other preparations to have the interop tests
+working. See the next section for the specifics.</p>
+</div>
+<div class="section" id="soap-interoperability-tests">
+<h2>SOAP Interoperability Tests<a class="headerlink" href="#soap-interoperability-tests" title="Permalink to this headline">¶</a></h2>
+<p>The interoperability servers require twisted.web.</p>
+<div class="section" id="python">
+<h3>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h3>
+<p>Python interop tests currently use Spyne&#8217;s own clients and suds. For The suds
+test is the first thing we check and try not to break.</p>
+</div>
+<div class="section" id="ruby">
+<h3>Ruby<a class="headerlink" href="#ruby" title="Permalink to this headline">¶</a></h3>
+<p>You need Ruby 1.8.x to run the ruby interop test against soap_http_basic.
+Unfortunately, the Ruby Soap client does not do proper handling of namespaces,
+so you&#8217;ll need to turn off strict validation if you want to work with ruby
+clients.</p>
+<p>Ruby test module is very incomplete, implementing only two (echo_string and
+echo_integer) tests. We&#8217;re looking for volunteers who&#8217;d like to work on
+increasing test coverage for other use cases.</p>
+</div>
+<div class="section" id="net">
+<h3>.Net<a class="headerlink" href="#net" title="Permalink to this headline">¶</a></h3>
+<p>There isn&#8217;t any .Net tests for Spyne. WS-I test compliance reportedly covers
+.Net use cases as well. Patches are welcome!</p>
+</div>
+<div class="section" id="java">
+<h3>Java<a class="headerlink" href="#java" title="Permalink to this headline">¶</a></h3>
+<p>The WS-I test is written in Java. But unfortunately, it only focuses on Wsdl
+document and not the Soap functionality itself. We&#8217;re looking for volunteers
+who&#8217;d like to work on writing Java interop tests for spyne.</p>
+<p>To run the Wsdl tests, you should first get wsi-interop-tools package from
+<a class="reference external" href="http://ws-i.org">http://ws-i.org</a> and unpack it next to test_wsi.py. Here are the relevant links:</p>
+<p><a class="reference external" href="http://www.ws-i.org/deliverables/workinggroup.aspx?wg=testingtools">http://www.ws-i.org/deliverables/workinggroup.aspx?wg=testingtools</a>
+<a class="reference external" href="http://www.ws-i.org/Testing/Tools/2005/06/WSI_Test_Java_Final_1.1.zip">http://www.ws-i.org/Testing/Tools/2005/06/WSI_Test_Java_Final_1.1.zip</a></p>
+<p>See also test_wsi.py for more info.</p>
+<p>Now run the soap_http_basic interop test server and run test_wsi.py. If all goes
+well, you should get a new wsi-report-spyne.xml file in the same directory.</p>
+<p>Here&#8217;s the directory tree from a working setup:</p>
+<div class="highlight-python"><pre>|-- README.rst
+|-- (...)
+|-- interop
+|   |-- (...)
+|   |-- test_wsi.py
+|   `-- wsi-test-tools
+|       |-- License.htm
+|       |-- README.txt
+|       `-- (...)
+`-- (...)</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
         </div>
       </div>
       <div class="clearer"></div>

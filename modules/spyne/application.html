@@ -10,7 +10,7 @@
     
     <title>spyne.application &mdash; spyne 2.8.0-rc documentation</title>
     
-    <link rel="stylesheet" href="../../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -42,7 +42,24 @@
           <li><a href="../index.html" >Module code</a> &raquo;</li>
           <li><a href="../spyne.html" accesskey="U">spyne</a> &raquo;</li> 
       </ul>
-    </div>  
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -69,10 +86,6 @@
 <span class="c">#</span>
 
 
-<span class="sd">&quot;&quot;&quot;This module contains the Application class, to which every other spyne</span>
-<span class="sd">component is integrated.</span>
-<span class="sd">&quot;&quot;&quot;</span>
-
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
 
@@ -82,9 +95,24 @@
 <span class="kn">from</span> <span class="nn">spyne.util.appreg</span> <span class="kn">import</span> <span class="n">register_application</span>
 
 
-<span class="k">class</span> <span class="nc">Application</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<div class="viewcode-block" id="Application"><a class="viewcode-back" href="../../reference/application.html#spyne.application.Application">[docs]</a>    <span class="sd">&#39;&#39;&#39;This class is the glue between one or more service definitions,</span>
-<span class="sd">    interface and protocol choices.</span>
+<span class="k">def</span> <span class="nf">get_fault_string_from_exception</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">return_traceback_in_unhandled_exceptions</span><span class="p">():</span>
+<div class="viewcode-block" id="return_traceback_in_unhandled_exceptions"><a class="viewcode-back" href="../../reference/application.html#spyne.application.return_traceback_in_unhandled_exceptions">[docs]</a>    <span class="sd">&quot;&quot;&quot;Call this function first thing in your main function to return tracebacks</span>
+<span class="sd">    to your clients in case of unhandled exceptions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">global</span> <span class="n">get_fault_string_from_exception</span>
+
+    <span class="kn">import</span> <span class="nn">traceback</span>
+    <span class="k">def</span> <span class="nf">_get_fault_string_from_exception</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">()</span>
+    <span class="n">get_fault_string_from_exception</span> <span class="o">=</span> <span class="n">_get_fault_string_from_exception</span>
+
+<span class="k">class</span> <span class="nc">Application</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Application"><a class="viewcode-back" href="../../reference/application.html#spyne.application.Application">[docs]</a>    <span class="sd">&#39;&#39;&#39;The Application class is the glue between one or more service</span>
+<span class="sd">    definitions, input and output protocols.</span>
 
 <span class="sd">    :param services:     An iterable of ServiceBase subclasses that define</span>
 <span class="sd">                         the exposed services.</span>
@@ -92,10 +120,10 @@
 <span class="sd">                         service.</span>
 <span class="sd">    :param name:         The optional name attribute of the exposed service.</span>
 <span class="sd">                         The default is the name of the application class</span>
-<span class="sd">                         which is, by default, &#39;Application&#39;.</span>
-<span class="sd">    :param in_protocol:  A ProtocolBase instance that defines the input</span>
+<span class="sd">                         which is by default &#39;Application&#39;.</span>
+<span class="sd">    :param in_protocol:  A ProtocolBase instance that denotes the input</span>
 <span class="sd">                         protocol. It&#39;s only optional for NullServer transport.</span>
-<span class="sd">    :param out_protocol: A ProtocolBase instance that defines the output</span>
+<span class="sd">    :param out_protocol: A ProtocolBase instance that denotes the output</span>
 <span class="sd">                         protocol. It&#39;s only optional for NullServer transport.</span>
 <span class="sd">    :param interface:    Ignored. Kept for backwards-compatibility purposes.</span>
 
@@ -187,7 +215,7 @@
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
-            <span class="n">ctx</span><span class="o">.</span><span class="n">out_error</span> <span class="o">=</span> <span class="n">Fault</span><span class="p">(</span><span class="s">&#39;Server&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="n">out_error</span> <span class="o">=</span> <span class="n">Fault</span><span class="p">(</span><span class="s">&#39;Server&#39;</span><span class="p">,</span> <span class="n">get_fault_string_from_exception</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
 
             <span class="c"># fire events</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">event_manager</span><span class="o">.</span><span class="n">fire_event</span><span class="p">(</span><span class="s">&#39;method_exception_object&#39;</span><span class="p">,</span> <span class="n">ctx</span><span class="p">)</span>
@@ -221,23 +249,6 @@
 </pre></div></div>
 
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>

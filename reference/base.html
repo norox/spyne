@@ -10,7 +10,7 @@
     
     <title>Fundamental Data Structures &mdash; spyne 2.8.0-rc documentation</title>
     
-    <link rel="stylesheet" href="../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -49,7 +49,45 @@
         <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Spyne API Reference</a> &raquo;</li> 
       </ul>
-    </div>  
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Fundamental Data Structures</a><ul>
+<li><a class="reference internal" href="#methodcontext">MethodContext</a></li>
+<li><a class="reference internal" href="#methoddescriptor">MethodDescriptor</a></li>
+<li><a class="reference internal" href="#eventmanager">EventManager</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Spyne API Reference</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="application.html"
+                        title="next chapter">Application Definition</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../sources/reference/base.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -63,8 +101,9 @@
 <dl class="class">
 <dt id="spyne.MethodContext">
 <em class="property">class </em><tt class="descclassname">spyne.</tt><tt class="descname">MethodContext</tt><big>(</big><em>transport</em><big>)</big><a class="headerlink" href="#spyne.MethodContext" title="Permalink to this definition">¶</a></dt>
-<dd><p>The base class for all RPC Contexts. Holds crucial information about the
-lifetime of a document.</p>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>The base class for all RPC Contexts. Holds all information about the
+current state of execution of a remote procedure call.</p>
 <dl class="attribute">
 <dt id="spyne.MethodContext.app">
 <tt class="descname">app</tt><em class="property"> = None</em><a class="headerlink" href="#spyne.MethodContext.app" title="Permalink to this definition">¶</a></dt>
@@ -75,7 +114,7 @@ lifetime of a document.</p>
 <dt id="spyne.MethodContext.aux">
 <tt class="descname">aux</tt><em class="property"> = None</em><a class="headerlink" href="#spyne.MethodContext.aux" title="Permalink to this definition">¶</a></dt>
 <dd><p>Auxiliary-method specific context. You can use this to share data
-between auxiliary sessions. This is not set in primary methods.</p>
+between auxiliary sessions. This is not set in primary contexts.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -98,7 +137,9 @@ format.</p>
 <dt id="spyne.MethodContext.descriptor">
 <tt class="descname">descriptor</tt><a class="headerlink" href="#spyne.MethodContext.descriptor" title="Permalink to this definition">¶</a></dt>
 <dd><p>The :class:<tt class="docutils literal"><span class="pre">MethodDescriptor</span></tt> object representing the current method.
-This object should not be changed by the user code.</p>
+It is only set when the incoming request was successfully mapped to a method
+in the public interface. The contents of this property should not be changed
+by the user code.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -157,29 +198,29 @@ parsing error or the incoming document was representing an exception.</p>
 <dt id="spyne.MethodContext.in_object">
 <tt class="descname">in_object</tt><em class="property"> = None</em><a class="headerlink" href="#spyne.MethodContext.in_object" title="Permalink to this definition">¶</a></dt>
 <dd><p>In the request (i.e. server) case, this contains the function
-arguments for the function in the service definition class.
+argument sequence for the function in the service definition class.
 In the response (i.e. client) case, this contains the object returned
 by the remote procedure call.</p>
 <dl class="docutils">
-<dt>It&#8217;s always an iterable of objects:</dt>
+<dt>It&#8217;s always a sequence of objects:</dt>
 <dd><ul class="first last simple">
 <li>[None] when the function has no output (client)/input (server)
 types.</li>
 <li>A single-element list that wraps the return value when the
 function has one return type defined,</li>
-<li>Left untouched even when the function has more than one return
-values.</li>
+<li>A tuple of return values in case of the function having more than
+one return value.</li>
 </ul>
 </dd>
 </dl>
-<p>The objects never contain the instances but lists of values. The order
-is in line with <tt class="docutils literal"><span class="pre">self.descriptor.in_class._type_info.keys()</span></tt>.</p>
+<p>The order of the argument sequence is in line with
+<tt class="docutils literal"><span class="pre">self.descriptor.in_message._type_info.keys()</span></tt>.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="spyne.MethodContext.in_string">
 <tt class="descname">in_string</tt><em class="property"> = None</em><a class="headerlink" href="#spyne.MethodContext.in_string" title="Permalink to this definition">¶</a></dt>
-<dd><p>Incoming bytestream (i.e. an iterable of strings)</p>
+<dd><p>Incoming bytestream as iterable of <tt class="docutils literal"><span class="pre">str</span></tt> or <tt class="docutils literal"><span class="pre">bytes</span></tt> instances.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -199,7 +240,8 @@ matched to.</p>
 <dl class="attribute">
 <dt id="spyne.MethodContext.method_request_string">
 <tt class="descname">method_request_string</tt><em class="property"> = None</em><a class="headerlink" href="#spyne.MethodContext.method_request_string" title="Permalink to this definition">¶</a></dt>
-<dd><p>This is used as a basis on deciding which native method to call.</p>
+<dd><p>This is used to decide which native method to call. It is set by
+the protocol classes.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -237,30 +279,37 @@ class.</p>
 <dl class="attribute">
 <dt id="spyne.MethodContext.out_object">
 <tt class="descname">out_object</tt><em class="property"> = None</em><a class="headerlink" href="#spyne.MethodContext.out_object" title="Permalink to this definition">¶</a></dt>
-<dd><p>In the request (i.e. server) case, this is the native python object
-returned by the function in the service definition class.
+<dd><p>In the request (i.e. server) case, this contains the native python
+object(s) returned by the function in the service definition class.
 In the response (i.e. client) case, this contains the function arguments
 passed to the function call wrapper.</p>
 <dl class="docutils">
-<dt>It&#8217;s always an iterable of objects:</dt>
+<dt>It&#8217;s always an sequence of objects:</dt>
 <dd><ul class="first last simple">
 <li>[None] when the function has no output (server)/input (client)
 types.</li>
 <li>A single-element list that wraps the return value when the
 function has one return type defined,</li>
-<li>Left untouched even when the function has more than one return
-values.</li>
+<li>A tuple of return values in case of the function having more than
+one return value.</li>
 </ul>
 </dd>
 </dl>
-<p>The objects never contain the instances but lists of values. The order
-is in line with <tt class="docutils literal"><span class="pre">self.descriptor.out_class._type_info.keys()</span></tt>.</p>
+<p>The order of the argument sequence is in line with
+<tt class="docutils literal"><span class="pre">self.descriptor.out_message._type_info.keys()</span></tt>.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="spyne.MethodContext.out_string">
 <tt class="descname">out_string</tt><em class="property"> = None</em><a class="headerlink" href="#spyne.MethodContext.out_string" title="Permalink to this definition">¶</a></dt>
 <dd><p>Outgoing bytestream (i.e. an iterable of strings)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="spyne.MethodContext.protocol">
+<tt class="descname">protocol</tt><em class="property"> = None</em><a class="headerlink" href="#spyne.MethodContext.protocol" title="Permalink to this definition">¶</a></dt>
+<dd><p>The protocol-specific context. Protocol implementors can use this
+to their liking.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -290,8 +339,9 @@ to their liking.</p>
 <dl class="class">
 <dt id="spyne.MethodDescriptor">
 <em class="property">class </em><tt class="descclassname">spyne.</tt><tt class="descname">MethodDescriptor</tt><big>(</big><em>function</em>, <em>in_message</em>, <em>out_message</em>, <em>doc</em>, <em>is_callback=False</em>, <em>is_async=False</em>, <em>mtom=False</em>, <em>in_header=None</em>, <em>out_header=None</em>, <em>faults=None</em>, <em>port_type=None</em>, <em>no_ctx=False</em>, <em>udp=None</em>, <em>class_key=None</em>, <em>aux=None</em><big>)</big><a class="headerlink" href="#spyne.MethodDescriptor" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class represents the method signature of a soap method,
-and is returned by the rpc decorator.</p>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>This class represents the method signature of an exposed service. It is
+produced by the <a class="reference internal" href="decorator.html#spyne.decorator.srpc" title="spyne.decorator.srpc"><tt class="xref py py-func docutils literal"><span class="pre">spyne.decorator.srpc()</span></tt></a> decorator.</p>
 <dl class="attribute">
 <dt id="spyne.MethodDescriptor.aux">
 <tt class="descname">aux</tt><em class="property"> = None</em><a class="headerlink" href="#spyne.MethodDescriptor.aux" title="Permalink to this definition">¶</a></dt>
@@ -306,7 +356,8 @@ are ignored by the rpc layer.</p>
 <dl class="attribute">
 <dt id="spyne.MethodDescriptor.class_key">
 <tt class="descname">class_key</tt><em class="property"> = None</em><a class="headerlink" href="#spyne.MethodDescriptor.class_key" title="Permalink to this definition">¶</a></dt>
-<dd><p>The name the function is accessible from in the class.</p>
+<dd><p>The identifier of this method in its parent
+<a class="reference internal" href="service.html#spyne.service.ServiceBase" title="spyne.service.ServiceBase"><tt class="xref py py-class docutils literal"><span class="pre">spyne.service.ServiceBase</span></tt></a> subclass.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -318,32 +369,30 @@ are ignored by the rpc layer.</p>
 <dl class="attribute">
 <dt id="spyne.MethodDescriptor.faults">
 <tt class="descname">faults</tt><em class="property"> = None</em><a class="headerlink" href="#spyne.MethodDescriptor.faults" title="Permalink to this definition">¶</a></dt>
-<dd><p>The exceptions that this function can throw.</p>
+<dd><p>An iterable of <a class="reference internal" href="model.html#spyne.model.fault.Fault" title="spyne.model.fault.Fault"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.fault.Fault</span></tt></a> subclasses to denote
+the types of exceptions that this method can throw.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="spyne.MethodDescriptor.in_header">
 <tt class="descname">in_header</tt><em class="property"> = None</em><a class="headerlink" href="#spyne.MethodDescriptor.in_header" title="Permalink to this definition">¶</a></dt>
-<dd><p>The incoming header object this function could accept.</p>
+<dd><p>An iterable of <a class="reference internal" href="model.html#spyne.model.complex.ComplexModel" title="spyne.model.complex.ComplexModel"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.complex.ComplexModel</span></tt></a>
+subclasses to denote the types of header objects that this method can
+accept.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="spyne.MethodDescriptor.in_message">
 <tt class="descname">in_message</tt><em class="property"> = None</em><a class="headerlink" href="#spyne.MethodDescriptor.in_message" title="Permalink to this definition">¶</a></dt>
-<dd><p>Automatically generated complex object based on incoming arguments to
-the function.</p>
+<dd><p>A <a class="reference internal" href="model.html#spyne.model.complex.ComplexModel" title="spyne.model.complex.ComplexModel"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.complex.ComplexModel</span></tt></a> subclass that defines the
+input signature of the user function and that was automatically
+generated by the <tt class="docutils literal"><span class="pre">&#64;srpc</span></tt> decorator.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="spyne.MethodDescriptor.key">
 <tt class="descname">key</tt><a class="headerlink" href="#spyne.MethodDescriptor.key" title="Permalink to this definition">¶</a></dt>
 <dd><p>The function identifier in &#8216;{namespace}name&#8217; form.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="spyne.MethodDescriptor.mtom">
-<tt class="descname">mtom</tt><em class="property"> = None</em><a class="headerlink" href="#spyne.MethodDescriptor.mtom" title="Permalink to this definition">¶</a></dt>
-<dd><p>Flag to indicate whether to use MTOM transport with SOAP.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -356,34 +405,32 @@ in_message.</p>
 <dl class="attribute">
 <dt id="spyne.MethodDescriptor.no_ctx">
 <tt class="descname">no_ctx</tt><em class="property"> = None</em><a class="headerlink" href="#spyne.MethodDescriptor.no_ctx" title="Permalink to this definition">¶</a></dt>
-<dd><p>Whether the function receives the method context as the first
-argument implicitly or not.</p>
+<dd><p>no_ctx: Boolean flag to denote whether the user code gets an
+implicit <a class="reference internal" href="#spyne.MethodContext" title="spyne.MethodContext"><tt class="xref py py-class docutils literal"><span class="pre">spyne.MethodContext</span></tt></a> instance as first argument.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="spyne.MethodDescriptor.out_header">
 <tt class="descname">out_header</tt><em class="property"> = None</em><a class="headerlink" href="#spyne.MethodDescriptor.out_header" title="Permalink to this definition">¶</a></dt>
-<dd><p>The outgoing header object this function could send.</p>
+<dd><p>An iterable of <a class="reference internal" href="model.html#spyne.model.complex.ComplexModel" title="spyne.model.complex.ComplexModel"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.complex.ComplexModel</span></tt></a>
+subclasses to denote the types of header objects that this method can
+emit along with its return value.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="spyne.MethodDescriptor.out_message">
 <tt class="descname">out_message</tt><em class="property"> = None</em><a class="headerlink" href="#spyne.MethodDescriptor.out_message" title="Permalink to this definition">¶</a></dt>
-<dd><p>Automatically generated complex object based on the return type of
-the function.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="spyne.MethodDescriptor.port_type">
-<tt class="descname">port_type</tt><em class="property"> = None</em><a class="headerlink" href="#spyne.MethodDescriptor.port_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>The portType this function belongs to.</p>
+<dd><p>A <a class="reference internal" href="model.html#spyne.model.complex.ComplexModel" title="spyne.model.complex.ComplexModel"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.complex.ComplexModel</span></tt></a> subclass that defines the
+output signature of the user function and that was automatically
+generated by the <tt class="docutils literal"><span class="pre">&#64;srpc</span></tt> decorator.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="spyne.MethodDescriptor.udp">
 <tt class="descname">udp</tt><em class="property"> = None</em><a class="headerlink" href="#spyne.MethodDescriptor.udp" title="Permalink to this definition">¶</a></dt>
-<dd><p>Short for &#8220;User-Defined Properties&#8221;, it&#8217;s your own playground. You
-can use it to store custom metadata about the method.</p>
+<dd><p>Short for &#8220;User Defined Properties&#8221;, this is just an arbitrary python
+object set by the user to pass arbitrary metadata via the <tt class="docutils literal"><span class="pre">&#64;srpc</span></tt>
+decorator.</p>
 </dd></dl>
 
 </dd></dl>
@@ -391,9 +438,9 @@ can use it to store custom metadata about the method.</p>
 </div>
 <div class="section" id="eventmanager">
 <span id="reference-eventmanager"></span><h2>EventManager<a class="headerlink" href="#eventmanager" title="Permalink to this headline">¶</a></h2>
-<p>Spyne supports a simple event system that can be used to have repetitive boiler
-plate code that has to run for every method call nicely tucked away in one or
-more event handlers. The popular use-cases include things like database
+<p>Spyne supports a simple event system that can be used to have repetitive
+boilerplate code that has to run for every method call nicely tucked away in one
+or more event handlers. The popular use-cases include tasks like database
 transaction management, logging and measuring performance.</p>
 <p>Various Spyne components support firing events at various stages during the
 processing of the request, which are documented in the relevant classes.</p>
@@ -402,7 +449,7 @@ processing of the request, which are documented in the relevant classes.</p>
 <dd><ul class="first last simple">
 <li><a class="reference internal" href="application.html#spyne.application.Application" title="spyne.application.Application"><tt class="xref py py-class docutils literal"><span class="pre">spyne.application.Application</span></tt></a></li>
 <li><a class="reference internal" href="service.html#spyne.service.ServiceBase" title="spyne.service.ServiceBase"><tt class="xref py py-class docutils literal"><span class="pre">spyne.service.ServiceBase</span></tt></a></li>
-<li><a class="reference internal" href="protocol.html#spyne.protocol._base.ProtocolBase" title="spyne.protocol._base.ProtocolBase"><tt class="xref py py-class docutils literal"><span class="pre">spyne.protocol._base.ProtocolBase</span></tt></a></li>
+<li><a class="reference internal" href="protocol/base.html#spyne.protocol._base.ProtocolBase" title="spyne.protocol._base.ProtocolBase"><tt class="xref py py-class docutils literal"><span class="pre">spyne.protocol._base.ProtocolBase</span></tt></a></li>
 <li><a class="reference internal" href="server.html#spyne.server.wsgi.WsgiApplication" title="spyne.server.wsgi.WsgiApplication"><tt class="xref py py-class docutils literal"><span class="pre">spyne.server.wsgi.WsgiApplication</span></tt></a></li>
 </ul>
 </dd>
@@ -410,7 +457,8 @@ processing of the request, which are documented in the relevant classes.</p>
 <dl class="class">
 <dt id="spyne.EventManager">
 <em class="property">class </em><tt class="descclassname">spyne.</tt><tt class="descname">EventManager</tt><big>(</big><em>parent</em>, <em>handlers={}</em><big>)</big><a class="headerlink" href="#spyne.EventManager" title="Permalink to this definition">¶</a></dt>
-<dd><p>The event manager for all spyne events. The events are stored in an
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>The event manager for all spyne events. The events are stored in an
 ordered set &#8211; so the events are ran in the order they were added and
 adding a handler twice does not cause it to run twice.</p>
 <dl class="method">
@@ -460,44 +508,6 @@ stored in ctx.event attribute.</li>
 
 
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Fundamental Data Structures</a><ul>
-<li><a class="reference internal" href="#methodcontext">MethodContext</a></li>
-<li><a class="reference internal" href="#methoddescriptor">MethodDescriptor</a></li>
-<li><a class="reference internal" href="#eventmanager">EventManager</a></li>
-</ul>
-</li>
-</ul>
-
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="index.html"
-                        title="previous chapter">Spyne API Reference</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="application.html"
-                        title="next chapter">Application Definition</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../sources/reference/base.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>

@@ -10,7 +10,7 @@
     
     <title>spyne.model.fault &mdash; spyne 2.8.0-rc documentation</title>
     
-    <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -42,7 +42,24 @@
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../spyne.html" accesskey="U">spyne</a> &raquo;</li> 
       </ul>
-    </div>  
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -68,12 +85,33 @@
 <span class="c"># Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301</span>
 <span class="c">#</span>
 
-<span class="sd">&quot;&quot;&quot;This module defines the Fault class.&quot;&quot;&quot;</span>
-
 <span class="kn">from</span> <span class="nn">spyne.model</span> <span class="kn">import</span> <span class="n">ModelBase</span>
 
 <span class="k">class</span> <span class="nc">Fault</span><span class="p">(</span><span class="n">ModelBase</span><span class="p">,</span> <span class="ne">Exception</span><span class="p">):</span>
-<div class="viewcode-block" id="Fault"><a class="viewcode-back" href="../../../reference/model.html#spyne.model.fault.Fault">[docs]</a>    <span class="sd">&quot;&quot;&quot;Use this class as a base for public exceptions.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Fault"><a class="viewcode-back" href="../../../reference/model.html#spyne.model.fault.Fault">[docs]</a>    <span class="sd">&quot;&quot;&quot;Use this class as a base for all public exceptions.</span>
+<span class="sd">    The Fault object adheres to the</span>
+<span class="sd">    `SOAP 1.1 Fault definition &lt;http://www.w3.org/TR/2000/NOTE-SOAP-20000508/#_Toc478383507&gt;`_,</span>
+
+<span class="sd">    which has three main attributes:</span>
+
+<span class="sd">    :param faultcode: It&#39;s a dot-delimited string whose first fragment is</span>
+<span class="sd">        either &#39;Client&#39; or &#39;Server&#39;. Just like HTTP 4xx and 5xx codes,</span>
+<span class="sd">        &#39;Client&#39; indicates that something was wrong with the input, and &#39;Server&#39;</span>
+<span class="sd">        indicates something went wrong during the processing of an otherwise</span>
+<span class="sd">        legitimate request.</span>
+
+<span class="sd">        Protocol implementors should heed the values in ``faultcode`` to set</span>
+<span class="sd">        proper return codes in the protocol level when necessary. E.g. HttpRpc</span>
+<span class="sd">        protocol will return a HTTP 404 error when a</span>
+<span class="sd">        :class:`spyne.error.ResourceNotFound` is raised, and a general HTTP 400</span>
+<span class="sd">        when the ``faultcode`` starts with ``&#39;Client.&#39;`` or is ``&#39;Client&#39;``.</span>
+
+<span class="sd">        Soap would return Http 500 for any kind of exception, and denote the</span>
+<span class="sd">        nature of the exception in the Soap response body. (because that&#39;s what</span>
+<span class="sd">        the standard says... Yes, soap is famous for a reason :))</span>
+<span class="sd">    :param faultstring: It&#39;s the human-readable explanation of the exception.</span>
+<span class="sd">    :param detail: Additional information dict.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">__type_name__</span> <span class="o">=</span> <span class="s">&quot;Fault&quot;</span>
 
@@ -104,23 +142,6 @@
 </pre></div></div>
 
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>

@@ -10,7 +10,7 @@
     
     <title>Spyne FAQ &mdash; spyne 2.8.0-rc documentation</title>
     
-    <link rel="stylesheet" href="static/default.css" type="text/css" />
+    <link rel="stylesheet" href="static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="static/doctools.js"></script>
     <link rel="top" title="spyne 2.8.0-rc documentation" href="index.html" />
     <link rel="next" title="History and Future" href="h_and_f.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="tests.html" /> 
+    <link rel="prev" title="Running Tests" href="tests.html" /> 
   </head>
   <body>
     <div class="related">
@@ -43,11 +43,53 @@
           <a href="h_and_f.html" title="History and Future"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="tests.html" title="&lt;no title&gt;"
+          <a href="tests.html" title="Running Tests"
              accesskey="P">previous</a> |</li>
         <li><a href="index.html">spyne 2.8.0-rc documentation</a> &raquo;</li> 
       </ul>
-    </div>  
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Spyne FAQ</a><ul>
+<li><a class="reference internal" href="#does-spyne-support-the-soap-1-2-standard">Does spyne support the SOAP 1.2 standard?</a></li>
+<li><a class="reference internal" href="#how-do-i-implement-a-predefined-wsdl">How do I implement a predefined WSDL?</a></li>
+<li><a class="reference internal" href="#is-it-possible-to-use-other-decorators-with-rpc-srpc">Is it possible to use other decorators with &#64;rpc/&#64;srpc?</a></li>
+<li><a class="reference internal" href="#how-do-i-alter-the-behaviour-of-a-user-method-without-using-decorators">How do I alter the behaviour of a user method without using decorators?</a></li>
+<li><a class="reference internal" href="#how-do-i-use-variable-names-that-are-also-python-keywords">How do I use variable names that are also Python keywords?</a></li>
+<li><a class="reference internal" href="#how-does-spyne-behave-in-a-multi-threaded-environment">How does Spyne behave in a multi-threaded environment?</a></li>
+<li><a class="reference internal" href="#what-implications-does-spyne-s-license-lgpl-have-for-proprietary-projects-that-use-it">What implications does Spyne&#8217;s license (LGPL) have for proprietary projects that use it?</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tests.html"
+                        title="previous chapter">Running Tests</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="h_and_f.html"
+                        title="next chapter">History and Future</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="sources/faq.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -56,7 +98,7 @@
             
   <div class="section" id="spyne-faq">
 <h1>Spyne FAQ<a class="headerlink" href="#spyne-faq" title="Permalink to this headline">¶</a></h1>
-<p>Frequently asked questions about spyne and related libraries.</p>
+<p>Frequently asked questions about Spyne and related libraries.</p>
 <div class="section" id="does-spyne-support-the-soap-1-2-standard">
 <h2>Does spyne support the SOAP 1.2 standard?<a class="headerlink" href="#does-spyne-support-the-soap-1-2-standard" title="Permalink to this headline">¶</a></h2>
 <p><strong>Short answer:</strong> No.</p>
@@ -66,16 +108,15 @@
 <div class="section" id="how-do-i-implement-a-predefined-wsdl">
 <h2>How do I implement a predefined WSDL?<a class="headerlink" href="#how-do-i-implement-a-predefined-wsdl" title="Permalink to this headline">¶</a></h2>
 <p><strong>Short answer:</strong> By hand.</p>
-<p><strong>Long answer:</strong> This is not a strength of spyne, which is more oriented toward
-implementing services from scratch. It does not have any functionality to parse
-an existing WSDL document to produce the necessary Python classes and method
-stubs.</p>
-<p>Patches are welcome. You can start by adapting the WSDL parser from
-<a class="reference external" href="http://rsl.sf.net">RSL</a>.</p>
+<p><strong>Long answer:</strong> Spyne does not have any functionality to parse an existing WSDL
+document, nor a way of producing the necessary Python classes and method stubs
+from an existing interface definition.</p>
+<p>Patches are welcome for both of these points. Maybe you can start by adapting
+the WSDL parser from <a class="reference external" href="http://rsl.sf.net">RSL</a>.</p>
 </div>
 <div class="section" id="is-it-possible-to-use-other-decorators-with-rpc-srpc">
 <h2>Is it possible to use other decorators with &#64;rpc/&#64;srpc?<a class="headerlink" href="#is-it-possible-to-use-other-decorators-with-rpc-srpc" title="Permalink to this headline">¶</a></h2>
-<p><strong>Short answer:</strong> Yes, but just use events. See the <a class="reference internal" href="manual/usermanager.html#manual-user-manager"><em>User Manager</em></a>
+<p><strong>Short answer:</strong> Yes, but just use events. See the <a class="reference internal" href="manual/03_usermanager.html#manual-user-manager"><em>User Manager</em></a>
 tutorial and the <a class="reference external" href="http://github.com/arskom/spyne/blob/master/examples/user_manager/server_basic.py">events example</a>
 to learn how to do so. They work almost the same, except for the syntax.</p>
 <p><strong>Long Answer:</strong> Here&#8217;s the magic from the <a class="reference internal" href="reference/decorator.html#module-spyne.decorator" title="spyne.decorator"><tt class="xref py py-mod docutils literal"><span class="pre">spyne.decorator</span></tt></a>:</p>
@@ -83,9 +124,9 @@ to learn how to do so. They work almost the same, except for the syntax.</p>
 <span class="n">param_names</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">func_code</span><span class="o">.</span><span class="n">co_varnames</span><span class="p">[</span><span class="n">arg_start</span><span class="p">:</span><span class="n">argcount</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>So if <tt class="docutils literal"><span class="pre">f</span></tt> is your decorator, its signature should be the same as the user method,
-otherwise the parameter names and numbers in the interface are going to be wrong,
-which will cause weird errors.</p>
+<p>So if <tt class="docutils literal"><span class="pre">f</span></tt> is your decorator, its signature should be the same as the user
+method, otherwise the parameter names and numbers in the interface are going to
+be wrong, which will cause weird errors.</p>
 <p>Please note that if you just intend to have a convenient way to set additional
 method metadata, you can pass the <tt class="docutils literal"><span class="pre">_udp</span></tt> argument to the <a class="reference internal" href="reference/decorator.html#spyne.decorator.srpc" title="spyne.decorator.srpc"><tt class="xref py py-func docutils literal"><span class="pre">spyne.decorator.srpc()</span></tt></a>
 to your liking.</p>
@@ -118,8 +159,9 @@ every time the method is called, but not on initialization.</p>
 </div>
 <div class="section" id="how-do-i-alter-the-behaviour-of-a-user-method-without-using-decorators">
 <h2>How do I alter the behaviour of a user method without using decorators?<a class="headerlink" href="#how-do-i-alter-the-behaviour-of-a-user-method-without-using-decorators" title="Permalink to this headline">¶</a></h2>
-<p><tt class="docutils literal"><span class="pre">ctx.function</span></tt> contains the handle to the original function. You
-can set that attribute to arbitrary callables to prevent the original user
+<p><strong>Short answer:</strong> Set <tt class="docutils literal"><span class="pre">ctx.function</span></tt> to any callable you want.</p>
+<p><strong>Long answer:</strong> <tt class="docutils literal"><span class="pre">ctx.function</span></tt> contains the handle to the original function.
+You can set that attribute to arbitrary callables to prevent the original user
 method from running. This property is initiallized from
 <tt class="docutils literal"><span class="pre">ctx.descriptor.function</span></tt> every time a new context is initialized.</p>
 <p>If for some reason you need to alter the <tt class="docutils literal"><span class="pre">ctx.descriptor.function</span></tt>,
@@ -128,68 +170,52 @@ original value.</p>
 <p>Also consider thread-safety issues when altering global state.</p>
 </div>
 <div class="section" id="how-do-i-use-variable-names-that-are-also-python-keywords">
-<h2>How do I use variable names that are also python keywords?<a class="headerlink" href="#how-do-i-use-variable-names-that-are-also-python-keywords" title="Permalink to this headline">¶</a></h2>
+<h2>How do I use variable names that are also Python keywords?<a class="headerlink" href="#how-do-i-use-variable-names-that-are-also-python-keywords" title="Permalink to this headline">¶</a></h2>
 <p>Due to restrictions of the python language, you can&#8217;t do this:</p>
-<blockquote>
-<div><dl class="docutils">
-<dt>class SomeClass(ComplexModel):</dt>
-<dd>and = String
-or = Integer
-import = Datetime</dd>
-</dl>
-</div></blockquote>
+<div class="highlight-python"><pre>class SomeClass(ComplexModel):
+    and = String
+    or = Integer
+    import = Datetime</pre>
+</div>
 <p>The workaround is as follows:</p>
-<blockquote>
-<div><dl class="docutils">
-<dt>class SomeClass(ComplexModel):</dt>
-<dd><dl class="first docutils">
-<dt>_type_info = {</dt>
-<dd>&#8216;and&#8217;: String
-&#8216;or&#8217;: Integer
-&#8216;import&#8217;: Datetime</dd>
-</dl>
-<p class="last">}</p>
-</dd>
-</dl>
-</div></blockquote>
+<div class="highlight-python"><pre>class SomeClass(ComplexModel):
+    _type_info = {
+        'and': String
+        'or': Integer
+        'import': Datetime
+    }</pre>
+</div>
 <p>You also can&#8217;t do this:</p>
-<blockquote>
-<div><p>&#64;rpc(String, String, String, _returns=String)
-def f(ctx, from, import):</p>
-<blockquote>
-<div>return &#8216;1234&#8217;</div></blockquote>
-</div></blockquote>
+<div class="highlight-python"><pre>@rpc(String, String, String, _returns=String)
+def f(ctx, from, import):
+    return '1234'</pre>
+</div>
 <p>The workaround is as follows:</p>
-<blockquote>
-<div><dl class="docutils">
-<dt>&#64;rpc(String, String, String, _returns=String,</dt>
-<dd><dl class="first docutils">
-<dt>_in_variable_names={&#8216;_from&#8217;: &#8216;from&#8217;,</dt>
-<dd>&#8216;_import&#8217;: &#8216;import&#8217;},</dd>
-</dl>
-<p class="last">_out_variable_name=&#8221;return&#8221;</p>
-</dd>
-<dt>def f(ctx, _from, _import):</dt>
-<dd>return &#8216;1234&#8217;</dd>
-</dl>
-</div></blockquote>
+<div class="highlight-python"><pre>@rpc(String, String, String, _returns=String,
+    _in_variable_names={'from_': 'from', 'import_': 'import'},
+    _out_variable_name="return"
+def f(ctx, from_, import_):
+    return '1234'</pre>
+</div>
 <p>See here: <a class="reference external" href="https://github.com/arskom/spyne/blob/spyne-2.5.0-beta/src/spyne/test/test_service.py#L114">https://github.com/arskom/spyne/blob/spyne-2.5.0-beta/src/spyne/test/test_service.py#L114</a></p>
 </div>
 <div class="section" id="how-does-spyne-behave-in-a-multi-threaded-environment">
-<h2>How does spyne behave in a multi-threaded environment?<a class="headerlink" href="#how-does-spyne-behave-in-a-multi-threaded-environment" title="Permalink to this headline">¶</a></h2>
-<p>Spyne code is re-entrant, thus mostly thread safe. (A notable exception to
-this rule is the Interface class that caches where the document string once
-generated.) Whatever global state that is accessed is initialized and frozen
-(by convention) before any rpc processing is performed.</p>
-<p>The transport implementations (i.e. the code in client and server packages) or
-the user code are responsible for assuring thread-safety when accessing any
-out-of-thread data. No other parts of spyne should be made aware of threads.</p>
+<h2>How does Spyne behave in a multi-threaded environment?<a class="headerlink" href="#how-does-spyne-behave-in-a-multi-threaded-environment" title="Permalink to this headline">¶</a></h2>
+<p>Spyne code is mostly re-entrant, thus thread safe. Whatever global state that is
+accessed is initialized and frozen (by convention) before any rpc processing is
+performed.</p>
+<p>Some data (like the WSDL document) is initialized on first request,
+which does need precautions against race conditions. These precautions should be
+taken in the transport implementations. It&#8217;s the transport&#8217;s job to assure
+thread-safety when accessing any out-of-thread data. No other parts of Spyne
+should be made aware of threads.</p>
 </div>
 <div class="section" id="what-implications-does-spyne-s-license-lgpl-have-for-proprietary-projects-that-use-it">
 <h2>What implications does Spyne&#8217;s license (LGPL) have for proprietary projects that use it?<a class="headerlink" href="#what-implications-does-spyne-s-license-lgpl-have-for-proprietary-projects-that-use-it" title="Permalink to this headline">¶</a></h2>
 <p>DISCLAIMER: This is not legal advice, but just how we think things should work.</p>
 <p><strong>Short Answer:</strong> As long as you don&#8217;t modify Spyne itself, you can freely use
-Spyne in your commercial projects, without any additional obligations.</p>
+Spyne in conjunction with your proprietary code, without any additional
+obligations.</p>
 <p><strong>Long Answer:</strong> If you do modifications to Spyne, the best thing to do is to
 put them on github and just send a pull request upstream. Even if your patch
 is not accepted, you&#8217;ve done more than what the license requires you to do.</p>
@@ -210,7 +236,7 @@ tightly coupled, the license of Spyne propagates to your code as well.</p>
 <p>Spyne is a descendant of Soaplib, which was published by its author initially
 under LGPL. When he quit, the people who took over contemplated re-licensing it
 under the three-clause BSD license, but were not able to reach the original
-author. A re-licensing is now even less probable today because of the number of
+author. A re-licensing is even less probable today because of the number of
 people who&#8217;ve contributed code in the past years as we&#8217;d need to get the
 approval of every single person in order to re-license Spyne.</p>
 <p>It&#8217;s also not possible to distribute Spyne under a dual license model for the
@@ -220,48 +246,6 @@ same reason &#8211; everybody would have to approve the new licensing terms.</p>
 
 
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Spyne FAQ</a><ul>
-<li><a class="reference internal" href="#does-spyne-support-the-soap-1-2-standard">Does spyne support the SOAP 1.2 standard?</a></li>
-<li><a class="reference internal" href="#how-do-i-implement-a-predefined-wsdl">How do I implement a predefined WSDL?</a></li>
-<li><a class="reference internal" href="#is-it-possible-to-use-other-decorators-with-rpc-srpc">Is it possible to use other decorators with &#64;rpc/&#64;srpc?</a></li>
-<li><a class="reference internal" href="#how-do-i-alter-the-behaviour-of-a-user-method-without-using-decorators">How do I alter the behaviour of a user method without using decorators?</a></li>
-<li><a class="reference internal" href="#how-do-i-use-variable-names-that-are-also-python-keywords">How do I use variable names that are also python keywords?</a></li>
-<li><a class="reference internal" href="#how-does-spyne-behave-in-a-multi-threaded-environment">How does spyne behave in a multi-threaded environment?</a></li>
-<li><a class="reference internal" href="#what-implications-does-spyne-s-license-lgpl-have-for-proprietary-projects-that-use-it">What implications does Spyne&#8217;s license (LGPL) have for proprietary projects that use it?</a></li>
-</ul>
-</li>
-</ul>
-
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="tests.html"
-                        title="previous chapter">&lt;no title&gt;</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="h_and_f.html"
-                        title="next chapter">History and Future</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="sources/faq.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -279,7 +263,7 @@ same reason &#8211; everybody would have to approve the new licensing terms.</p>
           <a href="h_and_f.html" title="History and Future"
              >next</a> |</li>
         <li class="right" >
-          <a href="tests.html" title="&lt;no title&gt;"
+          <a href="tests.html" title="Running Tests"
              >previous</a> |</li>
         <li><a href="index.html">spyne 2.8.0-rc documentation</a> &raquo;</li> 
       </ul>

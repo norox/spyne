@@ -10,7 +10,7 @@
     
     <title>Miscellanous Spyne Utilities &mdash; spyne 2.8.0-rc documentation</title>
     
-    <link rel="stylesheet" href="../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../static/doctools.js"></script>
     <link rel="top" title="spyne 2.8.0-rc documentation" href="../index.html" />
     <link rel="up" title="Spyne API Reference" href="index.html" />
-    <link rel="next" title="&lt;no title&gt;" href="../tests.html" />
+    <link rel="next" title="Running Tests" href="../tests.html" />
     <link rel="prev" title="Auxiliary Processors" href="auxproc.html" /> 
   </head>
   <body>
@@ -41,7 +41,7 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../tests.html" title="&lt;no title&gt;"
+          <a href="../tests.html" title="Running Tests"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="auxproc.html" title="Auxiliary Processors"
@@ -49,7 +49,48 @@
         <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Spyne API Reference</a> &raquo;</li> 
       </ul>
-    </div>  
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Miscellanous Spyne Utilities</a><ul>
+<li><a class="reference internal" href="#module-spyne.util.cdict">Class Dictionary</a></li>
+<li><a class="reference internal" href="#module-spyne.util.etreeconv">Element Tree Conversion</a></li>
+<li><a class="reference internal" href="#module-spyne.util.simple">Simple Wrappers</a></li>
+<li><a class="reference internal" href="#module-spyne.util.xml">Xml Utilities</a></li>
+<li><a class="reference internal" href="#module-spyne.util.odict">Ordered Dictionary</a></li>
+<li><a class="reference internal" href="#module-spyne.util.oset">Ordered Set</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="auxproc.html"
+                        title="previous chapter">Auxiliary Processors</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../tests.html"
+                        title="next chapter">Running Tests</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../sources/reference/util.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -247,70 +288,10 @@ ElementTree representation of the same class.</p>
 <div class="section" id="module-spyne.util.oset">
 <span id="ordered-set"></span><h2>Ordered Set<a class="headerlink" href="#module-spyne.util.oset" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-spyne.util.simple">
-<span id="helpers"></span><h2>Helpers<a class="headerlink" href="#module-spyne.util.simple" title="Permalink to this headline">¶</a></h2>
-<p>Contains functions that implement the most common protocol and transport
-combinations</p>
-<dl class="function">
-<dt>
-<tt class="descclassname">spyne.util.simple.</tt><tt class="descname">wsgi_soap11_application</tt><big>(</big><em>services</em>, <em>tns='spyne.simple.soap'</em>, <em>validator=None</em>, <em>name=None</em><big>)</big><a class="reference internal" href="../modules/spyne/util/simple.html#wsgi_soap11_application"><span class="viewcode-link">[source]</span></a></dt>
-<dd><p>Wraps <cite>services</cite> argument inside a WsgiApplication that uses Wsdl 1.1 as
-interface document and Soap 1.1 and both input and output protocols.</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<tt class="descclassname">spyne.util.simple.</tt><tt class="descname">wsgi_soap_application</tt><big>(</big><em>services</em>, <em>tns='spyne.simple.soap'</em>, <em>validator=None</em>, <em>name=None</em><big>)</big></dt>
-<dd><p>DEPRECATED! Use <a class="reference internal" href="#spyne.util.simple.wsgi_soap11_application" title="spyne.util.simple.wsgi_soap11_application"><tt class="xref py py-func docutils literal"><span class="pre">wsgi_soap11_application()</span></tt></a> instead.</p>
-</dd></dl>
-
-</div>
 </div>
 
 
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Miscellanous Spyne Utilities</a><ul>
-<li><a class="reference internal" href="#module-spyne.util.cdict">Class Dictionary</a></li>
-<li><a class="reference internal" href="#module-spyne.util.etreeconv">Element Tree Conversion</a></li>
-<li><a class="reference internal" href="#module-spyne.util.simple">Simple Wrappers</a></li>
-<li><a class="reference internal" href="#module-spyne.util.xml">Xml Utilities</a></li>
-<li><a class="reference internal" href="#module-spyne.util.odict">Ordered Dictionary</a></li>
-<li><a class="reference internal" href="#module-spyne.util.oset">Ordered Set</a></li>
-<li><a class="reference internal" href="#module-spyne.util.simple">Helpers</a></li>
-</ul>
-</li>
-</ul>
-
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="auxproc.html"
-                        title="previous chapter">Auxiliary Processors</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="../tests.html"
-                        title="next chapter">&lt;no title&gt;</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../sources/reference/util.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -325,7 +306,7 @@ interface document and Soap 1.1 and both input and output protocols.</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../tests.html" title="&lt;no title&gt;"
+          <a href="../tests.html" title="Running Tests"
              >next</a> |</li>
         <li class="right" >
           <a href="auxproc.html" title="Auxiliary Processors"

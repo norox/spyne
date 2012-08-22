@@ -1,0 +1,9 @@
+
+.. _reference-error:
+
+Common Exceptions
+=================
+
+.. automodule:: spyne.error
+    :members:
+    :show-inheritance:

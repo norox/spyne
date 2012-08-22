@@ -10,7 +10,7 @@
     
     <title>Application Definition &mdash; spyne 2.8.0-rc documentation</title>
     
-    <link rel="stylesheet" href="../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -49,22 +49,48 @@
         <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Spyne API Reference</a> &raquo;</li> 
       </ul>
-    </div>  
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="base.html"
+                        title="previous chapter">Fundamental Data Structures</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="service.html"
+                        title="next chapter">Service Definition</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../sources/reference/application.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="module-spyne.application">
-<span id="application-definition"></span><h1>Application Definition<a class="headerlink" href="#module-spyne.application" title="Permalink to this headline">¶</a></h1>
-<p>This module contains the Application class, to which every other spyne
-component is integrated.</p>
+  <div class="section" id="application-definition">
+<h1>Application Definition<a class="headerlink" href="#application-definition" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="spyne.application.Application">
 <em class="property">class </em><tt class="descclassname">spyne.application.</tt><tt class="descname">Application</tt><big>(</big><em>services</em>, <em>tns</em>, <em>name=None</em>, <em>in_protocol=None</em>, <em>out_protocol=None</em>, <em>interface=None</em><big>)</big><a class="reference internal" href="../modules/spyne/application.html#Application"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.application.Application" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class is the glue between one or more service definitions,
-interface and protocol choices.</p>
+<dd><p>The Application class is the glue between one or more service
+definitions, input and output protocols.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -76,10 +102,10 @@ the exposed services.</li>
 service.</li>
 <li><strong>name</strong> &#8211; The optional name attribute of the exposed service.
 The default is the name of the application class
-which is, by default, &#8216;Application&#8217;.</li>
-<li><strong>in_protocol</strong> &#8211; A ProtocolBase instance that defines the input
+which is by default &#8216;Application&#8217;.</li>
+<li><strong>in_protocol</strong> &#8211; A ProtocolBase instance that denotes the input
 protocol. It&#8217;s only optional for NullServer transport.</li>
-<li><strong>out_protocol</strong> &#8211; A ProtocolBase instance that defines the output
+<li><strong>out_protocol</strong> &#8211; A ProtocolBase instance that denotes the output
 protocol. It&#8217;s only optional for NullServer transport.</li>
 <li><strong>interface</strong> &#8211; Ignored. Kept for backwards-compatibility purposes.</li>
 </ul>
@@ -144,38 +170,17 @@ meant to be overridden unless you know what you&#8217;re doing.</p>
 
 </dd></dl>
 
+<dl class="function">
+<dt id="spyne.application.return_traceback_in_unhandled_exceptions">
+<tt class="descclassname">spyne.application.</tt><tt class="descname">return_traceback_in_unhandled_exceptions</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/spyne/application.html#return_traceback_in_unhandled_exceptions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.application.return_traceback_in_unhandled_exceptions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call this function first thing in your main function to return tracebacks
+to your clients in case of unhandled exceptions.</p>
+</dd></dl>
+
 </div>
 
 
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="base.html"
-                        title="previous chapter">Fundamental Data Structures</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="service.html"
-                        title="next chapter">Service Definition</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../sources/reference/application.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>

@@ -12,7 +12,7 @@
     
     <title>Index &mdash; spyne 2.8.0-rc documentation</title>
     
-    <link rel="stylesheet" href="static/default.css" type="text/css" />
+    <link rel="stylesheet" href="static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -41,7 +41,27 @@
              >modules</a> |</li>
         <li><a href="index.html">spyne 2.8.0-rc documentation</a> &raquo;</li> 
       </ul>
-    </div>  
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+
+   
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -61,6 +81,7 @@
  | <a href="#G"><strong>G</strong></a>
  | <a href="#H"><strong>H</strong></a>
  | <a href="#I"><strong>I</strong></a>
+ | <a href="#J"><strong>J</strong></a>
  | <a href="#K"><strong>K</strong></a>
  | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
@@ -93,7 +114,7 @@
   </dt>
 
       
-  <dt><a href="reference/protocol.html#spyne.protocol.http.HttpRpc.allowed_http_verbs">allowed_http_verbs (spyne.protocol.http.HttpRpc attribute)</a>
+  <dt><a href="reference/protocol/xml.html#spyne.protocol.xml._base.XmlObject.allowed_http_verbs">allowed_http_verbs (spyne.protocol.xml._base.XmlObject attribute)</a>
   </dt>
 
       
@@ -101,46 +122,26 @@
   </dt>
 
       
-  <dt><a href="reference/model.html#spyne.model.primitive.AnyDict.Annotations">AnyDict.Annotations (class in spyne.model.primitive)</a>
-  </dt>
-
-      
-  <dt><a href="reference/model.html#spyne.model.primitive.AnyDict.Attributes">AnyDict.Attributes (class in spyne.model.primitive)</a>
-  </dt>
-
-      
   <dt><a href="reference/model.html#spyne.model.primitive.AnyUri">AnyUri (class in spyne.model.primitive)</a>
   </dt>
 
       
-  <dt><a href="reference/model.html#spyne.model.primitive.AnyUri.Annotations">AnyUri.Annotations (class in spyne.model.primitive)</a>
+  <dt><a href="reference/model.html#spyne.model.primitive.AnyUri.UriValue">AnyUri.UriValue (class in spyne.model.primitive)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="reference/model.html#spyne.model.primitive.AnyXml">AnyXml (class in spyne.model.primitive)</a>
   </dt>
 
-      
-  <dt><a href="reference/model.html#spyne.model.primitive.AnyXml.Annotations">AnyXml.Annotations (class in spyne.model.primitive)</a>
-  </dt>
-
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="reference/base.html#spyne.MethodContext.app">app (spyne.MethodContext attribute)</a>
   </dt>
 
       <dd><dl>
         
-  <dt><a href="reference/protocol.html#spyne.protocol._base.ProtocolBase.app">(spyne.protocol._base.ProtocolBase attribute)</a>
-  </dt>
-
-        
-  <dt><a href="reference/protocol.html#spyne.protocol.http.HttpRpc.app">(spyne.protocol.http.HttpRpc attribute)</a>
-  </dt>
-
-        
-  <dt><a href="reference/protocol.html#spyne.protocol.soap.soap11.Soap11.app">(spyne.protocol.soap.soap11.Soap11 attribute)</a>
+  <dt><a href="reference/protocol/base.html#spyne.protocol._base.ProtocolBase.app">(spyne.protocol._base.ProtocolBase attribute)</a>
   </dt>
 
       </dl></dd>
@@ -153,11 +154,11 @@
   </dt>
 
       
-  <dt><a href="reference/model.html#spyne.model.complex.Array">Array (class in spyne.model.complex)</a>
+  <dt><a href="reference/error.html#spyne.error.ArgumentError">ArgumentError</a>
   </dt>
 
       
-  <dt><a href="reference/model.html#spyne.model.binary.Attachment">Attachment (class in spyne.model.binary)</a>
+  <dt><a href="reference/model.html#spyne.model.complex.Array">Array (class in spyne.model.complex)</a>
   </dt>
 
       
@@ -185,14 +186,6 @@
   </dt>
 
       
-  <dt><a href="reference/model.html#spyne.model.primitive.Boolean.Annotations">Boolean.Annotations (class in spyne.model.primitive)</a>
-  </dt>
-
-      
-  <dt><a href="reference/model.html#spyne.model.primitive.Boolean.Attributes">Boolean.Attributes (class in spyne.model.primitive)</a>
-  </dt>
-
-      
   <dt><a href="reference/interface.html#spyne.interface._base.InterfaceDocumentBase.build_interface_document">build_interface_document() (spyne.interface._base.InterfaceDocumentBase method)</a>
   </dt>
 
@@ -202,8 +195,6 @@
   </dt>
 
       </dl></dd>
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="reference/interface.html#spyne.interface.wsdl.wsdl11.Wsdl11.build_validation_schema">build_validation_schema() (spyne.interface.wsdl.wsdl11.Wsdl11 method)</a>
   </dt>
@@ -214,6 +205,8 @@
   </dt>
 
       </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="reference/model.html#spyne.model.primitive.Byte">Byte (in module spyne.model.primitive)</a>
   </dt>
@@ -277,26 +270,34 @@
   </dt>
 
       
-  <dt><a href="reference/protocol.html#spyne.protocol._base.ProtocolBase.create_in_document">create_in_document() (spyne.protocol._base.ProtocolBase method)</a>
+  <dt><a href="reference/protocol/base.html#spyne.protocol._base.ProtocolBase.create_in_document">create_in_document() (spyne.protocol._base.ProtocolBase method)</a>
   </dt>
 
       <dd><dl>
         
-  <dt><a href="reference/protocol.html#spyne.protocol.http.HttpRpc.create_in_document">(spyne.protocol.http.HttpRpc method)</a>
+  <dt><a href="reference/protocol/json.html#spyne.protocol.json.JsonObject.create_in_document">(spyne.protocol.json.JsonObject method)</a>
+  </dt>
+
+        
+  <dt><a href="reference/protocol/msgpack.html#spyne.protocol.msgpack.MessagePackObject.create_in_document">(spyne.protocol.msgpack.MessagePackObject method)</a>
+  </dt>
+
+        
+  <dt><a href="reference/protocol/msgpack.html#spyne.protocol.msgpack.MessagePackRpc.create_in_document">(spyne.protocol.msgpack.MessagePackRpc method)</a>
+  </dt>
+
+        
+  <dt><a href="reference/protocol/xml.html#spyne.protocol.xml._base.XmlObject.create_in_document">(spyne.protocol.xml._base.XmlObject method)</a>
   </dt>
 
       </dl></dd>
       
-  <dt><a href="reference/protocol.html#spyne.protocol._base.ProtocolBase.create_out_string">create_out_string() (spyne.protocol._base.ProtocolBase method)</a>
+  <dt><a href="reference/protocol/base.html#spyne.protocol._base.ProtocolBase.create_out_string">create_out_string() (spyne.protocol._base.ProtocolBase method)</a>
   </dt>
 
       <dd><dl>
         
-  <dt><a href="reference/protocol.html#spyne.protocol.http.HttpRpc.create_out_string">(spyne.protocol.http.HttpRpc method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/protocol.html#spyne.protocol.soap.soap11.Soap11.create_out_string">(spyne.protocol.soap.soap11.Soap11 method)</a>
+  <dt><a href="reference/protocol/xml.html#spyne.protocol.xml._base.XmlObject.create_out_string">(spyne.protocol.xml._base.XmlObject method)</a>
   </dt>
 
       </dl></dd>
@@ -307,98 +308,6 @@
       <dd><dl>
         
   <dt><a href="reference/model.html#spyne.model.complex.ComplexModelBase.customize">(spyne.model.complex.ComplexModelBase class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.AnyDict.customize">(spyne.model.primitive.AnyDict class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.AnyUri.customize">(spyne.model.primitive.AnyUri class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.AnyXml.customize">(spyne.model.primitive.AnyXml class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Boolean.customize">(spyne.model.primitive.Boolean class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Date.customize">(spyne.model.primitive.Date class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.DateTime.customize">(spyne.model.primitive.DateTime class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Decimal.customize">(spyne.model.primitive.Decimal class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Double.customize">(spyne.model.primitive.Double class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Duration.customize">(spyne.model.primitive.Duration class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Float.customize">(spyne.model.primitive.Float class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.ImageUri.customize">(spyne.model.primitive.ImageUri class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer.customize">(spyne.model.primitive.Integer class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer16.customize">(spyne.model.primitive.Integer16 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer32.customize">(spyne.model.primitive.Integer32 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer64.customize">(spyne.model.primitive.Integer64 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer8.customize">(spyne.model.primitive.Integer8 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Time.customize">(spyne.model.primitive.Time class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Unicode.customize">(spyne.model.primitive.Unicode class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger.customize">(spyne.model.primitive.UnsignedInteger class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger16.customize">(spyne.model.primitive.UnsignedInteger16 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger32.customize">(spyne.model.primitive.UnsignedInteger32 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger64.customize">(spyne.model.primitive.UnsignedInteger64 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger8.customize">(spyne.model.primitive.UnsignedInteger8 class method)</a>
   </dt>
 
       </dl></dd>
@@ -413,15 +322,7 @@
   </dt>
 
       
-  <dt><a href="reference/model.html#spyne.model.primitive.Date.Annotations">Date.Annotations (class in spyne.model.primitive)</a>
-  </dt>
-
-      
   <dt><a href="reference/model.html#spyne.model.primitive.DateTime">DateTime (class in spyne.model.primitive)</a>
-  </dt>
-
-      
-  <dt><a href="reference/model.html#spyne.model.primitive.DateTime.Annotations">DateTime.Annotations (class in spyne.model.primitive)</a>
   </dt>
 
       
@@ -433,20 +334,16 @@
   </dt>
 
       
-  <dt><a href="reference/model.html#spyne.model.primitive.Decimal.Annotations">Decimal.Annotations (class in spyne.model.primitive)</a>
-  </dt>
-
-      
   <dt><a href="reference/model.html#spyne.model.primitive.Decimal.Attributes">Decimal.Attributes (class in spyne.model.primitive)</a>
   </dt>
 
       
-  <dt><a href="reference/protocol.html#spyne.protocol._base.ProtocolBase.decompose_incoming_envelope">decompose_incoming_envelope() (spyne.protocol._base.ProtocolBase method)</a>
+  <dt><a href="reference/protocol/base.html#spyne.protocol._base.ProtocolBase.decompose_incoming_envelope">decompose_incoming_envelope() (spyne.protocol._base.ProtocolBase method)</a>
   </dt>
 
       <dd><dl>
         
-  <dt><a href="reference/protocol.html#spyne.protocol.http.HttpRpc.decompose_incoming_envelope">(spyne.protocol.http.HttpRpc method)</a>
+  <dt><a href="reference/protocol/xml.html#spyne.protocol.xml._base.XmlObject.decompose_incoming_envelope">(spyne.protocol.xml._base.XmlObject method)</a>
   </dt>
 
         
@@ -475,16 +372,16 @@
 
       </dl></dd>
       
-  <dt><a href="reference/protocol.html#spyne.protocol._base.ProtocolBase.deserialize">deserialize() (spyne.protocol._base.ProtocolBase method)</a>
+  <dt><a href="reference/protocol/base.html#spyne.protocol._base.ProtocolBase.deserialize">deserialize() (spyne.protocol._base.ProtocolBase method)</a>
   </dt>
 
       <dd><dl>
         
-  <dt><a href="reference/protocol.html#spyne.protocol.http.HttpRpc.deserialize">(spyne.protocol.http.HttpRpc method)</a>
+  <dt><a href="reference/protocol/soap.html#spyne.protocol.soap.soap11.Soap11.deserialize">(spyne.protocol.soap.soap11.Soap11 method)</a>
   </dt>
 
         
-  <dt><a href="reference/protocol.html#spyne.protocol.soap.soap11.Soap11.deserialize">(spyne.protocol.soap.soap11.Soap11 method)</a>
+  <dt><a href="reference/protocol/xml.html#spyne.protocol.xml._base.XmlObject.deserialize">(spyne.protocol.xml._base.XmlObject method)</a>
   </dt>
 
       </dl></dd>
@@ -507,23 +404,7 @@
   </dt>
 
       
-  <dt><a href="reference/model.html#spyne.model.primitive.Double.Annotations">Double.Annotations (class in spyne.model.primitive)</a>
-  </dt>
-
-      
-  <dt><a href="reference/model.html#spyne.model.primitive.Double.Attributes">Double.Attributes (class in spyne.model.primitive)</a>
-  </dt>
-
-      
   <dt><a href="reference/model.html#spyne.model.primitive.Duration">Duration (class in spyne.model.primitive)</a>
-  </dt>
-
-      
-  <dt><a href="reference/model.html#spyne.model.primitive.Duration.Annotations">Duration.Annotations (class in spyne.model.primitive)</a>
-  </dt>
-
-      
-  <dt><a href="reference/model.html#spyne.model.primitive.Duration.Attributes">Duration.Attributes (class in spyne.model.primitive)</a>
   </dt>
 
   </dl></td>
@@ -561,11 +442,11 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="reference/model.html#spyne.model.fault.Fault">Fault</a>
+  <dt><a href="reference/model.html#spyne.model.fault.Fault">Fault (class in spyne.model.fault)</a>
   </dt>
 
       
-  <dt><a href="reference/protocol.html#spyne.protocol.http.HttpRpc.fault_to_http_response_code">fault_to_http_response_code() (spyne.protocol.http.HttpRpc method)</a>
+  <dt><a href="reference/protocol/base.html#spyne.protocol._base.ProtocolBase.fault_to_http_response_code">fault_to_http_response_code() (spyne.protocol._base.ProtocolBase method)</a>
   </dt>
 
       
@@ -573,25 +454,17 @@
   </dt>
 
       
+  <dt><a href="reference/model.html#spyne.model.binary.File">File (class in spyne.model.binary)</a>
+  </dt>
+
+      
   <dt><a href="reference/base.html#spyne.EventManager.fire_event">fire_event() (spyne.EventManager method)</a>
-  </dt>
-
-      
-  <dt><a href="reference/protocol.html#spyne.protocol.http.HttpRpc.flat_dict_to_object">flat_dict_to_object() (spyne.protocol.http.HttpRpc method)</a>
-  </dt>
-
-      
-  <dt><a href="reference/model.html#spyne.model.primitive.Float">Float (class in spyne.model.primitive)</a>
   </dt>
 
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="reference/model.html#spyne.model.primitive.Float.Annotations">Float.Annotations (class in spyne.model.primitive)</a>
-  </dt>
-
-      
-  <dt><a href="reference/model.html#spyne.model.primitive.Float.Attributes">Float.Attributes (class in spyne.model.primitive)</a>
+  <dt><a href="reference/model.html#spyne.model.primitive.Float">Float (class in spyne.model.primitive)</a>
   </dt>
 
       
@@ -604,6 +477,10 @@
   </dt>
 
       </dl></dd>
+      
+  <dt><a href="reference/protocol/xml.html#spyne.protocol.xml._base.XmlObject.from_element">from_element() (spyne.protocol.xml._base.XmlObject method)</a>
+  </dt>
+
       
   <dt><a href="reference/base.html#spyne.MethodContext.frozen">frozen (spyne.MethodContext attribute)</a>
   </dt>
@@ -651,23 +528,13 @@
 
       </dl></dd>
       
-  <dt><a href="reference/protocol.html#spyne.protocol.http.HttpRpc.generate_method_contexts">generate_method_contexts() (spyne.protocol.http.HttpRpc method)</a>
+  <dt><a href="reference/protocol/base.html#spyne.protocol._base.ProtocolBase.generate_method_contexts">generate_method_contexts() (spyne.protocol._base.ProtocolBase method)</a>
   </dt>
 
       
-  <dt><a href="reference/protocol.html#spyne.protocol._base.ProtocolBase.get_call_handles">get_call_handles() (spyne.protocol._base.ProtocolBase method)</a>
+  <dt><a href="reference/protocol/base.html#spyne.protocol._base.ProtocolBase.get_call_handles">get_call_handles() (spyne.protocol._base.ProtocolBase method)</a>
   </dt>
 
-      <dd><dl>
-        
-  <dt><a href="reference/protocol.html#spyne.protocol.http.HttpRpc.get_call_handles">(spyne.protocol.http.HttpRpc method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/protocol.html#spyne.protocol.soap.soap11.Soap11.get_call_handles">(spyne.protocol.soap.soap11.Soap11 method)</a>
-  </dt>
-
-      </dl></dd>
       
   <dt><a href="reference/interface.html#spyne.interface._base.Interface.get_class">get_class() (spyne.interface._base.Interface method)</a>
   </dt>
@@ -732,100 +599,6 @@
   <dt><a href="reference/model.html#spyne.model._base.ModelBase.get_namespace">get_namespace() (spyne.model._base.ModelBase class method)</a>
   </dt>
 
-      <dd><dl>
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.AnyDict.get_namespace">(spyne.model.primitive.AnyDict class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.AnyUri.get_namespace">(spyne.model.primitive.AnyUri class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.AnyXml.get_namespace">(spyne.model.primitive.AnyXml class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Boolean.get_namespace">(spyne.model.primitive.Boolean class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Date.get_namespace">(spyne.model.primitive.Date class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.DateTime.get_namespace">(spyne.model.primitive.DateTime class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Decimal.get_namespace">(spyne.model.primitive.Decimal class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Double.get_namespace">(spyne.model.primitive.Double class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Duration.get_namespace">(spyne.model.primitive.Duration class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Float.get_namespace">(spyne.model.primitive.Float class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.ImageUri.get_namespace">(spyne.model.primitive.ImageUri class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer.get_namespace">(spyne.model.primitive.Integer class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer16.get_namespace">(spyne.model.primitive.Integer16 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer32.get_namespace">(spyne.model.primitive.Integer32 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer64.get_namespace">(spyne.model.primitive.Integer64 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer8.get_namespace">(spyne.model.primitive.Integer8 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Time.get_namespace">(spyne.model.primitive.Time class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Unicode.get_namespace">(spyne.model.primitive.Unicode class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger.get_namespace">(spyne.model.primitive.UnsignedInteger class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger16.get_namespace">(spyne.model.primitive.UnsignedInteger16 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger32.get_namespace">(spyne.model.primitive.UnsignedInteger32 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger64.get_namespace">(spyne.model.primitive.UnsignedInteger64 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger8.get_namespace">(spyne.model.primitive.UnsignedInteger8 class method)</a>
-  </dt>
-
-      </dl></dd>
       
   <dt><a href="reference/interface.html#spyne.interface._base.Interface.get_namespace_prefix">get_namespace_prefix() (spyne.interface._base.Interface method)</a>
   </dt>
@@ -835,105 +608,13 @@
   <dt><a href="reference/model.html#spyne.model._base.ModelBase.get_namespace_prefix">(spyne.model._base.ModelBase class method)</a>
   </dt>
 
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.AnyDict.get_namespace_prefix">(spyne.model.primitive.AnyDict class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.AnyUri.get_namespace_prefix">(spyne.model.primitive.AnyUri class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.AnyXml.get_namespace_prefix">(spyne.model.primitive.AnyXml class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Boolean.get_namespace_prefix">(spyne.model.primitive.Boolean class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Date.get_namespace_prefix">(spyne.model.primitive.Date class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.DateTime.get_namespace_prefix">(spyne.model.primitive.DateTime class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Decimal.get_namespace_prefix">(spyne.model.primitive.Decimal class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Double.get_namespace_prefix">(spyne.model.primitive.Double class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Duration.get_namespace_prefix">(spyne.model.primitive.Duration class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Float.get_namespace_prefix">(spyne.model.primitive.Float class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.ImageUri.get_namespace_prefix">(spyne.model.primitive.ImageUri class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer.get_namespace_prefix">(spyne.model.primitive.Integer class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer16.get_namespace_prefix">(spyne.model.primitive.Integer16 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer32.get_namespace_prefix">(spyne.model.primitive.Integer32 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer64.get_namespace_prefix">(spyne.model.primitive.Integer64 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer8.get_namespace_prefix">(spyne.model.primitive.Integer8 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Time.get_namespace_prefix">(spyne.model.primitive.Time class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Unicode.get_namespace_prefix">(spyne.model.primitive.Unicode class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger.get_namespace_prefix">(spyne.model.primitive.UnsignedInteger class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger16.get_namespace_prefix">(spyne.model.primitive.UnsignedInteger16 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger32.get_namespace_prefix">(spyne.model.primitive.UnsignedInteger32 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger64.get_namespace_prefix">(spyne.model.primitive.UnsignedInteger64 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger8.get_namespace_prefix">(spyne.model.primitive.UnsignedInteger8 class method)</a>
-  </dt>
-
       </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="reference/util.html#spyne.util.xml.get_object_as_xml">get_object_as_xml() (in module spyne.util.xml)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="reference/client.html#spyne.client._base.RemoteProcedureBase.get_out_object">get_out_object() (spyne.client._base.RemoteProcedureBase method)</a>
   </dt>
@@ -1011,14 +692,6 @@
   </dt>
 
       
-  <dt><a href="reference/protocol.html#spyne.protocol.http.get_stream_factory">get_stream_factory() (in module spyne.protocol.http)</a>
-  </dt>
-
-      
-  <dt><a href="reference/protocol.html#spyne.protocol.http.HttpRpc.get_tmp_delete_on_close">get_tmp_delete_on_close() (spyne.protocol.http.HttpRpc method)</a>
-  </dt>
-
-      
   <dt><a href="reference/interface.html#spyne.interface._base.Interface.get_tns">get_tns() (spyne.interface._base.Interface method)</a>
   </dt>
 
@@ -1026,198 +699,10 @@
   <dt><a href="reference/model.html#spyne.model._base.ModelBase.get_type_name">get_type_name() (spyne.model._base.ModelBase class method)</a>
   </dt>
 
-      <dd><dl>
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.AnyDict.get_type_name">(spyne.model.primitive.AnyDict class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.AnyUri.get_type_name">(spyne.model.primitive.AnyUri class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.AnyXml.get_type_name">(spyne.model.primitive.AnyXml class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Boolean.get_type_name">(spyne.model.primitive.Boolean class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Date.get_type_name">(spyne.model.primitive.Date class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.DateTime.get_type_name">(spyne.model.primitive.DateTime class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Decimal.get_type_name">(spyne.model.primitive.Decimal class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Double.get_type_name">(spyne.model.primitive.Double class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Duration.get_type_name">(spyne.model.primitive.Duration class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Float.get_type_name">(spyne.model.primitive.Float class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.ImageUri.get_type_name">(spyne.model.primitive.ImageUri class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer.get_type_name">(spyne.model.primitive.Integer class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer16.get_type_name">(spyne.model.primitive.Integer16 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer32.get_type_name">(spyne.model.primitive.Integer32 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer64.get_type_name">(spyne.model.primitive.Integer64 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer8.get_type_name">(spyne.model.primitive.Integer8 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Time.get_type_name">(spyne.model.primitive.Time class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Unicode.get_type_name">(spyne.model.primitive.Unicode class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger.get_type_name">(spyne.model.primitive.UnsignedInteger class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger16.get_type_name">(spyne.model.primitive.UnsignedInteger16 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger32.get_type_name">(spyne.model.primitive.UnsignedInteger32 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger64.get_type_name">(spyne.model.primitive.UnsignedInteger64 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger8.get_type_name">(spyne.model.primitive.UnsignedInteger8 class method)</a>
-  </dt>
-
-      </dl></dd>
       
   <dt><a href="reference/model.html#spyne.model._base.ModelBase.get_type_name_ns">get_type_name_ns() (spyne.model._base.ModelBase class method)</a>
   </dt>
 
-      <dd><dl>
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.AnyDict.get_type_name_ns">(spyne.model.primitive.AnyDict class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.AnyUri.get_type_name_ns">(spyne.model.primitive.AnyUri class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.AnyXml.get_type_name_ns">(spyne.model.primitive.AnyXml class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Boolean.get_type_name_ns">(spyne.model.primitive.Boolean class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Date.get_type_name_ns">(spyne.model.primitive.Date class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.DateTime.get_type_name_ns">(spyne.model.primitive.DateTime class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Decimal.get_type_name_ns">(spyne.model.primitive.Decimal class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Double.get_type_name_ns">(spyne.model.primitive.Double class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Duration.get_type_name_ns">(spyne.model.primitive.Duration class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Float.get_type_name_ns">(spyne.model.primitive.Float class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.ImageUri.get_type_name_ns">(spyne.model.primitive.ImageUri class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer.get_type_name_ns">(spyne.model.primitive.Integer class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer16.get_type_name_ns">(spyne.model.primitive.Integer16 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer32.get_type_name_ns">(spyne.model.primitive.Integer32 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer64.get_type_name_ns">(spyne.model.primitive.Integer64 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer8.get_type_name_ns">(spyne.model.primitive.Integer8 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Time.get_type_name_ns">(spyne.model.primitive.Time class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Unicode.get_type_name_ns">(spyne.model.primitive.Unicode class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger.get_type_name_ns">(spyne.model.primitive.UnsignedInteger class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger16.get_type_name_ns">(spyne.model.primitive.UnsignedInteger16 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger32.get_type_name_ns">(spyne.model.primitive.UnsignedInteger32 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger64.get_type_name_ns">(spyne.model.primitive.UnsignedInteger64 class method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger8.get_type_name_ns">(spyne.model.primitive.UnsignedInteger8 class method)</a>
-  </dt>
-
-      </dl></dd>
       
   <dt><a href="reference/util.html#spyne.util.xml.get_validation_schema">get_validation_schema() (in module spyne.util.xml)</a>
   </dt>
@@ -1259,7 +744,7 @@
   </dt>
 
       
-  <dt><a href="reference/protocol.html#spyne.protocol.http.HttpRpc">HttpRpc (class in spyne.protocol.http)</a>
+  <dt><a href="reference/protocol/http.html#spyne.protocol.http.HttpRpc">HttpRpc (class in spyne.protocol.http)</a>
   </dt>
 
   </dl></td>
@@ -1270,10 +755,6 @@
   <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="reference/model.html#spyne.model.primitive.ImageUri">ImageUri (class in spyne.model.primitive)</a>
-  </dt>
-
-      
-  <dt><a href="reference/model.html#spyne.model.primitive.ImageUri.Annotations">ImageUri.Annotations (class in spyne.model.primitive)</a>
   </dt>
 
       
@@ -1318,26 +799,12 @@
   <dt><a href="reference/auxproc.html#spyne.auxproc._base.AuxProcBase.initialize">initialize() (spyne.auxproc._base.AuxProcBase method)</a>
   </dt>
 
-      <dd><dl>
-        
-  <dt><a href="reference/auxproc.html#spyne.auxproc.sync.SyncAuxProc.initialize">(spyne.auxproc.sync.SyncAuxProc method)</a>
-  </dt>
-
-      </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="reference/auxproc.html#spyne.auxproc._base.AuxProcBase.initialize_context">initialize_context() (spyne.auxproc._base.AuxProcBase method)</a>
   </dt>
 
-      <dd><dl>
-        
-  <dt><a href="reference/auxproc.html#spyne.auxproc.sync.SyncAuxProc.initialize_context">(spyne.auxproc.sync.SyncAuxProc method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/auxproc.html#spyne.auxproc.thread.ThreadAuxProc.initialize_context">(spyne.auxproc.thread.ThreadAuxProc method)</a>
-  </dt>
-
-      </dl></dd>
       
   <dt><a href="reference/model.html#spyne.model.primitive.Int">Int (in module spyne.model.primitive)</a>
   </dt>
@@ -1347,25 +814,7 @@
   </dt>
 
       
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer.Annotations">Integer.Annotations (class in spyne.model.primitive)</a>
-  </dt>
-
-      
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer.Attributes">Integer.Attributes (class in spyne.model.primitive)</a>
-  </dt>
-
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
-      
   <dt><a href="reference/model.html#spyne.model.primitive.Integer16">Integer16 (class in spyne.model.primitive)</a>
-  </dt>
-
-      
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer16.Annotations">Integer16.Annotations (class in spyne.model.primitive)</a>
-  </dt>
-
-      
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer16.Attributes">Integer16.Attributes (class in spyne.model.primitive)</a>
   </dt>
 
       
@@ -1373,35 +822,11 @@
   </dt>
 
       
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer32.Annotations">Integer32.Annotations (class in spyne.model.primitive)</a>
-  </dt>
-
-      
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer32.Attributes">Integer32.Attributes (class in spyne.model.primitive)</a>
-  </dt>
-
-      
   <dt><a href="reference/model.html#spyne.model.primitive.Integer64">Integer64 (class in spyne.model.primitive)</a>
   </dt>
 
       
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer64.Annotations">Integer64.Annotations (class in spyne.model.primitive)</a>
-  </dt>
-
-      
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer64.Attributes">Integer64.Attributes (class in spyne.model.primitive)</a>
-  </dt>
-
-      
   <dt><a href="reference/model.html#spyne.model.primitive.Integer8">Integer8 (class in spyne.model.primitive)</a>
-  </dt>
-
-      
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer8.Annotations">Integer8.Annotations (class in spyne.model.primitive)</a>
-  </dt>
-
-      
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer8.Attributes">Integer8.Attributes (class in spyne.model.primitive)</a>
   </dt>
 
       
@@ -1414,6 +839,16 @@
 
       
   <dt><a href="reference/model.html#spyne.model.complex.Iterable">Iterable (class in spyne.model.complex)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="J">J</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/protocol/json.html#spyne.protocol.json.JsonObject">JsonObject (class in spyne.protocol.json)</a>
   </dt>
 
   </dl></td>
@@ -1434,10 +869,6 @@
   <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="reference/model.html#spyne.model.primitive.Decimal.Attributes.le">le (spyne.model.primitive.Decimal.Attributes attribute)</a>
-  </dt>
-
-      
-  <dt><a href="reference/model.html#spyne.model.binary.Attachment.load_from_file">load_from_file() (spyne.model.binary.Attachment method)</a>
   </dt>
 
       
@@ -1477,6 +908,14 @@
   </dt>
 
       
+  <dt><a href="reference/protocol/msgpack.html#spyne.protocol.msgpack.MessagePackObject">MessagePackObject (class in spyne.protocol.msgpack)</a>
+  </dt>
+
+      
+  <dt><a href="reference/protocol/msgpack.html#spyne.protocol.msgpack.MessagePackRpc">MessagePackRpc (class in spyne.protocol.msgpack)</a>
+  </dt>
+
+      
   <dt><a href="reference/base.html#spyne.MethodContext.method_name">method_name (spyne.MethodContext attribute)</a>
   </dt>
 
@@ -1498,14 +937,14 @@
   <dt><a href="reference/base.html#spyne.MethodContext">MethodContext (class in spyne)</a>
   </dt>
 
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="reference/base.html#spyne.MethodDescriptor">MethodDescriptor (class in spyne)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="reference/protocol.html#spyne.protocol.http.HttpRpc.mime_type">mime_type (spyne.protocol.http.HttpRpc attribute)</a>
+  <dt><a href="reference/protocol/xml.html#spyne.protocol.xml._base.XmlObject.mime_type">mime_type (spyne.protocol.xml._base.XmlObject attribute)</a>
   </dt>
 
       <dd><dl>
@@ -1536,10 +975,6 @@
 
       
   <dt><a href="reference/service.html#spyne.service.ServiceBaseMeta.mro">mro() (spyne.service.ServiceBaseMeta method)</a>
-  </dt>
-
-      
-  <dt><a href="reference/base.html#spyne.MethodDescriptor.mtom">mtom (spyne.MethodDescriptor attribute)</a>
   </dt>
 
   </dl></td>
@@ -1589,10 +1024,6 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="reference/protocol.html#spyne.protocol.http.HttpRpc.object_to_flat_dict">object_to_flat_dict() (spyne.protocol.http.HttpRpc method)</a>
-  </dt>
-
-      
   <dt><a href="reference/util.html#spyne.util.odict.odict">odict (class in spyne.util.odict)</a>
   </dt>
 
@@ -1608,8 +1039,6 @@
   <dt><a href="reference/base.html#spyne.MethodContext.out_error">out_error (spyne.MethodContext attribute)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="reference/base.html#spyne.MethodContext.out_header">out_header (spyne.MethodContext attribute)</a>
   </dt>
@@ -1620,6 +1049,8 @@
   </dt>
 
       </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="reference/base.html#spyne.MethodContext.out_header_doc">out_header_doc (spyne.MethodContext attribute)</a>
   </dt>
@@ -1651,29 +1082,15 @@
   </dt>
 
       
-  <dt><a href="reference/base.html#spyne.MethodDescriptor.port_type">port_type (spyne.MethodDescriptor attribute)</a>
-  </dt>
-
-      
   <dt><a href="reference/auxproc.html#spyne.auxproc._base.AuxProcBase.process">process() (spyne.auxproc._base.AuxProcBase method)</a>
   </dt>
 
-      <dd><dl>
-        
-  <dt><a href="reference/auxproc.html#spyne.auxproc.sync.SyncAuxProc.process">(spyne.auxproc.sync.SyncAuxProc method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/auxproc.html#spyne.auxproc.thread.ThreadAuxProc.process">(spyne.auxproc.thread.ThreadAuxProc method)</a>
-  </dt>
-
-      </dl></dd>
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="reference/auxproc.html#spyne.auxproc._base.AuxProcBase.process_context">process_context() (spyne.auxproc._base.AuxProcBase method)</a>
   </dt>
 
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="reference/application.html#spyne.application.Application.process_request">process_request() (spyne.application.Application method)</a>
   </dt>
@@ -1683,7 +1100,11 @@
   </dt>
 
       
-  <dt><a href="reference/protocol.html#spyne.protocol._base.ProtocolBase">ProtocolBase (class in spyne.protocol._base)</a>
+  <dt><a href="reference/base.html#spyne.MethodContext.protocol">protocol (spyne.MethodContext attribute)</a>
+  </dt>
+
+      
+  <dt><a href="reference/protocol/base.html#spyne.protocol._base.ProtocolBase">ProtocolBase (class in spyne.protocol._base)</a>
   </dt>
 
   </dl></td>
@@ -1705,111 +1126,29 @@
   </dt>
 
       
-  <dt><a href="reference/protocol.html#spyne.protocol.http.HttpRpc.REQUEST">REQUEST (spyne.protocol.http.HttpRpc attribute)</a>
+  <dt><a href="reference/error.html#spyne.error.RequestNotAllowed">RequestNotAllowed</a>
+  </dt>
+
+      
+  <dt><a href="reference/error.html#spyne.error.RequestTooLongError">RequestTooLongError</a>
+  </dt>
+
+      
+  <dt><a href="reference/model.html#spyne.model._base.ModelBase.resolve_namespace">resolve_namespace() (spyne.model._base.ModelBase static method)</a>
   </dt>
 
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="reference/model.html#spyne.model._base.ModelBase.resolve_namespace">resolve_namespace() (spyne.model._base.ModelBase static method)</a>
+  <dt><a href="reference/error.html#spyne.error.ResourceNotFoundError">ResourceNotFoundError</a>
   </dt>
 
-      <dd><dl>
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.AnyDict.resolve_namespace">(spyne.model.primitive.AnyDict static method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.AnyUri.resolve_namespace">(spyne.model.primitive.AnyUri static method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.AnyXml.resolve_namespace">(spyne.model.primitive.AnyXml static method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Boolean.resolve_namespace">(spyne.model.primitive.Boolean static method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Date.resolve_namespace">(spyne.model.primitive.Date static method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.DateTime.resolve_namespace">(spyne.model.primitive.DateTime static method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Decimal.resolve_namespace">(spyne.model.primitive.Decimal static method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Double.resolve_namespace">(spyne.model.primitive.Double static method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Duration.resolve_namespace">(spyne.model.primitive.Duration static method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Float.resolve_namespace">(spyne.model.primitive.Float static method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.ImageUri.resolve_namespace">(spyne.model.primitive.ImageUri static method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer.resolve_namespace">(spyne.model.primitive.Integer static method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer16.resolve_namespace">(spyne.model.primitive.Integer16 static method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer32.resolve_namespace">(spyne.model.primitive.Integer32 static method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer64.resolve_namespace">(spyne.model.primitive.Integer64 static method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Integer8.resolve_namespace">(spyne.model.primitive.Integer8 static method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Time.resolve_namespace">(spyne.model.primitive.Time static method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Unicode.resolve_namespace">(spyne.model.primitive.Unicode static method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger.resolve_namespace">(spyne.model.primitive.UnsignedInteger static method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger16.resolve_namespace">(spyne.model.primitive.UnsignedInteger16 static method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger32.resolve_namespace">(spyne.model.primitive.UnsignedInteger32 static method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger64.resolve_namespace">(spyne.model.primitive.UnsignedInteger64 static method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger8.resolve_namespace">(spyne.model.primitive.UnsignedInteger8 static method)</a>
-  </dt>
-
-      </dl></dd>
       
-  <dt><a href="reference/protocol.html#spyne.protocol.http.HttpRpc.RESPONSE">RESPONSE (spyne.protocol.http.HttpRpc attribute)</a>
+  <dt><a href="reference/application.html#spyne.application.return_traceback_in_unhandled_exceptions">return_traceback_in_unhandled_exceptions() (in module spyne.application)</a>
+  </dt>
+
+      
+  <dt><a href="reference/model.html#spyne.model.binary.File.rollover">rollover() (spyne.model.binary.File method)</a>
   </dt>
 
       
@@ -1820,6 +1159,10 @@
   <dt><a href="reference/util.html#spyne.util.etreeconv.root_etree_to_dict">root_etree_to_dict() (in module spyne.util.etreeconv)</a>
   </dt>
 
+      
+  <dt><a href="reference/decorator.html#spyne.decorator.rpc">rpc() (in module spyne.decorator)</a>
+  </dt>
+
   </dl></td>
 </tr></table>
 
@@ -1827,31 +1170,53 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="reference/model.html#spyne.model.binary.Attachment.save_to_file">save_to_file() (spyne.model.binary.Attachment method)</a>
-  </dt>
-
-      
   <dt><a href="reference/model.html#spyne.model._base.ModelBase.Attributes.schema_tag">schema_tag (spyne.model._base.ModelBase.Attributes attribute)</a>
   </dt>
 
       
-  <dt><a href="reference/protocol.html#spyne.protocol._base.ProtocolBase.serialize">serialize() (spyne.protocol._base.ProtocolBase method)</a>
+  <dt><a href="reference/protocol/xml.html#spyne.protocol.xml._base.XmlObject.SCHEMA_VALIDATION">SCHEMA_VALIDATION (spyne.protocol.xml._base.XmlObject attribute)</a>
+  </dt>
+
+      
+  <dt><a href="reference/protocol/xml.html#spyne.protocol.xml._base.SchemaValidationError">SchemaValidationError</a>
+  </dt>
+
+      
+  <dt><a href="reference/model.html#spyne.model.complex.SelfReference">SelfReference (class in spyne.model.complex)</a>
+  </dt>
+
+      
+  <dt><a href="reference/protocol/base.html#spyne.protocol._base.ProtocolBase.serialize">serialize() (spyne.protocol._base.ProtocolBase method)</a>
   </dt>
 
       <dd><dl>
         
-  <dt><a href="reference/protocol.html#spyne.protocol.http.HttpRpc.serialize">(spyne.protocol.http.HttpRpc method)</a>
+  <dt><a href="reference/protocol/soap.html#spyne.protocol.soap.soap11.Soap11.serialize">(spyne.protocol.soap.soap11.Soap11 method)</a>
   </dt>
 
         
-  <dt><a href="reference/protocol.html#spyne.protocol.soap.soap11.Soap11.serialize">(spyne.protocol.soap.soap11.Soap11 method)</a>
+  <dt><a href="reference/protocol/xml.html#spyne.protocol.xml._base.XmlObject.serialize">(spyne.protocol.xml._base.XmlObject method)</a>
   </dt>
 
       </dl></dd>
       
-  <dt><a href="reference/server.html#spyne.server.zeromq.ZeroMQServer.serve_forever">serve_forever() (spyne.server.zeromq.ZeroMQServer method)</a>
+  <dt><a href="reference/server.html#spyne.server._base.ServerBase.serve_forever">serve_forever() (spyne.server._base.ServerBase method)</a>
   </dt>
 
+      <dd><dl>
+        
+  <dt><a href="reference/server.html#spyne.server.null.NullServer.serve_forever">(spyne.server.null.NullServer method)</a>
+  </dt>
+
+        
+  <dt><a href="reference/server.html#spyne.server.wsgi.WsgiApplication.serve_forever">(spyne.server.wsgi.WsgiApplication method)</a>
+  </dt>
+
+        
+  <dt><a href="reference/server.html#spyne.server.zeromq.ZeroMQServer.serve_forever">(spyne.server.zeromq.ZeroMQServer method)</a>
+  </dt>
+
+      </dl></dd>
       
   <dt><a href="reference/server.html#spyne.server._base.ServerBase">ServerBase (class in spyne.server._base)</a>
   </dt>
@@ -1869,7 +1234,7 @@
   </dt>
 
       
-  <dt><a href="reference/protocol.html#spyne.protocol.http.HttpRpc.set_app">set_app() (spyne.protocol.http.HttpRpc method)</a>
+  <dt><a href="reference/protocol/xml.html#spyne.protocol.xml._base.XmlObject.set_app">set_app() (spyne.protocol.xml._base.XmlObject method)</a>
   </dt>
 
       
@@ -1883,19 +1248,9 @@
 
       </dl></dd>
       
-  <dt><a href="reference/protocol.html#spyne.protocol._base.ProtocolBase.set_method_descriptor">set_method_descriptor() (spyne.protocol._base.ProtocolBase method)</a>
+  <dt><a href="reference/protocol/base.html#spyne.protocol._base.ProtocolBase.set_method_descriptor">set_method_descriptor() (spyne.protocol._base.ProtocolBase method)</a>
   </dt>
 
-      <dd><dl>
-        
-  <dt><a href="reference/protocol.html#spyne.protocol.http.HttpRpc.set_method_descriptor">(spyne.protocol.http.HttpRpc method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/protocol.html#spyne.protocol.soap.soap11.Soap11.set_method_descriptor">(spyne.protocol.soap.soap11.Soap11 method)</a>
-  </dt>
-
-      </dl></dd>
       
   <dt><a href="reference/server.html#spyne.server.wsgi.WsgiTransportContext.set_mime_type">set_mime_type() (spyne.server.wsgi.WsgiTransportContext method)</a>
   </dt>
@@ -1919,16 +1274,12 @@
 
       </dl></dd>
       
-  <dt><a href="reference/protocol.html#spyne.protocol.http.HttpRpc.set_tmp_delete_on_close">set_tmp_delete_on_close() (spyne.protocol.http.HttpRpc method)</a>
-  </dt>
-
-      
-  <dt><a href="reference/protocol.html#spyne.protocol._base.ProtocolBase.set_validator">set_validator() (spyne.protocol._base.ProtocolBase method)</a>
+  <dt><a href="reference/protocol/base.html#spyne.protocol._base.ProtocolBase.set_validator">set_validator() (spyne.protocol._base.ProtocolBase method)</a>
   </dt>
 
       <dd><dl>
         
-  <dt><a href="reference/protocol.html#spyne.protocol.http.HttpRpc.set_validator">(spyne.protocol.http.HttpRpc method)</a>
+  <dt><a href="reference/protocol/xml.html#spyne.protocol.xml._base.XmlObject.set_validator">(spyne.protocol.xml._base.XmlObject method)</a>
   </dt>
 
       </dl></dd>
@@ -1945,15 +1296,7 @@
   </dt>
 
       
-  <dt><a href="reference/protocol.html#spyne.protocol.soap.soap11.Soap11">Soap11 (class in spyne.protocol.soap.soap11)</a>
-  </dt>
-
-      
-  <dt><a href="reference/protocol.html#spyne.protocol.http.HttpRpc.SOFT_VALIDATION">SOFT_VALIDATION (spyne.protocol.http.HttpRpc attribute)</a>
-  </dt>
-
-      
-  <dt><a href="reference/application.html#module-spyne.application">spyne.application (module)</a>
+  <dt><a href="reference/protocol/soap.html#spyne.protocol.soap.soap11.Soap11">Soap11 (class in spyne.protocol.soap.soap11)</a>
   </dt>
 
       
@@ -1973,6 +1316,10 @@
   </dt>
 
       
+  <dt><a href="reference/error.html#module-spyne.error">spyne.error (module)</a>
+  </dt>
+
+      
   <dt><a href="reference/interface.html#module-spyne.interface._base">spyne.interface._base (module)</a>
   </dt>
 
@@ -1984,10 +1331,6 @@
   <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="reference/interface.html#module-spyne.interface.xml_schema._base">spyne.interface.xml_schema._base (module)</a>
-  </dt>
-
-      
-  <dt><a href="reference/model.html#module-spyne.model">spyne.model (module)</a>
   </dt>
 
       
@@ -2003,14 +1346,6 @@
   </dt>
 
       
-  <dt><a href="reference/model.html#module-spyne.model.enum">spyne.model.enum (module)</a>
-  </dt>
-
-      
-  <dt><a href="reference/model.html#module-spyne.model.fault">spyne.model.fault (module)</a>
-  </dt>
-
-      
   <dt><a href="reference/model.html#module-spyne.model.primitive">spyne.model.primitive (module)</a>
   </dt>
 
@@ -2019,15 +1354,27 @@
   </dt>
 
       
-  <dt><a href="reference/protocol.html#module-spyne.protocol._base">spyne.protocol._base (module)</a>
+  <dt><a href="reference/protocol/base.html#module-spyne.protocol._base">spyne.protocol._base (module)</a>
   </dt>
 
       
-  <dt><a href="reference/protocol.html#module-spyne.protocol.http">spyne.protocol.http (module)</a>
+  <dt><a href="reference/protocol/http.html#module-spyne.protocol.http">spyne.protocol.http (module)</a>
   </dt>
 
       
-  <dt><a href="reference/protocol.html#module-spyne.protocol.soap.soap11">spyne.protocol.soap.soap11 (module)</a>
+  <dt><a href="reference/protocol/json.html#module-spyne.protocol.json">spyne.protocol.json (module)</a>
+  </dt>
+
+      
+  <dt><a href="reference/protocol/msgpack.html#module-spyne.protocol.msgpack">spyne.protocol.msgpack (module)</a>
+  </dt>
+
+      
+  <dt><a href="reference/protocol/soap.html#module-spyne.protocol.soap.soap11">spyne.protocol.soap.soap11 (module)</a>
+  </dt>
+
+      
+  <dt><a href="reference/protocol/xml.html#module-spyne.protocol.xml._base">spyne.protocol.xml._base (module)</a>
   </dt>
 
       
@@ -2067,7 +1414,7 @@
   </dt>
 
       
-  <dt><a href="reference/util.html#module-spyne.util.simple">spyne.util.simple (module)</a>, <a href="reference/util.html#module-spyne.util.simple">[1]</a>
+  <dt><a href="reference/util.html#module-spyne.util.simple">spyne.util.simple (module)</a>
   </dt>
 
       
@@ -2112,22 +1459,14 @@
   <dt><a href="reference/model.html#spyne.model.primitive.Time">Time (class in spyne.model.primitive)</a>
   </dt>
 
-      
-  <dt><a href="reference/model.html#spyne.model.primitive.Time.Annotations">Time.Annotations (class in spyne.model.primitive)</a>
-  </dt>
-
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="reference/model.html#spyne.model.primitive.Time.Attributes">Time.Attributes (class in spyne.model.primitive)</a>
-  </dt>
-
-      
-  <dt><a href="reference/protocol.html#spyne.protocol.http.HttpRpc.tmp_delete_on_close">tmp_delete_on_close (spyne.protocol.http.HttpRpc attribute)</a>
-  </dt>
-
-      
   <dt><a href="reference/interface.html#spyne.interface._base.Interface.tns">tns (spyne.interface._base.Interface attribute)</a>
+  </dt>
+
+      
+  <dt><a href="reference/protocol/xml.html#spyne.protocol.xml._base.XmlObject.to_parent_element">to_parent_element() (spyne.protocol.xml._base.XmlObject method)</a>
   </dt>
 
       
@@ -2179,10 +1518,6 @@
   </dt>
 
       
-  <dt><a href="reference/model.html#spyne.model.primitive.Unicode.Annotations">Unicode.Annotations (class in spyne.model.primitive)</a>
-  </dt>
-
-      
   <dt><a href="reference/model.html#spyne.model.primitive.Unicode.Attributes">Unicode.Attributes (class in spyne.model.primitive)</a>
   </dt>
 
@@ -2198,16 +1533,10 @@
   <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInt">UnsignedInt (in module spyne.model.primitive)</a>
   </dt>
 
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger">UnsignedInteger (class in spyne.model.primitive)</a>
-  </dt>
-
-      
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger.Annotations">UnsignedInteger.Annotations (class in spyne.model.primitive)</a>
-  </dt>
-
-      
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger.Attributes">UnsignedInteger.Attributes (class in spyne.model.primitive)</a>
   </dt>
 
       
@@ -2215,25 +1544,7 @@
   </dt>
 
       
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger16.Annotations">UnsignedInteger16.Annotations (class in spyne.model.primitive)</a>
-  </dt>
-
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
-      
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger16.Attributes">UnsignedInteger16.Attributes (class in spyne.model.primitive)</a>
-  </dt>
-
-      
   <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger32">UnsignedInteger32 (class in spyne.model.primitive)</a>
-  </dt>
-
-      
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger32.Annotations">UnsignedInteger32.Annotations (class in spyne.model.primitive)</a>
-  </dt>
-
-      
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger32.Attributes">UnsignedInteger32.Attributes (class in spyne.model.primitive)</a>
   </dt>
 
       
@@ -2241,23 +1552,7 @@
   </dt>
 
       
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger64.Annotations">UnsignedInteger64.Annotations (class in spyne.model.primitive)</a>
-  </dt>
-
-      
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger64.Attributes">UnsignedInteger64.Attributes (class in spyne.model.primitive)</a>
-  </dt>
-
-      
   <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger8">UnsignedInteger8 (class in spyne.model.primitive)</a>
-  </dt>
-
-      
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger8.Annotations">UnsignedInteger8.Annotations (class in spyne.model.primitive)</a>
-  </dt>
-
-      
-  <dt><a href="reference/model.html#spyne.model.primitive.UnsignedInteger8.Attributes">UnsignedInteger8.Attributes (class in spyne.model.primitive)</a>
   </dt>
 
       
@@ -2275,73 +1570,25 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="reference/protocol.html#spyne.protocol.soap.soap11.Soap11.validate_body">validate_body() (spyne.protocol.soap.soap11.Soap11 method)</a>
+  <dt><a href="reference/protocol/xml.html#spyne.protocol.xml._base.XmlObject.validate_body">validate_body() (spyne.protocol.xml._base.XmlObject method)</a>
   </dt>
 
       
-  <dt><a href="reference/protocol.html#spyne.protocol._base.ProtocolBase.validate_document">validate_document() (spyne.protocol._base.ProtocolBase method)</a>
+  <dt><a href="reference/protocol/base.html#spyne.protocol._base.ProtocolBase.validate_document">validate_document() (spyne.protocol._base.ProtocolBase method)</a>
   </dt>
 
-      <dd><dl>
-        
-  <dt><a href="reference/protocol.html#spyne.protocol.http.HttpRpc.validate_document">(spyne.protocol.http.HttpRpc method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/protocol.html#spyne.protocol.soap.soap11.Soap11.validate_document">(spyne.protocol.soap.soap11.Soap11 method)</a>
-  </dt>
-
-      </dl></dd>
       
   <dt><a href="reference/model.html#spyne.model._base.ModelBase.validate_native">validate_native() (spyne.model._base.ModelBase static method)</a>
   </dt>
 
-      <dd><dl>
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.AnyDict.validate_native">(spyne.model.primitive.AnyDict static method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.AnyUri.validate_native">(spyne.model.primitive.AnyUri static method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.AnyXml.validate_native">(spyne.model.primitive.AnyXml static method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Boolean.validate_native">(spyne.model.primitive.Boolean static method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Date.validate_native">(spyne.model.primitive.Date static method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.DateTime.validate_native">(spyne.model.primitive.DateTime static method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Duration.validate_native">(spyne.model.primitive.Duration static method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.ImageUri.validate_native">(spyne.model.primitive.ImageUri static method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Time.validate_native">(spyne.model.primitive.Time static method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/model.html#spyne.model.primitive.Unicode.validate_native">(spyne.model.primitive.Unicode static method)</a>
-  </dt>
-
-      </dl></dd>
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="reference/model.html#spyne.model._base.ModelBase.validate_string">validate_string() (spyne.model._base.ModelBase static method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/error.html#spyne.error.ValidationError">ValidationError</a>
   </dt>
 
       
@@ -2359,11 +1606,11 @@
   </dt>
 
       
-  <dt><a href="reference/util.html#spyne.util.simple.wsgi_soap11_application">wsgi_soap11_application() (in module spyne.util.simple)</a>, <a href="reference/util.html#spyne.util.simple.wsgi_soap11_application">[1]</a>
+  <dt><a href="reference/util.html#spyne.util.simple.wsgi_soap11_application">wsgi_soap11_application() (in module spyne.util.simple)</a>
   </dt>
 
       
-  <dt><a href="reference/util.html#spyne.util.simple.wsgi_soap_application">wsgi_soap_application() (in module spyne.util.simple)</a>, <a href="reference/util.html#spyne.util.simple.wsgi_soap_application">[1]</a>
+  <dt><a href="reference/util.html#spyne.util.simple.wsgi_soap_application">wsgi_soap_application() (in module spyne.util.simple)</a>
   </dt>
 
   </dl></td>
@@ -2397,6 +1644,10 @@
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
+  <dt><a href="reference/protocol/xml.html#spyne.protocol.xml._base.XmlObject">XmlObject (class in spyne.protocol.xml._base)</a>
+  </dt>
+
+      
   <dt><a href="reference/interface.html#spyne.interface.xml_schema._base.XmlSchema">XmlSchema (class in spyne.interface.xml_schema._base)</a>
   </dt>
 
@@ -2426,26 +1677,6 @@
 
 
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-
-   
-
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>

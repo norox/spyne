@@ -10,7 +10,7 @@
     
     <title>Implementing Transports and Protocols &mdash; spyne 2.8.0-rc documentation</title>
     
-    <link rel="stylesheet" href="../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -28,7 +28,7 @@
     <link rel="top" title="spyne 2.8.0-rc documentation" href="../index.html" />
     <link rel="up" title="Spyne Manual" href="index.html" />
     <link rel="next" title="Spyne API Reference" href="../reference/index.html" />
-    <link rel="prev" title="Working with RPC Metadata" href="metadata.html" /> 
+    <link rel="prev" title="Working with RPC Metadata" href="05_metadata.html" /> 
   </head>
   <body>
     <div class="related">
@@ -44,12 +44,52 @@
           <a href="../reference/index.html" title="Spyne API Reference"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="metadata.html" title="Working with RPC Metadata"
+          <a href="05_metadata.html" title="Working with RPC Metadata"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Spyne Manual</a> &raquo;</li> 
       </ul>
-    </div>  
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Implementing Transports and Protocols</a><ul>
+<li><a class="reference internal" href="#how-exactly-is-user-code-wrapped">How Exactly is User Code Wrapped?</a></li>
+<li><a class="reference internal" href="#a-transport-example-a-db-backed-fan-out-queue">A Transport Example: A DB-Backed Fan-Out Queue</a><ul>
+<li><a class="reference internal" href="#what-s-next">What&#8217;s Next?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="05_metadata.html"
+                        title="previous chapter">Working with RPC Metadata</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../reference/index.html"
+                        title="next chapter">Spyne API Reference</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../sources/manual/06_t_and_p.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -61,12 +101,12 @@
 <p>Some preliminary information would be handy before delving into details:</p>
 <div class="section" id="how-exactly-is-user-code-wrapped">
 <h2>How Exactly is User Code Wrapped?<a class="headerlink" href="#how-exactly-is-user-code-wrapped" title="Permalink to this headline">¶</a></h2>
-<p>Here&#8217;s what happens when a request arrives to an Spyne server:</p>
+<p>Here&#8217;s what happens when a request arrives to a Spyne server:</p>
 <p>The server transport decides whether this is a simple interface document request
 or a remote procedure call request. Every transport has its own way of dealing
 with this.</p>
 <p>If the incoming request was for the interface document, it&#8217;s easy: The interface
-document needs to be generated and returned as a nice chunk of string to the
+document needs to be generated and returned as a nice chunk of strings to the
 client.
 The server transport first calls
 <tt class="xref py py-func docutils literal"><span class="pre">spyne.interface._base.InterfaceBase.build_interface_document()</span></tt>
@@ -77,8 +117,8 @@ the cached document.</p>
 <ol class="arabic simple">
 <li>The server must set the <tt class="docutils literal"><span class="pre">ctx.in_string</span></tt> attribute to an iterable of
 strings. This will contain the incoming byte stream.</li>
-<li>The server calls the <a class="reference internal" href="../reference/server.html#spyne.server._base.ServerBase.get_in_object" title="spyne.server._base.ServerBase.get_in_object"><tt class="xref py py-class docutils literal"><span class="pre">spyne.server._base.ServerBase.get_in_object</span></tt></a> function
-from its parent class.</li>
+<li>The server calls the <a class="reference internal" href="../reference/server.html#spyne.server._base.ServerBase.get_in_object" title="spyne.server._base.ServerBase.get_in_object"><tt class="xref py py-class docutils literal"><span class="pre">spyne.server._base.ServerBase.get_in_object</span></tt></a>
+function from its parent class.</li>
 <li>The server then calls the <tt class="docutils literal"><span class="pre">create_in_document</span></tt>,
 <tt class="docutils literal"><span class="pre">decompose_incoming_envelope</span></tt>
 and <tt class="docutils literal"><span class="pre">deserialize</span></tt> functions from the protocol class in the <tt class="docutils literal"><span class="pre">in_protocol</span></tt>
@@ -86,8 +126,7 @@ attribute. The first call parses
 incoming stream to the protocol serializer&#8217;s internal representation. This
 is then split to header and body parts by the second call and deserialized to
 the native python representation by the third call.</li>
-<li>Once the protocol performs its voodoo, the server calls <tt class="docutils literal"><span class="pre">get_out_object</span></tt>
-which in turn calls the
+<li>The server then calls <tt class="docutils literal"><span class="pre">get_out_object</span></tt> which in turn calls the
 <a class="reference internal" href="../reference/application.html#spyne.application.Application.process_request" title="spyne.application.Application.process_request"><tt class="xref py py-func docutils literal"><span class="pre">spyne.application.Application.process_request()</span></tt></a>
 function.</li>
 <li>The <tt class="docutils literal"><span class="pre">process_request</span></tt> function fires relevant events and calls the
@@ -102,8 +141,8 @@ function, and the value is returned to <tt class="docutils literal"><span class=
 the return value to <tt class="docutils literal"><span class="pre">ctx.out_object</span></tt>.</li>
 <li>The server object now calls the <tt class="docutils literal"><span class="pre">get_out_string</span></tt> function to put the
 response as an iterable of strings in <tt class="docutils literal"><span class="pre">ctx.out_string</span></tt>. The
-<tt class="docutils literal"><span class="pre">get_out_string</span></tt> function calls the <tt class="docutils literal"><span class="pre">serialize</span></tt> and <tt class="docutils literal"><span class="pre">create_out_string</span></tt>
-functions of the protocol class.</li>
+<tt class="docutils literal"><span class="pre">get_out_string</span></tt> function in turn calls the <tt class="docutils literal"><span class="pre">serialize</span></tt> and
+<tt class="docutils literal"><span class="pre">create_out_string</span></tt> functions of the protocol class.</li>
 <li>The server pushes the stream from ctx.out_string back to the client.</li>
 </ol>
 <p>The same logic applies to client transports, in reverse.</p>
@@ -114,12 +153,11 @@ to subclass the relevant base class and implement the missing methods.</p>
 <h2>A Transport Example: A DB-Backed Fan-Out Queue<a class="headerlink" href="#a-transport-example-a-db-backed-fan-out-queue" title="Permalink to this headline">¶</a></h2>
 <p>Here&#8217;s the source code in one file:
 <a class="reference external" href="https://github.com/arskom/spyne/blob/master/examples/queue.py">https://github.com/arskom/spyne/blob/master/examples/queue.py</a></p>
-<p>The following block of code is SQLAlchemy
-boilerplate for creating the database and other related machinery. Under normal
-conditions, you should pass the sqlalchemy url to the Producer and Consumer
-instances instead of the connection object itself, but here as we deal with an
-in-memory database, global variable ugliness is just a nicer way to pass
-database handles.</p>
+<p>The following block of code is SQLAlchemy boilerplate for creating the database
+and other related machinery. Under normal conditions, you should pass the
+sqlalchemy url to the Producer and Consumer instances instead of the connection
+object itself, but here as we deal with an in-memory database, global variable
+ugliness is just a nicer way to pass database handles.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">db</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s">&#39;sqlite:///:memory:&#39;</span><span class="p">)</span>
 <span class="n">metadata</span> <span class="o">=</span> <span class="n">MetaData</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="n">db</span><span class="p">)</span>
 <span class="n">DeclarativeBase</span> <span class="o">=</span> <span class="n">declarative_base</span><span class="p">(</span><span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">)</span>
@@ -163,7 +201,7 @@ nice to put it in:</p>
 </pre></div>
 </div>
 <p>We also query the worker status table and get the id for the first task. If
-there is no record for own worker id, the server starts from the beginning:</p>
+there is no record for own worker id, the server bootstraps its state:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">try</span><span class="p">:</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">WorkerStatus</span><span class="p">)</span> \
                 <span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">worker_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">one</span><span class="p">()</span>
@@ -217,7 +255,7 @@ the task:</p>
 </pre></div>
 </div>
 <p>The server should not care whether the error was an expected or unexpected one.
-So the error is logged and the server  continues to process the next task in
+So the error is logged and the server continues to process the next task in
 queue.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">out_error</span><span class="p">:</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">get_out_string</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
@@ -241,14 +279,14 @@ time before polling the database for new tasks:</p>
 </pre></div>
 </div>
 <p>This concludes the worker implementation. But how do we put tasks in the task
-queue? That&#8217;s the job of the <tt class="docutils literal"><span class="pre">Producer</span></tt> class that is implemented as an Spyne
+queue? That&#8217;s the job of the <tt class="docutils literal"><span class="pre">Producer</span></tt> class that is implemented as a Spyne
 client.</p>
 <p>Implementing clients is a two-stage operation. The main transport logic is in
 the <tt class="xref py py-class docutils literal"><span class="pre">spyne.client.RemoteProcedureBase</span></tt> child that is a native Python
 callable whose function is to serialize the arguments, send it to the server,
 receive the reply, deserialize it and pass the return value to the python
 caller. However, in our case, the client does not return anything as calls are
-processed asyncronously.</p>
+processed asyncronously and the return values are ignored.</p>
 <p>We start with the constructor, where we initialize the SQLAlchemy database
 connection factory:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">RemoteProcedure</span><span class="p">(</span><span class="n">RemoteProcedureBase</span><span class="p">):</span>
@@ -275,7 +313,7 @@ Spyne code will do The Right Thing. Here, we serialize the arguments:</p>
 <span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Again here the function does not return anything because this is an asyncronous
+<p>Again, here the function does not return anything because this is an asyncronous
 client.</p>
 <p>Here&#8217;s the <tt class="docutils literal"><span class="pre">Producer</span></tt> class whose sole purpose is to initialize the right
 callable factory.</p>
@@ -343,46 +381,6 @@ questions.</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Implementing Transports and Protocols</a><ul>
-<li><a class="reference internal" href="#how-exactly-is-user-code-wrapped">How Exactly is User Code Wrapped?</a></li>
-<li><a class="reference internal" href="#a-transport-example-a-db-backed-fan-out-queue">A Transport Example: A DB-Backed Fan-Out Queue</a><ul>
-<li><a class="reference internal" href="#what-s-next">What&#8217;s Next?</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="metadata.html"
-                        title="previous chapter">Working with RPC Metadata</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="../reference/index.html"
-                        title="next chapter">Spyne API Reference</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../sources/manual/t_and_p.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
       <div class="clearer"></div>
     </div>
     <div class="related">
@@ -398,7 +396,7 @@ questions.</p>
           <a href="../reference/index.html" title="Spyne API Reference"
              >next</a> |</li>
         <li class="right" >
-          <a href="metadata.html" title="Working with RPC Metadata"
+          <a href="05_metadata.html" title="Working with RPC Metadata"
              >previous</a> |</li>
         <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
           <li><a href="index.html" >Spyne Manual</a> &raquo;</li> 

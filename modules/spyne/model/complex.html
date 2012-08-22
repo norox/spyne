@@ -10,7 +10,7 @@
     
     <title>spyne.model.complex &mdash; spyne 2.8.0-rc documentation</title>
     
-    <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -42,7 +42,24 @@
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../spyne.html" accesskey="U">spyne</a> &raquo;</li> 
       </ul>
-    </div>  
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -68,8 +85,8 @@
 <span class="c"># Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301</span>
 <span class="c">#</span>
 
-<span class="sd">&quot;&quot;&quot;This module contains ComplexBase class and its helper objects that are</span>
-<span class="sd">mainly container classes that organize other values.</span>
+<span class="sd">&quot;&quot;&quot;The ``spyne.model`` module contains :class:`spyne.model.complex.ComplexBase`</span>
+<span class="sd">class and its helper objects and subclasses. These are mainly container classes.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">decimal</span>
@@ -135,7 +152,7 @@
 
 
 <span class="k">class</span> <span class="nc">XmlAttributeRef</span><span class="p">(</span><span class="n">XmlAttribute</span><span class="p">):</span></div>
-<div class="viewcode-block" id="XmlAttributeRef"><a class="viewcode-back" href="../../../reference/model.html#spyne.model.complex.XmlAttributeRef">[docs]</a>    <span class="sd">&quot;&quot;&quot;Reference to stock XML attribute.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="XmlAttributeRef"><a class="viewcode-back" href="../../../reference/model.html#spyne.model.complex.XmlAttributeRef">[docs]</a>    <span class="sd">&quot;&quot;&quot;Reference to an Xml attribute.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ref</span><span class="p">,</span> <span class="n">use</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_ref</span> <span class="o">=</span> <span class="n">ref</span>
@@ -148,11 +165,15 @@
 
 
 <span class="k">class</span> <span class="nc">SelfReference</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span></div>
+<div class="viewcode-block" id="SelfReference"><a class="viewcode-back" href="../../../reference/model.html#spyne.model.complex.SelfReference">[docs]</a>    <span class="sd">&#39;&#39;&#39;Use this as a placeholder type in classes that contain themselves. See</span>
+<span class="sd">    :func:`spyne.test.model.test_complex.TestComplexModel.test_self_reference`.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
 
 
-<span class="k">class</span> <span class="nc">ComplexModelMeta</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">ModelBase</span><span class="p">)):</span>
+<span class="k">class</span> <span class="nc">ComplexModelMeta</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">ModelBase</span><span class="p">)):</span></div>
 <div class="viewcode-block" id="ComplexModelMeta"><a class="viewcode-back" href="../../../reference/model.html#spyne.model.complex.ComplexModelMeta">[docs]</a>    <span class="sd">&#39;&#39;&#39;This metaclass sets ``_type_info``, ``__type_name__`` and ``__extends__``</span>
 <span class="sd">    which are going to be used for (de)serialization and schema generation.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
@@ -184,7 +205,7 @@
                         <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">extends</span><span class="p">))</span>
                         <span class="k">raise</span>
 
-        <span class="c"># populate soap members</span>
+        <span class="c"># populate children</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="s">&#39;_type_info&#39;</span> <span class="ow">in</span> <span class="n">cls_dict</span><span class="p">):</span>
             <span class="n">cls_dict</span><span class="p">[</span><span class="s">&#39;_type_info&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_type_info</span> <span class="o">=</span> <span class="n">TypeInfo</span><span class="p">()</span>
 
@@ -266,7 +287,7 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">get_serialization_instance</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-<div class="viewcode-block" id="ComplexModelBase.get_serialization_instance"><a class="viewcode-back" href="../../../reference/model.html#spyne.model.complex.ComplexModelBase.get_serialization_instance">[docs]</a>        <span class="sd">&quot;&quot;&quot;The value argument can be:</span>
+<div class="viewcode-block" id="ComplexModelBase.get_serialization_instance"><a class="viewcode-back" href="../../../reference/model.html#spyne.model.complex.ComplexModelBase.get_serialization_instance">[docs]</a>        <span class="sd">&quot;&quot;&quot;:param value: This argument can be:</span>
 <span class="sd">            * A list of native types aligned with cls._type_info.</span>
 <span class="sd">            * A dict of native types</span>
 <span class="sd">            * The native type itself.</span>
@@ -335,6 +356,9 @@
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_flat_type_info</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">retval</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
 <div class="viewcode-block" id="ComplexModelBase.get_flat_type_info"><a class="viewcode-back" href="../../../reference/model.html#spyne.model.complex.ComplexModelBase.get_flat_type_info">[docs]</a>        <span class="sd">&quot;&quot;&quot;Returns a _type_info dict that includes members from all base classes.</span>
+
+<span class="sd">        It&#39;s called a &quot;flat&quot; dict because it flattens all members from the</span>
+<span class="sd">        inheritance hierarchy into one dict.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">retval</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
@@ -394,12 +418,12 @@
     <span class="nd">@classmethod</span></div>
     <span class="nd">@nillable_string</span>
     <span class="k">def</span> <span class="nf">to_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;Only primitives can be serialized to string.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Only primitives can be serialized to string.&quot;</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
     <span class="nd">@nillable_string</span>
     <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;Only primitives can be deserialized from string.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Only primitives can be deserialized from string.&quot;</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">resolve_namespace</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">default_ns</span><span class="p">):</span>
@@ -463,6 +487,8 @@
 
         <span class="n">retval</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">cls_name</span><span class="p">,</span> <span class="n">cls_bases</span><span class="p">,</span> <span class="n">cls_dict</span><span class="p">)</span>
         <span class="n">retval</span><span class="o">.</span><span class="n">_type_info</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_type_info</span>
+        <span class="n">retval</span><span class="o">.</span><span class="n">__type_name__</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">__type_name__</span>
+        <span class="n">retval</span><span class="o">.</span><span class="n">__namespace__</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">__namespace__</span>
 
         <span class="n">e</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">retval</span><span class="p">,</span> <span class="s">&#39;__extends__&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">e</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
@@ -552,23 +578,6 @@
 </pre></div></div>
 
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>

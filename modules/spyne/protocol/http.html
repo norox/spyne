@@ -10,7 +10,7 @@
     
     <title>spyne.protocol.http &mdash; spyne 2.8.0-rc documentation</title>
     
-    <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -42,7 +42,24 @@
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../spyne.html" accesskey="U">spyne</a> &raquo;</li> 
       </ul>
-    </div>  
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -68,8 +85,8 @@
 <span class="c"># Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301</span>
 <span class="c">#</span>
 
-<span class="sd">&quot;&quot;&quot;This module contains the HttpRpc protocol implementation. This is not exactly</span>
-<span class="sd">Rest, because it ignores Http verbs.</span>
+<span class="sd">&quot;&quot;&quot;The ``spyne.protocol.http`` module contains the HttpRpc protocol</span>
+<span class="sd">implementation. This is not exactly Rest.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">logging</span>
@@ -77,6 +94,7 @@
 
 <span class="kn">import</span> <span class="nn">tempfile</span>
 <span class="n">TEMPORARY_DIR</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">STREAM_READ_BLOCK_SIZE</span> <span class="o">=</span> <span class="mh">0x4000</span>
 
 <span class="k">try</span><span class="p">:</span>
     <span class="kn">from</span> <span class="nn">cStringIO</span> <span class="kn">import</span> <span class="n">StringIO</span>
@@ -86,13 +104,11 @@
     <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span> <span class="c"># Python 3</span>
         <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
 
-<span class="kn">from</span> <span class="nn">spyne.protocol</span> <span class="kn">import</span> <span class="n">ProtocolBase</span>
-
-<span class="n">STREAM_READ_BLOCK_SIZE</span> <span class="o">=</span> <span class="mi">16384</span>
+<span class="kn">from</span> <span class="nn">spyne.protocol.dictobj</span> <span class="kn">import</span> <span class="n">DictObject</span>
 
 
 <span class="k">def</span> <span class="nf">get_stream_factory</span><span class="p">(</span><span class="nb">dir</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">delete</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
-<div class="viewcode-block" id="get_stream_factory"><a class="viewcode-back" href="../../../reference/protocol.html#spyne.protocol.http.get_stream_factory">[docs]</a>    <span class="k">def</span> <span class="nf">stream_factory</span><span class="p">(</span><span class="n">total_content_length</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">content_type</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">stream_factory</span><span class="p">(</span><span class="n">total_content_length</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">content_type</span><span class="p">,</span>
                                                            <span class="n">content_length</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">total_content_length</span> <span class="o">&gt;=</span> <span class="mi">512</span> <span class="o">*</span> <span class="mi">1024</span> <span class="ow">or</span> <span class="n">delete</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">delete</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
@@ -106,9 +122,9 @@
     <span class="k">return</span> <span class="n">stream_factory</span>
 
 
-<span class="k">class</span> <span class="nc">HttpRpc</span><span class="p">(</span><span class="n">ProtocolBase</span><span class="p">):</span></div>
-<div class="viewcode-block" id="HttpRpc"><a class="viewcode-back" href="../../../reference/protocol.html#spyne.protocol.http.HttpRpc">[docs]</a>    <span class="sd">&quot;&quot;&quot;The so-called ReST-ish HttpRpc protocol implementation. It only works</span>
-<span class="sd">    with http (wsgi and twisted) transports.</span>
+<span class="k">class</span> <span class="nc">HttpRpc</span><span class="p">(</span><span class="n">DictObject</span><span class="p">):</span>
+<div class="viewcode-block" id="HttpRpc"><a class="viewcode-back" href="../../../reference/protocol/http.html#spyne.protocol.http.HttpRpc">[docs]</a>    <span class="sd">&quot;&quot;&quot;The so-called ReST-ish HttpRpc protocol implementation. It only works</span>
+<span class="sd">    with Http (wsgi and twisted) transports.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">mime_type</span> <span class="o">=</span> <span class="s">&#39;text/plain&#39;</span>
@@ -116,45 +132,45 @@
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">validator</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">mime_type</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">tmp_dir</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                                                       <span class="n">tmp_delete_on_close</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
-        <span class="n">ProtocolBase</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">validator</span><span class="p">,</span> <span class="n">mime_type</span><span class="p">)</span>
+        <span class="n">DictObject</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">validator</span><span class="p">,</span> <span class="n">mime_type</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">tmp_dir</span> <span class="o">=</span> <span class="n">tmp_dir</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tmp_delete_on_close</span> <span class="o">=</span> <span class="n">tmp_delete_on_close</span>
 
     <span class="k">def</span> <span class="nf">get_tmp_delete_on_close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<div class="viewcode-block" id="HttpRpc.get_tmp_delete_on_close"><a class="viewcode-back" href="../../../reference/protocol.html#spyne.protocol.http.HttpRpc.get_tmp_delete_on_close">[docs]</a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__tmp_delete_on_close</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__tmp_delete_on_close</span>
 
-    <span class="k">def</span> <span class="nf">set_tmp_delete_on_close</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span></div>
-<div class="viewcode-block" id="HttpRpc.set_tmp_delete_on_close"><a class="viewcode-back" href="../../../reference/protocol.html#spyne.protocol.http.HttpRpc.set_tmp_delete_on_close">[docs]</a>        <span class="bp">self</span><span class="o">.</span><span class="n">__tmp_delete_on_close</span> <span class="o">=</span> <span class="n">val</span>
+    <span class="k">def</span> <span class="nf">set_tmp_delete_on_close</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__tmp_delete_on_close</span> <span class="o">=</span> <span class="n">val</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">stream_factory</span> <span class="o">=</span> <span class="n">get_stream_factory</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tmp_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__tmp_delete_on_close</span><span class="p">)</span>
 
-    <span class="n">tmp_delete_on_close</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_tmp_delete_on_close</span><span class="p">,</span> <span class="n">set_tmp_delete_on_close</span><span class="p">)</span></div>
+    <span class="n">tmp_delete_on_close</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_tmp_delete_on_close</span><span class="p">,</span> <span class="n">set_tmp_delete_on_close</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">set_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">validator</span><span class="p">):</span>
-<div class="viewcode-block" id="HttpRpc.set_validator"><a class="viewcode-back" href="../../../reference/protocol.html#spyne.protocol.http.HttpRpc.set_validator">[docs]</a>        <span class="k">if</span> <span class="n">validator</span> <span class="o">==</span> <span class="s">&#39;soft&#39;</span> <span class="ow">or</span> <span class="n">validator</span> <span class="ow">is</span> <span class="bp">self</span><span class="o">.</span><span class="n">SOFT_VALIDATION</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">validator</span> <span class="o">==</span> <span class="s">&#39;soft&#39;</span> <span class="ow">or</span> <span class="n">validator</span> <span class="ow">is</span> <span class="bp">self</span><span class="o">.</span><span class="n">SOFT_VALIDATION</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">validator</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">SOFT_VALIDATION</span>
         <span class="k">elif</span> <span class="n">validator</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">validator</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">validator</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">create_in_document</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">in_string_encoding</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span></div>
-<div class="viewcode-block" id="HttpRpc.create_in_document"><a class="viewcode-back" href="../../../reference/protocol.html#spyne.protocol.http.HttpRpc.create_in_document">[docs]</a>        <span class="k">assert</span> <span class="n">ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">&#39;http&#39;</span><span class="p">),</span> \
+    <span class="k">def</span> <span class="nf">create_in_document</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">in_string_encoding</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">&#39;http&#39;</span><span class="p">),</span> \
             <span class="p">(</span><span class="s">&quot;This protocol only works with an http transport, not: </span><span class="si">%s</span><span class="s">, (in </span><span class="si">%r</span><span class="s">)&quot;</span>
                                           <span class="o">%</span> <span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">transport</span><span class="p">))</span>
 
         <span class="n">ctx</span><span class="o">.</span><span class="n">in_document</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">req</span>
 
-    <span class="k">def</span> <span class="nf">decompose_incoming_envelope</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span></div>
-<div class="viewcode-block" id="HttpRpc.decompose_incoming_envelope"><a class="viewcode-back" href="../../../reference/protocol.html#spyne.protocol.http.HttpRpc.decompose_incoming_envelope">[docs]</a>        <span class="k">assert</span> <span class="n">message</span> <span class="o">==</span> <span class="n">ProtocolBase</span><span class="o">.</span><span class="n">REQUEST</span>
+    <span class="k">def</span> <span class="nf">decompose_incoming_envelope</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">message</span> <span class="o">==</span> <span class="n">DictObject</span><span class="o">.</span><span class="n">REQUEST</span>
 
         <span class="n">ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">itself</span><span class="o">.</span><span class="n">decompose_incoming_envelope</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
 
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\t</span><span class="s">header : </span><span class="si">%r</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">in_header_doc</span><span class="p">))</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\t</span><span class="s">body   : </span><span class="si">%r</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">in_body_doc</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">deserialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span></div>
-<div class="viewcode-block" id="HttpRpc.deserialize"><a class="viewcode-back" href="../../../reference/protocol.html#spyne.protocol.http.HttpRpc.deserialize">[docs]</a>        <span class="k">assert</span> <span class="n">message</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">REQUEST</span><span class="p">,)</span>
+    <span class="k">def</span> <span class="nf">deserialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">message</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">REQUEST</span><span class="p">,)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">event_manager</span><span class="o">.</span><span class="n">fire_event</span><span class="p">(</span><span class="s">&#39;before_deserialize&#39;</span><span class="p">,</span> <span class="n">ctx</span><span class="p">)</span>
 
@@ -167,8 +183,8 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">event_manager</span><span class="o">.</span><span class="n">fire_event</span><span class="p">(</span><span class="s">&#39;after_deserialize&#39;</span><span class="p">,</span> <span class="n">ctx</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span></div>
-<div class="viewcode-block" id="HttpRpc.serialize"><a class="viewcode-back" href="../../../reference/protocol.html#spyne.protocol.http.HttpRpc.serialize">[docs]</a>        <span class="k">assert</span> <span class="n">message</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">RESPONSE</span><span class="p">,)</span>
+    <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">message</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">RESPONSE</span><span class="p">,)</span>
 
         <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">out_error</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">result_message_class</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">descriptor</span><span class="o">.</span><span class="n">out_message</span>
@@ -199,28 +215,11 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">event_manager</span><span class="o">.</span><span class="n">fire_event</span><span class="p">(</span><span class="s">&#39;serialize&#39;</span><span class="p">,</span> <span class="n">ctx</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">create_out_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">out_string_encoding</span><span class="o">=</span><span class="s">&#39;utf8&#39;</span><span class="p">):</span></div>
-<div class="viewcode-block" id="HttpRpc.create_out_string"><a class="viewcode-back" href="../../../reference/protocol.html#spyne.protocol.http.HttpRpc.create_out_string">[docs]</a>        <span class="n">ctx</span><span class="o">.</span><span class="n">out_string</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">out_document</span>
-</pre></div></div></div>
+    <span class="k">def</span> <span class="nf">create_out_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">out_string_encoding</span><span class="o">=</span><span class="s">&#39;utf8&#39;</span><span class="p">):</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">out_string</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">out_document</span>
+</pre></div></div>
 
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>

@@ -10,7 +10,7 @@
     
     <title>Spyne API Reference &mdash; spyne 2.8.0-rc documentation</title>
     
-    <link rel="stylesheet" href="../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../static/doctools.js"></script>
     <link rel="top" title="spyne 2.8.0-rc documentation" href="../index.html" />
     <link rel="next" title="Fundamental Data Structures" href="base.html" />
-    <link rel="prev" title="Implementing Transports and Protocols" href="../manual/t_and_p.html" /> 
+    <link rel="prev" title="Implementing Transports and Protocols" href="../manual/06_t_and_p.html" /> 
   </head>
   <body>
     <div class="related">
@@ -43,11 +43,39 @@
           <a href="base.html" title="Fundamental Data Structures"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="../manual/t_and_p.html" title="Implementing Transports and Protocols"
+          <a href="../manual/06_t_and_p.html" title="Implementing Transports and Protocols"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li> 
       </ul>
-    </div>  
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../manual/06_t_and_p.html"
+                        title="previous chapter">Implementing Transports and Protocols</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="base.html"
+                        title="next chapter">Fundamental Data Structures</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../sources/reference/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -67,12 +95,13 @@
 <li class="toctree-l1"><a class="reference internal" href="application.html">Application Definition</a></li>
 <li class="toctree-l1"><a class="reference internal" href="service.html">Service Definition</a></li>
 <li class="toctree-l1"><a class="reference internal" href="decorator.html">RPC Decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="error.html">Common Exceptions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="model.html">Models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="model.html#module-spyne.model">Base Classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="model.html#module-spyne.model.binary">Binary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model.html#module-spyne.model._base">Base Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model.html#module-spyne.model.binary">Binary Types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="model.html#module-spyne.model.complex">Complex</a></li>
-<li class="toctree-l2"><a class="reference internal" href="model.html#module-spyne.model.enum">Enum</a></li>
-<li class="toctree-l2"><a class="reference internal" href="model.html#module-spyne.model.fault">Fault</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model.html#enum">Enum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model.html#fault">Fault</a></li>
 <li class="toctree-l2"><a class="reference internal" href="model.html#module-spyne.model.primitive">Primitives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="model.html#module-spyne.model.table">SQL Table</a></li>
 </ul>
@@ -83,10 +112,16 @@
 <li class="toctree-l2"><a class="reference internal" href="interface.html#module-spyne.interface.wsdl.wsdl11">Wsdl 1.1</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="protocol.html">Protocols</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="protocol.html#module-spyne.protocol._base">Protocol Base Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="protocol.html#module-spyne.protocol.http">HttRpc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="protocol.html#module-spyne.protocol.soap.soap11">Soap 1.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="protocol/index.html">Protocols</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="protocol/index.html#protocol-classes">Protocol Classes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="protocol/base.html">Protocol Base Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="protocol/http.html">Http</a></li>
+<li class="toctree-l3"><a class="reference internal" href="protocol/xml.html">Xml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="protocol/json.html">Json</a></li>
+<li class="toctree-l3"><a class="reference internal" href="protocol/soap.html">Soap 1.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="protocol/msgpack.html">MessagePack</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="client.html">Client Transports</a><ul>
@@ -115,7 +150,6 @@
 <li class="toctree-l2"><a class="reference internal" href="util.html#module-spyne.util.xml">Xml Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="util.html#module-spyne.util.odict">Ordered Dictionary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="util.html#module-spyne.util.oset">Ordered Set</a></li>
-<li class="toctree-l2"><a class="reference internal" href="util.html#module-spyne.util.simple">Helpers</a></li>
 </ul>
 </li>
 </ul>
@@ -124,34 +158,6 @@
 
 
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="../manual/t_and_p.html"
-                        title="previous chapter">Implementing Transports and Protocols</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="base.html"
-                        title="next chapter">Fundamental Data Structures</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../sources/reference/index.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -169,7 +175,7 @@
           <a href="base.html" title="Fundamental Data Structures"
              >next</a> |</li>
         <li class="right" >
-          <a href="../manual/t_and_p.html" title="Implementing Transports and Protocols"
+          <a href="../manual/06_t_and_p.html" title="Implementing Transports and Protocols"
              >previous</a> |</li>
         <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li> 
       </ul>

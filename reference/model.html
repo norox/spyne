@@ -10,7 +10,7 @@
     
     <title>Models &mdash; spyne 2.8.0-rc documentation</title>
     
-    <link rel="stylesheet" href="../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -28,7 +28,7 @@
     <link rel="top" title="spyne 2.8.0-rc documentation" href="../index.html" />
     <link rel="up" title="Spyne API Reference" href="index.html" />
     <link rel="next" title="Interfaces" href="interface.html" />
-    <link rel="prev" title="RPC Decorators" href="decorator.html" /> 
+    <link rel="prev" title="Common Exceptions" href="error.html" /> 
   </head>
   <body>
     <div class="related">
@@ -44,12 +44,54 @@
           <a href="interface.html" title="Interfaces"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="decorator.html" title="RPC Decorators"
+          <a href="error.html" title="Common Exceptions"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Spyne API Reference</a> &raquo;</li> 
       </ul>
-    </div>  
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Models</a><ul>
+<li><a class="reference internal" href="#module-spyne.model._base">Base Classes</a></li>
+<li><a class="reference internal" href="#module-spyne.model.binary">Binary Types</a></li>
+<li><a class="reference internal" href="#module-spyne.model.complex">Complex</a></li>
+<li><a class="reference internal" href="#enum">Enum</a></li>
+<li><a class="reference internal" href="#fault">Fault</a></li>
+<li><a class="reference internal" href="#module-spyne.model.primitive">Primitives</a></li>
+<li><a class="reference internal" href="#module-spyne.model.table">SQL Table</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="error.html"
+                        title="previous chapter">Common Exceptions</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="interface.html"
+                        title="next chapter">Interfaces</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../sources/reference/model.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -58,16 +100,14 @@
             
   <div class="section" id="models">
 <h1>Models<a class="headerlink" href="#models" title="Permalink to this headline">¶</a></h1>
-<p>In spyne, models are used to mark how a certain message fragment will be
-converted to and from its native python format. It also holds validation
-information, and holds actually THE information interface document standards
-like WSDL are designed to exposed.</p>
-<p>Spyne&#8217;s has built-in support most common data types and provides an API to
+<p>In Spyne, models are used to mark how a certain message fragment will be
+converted to and from which native python format. They are also used to hold
+both declarative and imperative restrictions.</p>
+<p>Spyne has built-in support most common data types and provides an API to
 those who&#8217;d like to implement their own.</p>
-<div class="section" id="module-spyne.model">
-<span id="base-classes"></span><h2>Base Classes<a class="headerlink" href="#module-spyne.model" title="Permalink to this headline">¶</a></h2>
-<p>Models are mere type markers, they are not of much use without protocols.</p>
-<span class="target" id="module-spyne.model._base"></span><dl class="class">
+<div class="section" id="module-spyne.model._base">
+<span id="base-classes"></span><h2>Base Classes<a class="headerlink" href="#module-spyne.model._base" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
 <dt id="spyne.model._base.ModelBase">
 <em class="property">class </em><tt class="descclassname">spyne.model._base.</tt><tt class="descname">ModelBase</tt><a class="reference internal" href="../modules/spyne/model/_base.html#ModelBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model._base.ModelBase" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
@@ -242,46 +282,40 @@ native python value.</p>
 
 </div>
 <div class="section" id="module-spyne.model.binary">
-<span id="binary"></span><h2>Binary<a class="headerlink" href="#module-spyne.model.binary" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="spyne.model.binary.Attachment">
-<em class="property">class </em><tt class="descclassname">spyne.model.binary.</tt><tt class="descname">Attachment</tt><big>(</big><em>data=None</em>, <em>file_name=None</em><big>)</big><a class="reference internal" href="../modules/spyne/model/binary.html#Attachment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.binary.Attachment" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#spyne.model._base.ModelBase" title="spyne.model._base.ModelBase"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.ModelBase</span></tt></a></p>
-<p><strong>DEPRECATED!</strong> Use ByteArray or File instead.</p>
-<dl class="method">
-<dt id="spyne.model.binary.Attachment.load_from_file">
-<tt class="descname">load_from_file</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/spyne/model/binary.html#Attachment.load_from_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.binary.Attachment.load_from_file" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method loads the data from the specified file, and does
-no encoding/decoding of the data</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="spyne.model.binary.Attachment.save_to_file">
-<tt class="descname">save_to_file</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/spyne/model/binary.html#Attachment.save_to_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.binary.Attachment.save_to_file" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method writes the data to the specified file.  This method
-assumes that the file_name is the full path to the file to be written.
-This method also assumes that self.data is the base64 decoded data,
-and will do no additional transformations on it, simply write it to
-disk.</p>
-</dd></dl>
-
-</dd></dl>
-
+<span id="binary-types"></span><h2>Binary Types<a class="headerlink" href="#module-spyne.model.binary" title="Permalink to this headline">¶</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">spyne.model.binary</span></tt> package contains binary type markers.</p>
 <dl class="class">
 <dt id="spyne.model.binary.ByteArray">
 <em class="property">class </em><tt class="descclassname">spyne.model.binary.</tt><tt class="descname">ByteArray</tt><a class="reference internal" href="../modules/spyne/model/binary.html#ByteArray"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.binary.ByteArray" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#spyne.model._base.SimpleModel" title="spyne.model._base.SimpleModel"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.SimpleModel</span></tt></a></p>
-<p>Handles anything other than ascii or unicode-encoded data. Every protocol
-has a different way to handle arbitrary data. E.g. xml-based protocols
-encode this as base64, while HttpRpc just hands it over.</p>
-<p>Its native python format is an iterable of strings.</p>
+<p>Every protocol has a different way to handle arbitrary data.
+E.g. xml-based protocols encode this as base64, while HttpRpc just hands it over.</p>
+<p>Its native python format is an sequence of <tt class="docutils literal"><span class="pre">str</span></tt> objects for Python 2.x
+and a sequence of <tt class="docutils literal"><span class="pre">bytes</span></tt> objects for Python 3.x.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="spyne.model.binary.File">
+<em class="property">class </em><tt class="descclassname">spyne.model.binary.</tt><tt class="descname">File</tt><big>(</big><em>name=None</em>, <em>path=None</em>, <em>type='application/octet-stream'</em>, <em>data=None</em>, <em>handle=None</em><big>)</big><a class="reference internal" href="../modules/spyne/model/binary.html#File"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.binary.File" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#spyne.model._base.ModelBase" title="spyne.model._base.ModelBase"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.ModelBase</span></tt></a></p>
+<p>This type is needed because some protocols prefer to transport file data
+almost out-of-band.</p>
+<dl class="method">
+<dt id="spyne.model.binary.File.rollover">
+<tt class="descname">rollover</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/spyne/model/binary.html#File.rollover"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.binary.File.rollover" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method normalizes the file object by making <tt class="docutils literal"><span class="pre">path</span></tt>, <tt class="docutils literal"><span class="pre">name</span></tt>
+and <tt class="docutils literal"><span class="pre">handle</span></tt> properties consistent. It then writes incoming data to
+the file object and points the <tt class="docutils literal"><span class="pre">data</span></tt> iterable to the contents of
+this file.</p>
+</dd></dl>
+
 </dd></dl>
 
 </div>
 <div class="section" id="module-spyne.model.complex">
 <span id="complex"></span><h2>Complex<a class="headerlink" href="#module-spyne.model.complex" title="Permalink to this headline">¶</a></h2>
-<p>This module contains ComplexBase class and its helper objects that are
-mainly container classes that organize other values.</p>
+<p>The <tt class="docutils literal"><span class="pre">spyne.model</span></tt> module contains <tt class="xref py py-class docutils literal"><span class="pre">spyne.model.complex.ComplexBase</span></tt>
+class and its helper objects and subclasses. These are mainly container classes.</p>
 <dl class="class">
 <dt id="spyne.model.complex.Alias">
 <em class="property">class </em><tt class="descclassname">spyne.model.complex.</tt><tt class="descname">Alias</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../modules/spyne/model/complex.html#Alias"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.complex.Alias" title="Permalink to this definition">¶</a></dt>
@@ -340,15 +374,26 @@ its attributes.</p>
 <dt id="spyne.model.complex.ComplexModelBase.get_flat_type_info">
 <em class="property">static </em><tt class="descname">get_flat_type_info</tt><big>(</big><em>retval=None</em><big>)</big><a class="reference internal" href="../modules/spyne/model/complex.html#ComplexModelBase.get_flat_type_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.complex.ComplexModelBase.get_flat_type_info" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a _type_info dict that includes members from all base classes.</p>
+<p>It&#8217;s called a &#8220;flat&#8221; dict because it flattens all members from the
+inheritance hierarchy into one dict.</p>
 </dd></dl>
 
 <dl class="classmethod">
 <dt id="spyne.model.complex.ComplexModelBase.get_serialization_instance">
 <em class="property">classmethod </em><tt class="descname">get_serialization_instance</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="../modules/spyne/model/complex.html#ComplexModelBase.get_serialization_instance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.complex.ComplexModelBase.get_serialization_instance" title="Permalink to this definition">¶</a></dt>
-<dd><p>The value argument can be:
-* A list of native types aligned with cls._type_info.
-* A dict of native types
-* The native type itself.</p>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> &#8211; This argument can be:</td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li>A list of native types aligned with cls._type_info.</li>
+<li>A dict of native types</li>
+<li>The native type itself.</li>
+</ul>
 </dd></dl>
 
 <dl class="staticmethod">
@@ -394,6 +439,14 @@ implementation, this is just a marker.</p>
 </dd></dl>
 
 <dl class="class">
+<dt id="spyne.model.complex.SelfReference">
+<em class="property">class </em><tt class="descclassname">spyne.model.complex.</tt><tt class="descname">SelfReference</tt><a class="reference internal" href="../modules/spyne/model/complex.html#SelfReference"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.complex.SelfReference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Use this as a placeholder type in classes that contain themselves. See
+<tt class="xref py py-func docutils literal"><span class="pre">spyne.test.model.test_complex.TestComplexModel.test_self_reference()</span></tt>.</p>
+</dd></dl>
+
+<dl class="class">
 <dt id="spyne.model.complex.XmlAttribute">
 <em class="property">class </em><tt class="descclassname">spyne.model.complex.</tt><tt class="descname">XmlAttribute</tt><a class="reference internal" href="../modules/spyne/model/complex.html#XmlAttribute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.complex.XmlAttribute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#spyne.model._base.ModelBase" title="spyne.model._base.ModelBase"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.ModelBase</span></tt></a></p>
@@ -404,28 +457,55 @@ implementation, this is just a marker.</p>
 <dt id="spyne.model.complex.XmlAttributeRef">
 <em class="property">class </em><tt class="descclassname">spyne.model.complex.</tt><tt class="descname">XmlAttributeRef</tt><big>(</big><em>ref</em>, <em>use=None</em><big>)</big><a class="reference internal" href="../modules/spyne/model/complex.html#XmlAttributeRef"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.complex.XmlAttributeRef" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#spyne.model.complex.XmlAttribute" title="spyne.model.complex.XmlAttribute"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.complex.XmlAttribute</span></tt></a></p>
-<p>Reference to stock XML attribute.</p>
+<p>Reference to an Xml attribute.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-spyne.model.enum">
-<span id="enum"></span><h2>Enum<a class="headerlink" href="#module-spyne.model.enum" title="Permalink to this headline">¶</a></h2>
-<p>This module contains Enum object and its helper objects.</p>
+<div class="section" id="enum">
+<h2>Enum<a class="headerlink" href="#enum" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-spyne.model.fault">
-<span id="fault"></span><h2>Fault<a class="headerlink" href="#module-spyne.model.fault" title="Permalink to this headline">¶</a></h2>
-<p>This module defines the Fault class.</p>
-<dl class="exception">
+<div class="section" id="fault">
+<h2>Fault<a class="headerlink" href="#fault" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
 <dt id="spyne.model.fault.Fault">
-<em class="property">exception </em><tt class="descclassname">spyne.model.fault.</tt><tt class="descname">Fault</tt><big>(</big><em>faultcode='Server'</em>, <em>faultstring=''</em>, <em>faultactor=''</em>, <em>detail=None</em><big>)</big><a class="reference internal" href="../modules/spyne/model/fault.html#Fault"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.fault.Fault" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">spyne.model.fault.</tt><tt class="descname">Fault</tt><big>(</big><em>faultcode='Server'</em>, <em>faultstring=''</em>, <em>faultactor=''</em>, <em>detail=None</em><big>)</big><a class="reference internal" href="../modules/spyne/model/fault.html#Fault"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.fault.Fault" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#spyne.model._base.ModelBase" title="spyne.model._base.ModelBase"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.ModelBase</span></tt></a>, <tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></p>
-<p>Use this class as a base for public exceptions.</p>
+<p>Use this class as a base for all public exceptions.
+The Fault object adheres to the
+<a class="reference external" href="http://www.w3.org/TR/2000/NOTE-SOAP-20000508/#_Toc478383507">SOAP 1.1 Fault definition</a>,</p>
+<p>which has three main attributes:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>faultcode</strong> &#8211; <p>It&#8217;s a dot-delimited string whose first fragment is
+either &#8216;Client&#8217; or &#8216;Server&#8217;. Just like HTTP 4xx and 5xx codes,
+&#8216;Client&#8217; indicates that something was wrong with the input, and &#8216;Server&#8217;
+indicates something went wrong during the processing of an otherwise
+legitimate request.</p>
+<p>Protocol implementors should heed the values in <tt class="docutils literal"><span class="pre">faultcode</span></tt> to set
+proper return codes in the protocol level when necessary. E.g. HttpRpc
+protocol will return a HTTP 404 error when a
+<tt class="xref py py-class docutils literal"><span class="pre">spyne.error.ResourceNotFound</span></tt> is raised, and a general HTTP 400
+when the <tt class="docutils literal"><span class="pre">faultcode</span></tt> starts with <tt class="docutils literal"><span class="pre">'Client.'</span></tt> or is <tt class="docutils literal"><span class="pre">'Client'</span></tt>.</p>
+<p>Soap would return Http 500 for any kind of exception, and denote the
+nature of the exception in the Soap response body. (because that&#8217;s what
+the standard says... Yes, soap is famous for a reason :))</p>
+</li>
+<li><strong>faultstring</strong> &#8211; It&#8217;s the human-readable explanation of the exception.</li>
+<li><strong>detail</strong> &#8211; Additional information dict.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>
 <div class="section" id="module-spyne.model.primitive">
 <span id="primitives"></span><h2>Primitives<a class="headerlink" href="#module-spyne.model.primitive" title="Permalink to this headline">¶</a></h2>
-<p>This module defines primitives that are atomic, basic types.</p>
+<p>The <tt class="docutils literal"><span class="pre">spyne.model.primitive</span></tt> package contains atomic, single-value types.</p>
 <dl class="class">
 <dt id="spyne.model.primitive.AnyDict">
 <em class="property">class </em><tt class="descclassname">spyne.model.primitive.</tt><tt class="descname">AnyDict</tt><a class="reference internal" href="../modules/spyne/model/primitive.html#AnyDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.primitive.AnyDict" title="Permalink to this definition">¶</a></dt>
@@ -433,70 +513,6 @@ implementation, this is just a marker.</p>
 <p>An xml node that can contain any number of sub nodes. It&#8217;s represented by
 a dict instance that can contain other dicts or iterables of strings as
 values.</p>
-<dl class="class">
-<dt id="spyne.model.primitive.AnyDict.Annotations">
-<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#spyne.model.primitive.AnyDict.Annotations" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>The class that holds the annotations for the given type.</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="spyne.model.primitive.AnyDict.Attributes">
-<em class="property">class </em><tt class="descclassname">AnyDict.</tt><tt class="descname">Attributes</tt><a class="headerlink" href="#spyne.model.primitive.AnyDict.Attributes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.Attributes</span></tt></p>
-<p>The class that holds the constraints for the given type.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.AnyDict.customize">
-<em class="property">classmethod </em><tt class="descclassname">AnyDict.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.AnyDict.customize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
-<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.AnyDict.get_namespace">
-<em class="property">classmethod </em><tt class="descclassname">AnyDict.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.AnyDict.get_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace of the class. Defaults to the python module
-name.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.AnyDict.get_namespace_prefix">
-<em class="property">classmethod </em><tt class="descclassname">AnyDict.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.AnyDict.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace prefix for the given interface. The
-get_namespace_prefix of the interface class generates a prefix if none
-is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.AnyDict.get_type_name">
-<em class="property">classmethod </em><tt class="descclassname">AnyDict.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.AnyDict.get_type_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.AnyDict.get_type_name_ns">
-<em class="property">classmethod </em><tt class="descclassname">AnyDict.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.AnyDict.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="spyne.model.primitive.AnyDict.resolve_namespace">
-<em class="property">static </em><tt class="descclassname">AnyDict.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.AnyDict.resolve_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>This call finalizes the namespace assignment. The default namespace
-is not available until the application calls populate_interface method
-of the interface generator.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="spyne.model.primitive.AnyDict.validate_native">
-<em class="property">static </em><tt class="descclassname">AnyDict.</tt><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.AnyDict.validate_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>Override this method to do your own input validation on the native
-value. This is called after converting the incoming string to the
-native python value.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
@@ -505,60 +521,26 @@ native python value.</p>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.String</span></tt></p>
 <p>A special kind of String type designed to hold an uri.</p>
 <dl class="class">
-<dt id="spyne.model.primitive.AnyUri.Annotations">
-<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#spyne.model.primitive.AnyUri.Annotations" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.model.primitive.AnyUri.UriValue">
+<em class="property">class </em><tt class="descname">UriValue</tt><big>(</big><em>href</em>, <em>text=None</em>, <em>content=None</em><big>)</big><a class="reference internal" href="../modules/spyne/model/primitive.html#AnyUri.UriValue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.primitive.AnyUri.UriValue" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>The class that holds the annotations for the given type.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.AnyUri.customize">
-<em class="property">classmethod </em><tt class="descclassname">AnyUri.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.AnyUri.customize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
-<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.AnyUri.get_namespace">
-<em class="property">classmethod </em><tt class="descclassname">AnyUri.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.AnyUri.get_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace of the class. Defaults to the python module
-name.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.AnyUri.get_namespace_prefix">
-<em class="property">classmethod </em><tt class="descclassname">AnyUri.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.AnyUri.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace prefix for the given interface. The
-get_namespace_prefix of the interface class generates a prefix if none
-is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.AnyUri.get_type_name">
-<em class="property">classmethod </em><tt class="descclassname">AnyUri.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.AnyUri.get_type_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.AnyUri.get_type_name_ns">
-<em class="property">classmethod </em><tt class="descclassname">AnyUri.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.AnyUri.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="spyne.model.primitive.AnyUri.resolve_namespace">
-<em class="property">static </em><tt class="descclassname">AnyUri.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.AnyUri.resolve_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>This call finalizes the namespace assignment. The default namespace
-is not available until the application calls populate_interface method
-of the interface generator.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="spyne.model.primitive.AnyUri.validate_native">
-<em class="property">static </em><tt class="descclassname">AnyUri.</tt><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.AnyUri.validate_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>Override this method to do your own input validation on the native
-value. This is called after converting the incoming string to the
-native python value.</p>
+<p>A special object that is just a better way of carrying the
+information carried with a link.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>href</strong> &#8211; The uri string.</li>
+<li><strong>text</strong> &#8211; The text data that goes with the link. This is an
+<cite>lxml.etree._Element</cite> instance.</li>
+<li><strong>content</strong> &#8211; The structured data that goes with the link. This is a</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><tt class="docutils literal"><span class="pre">str</span></tt> or a <tt class="docutils literal"><span class="pre">unicode</span></tt> instance.</p>
 </dd></dl>
 
 </dd></dl>
@@ -569,63 +551,6 @@ native python value.</p>
 <dd><p>Bases: <a class="reference internal" href="#spyne.model._base.SimpleModel" title="spyne.model._base.SimpleModel"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.SimpleModel</span></tt></a></p>
 <p>An xml node that can contain any number of sub nodes. It&#8217;s represented by
 an ElementTree object.</p>
-<dl class="class">
-<dt id="spyne.model.primitive.AnyXml.Annotations">
-<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#spyne.model.primitive.AnyXml.Annotations" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>The class that holds the annotations for the given type.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.AnyXml.customize">
-<em class="property">classmethod </em><tt class="descclassname">AnyXml.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.AnyXml.customize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
-<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.AnyXml.get_namespace">
-<em class="property">classmethod </em><tt class="descclassname">AnyXml.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.AnyXml.get_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace of the class. Defaults to the python module
-name.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.AnyXml.get_namespace_prefix">
-<em class="property">classmethod </em><tt class="descclassname">AnyXml.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.AnyXml.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace prefix for the given interface. The
-get_namespace_prefix of the interface class generates a prefix if none
-is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.AnyXml.get_type_name">
-<em class="property">classmethod </em><tt class="descclassname">AnyXml.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.AnyXml.get_type_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.AnyXml.get_type_name_ns">
-<em class="property">classmethod </em><tt class="descclassname">AnyXml.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.AnyXml.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="spyne.model.primitive.AnyXml.resolve_namespace">
-<em class="property">static </em><tt class="descclassname">AnyXml.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.AnyXml.resolve_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>This call finalizes the namespace assignment. The default namespace
-is not available until the application calls populate_interface method
-of the interface generator.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="spyne.model.primitive.AnyXml.validate_native">
-<em class="property">static </em><tt class="descclassname">AnyXml.</tt><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.AnyXml.validate_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>Override this method to do your own input validation on the native
-value. This is called after converting the incoming string to the
-native python value.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
@@ -633,70 +558,6 @@ native python value.</p>
 <em class="property">class </em><tt class="descclassname">spyne.model.primitive.</tt><tt class="descname">Boolean</tt><a class="reference internal" href="../modules/spyne/model/primitive.html#Boolean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.primitive.Boolean" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#spyne.model._base.SimpleModel" title="spyne.model._base.SimpleModel"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.SimpleModel</span></tt></a></p>
 <p>Life is simple here. Just true or false.</p>
-<dl class="class">
-<dt id="spyne.model.primitive.Boolean.Annotations">
-<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#spyne.model.primitive.Boolean.Annotations" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>The class that holds the annotations for the given type.</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="spyne.model.primitive.Boolean.Attributes">
-<em class="property">class </em><tt class="descclassname">Boolean.</tt><tt class="descname">Attributes</tt><a class="headerlink" href="#spyne.model.primitive.Boolean.Attributes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.Attributes</span></tt></p>
-<p>The class that holds the constraints for the given type.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Boolean.customize">
-<em class="property">classmethod </em><tt class="descclassname">Boolean.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Boolean.customize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
-<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Boolean.get_namespace">
-<em class="property">classmethod </em><tt class="descclassname">Boolean.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.Boolean.get_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace of the class. Defaults to the python module
-name.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Boolean.get_namespace_prefix">
-<em class="property">classmethod </em><tt class="descclassname">Boolean.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Boolean.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace prefix for the given interface. The
-get_namespace_prefix of the interface class generates a prefix if none
-is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Boolean.get_type_name">
-<em class="property">classmethod </em><tt class="descclassname">Boolean.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.Boolean.get_type_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Boolean.get_type_name_ns">
-<em class="property">classmethod </em><tt class="descclassname">Boolean.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Boolean.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="spyne.model.primitive.Boolean.resolve_namespace">
-<em class="property">static </em><tt class="descclassname">Boolean.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Boolean.resolve_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>This call finalizes the namespace assignment. The default namespace
-is not available until the application calls populate_interface method
-of the interface generator.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="spyne.model.primitive.Boolean.validate_native">
-<em class="property">static </em><tt class="descclassname">Boolean.</tt><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Boolean.validate_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>Override this method to do your own input validation on the native
-value. This is called after converting the incoming string to the
-native python value.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="attribute">
@@ -711,63 +572,6 @@ native python value.</p>
 <dd><p>Bases: <a class="reference internal" href="#spyne.model.primitive.DateTime" title="spyne.model.primitive.DateTime"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.DateTime</span></tt></a></p>
 <p>Just that, Date. It also supports time zones.</p>
 <p>Native type is <a class="reference external" href="http://docs.python.org/library/datetime.html#datetime.date" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">datetime.date</span></tt></a>.</p>
-<dl class="class">
-<dt id="spyne.model.primitive.Date.Annotations">
-<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#spyne.model.primitive.Date.Annotations" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>The class that holds the annotations for the given type.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Date.customize">
-<em class="property">classmethod </em><tt class="descclassname">Date.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Date.customize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
-<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Date.get_namespace">
-<em class="property">classmethod </em><tt class="descclassname">Date.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.Date.get_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace of the class. Defaults to the python module
-name.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Date.get_namespace_prefix">
-<em class="property">classmethod </em><tt class="descclassname">Date.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Date.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace prefix for the given interface. The
-get_namespace_prefix of the interface class generates a prefix if none
-is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Date.get_type_name">
-<em class="property">classmethod </em><tt class="descclassname">Date.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.Date.get_type_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Date.get_type_name_ns">
-<em class="property">classmethod </em><tt class="descclassname">Date.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Date.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="spyne.model.primitive.Date.resolve_namespace">
-<em class="property">static </em><tt class="descclassname">Date.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Date.resolve_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>This call finalizes the namespace assignment. The default namespace
-is not available until the application calls populate_interface method
-of the interface generator.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="spyne.model.primitive.Date.validate_native">
-<em class="property">static </em><tt class="descclassname">Date.</tt><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Date.validate_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>Override this method to do your own input validation on the native
-value. This is called after converting the incoming string to the
-native python value.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
@@ -777,15 +581,8 @@ native python value.</p>
 <p>A compact way to represent dates and times together. Supports time zones.</p>
 <p>Native type is <a class="reference external" href="http://docs.python.org/library/datetime.html#datetime.datetime" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">datetime.datetime</span></tt></a>.</p>
 <dl class="class">
-<dt id="spyne.model.primitive.DateTime.Annotations">
-<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#spyne.model.primitive.DateTime.Annotations" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>The class that holds the annotations for the given type.</p>
-</dd></dl>
-
-<dl class="class">
 <dt id="spyne.model.primitive.DateTime.Attributes">
-<em class="property">class </em><tt class="descclassname">DateTime.</tt><tt class="descname">Attributes</tt><a class="reference internal" href="../modules/spyne/model/primitive.html#DateTime.Attributes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.primitive.DateTime.Attributes" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descname">Attributes</tt><a class="reference internal" href="../modules/spyne/model/primitive.html#DateTime.Attributes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.primitive.DateTime.Attributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.Attributes</span></tt></p>
 <p>Customizable attributes of the <a class="reference internal" href="#spyne.model.primitive.DateTime" title="spyne.model.primitive.DateTime"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.DateTime</span></tt></a>
 type.</p>
@@ -806,56 +603,6 @@ string. See here for more info:
 
 </dd></dl>
 
-<dl class="classmethod">
-<dt id="spyne.model.primitive.DateTime.customize">
-<em class="property">classmethod </em><tt class="descclassname">DateTime.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.DateTime.customize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
-<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.DateTime.get_namespace">
-<em class="property">classmethod </em><tt class="descclassname">DateTime.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.DateTime.get_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace of the class. Defaults to the python module
-name.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.DateTime.get_namespace_prefix">
-<em class="property">classmethod </em><tt class="descclassname">DateTime.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.DateTime.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace prefix for the given interface. The
-get_namespace_prefix of the interface class generates a prefix if none
-is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.DateTime.get_type_name">
-<em class="property">classmethod </em><tt class="descclassname">DateTime.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.DateTime.get_type_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.DateTime.get_type_name_ns">
-<em class="property">classmethod </em><tt class="descclassname">DateTime.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.DateTime.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="spyne.model.primitive.DateTime.resolve_namespace">
-<em class="property">static </em><tt class="descclassname">DateTime.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.DateTime.resolve_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>This call finalizes the namespace assignment. The default namespace
-is not available until the application calls populate_interface method
-of the interface generator.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="spyne.model.primitive.DateTime.validate_native">
-<em class="property">static </em><tt class="descclassname">DateTime.</tt><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.DateTime.validate_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>Override this method to do your own input validation on the native
-value. This is called after converting the incoming string to the
-native python value.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
@@ -863,17 +610,10 @@ native python value.</p>
 <em class="property">class </em><tt class="descclassname">spyne.model.primitive.</tt><tt class="descname">Decimal</tt><a class="reference internal" href="../modules/spyne/model/primitive.html#Decimal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.primitive.Decimal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#spyne.model._base.SimpleModel" title="spyne.model._base.SimpleModel"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.SimpleModel</span></tt></a></p>
 <p>The primitive that corresponds to the native python Decimal.</p>
-<p>This is also the base class for representing numbers.</p>
-<dl class="class">
-<dt id="spyne.model.primitive.Decimal.Annotations">
-<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#spyne.model.primitive.Decimal.Annotations" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>The class that holds the annotations for the given type.</p>
-</dd></dl>
-
+<p>This is also the base class for denoting numbers.</p>
 <dl class="class">
 <dt id="spyne.model.primitive.Decimal.Attributes">
-<em class="property">class </em><tt class="descclassname">Decimal.</tt><tt class="descname">Attributes</tt><a class="reference internal" href="../modules/spyne/model/primitive.html#Decimal.Attributes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.primitive.Decimal.Attributes" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descname">Attributes</tt><a class="reference internal" href="../modules/spyne/model/primitive.html#Decimal.Attributes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.primitive.Decimal.Attributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.Attributes</span></tt></p>
 <p>Customizable attributes of the <a class="reference internal" href="#spyne.model.primitive.Decimal" title="spyne.model.primitive.Decimal"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.Decimal</span></tt></a>
 type.</p>
@@ -899,13 +639,13 @@ type.</p>
 <dl class="attribute">
 <dt id="spyne.model.primitive.Decimal.Attributes.le">
 <tt class="descname">le</tt><em class="property"> = Decimal('Infinity')</em><a class="headerlink" href="#spyne.model.primitive.Decimal.Attributes.le" title="Permalink to this definition">¶</a></dt>
-<dd><p>The value should be smaller than or equal to this number.</p>
+<dd><p>The value should be lower than or equal to this number.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="spyne.model.primitive.Decimal.Attributes.lt">
 <tt class="descname">lt</tt><em class="property"> = Decimal('Infinity')</em><a class="headerlink" href="#spyne.model.primitive.Decimal.Attributes.lt" title="Permalink to this definition">¶</a></dt>
-<dd><p>The value should be smaller than this number.</p>
+<dd><p>The value should be lower than this number.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -916,48 +656,6 @@ type.</p>
 
 </dd></dl>
 
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Decimal.customize">
-<em class="property">classmethod </em><tt class="descclassname">Decimal.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Decimal.customize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
-<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Decimal.get_namespace">
-<em class="property">classmethod </em><tt class="descclassname">Decimal.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.Decimal.get_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace of the class. Defaults to the python module
-name.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Decimal.get_namespace_prefix">
-<em class="property">classmethod </em><tt class="descclassname">Decimal.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Decimal.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace prefix for the given interface. The
-get_namespace_prefix of the interface class generates a prefix if none
-is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Decimal.get_type_name">
-<em class="property">classmethod </em><tt class="descclassname">Decimal.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.Decimal.get_type_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Decimal.get_type_name_ns">
-<em class="property">classmethod </em><tt class="descclassname">Decimal.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Decimal.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="spyne.model.primitive.Decimal.resolve_namespace">
-<em class="property">static </em><tt class="descclassname">Decimal.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Decimal.resolve_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>This call finalizes the namespace assignment. The default namespace
-is not available until the application calls populate_interface method
-of the interface generator.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
@@ -966,63 +664,6 @@ of the interface generator.</p>
 <dd><p>Bases: <a class="reference internal" href="#spyne.model.primitive.Decimal" title="spyne.model.primitive.Decimal"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.Decimal</span></tt></a></p>
 <p>This is serialized as the python float. So this type comes with its
 gotchas.</p>
-<dl class="class">
-<dt id="spyne.model.primitive.Double.Annotations">
-<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#spyne.model.primitive.Double.Annotations" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>The class that holds the annotations for the given type.</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="spyne.model.primitive.Double.Attributes">
-<em class="property">class </em><tt class="descclassname">Double.</tt><tt class="descname">Attributes</tt><a class="headerlink" href="#spyne.model.primitive.Double.Attributes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.Attributes</span></tt></p>
-<p>Customizable attributes of the <a class="reference internal" href="#spyne.model.primitive.Decimal" title="spyne.model.primitive.Decimal"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.Decimal</span></tt></a>
-type.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Double.customize">
-<em class="property">classmethod </em><tt class="descclassname">Double.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Double.customize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
-<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Double.get_namespace">
-<em class="property">classmethod </em><tt class="descclassname">Double.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.Double.get_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace of the class. Defaults to the python module
-name.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Double.get_namespace_prefix">
-<em class="property">classmethod </em><tt class="descclassname">Double.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Double.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace prefix for the given interface. The
-get_namespace_prefix of the interface class generates a prefix if none
-is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Double.get_type_name">
-<em class="property">classmethod </em><tt class="descclassname">Double.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.Double.get_type_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Double.get_type_name_ns">
-<em class="property">classmethod </em><tt class="descclassname">Double.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Double.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="spyne.model.primitive.Double.resolve_namespace">
-<em class="property">static </em><tt class="descclassname">Double.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Double.resolve_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>This call finalizes the namespace assignment. The default namespace
-is not available until the application calls populate_interface method
-of the interface generator.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
@@ -1030,70 +671,6 @@ of the interface generator.</p>
 <em class="property">class </em><tt class="descclassname">spyne.model.primitive.</tt><tt class="descname">Duration</tt><a class="reference internal" href="../modules/spyne/model/primitive.html#Duration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.primitive.Duration" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#spyne.model._base.SimpleModel" title="spyne.model._base.SimpleModel"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.SimpleModel</span></tt></a></p>
 <p>Native type is <a class="reference external" href="http://docs.python.org/library/datetime.html#datetime.timedelta" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">datetime.timedelta</span></tt></a>.</p>
-<dl class="class">
-<dt id="spyne.model.primitive.Duration.Annotations">
-<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#spyne.model.primitive.Duration.Annotations" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>The class that holds the annotations for the given type.</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="spyne.model.primitive.Duration.Attributes">
-<em class="property">class </em><tt class="descclassname">Duration.</tt><tt class="descname">Attributes</tt><a class="headerlink" href="#spyne.model.primitive.Duration.Attributes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.Attributes</span></tt></p>
-<p>The class that holds the constraints for the given type.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Duration.customize">
-<em class="property">classmethod </em><tt class="descclassname">Duration.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Duration.customize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
-<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Duration.get_namespace">
-<em class="property">classmethod </em><tt class="descclassname">Duration.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.Duration.get_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace of the class. Defaults to the python module
-name.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Duration.get_namespace_prefix">
-<em class="property">classmethod </em><tt class="descclassname">Duration.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Duration.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace prefix for the given interface. The
-get_namespace_prefix of the interface class generates a prefix if none
-is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Duration.get_type_name">
-<em class="property">classmethod </em><tt class="descclassname">Duration.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.Duration.get_type_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Duration.get_type_name_ns">
-<em class="property">classmethod </em><tt class="descclassname">Duration.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Duration.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="spyne.model.primitive.Duration.resolve_namespace">
-<em class="property">static </em><tt class="descclassname">Duration.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Duration.resolve_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>This call finalizes the namespace assignment. The default namespace
-is not available until the application calls populate_interface method
-of the interface generator.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="spyne.model.primitive.Duration.validate_native">
-<em class="property">static </em><tt class="descclassname">Duration.</tt><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Duration.validate_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>Override this method to do your own input validation on the native
-value. This is called after converting the incoming string to the
-native python value.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
@@ -1101,63 +678,6 @@ native python value.</p>
 <em class="property">class </em><tt class="descclassname">spyne.model.primitive.</tt><tt class="descname">Float</tt><a class="reference internal" href="../modules/spyne/model/primitive.html#Float"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.primitive.Float" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#spyne.model.primitive.Double" title="spyne.model.primitive.Double"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.Double</span></tt></a></p>
 <p>Synonym for Double. This is here for compatibility purposes.</p>
-<dl class="class">
-<dt id="spyne.model.primitive.Float.Annotations">
-<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#spyne.model.primitive.Float.Annotations" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>The class that holds the annotations for the given type.</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="spyne.model.primitive.Float.Attributes">
-<em class="property">class </em><tt class="descclassname">Float.</tt><tt class="descname">Attributes</tt><a class="headerlink" href="#spyne.model.primitive.Float.Attributes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.Attributes</span></tt></p>
-<p>Customizable attributes of the <a class="reference internal" href="#spyne.model.primitive.Decimal" title="spyne.model.primitive.Decimal"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.Decimal</span></tt></a>
-type.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Float.customize">
-<em class="property">classmethod </em><tt class="descclassname">Float.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Float.customize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
-<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Float.get_namespace">
-<em class="property">classmethod </em><tt class="descclassname">Float.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.Float.get_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace of the class. Defaults to the python module
-name.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Float.get_namespace_prefix">
-<em class="property">classmethod </em><tt class="descclassname">Float.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Float.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace prefix for the given interface. The
-get_namespace_prefix of the interface class generates a prefix if none
-is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Float.get_type_name">
-<em class="property">classmethod </em><tt class="descclassname">Float.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.Float.get_type_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Float.get_type_name_ns">
-<em class="property">classmethod </em><tt class="descclassname">Float.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Float.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="spyne.model.primitive.Float.resolve_namespace">
-<em class="property">static </em><tt class="descclassname">Float.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Float.resolve_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>This call finalizes the namespace assignment. The default namespace
-is not available until the application calls populate_interface method
-of the interface generator.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
@@ -1165,63 +685,6 @@ of the interface generator.</p>
 <em class="property">class </em><tt class="descclassname">spyne.model.primitive.</tt><tt class="descname">ImageUri</tt><a class="reference internal" href="../modules/spyne/model/primitive.html#ImageUri"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.primitive.ImageUri" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#spyne.model.primitive.AnyUri" title="spyne.model.primitive.AnyUri"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.AnyUri</span></tt></a></p>
 <p>A special kind of String that holds the uri of an image.</p>
-<dl class="class">
-<dt id="spyne.model.primitive.ImageUri.Annotations">
-<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#spyne.model.primitive.ImageUri.Annotations" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>The class that holds the annotations for the given type.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.ImageUri.customize">
-<em class="property">classmethod </em><tt class="descclassname">ImageUri.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.ImageUri.customize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
-<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.ImageUri.get_namespace">
-<em class="property">classmethod </em><tt class="descclassname">ImageUri.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.ImageUri.get_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace of the class. Defaults to the python module
-name.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.ImageUri.get_namespace_prefix">
-<em class="property">classmethod </em><tt class="descclassname">ImageUri.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.ImageUri.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace prefix for the given interface. The
-get_namespace_prefix of the interface class generates a prefix if none
-is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.ImageUri.get_type_name">
-<em class="property">classmethod </em><tt class="descclassname">ImageUri.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.ImageUri.get_type_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.ImageUri.get_type_name_ns">
-<em class="property">classmethod </em><tt class="descclassname">ImageUri.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.ImageUri.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="spyne.model.primitive.ImageUri.resolve_namespace">
-<em class="property">static </em><tt class="descclassname">ImageUri.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.ImageUri.resolve_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>This call finalizes the namespace assignment. The default namespace
-is not available until the application calls populate_interface method
-of the interface generator.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="spyne.model.primitive.ImageUri.validate_native">
-<em class="property">static </em><tt class="descclassname">ImageUri.</tt><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.ImageUri.validate_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>Override this method to do your own input validation on the native
-value. This is called after converting the incoming string to the
-native python value.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="attribute">
@@ -1235,63 +698,6 @@ native python value.</p>
 <em class="property">class </em><tt class="descclassname">spyne.model.primitive.</tt><tt class="descname">Integer</tt><a class="reference internal" href="../modules/spyne/model/primitive.html#Integer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.primitive.Integer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#spyne.model.primitive.Decimal" title="spyne.model.primitive.Decimal"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.Decimal</span></tt></a></p>
 <p>The arbitrary-size signed integer.</p>
-<dl class="class">
-<dt id="spyne.model.primitive.Integer.Annotations">
-<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#spyne.model.primitive.Integer.Annotations" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>The class that holds the annotations for the given type.</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="spyne.model.primitive.Integer.Attributes">
-<em class="property">class </em><tt class="descclassname">Integer.</tt><tt class="descname">Attributes</tt><a class="headerlink" href="#spyne.model.primitive.Integer.Attributes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.Attributes</span></tt></p>
-<p>Customizable attributes of the <a class="reference internal" href="#spyne.model.primitive.Decimal" title="spyne.model.primitive.Decimal"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.Decimal</span></tt></a>
-type.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Integer.customize">
-<em class="property">classmethod </em><tt class="descclassname">Integer.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Integer.customize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
-<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Integer.get_namespace">
-<em class="property">classmethod </em><tt class="descclassname">Integer.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.Integer.get_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace of the class. Defaults to the python module
-name.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Integer.get_namespace_prefix">
-<em class="property">classmethod </em><tt class="descclassname">Integer.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Integer.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace prefix for the given interface. The
-get_namespace_prefix of the interface class generates a prefix if none
-is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Integer.get_type_name">
-<em class="property">classmethod </em><tt class="descclassname">Integer.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.Integer.get_type_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Integer.get_type_name_ns">
-<em class="property">classmethod </em><tt class="descclassname">Integer.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Integer.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="spyne.model.primitive.Integer.resolve_namespace">
-<em class="property">static </em><tt class="descclassname">Integer.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Integer.resolve_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>This call finalizes the namespace assignment. The default namespace
-is not available until the application calls populate_interface method
-of the interface generator.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
@@ -1299,63 +705,6 @@ of the interface generator.</p>
 <em class="property">class </em><tt class="descclassname">spyne.model.primitive.</tt><tt class="descname">Integer16</tt><a class="reference internal" href="../modules/spyne/model/primitive.html#Integer16"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.primitive.Integer16" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#spyne.model.primitive.Integer" title="spyne.model.primitive.Integer"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.Integer</span></tt></a></p>
 <p>The 8-bit signed integer, aka short.</p>
-<dl class="class">
-<dt id="spyne.model.primitive.Integer16.Annotations">
-<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#spyne.model.primitive.Integer16.Annotations" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>The class that holds the annotations for the given type.</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="spyne.model.primitive.Integer16.Attributes">
-<em class="property">class </em><tt class="descclassname">Integer16.</tt><tt class="descname">Attributes</tt><a class="headerlink" href="#spyne.model.primitive.Integer16.Attributes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.Attributes</span></tt></p>
-<p>Customizable attributes of the <a class="reference internal" href="#spyne.model.primitive.Decimal" title="spyne.model.primitive.Decimal"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.Decimal</span></tt></a>
-type.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Integer16.customize">
-<em class="property">classmethod </em><tt class="descclassname">Integer16.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Integer16.customize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
-<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Integer16.get_namespace">
-<em class="property">classmethod </em><tt class="descclassname">Integer16.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.Integer16.get_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace of the class. Defaults to the python module
-name.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Integer16.get_namespace_prefix">
-<em class="property">classmethod </em><tt class="descclassname">Integer16.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Integer16.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace prefix for the given interface. The
-get_namespace_prefix of the interface class generates a prefix if none
-is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Integer16.get_type_name">
-<em class="property">classmethod </em><tt class="descclassname">Integer16.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.Integer16.get_type_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Integer16.get_type_name_ns">
-<em class="property">classmethod </em><tt class="descclassname">Integer16.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Integer16.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="spyne.model.primitive.Integer16.resolve_namespace">
-<em class="property">static </em><tt class="descclassname">Integer16.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Integer16.resolve_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>This call finalizes the namespace assignment. The default namespace
-is not available until the application calls populate_interface method
-of the interface generator.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
@@ -1363,63 +712,6 @@ of the interface generator.</p>
 <em class="property">class </em><tt class="descclassname">spyne.model.primitive.</tt><tt class="descname">Integer32</tt><a class="reference internal" href="../modules/spyne/model/primitive.html#Integer32"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.primitive.Integer32" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#spyne.model.primitive.Integer" title="spyne.model.primitive.Integer"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.Integer</span></tt></a></p>
 <p>The 32-bit signed integer, aka int.</p>
-<dl class="class">
-<dt id="spyne.model.primitive.Integer32.Annotations">
-<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#spyne.model.primitive.Integer32.Annotations" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>The class that holds the annotations for the given type.</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="spyne.model.primitive.Integer32.Attributes">
-<em class="property">class </em><tt class="descclassname">Integer32.</tt><tt class="descname">Attributes</tt><a class="headerlink" href="#spyne.model.primitive.Integer32.Attributes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.Attributes</span></tt></p>
-<p>Customizable attributes of the <a class="reference internal" href="#spyne.model.primitive.Decimal" title="spyne.model.primitive.Decimal"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.Decimal</span></tt></a>
-type.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Integer32.customize">
-<em class="property">classmethod </em><tt class="descclassname">Integer32.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Integer32.customize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
-<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Integer32.get_namespace">
-<em class="property">classmethod </em><tt class="descclassname">Integer32.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.Integer32.get_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace of the class. Defaults to the python module
-name.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Integer32.get_namespace_prefix">
-<em class="property">classmethod </em><tt class="descclassname">Integer32.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Integer32.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace prefix for the given interface. The
-get_namespace_prefix of the interface class generates a prefix if none
-is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Integer32.get_type_name">
-<em class="property">classmethod </em><tt class="descclassname">Integer32.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.Integer32.get_type_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Integer32.get_type_name_ns">
-<em class="property">classmethod </em><tt class="descclassname">Integer32.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Integer32.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="spyne.model.primitive.Integer32.resolve_namespace">
-<em class="property">static </em><tt class="descclassname">Integer32.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Integer32.resolve_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>This call finalizes the namespace assignment. The default namespace
-is not available until the application calls populate_interface method
-of the interface generator.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
@@ -1427,63 +719,6 @@ of the interface generator.</p>
 <em class="property">class </em><tt class="descclassname">spyne.model.primitive.</tt><tt class="descname">Integer64</tt><a class="reference internal" href="../modules/spyne/model/primitive.html#Integer64"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.primitive.Integer64" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#spyne.model.primitive.Integer" title="spyne.model.primitive.Integer"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.Integer</span></tt></a></p>
 <p>The 64-bit signed integer, aka long.</p>
-<dl class="class">
-<dt id="spyne.model.primitive.Integer64.Annotations">
-<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#spyne.model.primitive.Integer64.Annotations" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>The class that holds the annotations for the given type.</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="spyne.model.primitive.Integer64.Attributes">
-<em class="property">class </em><tt class="descclassname">Integer64.</tt><tt class="descname">Attributes</tt><a class="headerlink" href="#spyne.model.primitive.Integer64.Attributes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.Attributes</span></tt></p>
-<p>Customizable attributes of the <a class="reference internal" href="#spyne.model.primitive.Decimal" title="spyne.model.primitive.Decimal"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.Decimal</span></tt></a>
-type.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Integer64.customize">
-<em class="property">classmethod </em><tt class="descclassname">Integer64.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Integer64.customize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
-<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Integer64.get_namespace">
-<em class="property">classmethod </em><tt class="descclassname">Integer64.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.Integer64.get_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace of the class. Defaults to the python module
-name.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Integer64.get_namespace_prefix">
-<em class="property">classmethod </em><tt class="descclassname">Integer64.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Integer64.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace prefix for the given interface. The
-get_namespace_prefix of the interface class generates a prefix if none
-is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Integer64.get_type_name">
-<em class="property">classmethod </em><tt class="descclassname">Integer64.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.Integer64.get_type_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Integer64.get_type_name_ns">
-<em class="property">classmethod </em><tt class="descclassname">Integer64.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Integer64.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="spyne.model.primitive.Integer64.resolve_namespace">
-<em class="property">static </em><tt class="descclassname">Integer64.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Integer64.resolve_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>This call finalizes the namespace assignment. The default namespace
-is not available until the application calls populate_interface method
-of the interface generator.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
@@ -1491,63 +726,6 @@ of the interface generator.</p>
 <em class="property">class </em><tt class="descclassname">spyne.model.primitive.</tt><tt class="descname">Integer8</tt><a class="reference internal" href="../modules/spyne/model/primitive.html#Integer8"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.primitive.Integer8" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#spyne.model.primitive.Integer" title="spyne.model.primitive.Integer"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.Integer</span></tt></a></p>
 <p>The 8-bit signed integer, aka byte.</p>
-<dl class="class">
-<dt id="spyne.model.primitive.Integer8.Annotations">
-<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#spyne.model.primitive.Integer8.Annotations" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>The class that holds the annotations for the given type.</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="spyne.model.primitive.Integer8.Attributes">
-<em class="property">class </em><tt class="descclassname">Integer8.</tt><tt class="descname">Attributes</tt><a class="headerlink" href="#spyne.model.primitive.Integer8.Attributes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.Attributes</span></tt></p>
-<p>Customizable attributes of the <a class="reference internal" href="#spyne.model.primitive.Decimal" title="spyne.model.primitive.Decimal"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.Decimal</span></tt></a>
-type.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Integer8.customize">
-<em class="property">classmethod </em><tt class="descclassname">Integer8.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Integer8.customize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
-<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Integer8.get_namespace">
-<em class="property">classmethod </em><tt class="descclassname">Integer8.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.Integer8.get_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace of the class. Defaults to the python module
-name.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Integer8.get_namespace_prefix">
-<em class="property">classmethod </em><tt class="descclassname">Integer8.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Integer8.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace prefix for the given interface. The
-get_namespace_prefix of the interface class generates a prefix if none
-is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Integer8.get_type_name">
-<em class="property">classmethod </em><tt class="descclassname">Integer8.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.Integer8.get_type_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Integer8.get_type_name_ns">
-<em class="property">classmethod </em><tt class="descclassname">Integer8.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Integer8.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="spyne.model.primitive.Integer8.resolve_namespace">
-<em class="property">static </em><tt class="descclassname">Integer8.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Integer8.resolve_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>This call finalizes the namespace assignment. The default namespace
-is not available until the application calls populate_interface method
-of the interface generator.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="attribute">
@@ -1559,8 +737,7 @@ of the interface generator.</p>
 <dl class="class">
 <dt id="spyne.model.primitive.Mandatory">
 <em class="property">class </em><tt class="descclassname">spyne.model.primitive.</tt><tt class="descname">Mandatory</tt><a class="reference internal" href="../modules/spyne/model/primitive.html#Mandatory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.primitive.Mandatory" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>Class that contains mandatory variants of primitives.</p>
+<dd><p>Class that contains mandatory variants of primitives.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -1581,70 +758,6 @@ of the interface generator.</p>
 <dd><p>Bases: <a class="reference internal" href="#spyne.model._base.SimpleModel" title="spyne.model._base.SimpleModel"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.SimpleModel</span></tt></a></p>
 <p>Just that, Time. No time zone support.</p>
 <p>Native type is <a class="reference external" href="http://docs.python.org/library/datetime.html#datetime.time" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">datetime.time</span></tt></a>.</p>
-<dl class="class">
-<dt id="spyne.model.primitive.Time.Annotations">
-<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#spyne.model.primitive.Time.Annotations" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>The class that holds the annotations for the given type.</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="spyne.model.primitive.Time.Attributes">
-<em class="property">class </em><tt class="descclassname">Time.</tt><tt class="descname">Attributes</tt><a class="headerlink" href="#spyne.model.primitive.Time.Attributes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.Attributes</span></tt></p>
-<p>The class that holds the constraints for the given type.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Time.customize">
-<em class="property">classmethod </em><tt class="descclassname">Time.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Time.customize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
-<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Time.get_namespace">
-<em class="property">classmethod </em><tt class="descclassname">Time.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.Time.get_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace of the class. Defaults to the python module
-name.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Time.get_namespace_prefix">
-<em class="property">classmethod </em><tt class="descclassname">Time.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Time.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace prefix for the given interface. The
-get_namespace_prefix of the interface class generates a prefix if none
-is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Time.get_type_name">
-<em class="property">classmethod </em><tt class="descclassname">Time.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.Time.get_type_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Time.get_type_name_ns">
-<em class="property">classmethod </em><tt class="descclassname">Time.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Time.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="spyne.model.primitive.Time.resolve_namespace">
-<em class="property">static </em><tt class="descclassname">Time.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Time.resolve_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>This call finalizes the namespace assignment. The default namespace
-is not available until the application calls populate_interface method
-of the interface generator.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="spyne.model.primitive.Time.validate_native">
-<em class="property">static </em><tt class="descclassname">Time.</tt><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Time.validate_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>Override this method to do your own input validation on the native
-value. This is called after converting the incoming string to the
-native python value.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
@@ -1654,15 +767,8 @@ native python value.</p>
 <p>The type to represent human-readable data. Its native format is <cite>unicode</cite>.
 or <cite>str</cite> with given encoding.</p>
 <dl class="class">
-<dt id="spyne.model.primitive.Unicode.Annotations">
-<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#spyne.model.primitive.Unicode.Annotations" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>The class that holds the annotations for the given type.</p>
-</dd></dl>
-
-<dl class="class">
 <dt id="spyne.model.primitive.Unicode.Attributes">
-<em class="property">class </em><tt class="descclassname">Unicode.</tt><tt class="descname">Attributes</tt><a class="reference internal" href="../modules/spyne/model/primitive.html#Unicode.Attributes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.primitive.Unicode.Attributes" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descname">Attributes</tt><a class="reference internal" href="../modules/spyne/model/primitive.html#Unicode.Attributes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.primitive.Unicode.Attributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.Attributes</span></tt></p>
 <p>Customizable attributes of the <a class="reference internal" href="#spyne.model.primitive.Unicode" title="spyne.model.primitive.Unicode"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.Unicode</span></tt></a>
 type.</p>
@@ -1702,56 +808,6 @@ info: <a class="reference external" href="http://www.regular-expressions.info/xm
 
 </dd></dl>
 
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Unicode.customize">
-<em class="property">classmethod </em><tt class="descclassname">Unicode.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Unicode.customize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
-<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Unicode.get_namespace">
-<em class="property">classmethod </em><tt class="descclassname">Unicode.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.Unicode.get_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace of the class. Defaults to the python module
-name.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Unicode.get_namespace_prefix">
-<em class="property">classmethod </em><tt class="descclassname">Unicode.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Unicode.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace prefix for the given interface. The
-get_namespace_prefix of the interface class generates a prefix if none
-is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Unicode.get_type_name">
-<em class="property">classmethod </em><tt class="descclassname">Unicode.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.Unicode.get_type_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.Unicode.get_type_name_ns">
-<em class="property">classmethod </em><tt class="descclassname">Unicode.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Unicode.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="spyne.model.primitive.Unicode.resolve_namespace">
-<em class="property">static </em><tt class="descclassname">Unicode.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Unicode.resolve_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>This call finalizes the namespace assignment. The default namespace
-is not available until the application calls populate_interface method
-of the interface generator.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="spyne.model.primitive.Unicode.validate_native">
-<em class="property">static </em><tt class="descclassname">Unicode.</tt><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.Unicode.validate_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>Override this method to do your own input validation on the native
-value. This is called after converting the incoming string to the
-native python value.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="attribute">
@@ -1771,63 +827,6 @@ native python value.</p>
 <em class="property">class </em><tt class="descclassname">spyne.model.primitive.</tt><tt class="descname">UnsignedInteger</tt><a class="reference internal" href="../modules/spyne/model/primitive.html#UnsignedInteger"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#spyne.model.primitive.Integer" title="spyne.model.primitive.Integer"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.Integer</span></tt></a></p>
 <p>The arbitrary-size unsigned integer, aka nonNegativeInteger.</p>
-<dl class="class">
-<dt id="spyne.model.primitive.UnsignedInteger.Annotations">
-<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger.Annotations" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>The class that holds the annotations for the given type.</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="spyne.model.primitive.UnsignedInteger.Attributes">
-<em class="property">class </em><tt class="descclassname">UnsignedInteger.</tt><tt class="descname">Attributes</tt><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger.Attributes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.Attributes</span></tt></p>
-<p>Customizable attributes of the <a class="reference internal" href="#spyne.model.primitive.Decimal" title="spyne.model.primitive.Decimal"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.Decimal</span></tt></a>
-type.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.UnsignedInteger.customize">
-<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger.customize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
-<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.UnsignedInteger.get_namespace">
-<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger.get_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace of the class. Defaults to the python module
-name.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.UnsignedInteger.get_namespace_prefix">
-<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace prefix for the given interface. The
-get_namespace_prefix of the interface class generates a prefix if none
-is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.UnsignedInteger.get_type_name">
-<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger.get_type_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.UnsignedInteger.get_type_name_ns">
-<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="spyne.model.primitive.UnsignedInteger.resolve_namespace">
-<em class="property">static </em><tt class="descclassname">UnsignedInteger.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger.resolve_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>This call finalizes the namespace assignment. The default namespace
-is not available until the application calls populate_interface method
-of the interface generator.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
@@ -1835,63 +834,6 @@ of the interface generator.</p>
 <em class="property">class </em><tt class="descclassname">spyne.model.primitive.</tt><tt class="descname">UnsignedInteger16</tt><a class="reference internal" href="../modules/spyne/model/primitive.html#UnsignedInteger16"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger16" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#spyne.model.primitive.Integer" title="spyne.model.primitive.Integer"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.Integer</span></tt></a></p>
 <p>The 16-bit unsigned integer, aka unsignedShort.</p>
-<dl class="class">
-<dt id="spyne.model.primitive.UnsignedInteger16.Annotations">
-<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger16.Annotations" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>The class that holds the annotations for the given type.</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="spyne.model.primitive.UnsignedInteger16.Attributes">
-<em class="property">class </em><tt class="descclassname">UnsignedInteger16.</tt><tt class="descname">Attributes</tt><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger16.Attributes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.Attributes</span></tt></p>
-<p>Customizable attributes of the <a class="reference internal" href="#spyne.model.primitive.Decimal" title="spyne.model.primitive.Decimal"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.Decimal</span></tt></a>
-type.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.UnsignedInteger16.customize">
-<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger16.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger16.customize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
-<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.UnsignedInteger16.get_namespace">
-<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger16.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger16.get_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace of the class. Defaults to the python module
-name.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.UnsignedInteger16.get_namespace_prefix">
-<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger16.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger16.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace prefix for the given interface. The
-get_namespace_prefix of the interface class generates a prefix if none
-is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.UnsignedInteger16.get_type_name">
-<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger16.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger16.get_type_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.UnsignedInteger16.get_type_name_ns">
-<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger16.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger16.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="spyne.model.primitive.UnsignedInteger16.resolve_namespace">
-<em class="property">static </em><tt class="descclassname">UnsignedInteger16.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger16.resolve_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>This call finalizes the namespace assignment. The default namespace
-is not available until the application calls populate_interface method
-of the interface generator.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
@@ -1899,63 +841,6 @@ of the interface generator.</p>
 <em class="property">class </em><tt class="descclassname">spyne.model.primitive.</tt><tt class="descname">UnsignedInteger32</tt><a class="reference internal" href="../modules/spyne/model/primitive.html#UnsignedInteger32"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger32" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#spyne.model.primitive.UnsignedInteger" title="spyne.model.primitive.UnsignedInteger"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.UnsignedInteger</span></tt></a></p>
 <p>The 32-bit unsigned integer, aka unsignedInt.</p>
-<dl class="class">
-<dt id="spyne.model.primitive.UnsignedInteger32.Annotations">
-<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger32.Annotations" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>The class that holds the annotations for the given type.</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="spyne.model.primitive.UnsignedInteger32.Attributes">
-<em class="property">class </em><tt class="descclassname">UnsignedInteger32.</tt><tt class="descname">Attributes</tt><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger32.Attributes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.Attributes</span></tt></p>
-<p>Customizable attributes of the <a class="reference internal" href="#spyne.model.primitive.Decimal" title="spyne.model.primitive.Decimal"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.Decimal</span></tt></a>
-type.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.UnsignedInteger32.customize">
-<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger32.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger32.customize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
-<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.UnsignedInteger32.get_namespace">
-<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger32.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger32.get_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace of the class. Defaults to the python module
-name.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.UnsignedInteger32.get_namespace_prefix">
-<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger32.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger32.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace prefix for the given interface. The
-get_namespace_prefix of the interface class generates a prefix if none
-is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.UnsignedInteger32.get_type_name">
-<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger32.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger32.get_type_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.UnsignedInteger32.get_type_name_ns">
-<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger32.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger32.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="spyne.model.primitive.UnsignedInteger32.resolve_namespace">
-<em class="property">static </em><tt class="descclassname">UnsignedInteger32.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger32.resolve_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>This call finalizes the namespace assignment. The default namespace
-is not available until the application calls populate_interface method
-of the interface generator.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
@@ -1963,63 +848,6 @@ of the interface generator.</p>
 <em class="property">class </em><tt class="descclassname">spyne.model.primitive.</tt><tt class="descname">UnsignedInteger64</tt><a class="reference internal" href="../modules/spyne/model/primitive.html#UnsignedInteger64"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger64" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#spyne.model.primitive.UnsignedInteger" title="spyne.model.primitive.UnsignedInteger"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.UnsignedInteger</span></tt></a></p>
 <p>The 64-bit unsigned integer, aka unsignedLong.</p>
-<dl class="class">
-<dt id="spyne.model.primitive.UnsignedInteger64.Annotations">
-<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger64.Annotations" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>The class that holds the annotations for the given type.</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="spyne.model.primitive.UnsignedInteger64.Attributes">
-<em class="property">class </em><tt class="descclassname">UnsignedInteger64.</tt><tt class="descname">Attributes</tt><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger64.Attributes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.Attributes</span></tt></p>
-<p>Customizable attributes of the <a class="reference internal" href="#spyne.model.primitive.Decimal" title="spyne.model.primitive.Decimal"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.Decimal</span></tt></a>
-type.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.UnsignedInteger64.customize">
-<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger64.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger64.customize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
-<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.UnsignedInteger64.get_namespace">
-<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger64.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger64.get_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace of the class. Defaults to the python module
-name.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.UnsignedInteger64.get_namespace_prefix">
-<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger64.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger64.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace prefix for the given interface. The
-get_namespace_prefix of the interface class generates a prefix if none
-is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.UnsignedInteger64.get_type_name">
-<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger64.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger64.get_type_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.UnsignedInteger64.get_type_name_ns">
-<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger64.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger64.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="spyne.model.primitive.UnsignedInteger64.resolve_namespace">
-<em class="property">static </em><tt class="descclassname">UnsignedInteger64.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger64.resolve_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>This call finalizes the namespace assignment. The default namespace
-is not available until the application calls populate_interface method
-of the interface generator.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
@@ -2027,63 +855,6 @@ of the interface generator.</p>
 <em class="property">class </em><tt class="descclassname">spyne.model.primitive.</tt><tt class="descname">UnsignedInteger8</tt><a class="reference internal" href="../modules/spyne/model/primitive.html#UnsignedInteger8"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger8" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#spyne.model.primitive.Integer" title="spyne.model.primitive.Integer"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.Integer</span></tt></a></p>
 <p>The 8-bit unsigned integer, aka unsignedByte.</p>
-<dl class="class">
-<dt id="spyne.model.primitive.UnsignedInteger8.Annotations">
-<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger8.Annotations" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>The class that holds the annotations for the given type.</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="spyne.model.primitive.UnsignedInteger8.Attributes">
-<em class="property">class </em><tt class="descclassname">UnsignedInteger8.</tt><tt class="descname">Attributes</tt><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger8.Attributes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.Attributes</span></tt></p>
-<p>Customizable attributes of the <a class="reference internal" href="#spyne.model.primitive.Decimal" title="spyne.model.primitive.Decimal"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.Decimal</span></tt></a>
-type.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.UnsignedInteger8.customize">
-<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger8.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger8.customize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
-<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.UnsignedInteger8.get_namespace">
-<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger8.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger8.get_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace of the class. Defaults to the python module
-name.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.UnsignedInteger8.get_namespace_prefix">
-<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger8.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger8.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace prefix for the given interface. The
-get_namespace_prefix of the interface class generates a prefix if none
-is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.UnsignedInteger8.get_type_name">
-<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger8.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger8.get_type_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="spyne.model.primitive.UnsignedInteger8.get_type_name_ns">
-<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger8.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger8.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="spyne.model.primitive.UnsignedInteger8.resolve_namespace">
-<em class="property">static </em><tt class="descclassname">UnsignedInteger8.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#spyne.model.primitive.UnsignedInteger8.resolve_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>This call finalizes the namespace assignment. The default namespace
-is not available until the application calls populate_interface method
-of the interface generator.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="attribute">
@@ -2101,7 +872,7 @@ of the interface generator.</p>
 </div>
 <div class="section" id="module-spyne.model.table">
 <span id="sql-table"></span><h2>SQL Table<a class="headerlink" href="#module-spyne.model.table" title="Permalink to this headline">¶</a></h2>
-<p>This module aims to bridge SQLAlchemy and spyne types by building a
+<p>This module aims to bridge SQLAlchemy and Spyne types by building a
 _type_info dictionary using the information held in class attributes by
 sqlalchemy.Column instances.</p>
 <p>While this module seems to be working fine for the documented purposes, the
@@ -2109,14 +880,14 @@ flexibility of SQLAlchemy and complexity of its internals leave much to be
 tested. Also considering the vast amount of non-supported sqlalchemy and spyne
 features, this module should be treated as EXPERIMENTAL. Please use with care
 and do bring up any issues you experience with this module to the attention of
-spyne or SQLAlchemy developers.</p>
+Spyne or SQLAlchemy developers.</p>
 <dl class="class">
 <dt id="spyne.model.table.TableModel">
 <em class="property">class </em><tt class="descclassname">spyne.model.table.</tt><tt class="descname">TableModel</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../modules/spyne/model/table.html#TableModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.table.TableModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#spyne.model.complex.ComplexModelBase" title="spyne.model.complex.ComplexModelBase"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.complex.ComplexModelBase</span></tt></a></p>
 <p>The main base class for complex types shared by both SQLAlchemy and
 spyne. Classes that inherit from this class should also inherit from
-an sqlalchemy.declarative base class. See the <a class="reference internal" href="../manual/sqlalchemy.html#manual-sqlalchemy"><em>SQLAlchemy Integration</em></a>
+an sqlalchemy.declarative base class. See the <a class="reference internal" href="../manual/04-01_sqlalchemy.html#manual-sqlalchemy"><em>SQLAlchemy Integration</em></a>
 section for more info.</p>
 </dd></dl>
 
@@ -2143,48 +914,6 @@ SQLAlchemy and its information alone.</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Models</a><ul>
-<li><a class="reference internal" href="#module-spyne.model">Base Classes</a></li>
-<li><a class="reference internal" href="#module-spyne.model.binary">Binary</a></li>
-<li><a class="reference internal" href="#module-spyne.model.complex">Complex</a></li>
-<li><a class="reference internal" href="#module-spyne.model.enum">Enum</a></li>
-<li><a class="reference internal" href="#module-spyne.model.fault">Fault</a></li>
-<li><a class="reference internal" href="#module-spyne.model.primitive">Primitives</a></li>
-<li><a class="reference internal" href="#module-spyne.model.table">SQL Table</a></li>
-</ul>
-</li>
-</ul>
-
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="decorator.html"
-                        title="previous chapter">RPC Decorators</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="interface.html"
-                        title="next chapter">Interfaces</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../sources/reference/model.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
       <div class="clearer"></div>
     </div>
     <div class="related">
@@ -2200,7 +929,7 @@ SQLAlchemy and its information alone.</p>
           <a href="interface.html" title="Interfaces"
              >next</a> |</li>
         <li class="right" >
-          <a href="decorator.html" title="RPC Decorators"
+          <a href="error.html" title="Common Exceptions"
              >previous</a> |</li>
         <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
           <li><a href="index.html" >Spyne API Reference</a> &raquo;</li> 

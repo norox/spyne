@@ -10,7 +10,7 @@
     
     <title>spyne.protocol._base &mdash; spyne 2.8.0-rc documentation</title>
     
-    <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -42,7 +42,24 @@
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../spyne.html" accesskey="U">spyne</a> &raquo;</li> 
       </ul>
-    </div>  
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -67,10 +84,6 @@
 <span class="c"># License along with this library; if not, write to the Free Software</span>
 <span class="c"># Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301</span>
 <span class="c">#</span>
-
-<span class="sd">&quot;&quot;&quot;This module contains the ProtocolBase abstract base class for all</span>
-<span class="sd">protocol implementations.</span>
-<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
@@ -123,8 +136,14 @@
 
 
 <span class="k">class</span> <span class="nc">ProtocolBase</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<div class="viewcode-block" id="ProtocolBase"><a class="viewcode-back" href="../../../reference/protocol.html#spyne.protocol._base.ProtocolBase">[docs]</a>    <span class="sd">&quot;&quot;&quot;This is the abstract base class for all protocol implementations. Child</span>
+<div class="viewcode-block" id="ProtocolBase"><a class="viewcode-back" href="../../../reference/protocol/base.html#spyne.protocol._base.ProtocolBase">[docs]</a>    <span class="sd">&quot;&quot;&quot;This is the abstract base class for all protocol implementations. Child</span>
 <span class="sd">    classes can implement only the required subset of the public methods.</span>
+
+<span class="sd">    An output protocol must implement :func:`serialize` and</span>
+<span class="sd">    :func:`create_out_string`.</span>
+
+<span class="sd">    An input protocol must implement :func:`create_in_document`,</span>
+<span class="sd">    :func:`decompose_incoming_envelope` and :func:`deserialize`.</span>
 
 <span class="sd">    The ProtocolBase class supports the following events:</span>
 
@@ -139,17 +158,8 @@
 
 <span class="sd">    * ``after_serialize``:</span>
 <span class="sd">      Called after the serialization operation is finished.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">allowed_http_verbs</span> <span class="o">=</span> <span class="bp">None</span>
-    <span class="n">mime_type</span> <span class="o">=</span> <span class="s">&#39;application/octet-stream&#39;</span>
-
-    <span class="n">SOFT_VALIDATION</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="s">&quot;Soft&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nb">object</span><span class="p">,),</span> <span class="p">{})</span>
-    <span class="n">REQUEST</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="s">&quot;Request&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nb">object</span><span class="p">,),</span> <span class="p">{})</span>
-    <span class="n">RESPONSE</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="s">&quot;Response&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nb">object</span><span class="p">,),</span> <span class="p">{})</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">validator</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">mime_type</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">skip_depth</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The arguments the constructor takes are as follows:</span>
+<span class="sd">    The arguments the constructor takes are as follows:</span>
 
 <span class="sd">        :param app: The application this protocol belongs to.</span>
 <span class="sd">        :param validator: The type of validation this protocol should do on</span>
@@ -162,6 +172,14 @@
 <span class="sd">        case.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
+    <span class="n">allowed_http_verbs</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">mime_type</span> <span class="o">=</span> <span class="s">&#39;application/octet-stream&#39;</span>
+
+    <span class="n">SOFT_VALIDATION</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="s">&quot;Soft&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nb">object</span><span class="p">,),</span> <span class="p">{})</span>
+    <span class="n">REQUEST</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="s">&quot;Request&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nb">object</span><span class="p">,),</span> <span class="p">{})</span>
+    <span class="n">RESPONSE</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="s">&quot;Response&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nb">object</span><span class="p">,),</span> <span class="p">{})</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">validator</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">mime_type</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">skip_depth</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__app</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">validator</span> <span class="o">=</span> <span class="bp">None</span>
 
@@ -174,7 +192,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">app</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<div class="viewcode-block" id="ProtocolBase.app"><a class="viewcode-back" href="../../../reference/protocol.html#spyne.protocol._base.ProtocolBase.app">[docs]</a>        <span class="sd">&quot;&quot;&quot;The :class:`spyne.application.Application` instance this protocol</span>
+<div class="viewcode-block" id="ProtocolBase.app"><a class="viewcode-back" href="../../../reference/protocol/base.html#spyne.protocol._base.ProtocolBase.app">[docs]</a>        <span class="sd">&quot;&quot;&quot;The :class:`spyne.application.Application` instance this protocol</span>
 <span class="sd">        belongs to.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -186,16 +204,16 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__app</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="k">def</span> <span class="nf">create_in_document</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">in_string_encoding</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-<div class="viewcode-block" id="ProtocolBase.create_in_document"><a class="viewcode-back" href="../../../reference/protocol.html#spyne.protocol._base.ProtocolBase.create_in_document">[docs]</a>        <span class="sd">&quot;&quot;&quot;Uses ``ctx.in_string`` to set ``ctx.in_document``.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="ProtocolBase.create_in_document"><a class="viewcode-back" href="../../../reference/protocol/base.html#spyne.protocol._base.ProtocolBase.create_in_document">[docs]</a>        <span class="sd">&quot;&quot;&quot;Uses ``ctx.in_string`` to set ``ctx.in_document``.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">decompose_incoming_envelope</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span></div>
-<div class="viewcode-block" id="ProtocolBase.decompose_incoming_envelope"><a class="viewcode-back" href="../../../reference/protocol.html#spyne.protocol._base.ProtocolBase.decompose_incoming_envelope">[docs]</a>        <span class="sd">&quot;&quot;&quot;Sets the ``ctx.method_request_string``, ``ctx.in_body_doc``,</span>
+<div class="viewcode-block" id="ProtocolBase.decompose_incoming_envelope"><a class="viewcode-back" href="../../../reference/protocol/base.html#spyne.protocol._base.ProtocolBase.decompose_incoming_envelope">[docs]</a>        <span class="sd">&quot;&quot;&quot;Sets the ``ctx.method_request_string``, ``ctx.in_body_doc``,</span>
 <span class="sd">        ``ctx.in_header_doc`` and ``ctx.service`` properties of the ctx object,</span>
 <span class="sd">        if applicable.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">deserialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span></div>
-<div class="viewcode-block" id="ProtocolBase.deserialize"><a class="viewcode-back" href="../../../reference/protocol.html#spyne.protocol._base.ProtocolBase.deserialize">[docs]</a>        <span class="sd">&quot;&quot;&quot;Takes a MethodContext instance and a string containing ONE document</span>
+<div class="viewcode-block" id="ProtocolBase.deserialize"><a class="viewcode-back" href="../../../reference/protocol/base.html#spyne.protocol._base.ProtocolBase.deserialize">[docs]</a>        <span class="sd">&quot;&quot;&quot;Takes a MethodContext instance and a string containing ONE document</span>
 <span class="sd">        instance in the ``ctx.in_string`` attribute.</span>
 
 <span class="sd">        Returns the corresponding native python object in the ctx.in_object</span>
@@ -203,7 +221,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span></div>
-<div class="viewcode-block" id="ProtocolBase.serialize"><a class="viewcode-back" href="../../../reference/protocol.html#spyne.protocol._base.ProtocolBase.serialize">[docs]</a>        <span class="sd">&quot;&quot;&quot;Takes a MethodContext instance and the object to be serialized in the</span>
+<div class="viewcode-block" id="ProtocolBase.serialize"><a class="viewcode-back" href="../../../reference/protocol/base.html#spyne.protocol._base.ProtocolBase.serialize">[docs]</a>        <span class="sd">&quot;&quot;&quot;Takes a MethodContext instance and the object to be serialized in the</span>
 <span class="sd">        ctx.out_object attribute.</span>
 
 <span class="sd">        Returns the corresponding document structure in the ctx.out_document</span>
@@ -211,15 +229,15 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">create_out_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">out_string_encoding</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span></div>
-<div class="viewcode-block" id="ProtocolBase.create_out_string"><a class="viewcode-back" href="../../../reference/protocol.html#spyne.protocol._base.ProtocolBase.create_out_string">[docs]</a>        <span class="sd">&quot;&quot;&quot;Uses ctx.out_document to set ctx.out_string&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="ProtocolBase.create_out_string"><a class="viewcode-back" href="../../../reference/protocol/base.html#spyne.protocol._base.ProtocolBase.create_out_string">[docs]</a>        <span class="sd">&quot;&quot;&quot;Uses ctx.out_document to set ctx.out_string&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">validate_document</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">):</span></div>
-<div class="viewcode-block" id="ProtocolBase.validate_document"><a class="viewcode-back" href="../../../reference/protocol.html#spyne.protocol._base.ProtocolBase.validate_document">[docs]</a>        <span class="sd">&quot;&quot;&quot;Method to be overriden to perform any sort of custom input</span>
+<div class="viewcode-block" id="ProtocolBase.validate_document"><a class="viewcode-back" href="../../../reference/protocol/base.html#spyne.protocol._base.ProtocolBase.validate_document">[docs]</a>        <span class="sd">&quot;&quot;&quot;Method to be overriden to perform any sort of custom input</span>
 <span class="sd">        validation on the parsed input document.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">set_method_descriptor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span></div>
-<div class="viewcode-block" id="ProtocolBase.set_method_descriptor"><a class="viewcode-back" href="../../../reference/protocol.html#spyne.protocol._base.ProtocolBase.set_method_descriptor">[docs]</a>        <span class="sd">&quot;&quot;&quot;DEPRECATED! Use :func:`generate_method_contexts` instead.</span>
+<div class="viewcode-block" id="ProtocolBase.set_method_descriptor"><a class="viewcode-back" href="../../../reference/protocol/base.html#spyne.protocol._base.ProtocolBase.set_method_descriptor">[docs]</a>        <span class="sd">&quot;&quot;&quot;DEPRECATED! Use :func:`generate_method_contexts` instead.</span>
 
 <span class="sd">        Method to be overriden to perform any sort of custom matching between</span>
 <span class="sd">        the method_request_string and the methods.</span>
@@ -239,6 +257,13 @@
             <span class="k">raise</span> <span class="n">ResourceNotFoundError</span><span class="p">(</span><span class="s">&#39;Method </span><span class="si">%r</span><span class="s"> not found.&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">generate_method_contexts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span></div>
+<div class="viewcode-block" id="ProtocolBase.generate_method_contexts"><a class="viewcode-back" href="../../../reference/protocol/base.html#spyne.protocol._base.ProtocolBase.generate_method_contexts">[docs]</a>        <span class="sd">&quot;&quot;&quot;Generates MethodContext instances for every callable assigned to the</span>
+<span class="sd">        given method handle.</span>
+
+<span class="sd">        The first element in the returned list is always the primary method</span>
+<span class="sd">        context whereas the rest are all auxiliary method contexts.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="n">call_handles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_call_handles</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">call_handles</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">ResourceNotFoundError</span><span class="p">(</span><span class="s">&#39;Method </span><span class="si">%r</span><span class="s"> not found.&#39;</span> <span class="o">%</span>
@@ -257,8 +282,8 @@
 
         <span class="k">return</span> <span class="n">retval</span>
 
-    <span class="k">def</span> <span class="nf">get_call_handles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span>
-<div class="viewcode-block" id="ProtocolBase.get_call_handles"><a class="viewcode-back" href="../../../reference/protocol.html#spyne.protocol._base.ProtocolBase.get_call_handles">[docs]</a>        <span class="sd">&quot;&quot;&quot;Method to be overriden to perform any sort of custom method mapping</span>
+    <span class="k">def</span> <span class="nf">get_call_handles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span></div>
+<div class="viewcode-block" id="ProtocolBase.get_call_handles"><a class="viewcode-back" href="../../../reference/protocol/base.html#spyne.protocol._base.ProtocolBase.get_call_handles">[docs]</a>        <span class="sd">&quot;&quot;&quot;Method to be overriden to perform any sort of custom method mapping</span>
 <span class="sd">        using any data in the method context. Returns a list of contexts.</span>
 <span class="sd">        Can return multiple contexts if a method_request_string matches more</span>
 <span class="sd">        than one function. (This is called the fanout mode.)</span>
@@ -273,6 +298,10 @@
         <span class="k">return</span> <span class="n">call_handles</span>
 
     <span class="k">def</span> <span class="nf">fault_to_http_response_code</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fault</span><span class="p">):</span></div>
+<div class="viewcode-block" id="ProtocolBase.fault_to_http_response_code"><a class="viewcode-back" href="../../../reference/protocol/base.html#spyne.protocol._base.ProtocolBase.fault_to_http_response_code">[docs]</a>        <span class="sd">&quot;&quot;&quot;Special function to convert native Python exceptions to Http response</span>
+<span class="sd">        codes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fault</span><span class="p">,</span> <span class="n">RequestTooLongError</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">HTTP_413</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fault</span><span class="p">,</span> <span class="n">ResourceNotFoundError</span><span class="p">):</span>
@@ -285,186 +314,16 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">HTTP_500</span>
 
-    <span class="k">def</span> <span class="nf">set_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">validator</span><span class="p">):</span>
-<div class="viewcode-block" id="ProtocolBase.set_validator"><a class="viewcode-back" href="../../../reference/protocol.html#spyne.protocol._base.ProtocolBase.set_validator">[docs]</a>        <span class="sd">&quot;&quot;&quot;You must override this function if your protocol supports validation.</span>
+    <span class="k">def</span> <span class="nf">set_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">validator</span><span class="p">):</span></div>
+<div class="viewcode-block" id="ProtocolBase.set_validator"><a class="viewcode-back" href="../../../reference/protocol/base.html#spyne.protocol._base.ProtocolBase.set_validator">[docs]</a>        <span class="sd">&quot;&quot;&quot;You must override this function if your protocol supports validation.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">assert</span> <span class="n">validator</span> <span class="ow">is</span> <span class="bp">None</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">validator</span> <span class="o">=</span> <span class="bp">None</span>
-
-    <span class="k">def</span> <span class="nf">flat_dict_to_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="n">inst_class</span><span class="p">):</span></div>
-        <span class="n">simple_type_info</span> <span class="o">=</span> <span class="n">inst_class</span><span class="o">.</span><span class="n">get_simple_type_info</span><span class="p">(</span><span class="n">inst_class</span><span class="p">)</span>
-        <span class="n">inst</span> <span class="o">=</span> <span class="n">inst_class</span><span class="o">.</span><span class="n">get_deserialization_instance</span><span class="p">()</span>
-
-        <span class="c"># this is for validating cls.Attributes.{min,max}_occurs</span>
-        <span class="n">frequencies</span> <span class="o">=</span> <span class="p">{}</span>
-
-        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">member</span> <span class="o">=</span> <span class="n">simple_type_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">member</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;discarding field </span><span class="si">%r</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">k</span><span class="p">)</span>
-                <span class="k">continue</span>
-
-            <span class="n">mo</span> <span class="o">=</span> <span class="n">member</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">max_occurs</span>
-            <span class="n">value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">inst</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-                <span class="n">value</span> <span class="o">=</span> <span class="p">[]</span>
-
-            <span class="c"># extract native values from the list of strings that comes from the</span>
-            <span class="c"># http dict.</span>
-            <span class="k">for</span> <span class="n">v2</span> <span class="ow">in</span> <span class="n">v</span><span class="p">:</span>
-                <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validator</span> <span class="ow">is</span> <span class="bp">self</span><span class="o">.</span><span class="n">SOFT_VALIDATION</span> <span class="ow">and</span> <span class="ow">not</span>
-                            <span class="n">member</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">validate_string</span><span class="p">(</span><span class="n">member</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">v2</span><span class="p">)):</span>
-                    <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
-
-                <span class="k">if</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">member</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="p">(</span><span class="n">File</span><span class="p">,</span> <span class="n">ByteArray</span><span class="p">)):</span>
-                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v2</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v2</span><span class="p">,</span> <span class="nb">unicode</span><span class="p">):</span>
-                        <span class="n">native_v2</span> <span class="o">=</span> <span class="n">member</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">native_v2</span> <span class="o">=</span> <span class="n">v2</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">native_v2</span> <span class="o">=</span> <span class="n">member</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
-
-                <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validator</span> <span class="ow">is</span> <span class="bp">self</span><span class="o">.</span><span class="n">SOFT_VALIDATION</span> <span class="ow">and</span> <span class="ow">not</span>
-                            <span class="n">member</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">validate_native</span><span class="p">(</span><span class="n">member</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">native_v2</span><span class="p">)):</span>
-                    <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
-
-                <span class="n">value</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">native_v2</span><span class="p">)</span>
-
-                <span class="c"># set frequencies of parents.</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">member</span><span class="o">.</span><span class="n">path</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">frequencies</span><span class="p">):</span>
-                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">member</span><span class="o">.</span><span class="n">path</span><span class="p">)):</span>
-                        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">set freq </span><span class="si">%r</span><span class="s"> = 1&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">member</span><span class="o">.</span><span class="n">path</span><span class="p">[:</span><span class="n">i</span><span class="p">],))</span>
-                        <span class="n">frequencies</span><span class="p">[</span><span class="n">member</span><span class="o">.</span><span class="n">path</span><span class="p">[:</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
-
-                <span class="n">freq</span> <span class="o">=</span> <span class="n">frequencies</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">member</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-                <span class="n">freq</span> <span class="o">+=</span> <span class="mi">1</span>
-                <span class="n">frequencies</span><span class="p">[</span><span class="n">member</span><span class="o">.</span><span class="n">path</span><span class="p">]</span> <span class="o">=</span> <span class="n">freq</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">set freq </span><span class="si">%r</span><span class="s"> = </span><span class="si">%d</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">member</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">freq</span><span class="p">))</span>
-
-            <span class="k">if</span> <span class="n">mo</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-            <span class="c"># assign the native value to the relevant class in the nested object</span>
-            <span class="c"># structure.</span>
-            <span class="n">cinst</span> <span class="o">=</span> <span class="n">inst</span>
-            <span class="n">ctype_info</span> <span class="o">=</span> <span class="n">inst_class</span><span class="o">.</span><span class="n">get_flat_type_info</span><span class="p">(</span><span class="n">inst_class</span><span class="p">)</span>
-            <span class="n">pkey</span> <span class="o">=</span> <span class="n">member</span><span class="o">.</span><span class="n">path</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">member</span><span class="o">.</span><span class="n">path</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-                <span class="n">pkey</span> <span class="o">=</span> <span class="n">member</span><span class="o">.</span><span class="n">path</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">ctype_info</span><span class="p">[</span><span class="n">pkey</span><span class="p">]</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">max_occurs</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)):</span>
-                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;non-primitives with max_occurs &gt; 1 are not&quot;</span>
-                                    <span class="s">&quot;supported&quot;</span><span class="p">)</span>
-
-                <span class="n">ninst</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">cinst</span><span class="p">,</span> <span class="n">pkey</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">ninst</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-                    <span class="n">ninst</span> <span class="o">=</span> <span class="n">ctype_info</span><span class="p">[</span><span class="n">pkey</span><span class="p">]</span><span class="o">.</span><span class="n">get_deserialization_instance</span><span class="p">()</span>
-                    <span class="nb">setattr</span><span class="p">(</span><span class="n">cinst</span><span class="p">,</span> <span class="n">pkey</span><span class="p">,</span> <span class="n">ninst</span><span class="p">)</span>
-                <span class="n">cinst</span> <span class="o">=</span> <span class="n">ninst</span>
-
-                <span class="n">ctype_info</span> <span class="o">=</span> <span class="n">ctype_info</span><span class="p">[</span><span class="n">pkey</span><span class="p">]</span><span class="o">.</span><span class="n">_type_info</span>
-
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cinst</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-                <span class="n">cinst</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">set array   </span><span class="si">%r</span><span class="s">(</span><span class="si">%r</span><span class="s">) = </span><span class="si">%r</span><span class="s">&quot;</span> <span class="o">%</span>
-                                                    <span class="p">(</span><span class="n">member</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">pkey</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="nb">setattr</span><span class="p">(</span><span class="n">cinst</span><span class="p">,</span> <span class="n">member</span><span class="o">.</span><span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">value</span><span class="p">)</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">set default </span><span class="si">%r</span><span class="s">(</span><span class="si">%r</span><span class="s">) = </span><span class="si">%r</span><span class="s">&quot;</span> <span class="o">%</span>
-                                                    <span class="p">(</span><span class="n">member</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">pkey</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">validator</span> <span class="ow">is</span> <span class="bp">self</span><span class="o">.</span><span class="n">SOFT_VALIDATION</span><span class="p">:</span>
-            <span class="n">sti</span> <span class="o">=</span> <span class="n">simple_type_info</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
-            <span class="n">sti</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">path</span><span class="p">),</span> <span class="n">x</span><span class="o">.</span><span class="n">path</span><span class="p">))</span>
-            <span class="n">pfrag</span> <span class="o">=</span> <span class="bp">None</span>
-            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sti</span><span class="p">:</span>
-                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">path</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">pfrag</span> <span class="o">!=</span> <span class="n">s</span><span class="o">.</span><span class="n">path</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
-                    <span class="n">pfrag</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">path</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-                    <span class="n">ctype_info</span> <span class="o">=</span> <span class="n">inst_class</span><span class="o">.</span><span class="n">get_flat_type_info</span><span class="p">(</span><span class="n">inst_class</span><span class="p">)</span>
-                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pfrag</span><span class="p">)):</span>
-                        <span class="n">f</span> <span class="o">=</span> <span class="n">pfrag</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-                        <span class="n">ntype_info</span> <span class="o">=</span> <span class="n">ctype_info</span><span class="p">[</span><span class="n">f</span><span class="p">]</span>
-
-                        <span class="n">min_o</span> <span class="o">=</span> <span class="n">ctype_info</span><span class="p">[</span><span class="n">f</span><span class="p">]</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">min_occurs</span>
-                        <span class="n">max_o</span> <span class="o">=</span> <span class="n">ctype_info</span><span class="p">[</span><span class="n">f</span><span class="p">]</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">max_occurs</span>
-                        <span class="n">val</span> <span class="o">=</span> <span class="n">frequencies</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pfrag</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
-                        <span class="k">if</span> <span class="n">val</span> <span class="o">&lt;</span> <span class="n">min_o</span><span class="p">:</span>
-                            <span class="k">raise</span> <span class="n">Fault</span><span class="p">(</span><span class="s">&#39;Client.ValidationError&#39;</span><span class="p">,</span>
-                                <span class="s">&#39;&quot;</span><span class="si">%s</span><span class="s">&quot; member must occur at least </span><span class="si">%d</span><span class="s"> times&#39;</span>
-                                              <span class="o">%</span> <span class="p">(</span><span class="s">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pfrag</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]),</span> <span class="n">min_o</span><span class="p">))</span>
-
-                        <span class="k">if</span> <span class="n">val</span> <span class="o">&gt;</span> <span class="n">max_o</span><span class="p">:</span>
-                            <span class="k">raise</span> <span class="n">Fault</span><span class="p">(</span><span class="s">&#39;Client.ValidationError&#39;</span><span class="p">,</span>
-                                <span class="s">&#39;&quot;</span><span class="si">%s</span><span class="s">&quot; member must occur at most </span><span class="si">%d</span><span class="s"> times&#39;</span>
-                                              <span class="o">%</span> <span class="p">(</span><span class="s">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pfrag</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]),</span> <span class="n">max_o</span><span class="p">))</span>
-
-                        <span class="n">ctype_info</span> <span class="o">=</span> <span class="n">ntype_info</span><span class="o">.</span><span class="n">get_flat_type_info</span><span class="p">(</span><span class="n">ntype_info</span><span class="p">)</span>
-
-                <span class="n">val</span> <span class="o">=</span> <span class="n">frequencies</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-                <span class="n">min_o</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">min_occurs</span>
-                <span class="n">max_o</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">max_occurs</span>
-                <span class="k">if</span> <span class="n">val</span> <span class="o">&lt;</span> <span class="n">min_o</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="n">Fault</span><span class="p">(</span><span class="s">&#39;Client.ValidationError&#39;</span><span class="p">,</span>
-                                <span class="s">&#39;&quot;</span><span class="si">%s</span><span class="s">&quot; member must occur at least </span><span class="si">%d</span><span class="s"> times&#39;</span>
-                                                    <span class="o">%</span> <span class="p">(</span><span class="s">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">path</span><span class="p">),</span> <span class="n">min_o</span><span class="p">))</span>
-                <span class="k">if</span> <span class="n">val</span> <span class="o">&gt;</span> <span class="n">max_o</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="n">Fault</span><span class="p">(</span><span class="s">&#39;Client.ValidationError&#39;</span><span class="p">,</span>
-                                <span class="s">&#39;&quot;</span><span class="si">%s</span><span class="s">&quot; member must occur at most </span><span class="si">%d</span><span class="s"> times&#39;</span>
-                                                    <span class="o">%</span> <span class="p">(</span><span class="s">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">path</span><span class="p">),</span> <span class="n">max_o</span><span class="p">))</span>
-
-        <span class="k">return</span> <span class="n">inst</span>
-
-
-    <span class="k">def</span> <span class="nf">object_to_flat_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inst_cls</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">hier_delim</span><span class="o">=</span><span class="s">&quot;_&quot;</span><span class="p">,</span> <span class="n">retval</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-                                                    <span class="n">prefix</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">retval</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="n">retval</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">if</span> <span class="n">prefix</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="n">prefix</span> <span class="o">=</span> <span class="p">[]</span>
-
-        <span class="n">fti</span> <span class="o">=</span> <span class="n">inst_cls</span><span class="o">.</span><span class="n">get_flat_type_info</span><span class="p">(</span><span class="n">inst_cls</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">fti</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">new_prefix</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
-            <span class="n">new_prefix</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
-            <span class="n">subvalue</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
-            <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s">&#39;get_flat_type_info&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span> <span class="c"># Not a ComplexModel</span>
-                <span class="n">key</span> <span class="o">=</span> <span class="n">hier_delim</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">new_prefix</span><span class="p">)</span>
-
-                <span class="k">if</span> <span class="n">retval</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%r</span><span class="s">.</span><span class="si">%s</span><span class="s"> conflicts with previous value </span><span class="si">%r</span><span class="s">&quot;</span> <span class="o">%</span>
-                                                        <span class="p">(</span><span class="n">inst_cls</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">retval</span><span class="p">[</span><span class="n">key</span><span class="p">]))</span>
-
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="n">retval</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">subvalue</span>
-                <span class="k">except</span><span class="p">:</span>
-                    <span class="n">retval</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
-
-            <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">object_to_flat_dict</span><span class="p">(</span><span class="n">fti</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">subvalue</span><span class="p">,</span> <span class="n">hier_delim</span><span class="p">,</span>
-                                             <span class="n">retval</span><span class="p">,</span> <span class="n">new_prefix</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">inst_cls</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">retval</span>
-</pre></div></div>
+</pre></div></div></div>
 
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>

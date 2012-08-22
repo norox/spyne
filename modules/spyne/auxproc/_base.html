@@ -10,7 +10,7 @@
     
     <title>spyne.auxproc._base &mdash; spyne 2.8.0-rc documentation</title>
     
-    <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -42,7 +42,24 @@
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../spyne.html" accesskey="U">spyne</a> &raquo;</li> 
       </ul>
-    </div>  
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -69,21 +86,9 @@
 <span class="c">#</span>
 
 
-<span class="sd">&quot;&quot;&quot;Module that contains base classes for Auxiliary Method Processors (AuxProcs</span>
-<span class="sd">for short).</span>
-
-<span class="sd">What we call &quot;Auxiliary Methods&quot; are methods that run asyncronously once the</span>
-<span class="sd">main method returns (either successfully or not). There can be only one main</span>
-<span class="sd">method for a given method identifier, zero or more auxiliary methods.</span>
-
-<span class="sd">To define multiple auxiliary methods for a given main method, you must use</span>
-<span class="sd">separate :class:`ServiceBase` children.</span>
-
-<span class="sd">Auxiliary methods are a useful abstraction for a variety of asyncronous</span>
-<span class="sd">execution methods like persistent or non-persistent queueing, async execution</span>
-<span class="sd">in another thread, process or node.</span>
-
-<span class="sd">AuxProcs define how an auxiliary method is going to be executed.</span>
+<span class="sd">&quot;&quot;&quot;Base class and other helper methods for Auxiliary Method Processors</span>
+<span class="sd">(&#39;AuxProc&#39;s for short). AuxProcs define how an auxiliary method is going to be</span>
+<span class="sd">executed.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">logging</span>
@@ -150,23 +155,6 @@
 </pre></div></div></div>
 
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>

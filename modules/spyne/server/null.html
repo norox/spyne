@@ -10,7 +10,7 @@
     
     <title>spyne.server.null &mdash; spyne 2.8.0-rc documentation</title>
     
-    <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -42,7 +42,24 @@
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../spyne.html" accesskey="U">spyne</a> &raquo;</li> 
       </ul>
-    </div>  
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -94,6 +111,14 @@
 <span class="sd">    to test services without having to run a server.</span>
 
 <span class="sd">    It implicitly uses the &#39;sync&#39; auxiliary processing mode.</span>
+
+<span class="sd">    Note that:</span>
+<span class="sd">        1) **kwargs overwrite **args.</span>
+<span class="sd">        2) You can do: ::</span>
+
+<span class="sd">                logging.getLogger(&#39;spyne.server.null&#39;).setLevel(logging.CRITICAL)</span>
+
+<span class="sd">            to hide context delimiters in logs.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">transport</span> <span class="o">=</span> <span class="s">&#39;noconn://null.spyne&#39;</span>
@@ -131,7 +156,6 @@
         <span class="n">initial_ctx</span> <span class="o">=</span> <span class="n">MethodContext</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">initial_ctx</span><span class="o">.</span><span class="n">method_request_string</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__key</span>
         <span class="n">initial_ctx</span><span class="o">.</span><span class="n">in_header</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__in_header</span>
-        <span class="n">initial_ctx</span><span class="o">.</span><span class="n">in_object</span> <span class="o">=</span> <span class="n">args</span>
         <span class="n">initial_ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">NullServer</span><span class="o">.</span><span class="n">transport</span>
 
         <span class="n">contexts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">in_protocol</span><span class="o">.</span><span class="n">generate_method_contexts</span><span class="p">(</span><span class="n">initial_ctx</span><span class="p">)</span>
@@ -141,6 +165,18 @@
         <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s"> start request </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">_big_header</span><span class="p">,</span> <span class="n">_big_footer</span><span class="p">)</span>  <span class="p">)</span>
 
         <span class="k">for</span> <span class="n">ctx</span> <span class="ow">in</span> <span class="n">contexts</span><span class="p">:</span>
+            <span class="c"># this reconstruction is quite costly. I wonder if it&#39;s a problem</span>
+            <span class="c"># though.</span>
+            <span class="n">_type_info</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">descriptor</span><span class="o">.</span><span class="n">in_message</span><span class="o">.</span><span class="n">_type_info</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="n">in_object</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">_type_info</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)):</span>
+                <span class="n">ctx</span><span class="o">.</span><span class="n">in_object</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">_type_info</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                <span class="n">val</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">val</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="n">ctx</span><span class="o">.</span><span class="n">in_object</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+
             <span class="k">if</span> <span class="n">cnt</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">p_ctx</span> <span class="o">=</span> <span class="n">ctx</span>
             <span class="k">else</span><span class="p">:</span>
@@ -148,7 +184,6 @@
 
             <span class="c"># do logging.getLogger(&#39;spyne.server.null&#39;).setLevel(logging.CRITICAL)</span>
             <span class="c"># to hide the following</span>
-
             <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s"> start context </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">_small_header</span><span class="p">,</span> <span class="n">_small_footer</span><span class="p">)</span> <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">process_request</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">  end context  </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">_small_header</span><span class="p">,</span> <span class="n">_small_footer</span><span class="p">)</span> <span class="p">)</span>
@@ -194,23 +229,6 @@
 </pre></div>
 
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>

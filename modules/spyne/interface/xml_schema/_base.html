@@ -10,7 +10,7 @@
     
     <title>spyne.interface.xml_schema._base &mdash; spyne 2.8.0-rc documentation</title>
     
-    <link rel="stylesheet" href="../../../../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../../static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -42,7 +42,24 @@
           <li><a href="../../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../../spyne.html" accesskey="U">spyne</a> &raquo;</li> 
       </ul>
-    </div>  
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -67,9 +84,6 @@
 <span class="c"># License along with this library; if not, write to the Free Software</span>
 <span class="c"># Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301</span>
 <span class="c">#</span>
-
-<span class="sd">&quot;&quot;&quot;This module contains the implementation of the Xml Schema standard and its</span>
-<span class="sd">helper methods and objects.&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
@@ -133,8 +147,15 @@
 
 
 <span class="k">class</span> <span class="nc">XmlSchema</span><span class="p">(</span><span class="n">InterfaceDocumentBase</span><span class="p">):</span>
-<div class="viewcode-block" id="XmlSchema"><a class="viewcode-back" href="../../../../reference/interface.html#spyne.interface.xml_schema._base.XmlSchema">[docs]</a>    <span class="sd">&quot;&quot;&quot;The implementation of the  Xml Schema object definition document</span>
-<span class="sd">    standard.</span>
+<div class="viewcode-block" id="XmlSchema"><a class="viewcode-back" href="../../../../reference/interface.html#spyne.interface.xml_schema._base.XmlSchema">[docs]</a>    <span class="sd">&quot;&quot;&quot;The implementation of a subset of the Xml Schema 1.0 object definition</span>
+<span class="sd">    document standard.</span>
+
+<span class="sd">    The standard is available in three parts as follows:</span>
+<span class="sd">    http://www.w3.org/TR/xmlschema-0/</span>
+<span class="sd">    http://www.w3.org/TR/xmlschema-1/</span>
+<span class="sd">    http://www.w3.org/TR/xmlschema-2/</span>
+
+<span class="sd">    :param interface: A :class:`spyne.interface.InterfaceBase` instance.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interface</span><span class="p">):</span>
@@ -184,8 +205,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">event_manager</span><span class="o">.</span><span class="n">fire_event</span><span class="p">(</span><span class="s">&#39;document_built&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">schema_dict</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">build_validation_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<div class="viewcode-block" id="XmlSchema.build_validation_schema"><a class="viewcode-back" href="../../../../reference/interface.html#spyne.interface.xml_schema._base.XmlSchema.build_validation_schema">[docs]</a>        <span class="sd">&quot;&quot;&quot;Build application schema specifically for xml validation purposes.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="XmlSchema.build_validation_schema"><a class="viewcode-back" href="../../../../reference/interface.html#spyne.interface.xml_schema._base.XmlSchema.build_validation_schema">[docs]</a>        <span class="sd">&quot;&quot;&quot;Build application schema specifically for xml validation purposes.&quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">build_schema_nodes</span><span class="p">(</span><span class="n">with_schema_location</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
@@ -271,23 +291,6 @@
 </pre></div></div></div>
 
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="../../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>

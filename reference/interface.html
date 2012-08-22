@@ -10,7 +10,7 @@
     
     <title>Interfaces &mdash; spyne 2.8.0-rc documentation</title>
     
-    <link rel="stylesheet" href="../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../static/doctools.js"></script>
     <link rel="top" title="spyne 2.8.0-rc documentation" href="../index.html" />
     <link rel="up" title="Spyne API Reference" href="index.html" />
-    <link rel="next" title="Protocols" href="protocol.html" />
+    <link rel="next" title="Protocols" href="protocol/index.html" />
     <link rel="prev" title="Models" href="model.html" /> 
   </head>
   <body>
@@ -41,7 +41,7 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="protocol.html" title="Protocols"
+          <a href="protocol/index.html" title="Protocols"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="model.html" title="Models"
@@ -49,7 +49,45 @@
         <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Spyne API Reference</a> &raquo;</li> 
       </ul>
-    </div>  
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Interfaces</a><ul>
+<li><a class="reference internal" href="#module-spyne.interface._base">Interface Base Class</a></li>
+<li><a class="reference internal" href="#module-spyne.interface.xml_schema._base">XML Schema</a></li>
+<li><a class="reference internal" href="#module-spyne.interface.wsdl.wsdl11">Wsdl 1.1</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="model.html"
+                        title="previous chapter">Models</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="protocol/index.html"
+                        title="next chapter">Protocols</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../sources/reference/interface.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -58,11 +96,12 @@
             
   <div class="section" id="interfaces">
 <h1>Interfaces<a class="headerlink" href="#interfaces" title="Permalink to this headline">¶</a></h1>
-<p>The <cite>spyne.interface</cite> package contains the implementations of various schema
-definition standards.</p>
+<p>The <cite>spyne.interface</cite> package contains the implementations of various interface
+document standards.</p>
 <div class="section" id="module-spyne.interface._base">
 <span id="interface-base-class"></span><h2>Interface Base Class<a class="headerlink" href="#module-spyne.interface._base" title="Permalink to this headline">¶</a></h2>
-<p>This module contains the InterfaceBase class and its helper objects.</p>
+<p>This module contains the Interface and InterfaceDocumentBase class and its
+helper objects.</p>
 <dl class="class">
 <dt id="spyne.interface._base.Interface">
 <em class="property">class </em><tt class="descclassname">spyne.interface._base.</tt><tt class="descname">Interface</tt><big>(</big><em>app=None</em>, <em>import_base_namespaces=False</em><big>)</big><a class="reference internal" href="../modules/spyne/interface/_base.html#Interface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.interface._base.Interface" title="Permalink to this definition">¶</a></dt>
@@ -136,7 +175,15 @@ attribute of the definitions tag.</p>
 <dl class="class">
 <dt id="spyne.interface._base.InterfaceDocumentBase">
 <em class="property">class </em><tt class="descclassname">spyne.interface._base.</tt><tt class="descname">InterfaceDocumentBase</tt><big>(</big><em>interface</em><big>)</big><a class="reference internal" href="../modules/spyne/interface/_base.html#InterfaceDocumentBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.interface._base.InterfaceDocumentBase" title="Permalink to this definition">¶</a></dt>
-<dd><p>Base class for all interface document implementations</p>
+<dd><p>Base class for all interface document implementations.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>interface</strong> &#8211; A <tt class="xref py py-class docutils literal"><span class="pre">spyne.interface.InterfaceBase</span></tt> instance.</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="spyne.interface._base.InterfaceDocumentBase.build_interface_document">
 <tt class="descname">build_interface_document</tt><big>(</big><em>cls</em><big>)</big><a class="reference internal" href="../modules/spyne/interface/_base.html#InterfaceDocumentBase.build_interface_document"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.interface._base.InterfaceDocumentBase.build_interface_document" title="Permalink to this definition">¶</a></dt>
@@ -159,13 +206,23 @@ cached interface document.</p>
 </div>
 <div class="section" id="module-spyne.interface.xml_schema._base">
 <span id="xml-schema"></span><h2>XML Schema<a class="headerlink" href="#module-spyne.interface.xml_schema._base" title="Permalink to this headline">¶</a></h2>
-<p>This module contains the implementation of the Xml Schema standard and its
-helper methods and objects.</p>
 <dl class="class">
 <dt id="spyne.interface.xml_schema._base.XmlSchema">
 <em class="property">class </em><tt class="descclassname">spyne.interface.xml_schema._base.</tt><tt class="descname">XmlSchema</tt><big>(</big><em>interface</em><big>)</big><a class="reference internal" href="../modules/spyne/interface/xml_schema/_base.html#XmlSchema"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.interface.xml_schema._base.XmlSchema" title="Permalink to this definition">¶</a></dt>
-<dd><p>The implementation of the  Xml Schema object definition document
-standard.</p>
+<dd><p>The implementation of a subset of the Xml Schema 1.0 object definition
+document standard.</p>
+<p>The standard is available in three parts as follows:
+<a class="reference external" href="http://www.w3.org/TR/xmlschema-0/">http://www.w3.org/TR/xmlschema-0/</a>
+<a class="reference external" href="http://www.w3.org/TR/xmlschema-1/">http://www.w3.org/TR/xmlschema-1/</a>
+<a class="reference external" href="http://www.w3.org/TR/xmlschema-2/">http://www.w3.org/TR/xmlschema-2/</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>interface</strong> &#8211; A <tt class="xref py py-class docutils literal"><span class="pre">spyne.interface.InterfaceBase</span></tt> instance.</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="spyne.interface.xml_schema._base.XmlSchema.build_validation_schema">
 <tt class="descname">build_validation_schema</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/spyne/interface/xml_schema/_base.html#XmlSchema.build_validation_schema"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.interface.xml_schema._base.XmlSchema.build_validation_schema" title="Permalink to this definition">¶</a></dt>
@@ -192,12 +249,26 @@ for a given namespace.</p>
 </div>
 <div class="section" id="module-spyne.interface.wsdl.wsdl11">
 <span id="wsdl-1-1"></span><h2>Wsdl 1.1<a class="headerlink" href="#module-spyne.interface.wsdl.wsdl11" title="Permalink to this headline">¶</a></h2>
-<p>This module contains the Wsdl 1.1 document standard implementation and
-its helper methods.</p>
+<p>The <tt class="docutils literal"><span class="pre">spyne.interface.wsdl.wsdl11</span></tt> module contains an implementation of a
+subset of the Wsdl 1.1 document standard and its helper methods.</p>
 <dl class="class">
 <dt id="spyne.interface.wsdl.wsdl11.Wsdl11">
 <em class="property">class </em><tt class="descclassname">spyne.interface.wsdl.wsdl11.</tt><tt class="descname">Wsdl11</tt><big>(</big><em>interface=None</em>, <em>_with_partnerlink=False</em><big>)</big><a class="reference internal" href="../modules/spyne/interface/wsdl/wsdl11.html#Wsdl11"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.interface.wsdl.wsdl11.Wsdl11" title="Permalink to this definition">¶</a></dt>
 <dd><p>The implementation of the Wsdl 1.1 interface definition document standard.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>app</strong> &#8211; The parent application.</li>
+<li><strong>import_base_namespaces</strong> &#8211; Include imports for base namespaces like
+xsd, xsi, wsdl, etc.</li>
+<li><strong>_with_partnerlink</strong> &#8211; Include the partnerLink tag in the wsdl.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="spyne.interface.wsdl.wsdl11.Wsdl11.build_interface_document">
 <tt class="descname">build_interface_document</tt><big>(</big><em>url</em><big>)</big><a class="reference internal" href="../modules/spyne/interface/wsdl/wsdl11.html#Wsdl11.build_interface_document"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.interface.wsdl.wsdl11.Wsdl11.build_interface_document" title="Permalink to this definition">¶</a></dt>
@@ -234,44 +305,6 @@ for a given namespace.</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Interfaces</a><ul>
-<li><a class="reference internal" href="#module-spyne.interface._base">Interface Base Class</a></li>
-<li><a class="reference internal" href="#module-spyne.interface.xml_schema._base">XML Schema</a></li>
-<li><a class="reference internal" href="#module-spyne.interface.wsdl.wsdl11">Wsdl 1.1</a></li>
-</ul>
-</li>
-</ul>
-
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="model.html"
-                        title="previous chapter">Models</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="protocol.html"
-                        title="next chapter">Protocols</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../sources/reference/interface.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
       <div class="clearer"></div>
     </div>
     <div class="related">
@@ -284,7 +317,7 @@ for a given namespace.</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="protocol.html" title="Protocols"
+          <a href="protocol/index.html" title="Protocols"
              >next</a> |</li>
         <li class="right" >
           <a href="model.html" title="Models"

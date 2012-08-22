@@ -10,7 +10,7 @@
     
     <title>Working with RPC Metadata &mdash; spyne 2.8.0-rc documentation</title>
     
-    <link rel="stylesheet" href="../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -27,8 +27,8 @@
     <script type="text/javascript" src="../static/doctools.js"></script>
     <link rel="top" title="spyne 2.8.0-rc documentation" href="../index.html" />
     <link rel="up" title="Spyne Manual" href="index.html" />
-    <link rel="next" title="Implementing Transports and Protocols" href="t_and_p.html" />
-    <link rel="prev" title="Input Validation" href="validation.html" /> 
+    <link rel="next" title="Implementing Transports and Protocols" href="06_t_and_p.html" />
+    <link rel="prev" title="Input Validation" href="04-02_validation.html" /> 
   </head>
   <body>
     <div class="related">
@@ -41,15 +41,56 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="t_and_p.html" title="Implementing Transports and Protocols"
+          <a href="06_t_and_p.html" title="Implementing Transports and Protocols"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="validation.html" title="Input Validation"
+          <a href="04-02_validation.html" title="Input Validation"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Spyne Manual</a> &raquo;</li> 
       </ul>
-    </div>  
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Working with RPC Metadata</a><ul>
+<li><a class="reference internal" href="#protocol-headers">Protocol Headers</a></li>
+<li><a class="reference internal" href="#transport-headers">Transport Headers</a></li>
+<li><a class="reference internal" href="#exceptions">Exceptions</a><ul>
+<li><a class="reference internal" href="#what-s-next">What&#8217;s next?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="04-02_validation.html"
+                        title="previous chapter">Input Validation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="06_t_and_p.html"
+                        title="next chapter">Implementing Transports and Protocols</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../sources/manual/05_metadata.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -58,7 +99,7 @@
             
   <div class="section" id="working-with-rpc-metadata">
 <span id="manual-metadata"></span><h1>Working with RPC Metadata<a class="headerlink" href="#working-with-rpc-metadata" title="Permalink to this headline">¶</a></h1>
-<p>This section builds on <a class="reference internal" href="usermanager.html#manual-user-manager"><em>User Manager</em></a> section. If you haven’t done
+<p>This section builds on <a class="reference internal" href="03_usermanager.html#manual-user-manager"><em>User Manager</em></a> section. If you haven’t done
 so, we recommended you to read it first.</p>
 <p>In most of the real-world scenarios, an rpc request comes with additional
 baggage like authentication headers, routing history, and similar information.
@@ -78,9 +119,9 @@ expose your functions.</p>
 here: <a class="reference external" href="https://github.com/plq/spyne/blob/master/examples/authenticate/server_soap.py">https://github.com/plq/spyne/blob/master/examples/authenticate/server_soap.py</a></p>
 <div class="section" id="protocol-headers">
 <h2>Protocol Headers<a class="headerlink" href="#protocol-headers" title="Permalink to this headline">¶</a></h2>
-<p>The protocol headers are available in <tt class="docutils literal"><span class="pre">ctx.in_header</span></tt> and <tt class="docutils literal"><span class="pre">ctx.out_header</span></tt>
-objects. You should set the <tt class="docutils literal"><span class="pre">ctx.out_header</span></tt> to the native value of the
-declared type.</p>
+<p>As said before, the protocol headers are available in <tt class="docutils literal"><span class="pre">ctx.in_header</span></tt> and
+<tt class="docutils literal"><span class="pre">ctx.out_header</span></tt> objects. You should set the <tt class="docutils literal"><span class="pre">ctx.out_header</span></tt> to the native
+value of the declared type.</p>
 <p>Header objects are defined just like any other object:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">RequestHeader</span><span class="p">(</span><span class="n">ComplexModel</span><span class="p">):</span>
     <span class="n">user_name</span> <span class="o">=</span> <span class="n">Mandatory</span><span class="o">.</span><span class="n">String</span>
@@ -106,7 +147,7 @@ service definition:</p>
 <div class="highlight-python"><pre>@rpc(_in_header=RequestHeader, _returns=Preferences)</pre>
 </div>
 <p>It&#8217;s generally a better idea to set the header types in the ServiceBase child
-as it&#8217;s likely that a lot of methods will use it. This will avoid cluttering the
+as it&#8217;s likely that all methods will use it. This will avoid cluttering the
 service definition with header declarations. The header declaration in the
 decorator will overwrite the one in the service definition.</p>
 <p>Among the protocols that support headers, only Soap is supported.</p>
@@ -123,28 +164,9 @@ pairs, both strings.</dd>
 </div>
 <div class="section" id="exceptions">
 <h2>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">¶</a></h2>
-<p>The base class for public exceptions in spyne is
-<a class="reference internal" href="../reference/model.html#spyne.model.fault.Fault" title="spyne.model.fault.Fault"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.fault.Fault</span></tt></a>. The Fault object adheres to the
-<a class="reference external" href="http://www.w3.org/TR/2000/NOTE-SOAP-20000508/#_Toc478383507">SOAP 1.1 Fault definition</a>,
-which has three main attributes:</p>
-<blockquote>
-<div><ol class="arabic">
-<li><p class="first"><tt class="docutils literal"><span class="pre">faultcode</span></tt>: is a dot-delimited string whose first part is either
-&#8216;Client&#8217; or &#8216;Server&#8217;. Just like HTTP 4xx and 5xx codes, &#8216;Client&#8217; indicates
-that something was wrong with the input, and &#8216;Server&#8217; indicates something
-went wrong during the processing of the otherwise legitimate request.</p>
-<p>Protocol implementors should heed the values in <tt class="docutils literal"><span class="pre">faultcode</span></tt> to set
-proper return codes in the protocol level when necessary. E.g. HttpRpc
-protocol will return a HTTP 404 error when a
-<tt class="xref py py-class docutils literal"><span class="pre">spyne.error.ResourceNotFound</span></tt> is raised, and a general HTTP 400
-when the <tt class="docutils literal"><span class="pre">faultcode</span></tt> starts with &#8216;Client.&#8217;.</p>
-</li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">faultstring</span></tt>: is the human-readable explanation of the exception.</p>
-</li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">detail</span></tt>: is the additional information as a valid xml document.</p>
-</li>
-</ol>
-</div></blockquote>
+<p>The base class for public exceptions in Spyne is
+<a class="reference internal" href="../reference/model.html#spyne.model.fault.Fault" title="spyne.model.fault.Fault"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.fault.Fault</span></tt></a>. See its docstring for more info about how it
+works.</p>
 <p>Here&#8217;s how you define your own public exceptions:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">PublicKeyError</span><span class="p">(</span><span class="n">Fault</span><span class="p">):</span>
     <span class="n">__type_name__</span> <span class="o">=</span> <span class="s">&#39;KeyError&#39;</span>
@@ -184,10 +206,16 @@ when the <tt class="docutils literal"><span class="pre">faultcode</span></tt> st
 still be nice to specify the exceptions your service can throw in the interface
 document. Plus, intefacing with your services will just feel more natural with
 languages like Java where exceptions are kept on a short leash.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Spyne has common exceptions already defined and integrated to protocols.
+So if one raises <tt class="xref py py-class docutils literal"><span class="pre">spyne.error.ResourceNotFound</span></tt> from user code,
+the HttpRpc protocol is smart enough to set the Http response code to 404.</p>
+</div>
 <div class="section" id="what-s-next">
 <h3>What&#8217;s next?<a class="headerlink" href="#what-s-next" title="Permalink to this headline">¶</a></h3>
-<p>With this document, you know most of what spyne has to offer for application
-programmers. You can refer to the <a class="reference internal" href="t_and_p.html#manual-t-and-p"><em>Implementing Transports and Protocols</em></a> section if you want to
+<p>With this document, you know most of what Spyne has to offer for application
+developers. You can refer to the <a class="reference internal" href="06_t_and_p.html#manual-t-and-p"><em>Implementing Transports and Protocols</em></a> section if you want to
 implement your own transports and protocols.</p>
 <p>Otherwise, please refer to the rest of the documentation or the mailing list
 if you have further questions.</p>
@@ -197,47 +225,6 @@ if you have further questions.</p>
 
 
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Working with RPC Metadata</a><ul>
-<li><a class="reference internal" href="#protocol-headers">Protocol Headers</a></li>
-<li><a class="reference internal" href="#transport-headers">Transport Headers</a></li>
-<li><a class="reference internal" href="#exceptions">Exceptions</a><ul>
-<li><a class="reference internal" href="#what-s-next">What&#8217;s next?</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="validation.html"
-                        title="previous chapter">Input Validation</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="t_and_p.html"
-                        title="next chapter">Implementing Transports and Protocols</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../sources/manual/metadata.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -252,10 +239,10 @@ if you have further questions.</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="t_and_p.html" title="Implementing Transports and Protocols"
+          <a href="06_t_and_p.html" title="Implementing Transports and Protocols"
              >next</a> |</li>
         <li class="right" >
-          <a href="validation.html" title="Input Validation"
+          <a href="04-02_validation.html" title="Input Validation"
              >previous</a> |</li>
         <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
           <li><a href="index.html" >Spyne Manual</a> &raquo;</li> 

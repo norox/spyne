@@ -10,7 +10,7 @@
     
     <title>spyne.model.primitive &mdash; spyne 2.8.0-rc documentation</title>
     
-    <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -42,7 +42,24 @@
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../spyne.html" accesskey="U">spyne</a> &raquo;</li> 
       </ul>
-    </div>  
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -68,7 +85,7 @@
 <span class="c"># Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301</span>
 <span class="c">#</span>
 
-<span class="sd">&quot;&quot;&quot;This module defines primitives that are atomic, basic types.&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;The ``spyne.model.primitive`` package contains atomic, single-value types.&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span> <span class="o">&gt;</span> <span class="s">&#39;3&#39;</span><span class="p">:</span>
@@ -276,17 +293,33 @@
 
     <span class="k">class</span> <span class="nc">Attributes</span><span class="p">(</span><span class="n">String</span><span class="o">.</span><span class="n">Attributes</span><span class="p">):</span>
         <span class="n">text</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="sd">&quot;&quot;&quot;The text shown in link.&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;The text shown in link. This is an object-wide constant.&quot;&quot;&quot;</span>
+
+    <span class="k">class</span> <span class="nc">UriValue</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="AnyUri.UriValue"><a class="viewcode-back" href="../../../reference/model.html#spyne.model.primitive.AnyUri.UriValue">[docs]</a>        <span class="sd">&quot;&quot;&quot;A special object that is just a better way of carrying the</span>
+<span class="sd">        information carried with a link.</span>
+
+<span class="sd">        :param href: The uri string.</span>
+<span class="sd">        :param text: The text data that goes with the link. This is an</span>
+<span class="sd">            `lxml.etree._Element` instance.</span>
+<span class="sd">        :param content: The structured data that goes with the link. This is a</span>
+<span class="sd">        ``str`` or a ``unicode`` instance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">href</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">href</span> <span class="o">=</span> <span class="n">href</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">text</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="n">content</span>
 
 
-<span class="k">class</span> <span class="nc">ImageUri</span><span class="p">(</span><span class="n">AnyUri</span><span class="p">):</span></div>
+<span class="k">class</span> <span class="nc">ImageUri</span><span class="p">(</span><span class="n">AnyUri</span><span class="p">):</span></div></div>
 <div class="viewcode-block" id="ImageUri"><a class="viewcode-back" href="../../../reference/model.html#spyne.model.primitive.ImageUri">[docs]</a>    <span class="sd">&quot;&quot;&quot;A special kind of String that holds the uri of an image.&quot;&quot;&quot;</span>
 
 
 <span class="k">class</span> <span class="nc">Decimal</span><span class="p">(</span><span class="n">SimpleModel</span><span class="p">):</span></div>
 <div class="viewcode-block" id="Decimal"><a class="viewcode-back" href="../../../reference/model.html#spyne.model.primitive.Decimal">[docs]</a>    <span class="sd">&quot;&quot;&quot;The primitive that corresponds to the native python Decimal.</span>
 
-<span class="sd">    This is also the base class for representing numbers.</span>
+<span class="sd">    This is also the base class for denoting numbers.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">__type_name__</span> <span class="o">=</span> <span class="s">&#39;decimal&#39;</span>
@@ -302,10 +335,10 @@
         <span class="sd">&quot;&quot;&quot;The value should be greater than or equal to this number.&quot;&quot;&quot;</span>
 
         <span class="n">lt</span> <span class="o">=</span> <span class="n">decimal</span><span class="o">.</span><span class="n">Decimal</span><span class="p">(</span><span class="s">&#39;inf&#39;</span><span class="p">)</span> <span class="c"># maxExclusive</span>
-        <span class="sd">&quot;&quot;&quot;The value should be smaller than this number.&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;The value should be lower than this number.&quot;&quot;&quot;</span>
 
         <span class="n">le</span> <span class="o">=</span> <span class="n">decimal</span><span class="o">.</span><span class="n">Decimal</span><span class="p">(</span><span class="s">&#39;inf&#39;</span><span class="p">)</span> <span class="c"># maxInclusive</span>
-        <span class="sd">&quot;&quot;&quot;The value should be smaller than or equal to this number.&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;The value should be lower than or equal to this number.&quot;&quot;&quot;</span>
 
         <span class="n">max_str_len</span> <span class="o">=</span> <span class="mi">1024</span>
         <span class="sd">&quot;&quot;&quot;The maximum length of string to be attempted to convert to number.&quot;&quot;&quot;</span>
@@ -420,6 +453,7 @@
 
 <span class="k">class</span> <span class="nc">UnsignedInteger</span><span class="p">(</span><span class="n">Integer</span><span class="p">):</span></div>
 <div class="viewcode-block" id="UnsignedInteger"><a class="viewcode-back" href="../../../reference/model.html#spyne.model.primitive.UnsignedInteger">[docs]</a>    <span class="sd">&quot;&quot;&quot;The arbitrary-size unsigned integer, aka nonNegativeInteger.&quot;&quot;&quot;</span>
+
     <span class="n">__type_name__</span> <span class="o">=</span> <span class="s">&#39;nonNegativeInteger&#39;</span>
 
     <span class="nd">@staticmethod</span>
@@ -592,27 +626,31 @@
         <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">,</span> <span class="n">hour</span><span class="p">,</span> <span class="nb">min</span><span class="p">,</span> <span class="n">sec</span><span class="p">,</span> <span class="n">microsec</span><span class="p">,</span> <span class="n">tz</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">default_parse</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
+        <span class="n">match</span> <span class="o">=</span> <span class="n">_utc_re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">match</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="n">pytz</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span>
+
+        <span class="n">match</span> <span class="o">=</span> <span class="n">_offset_re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
+            <span class="n">tz_hr</span><span class="p">,</span> <span class="n">tz_min</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&quot;tz_hr&quot;</span><span class="p">,</span> <span class="s">&quot;tz_min&quot;</span><span class="p">)]</span>
+            <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">match</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="n">FixedOffset</span><span class="p">(</span><span class="n">tz_hr</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">+</span> <span class="n">tz_min</span><span class="p">,</span> <span class="p">{}))</span>
+
+        <span class="n">match</span> <span class="o">=</span> <span class="n">_local_re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">match</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">match</span><span class="p">)</span>
+
+
+    <span class="nd">@classmethod</span>
     <span class="nd">@nillable_string</span>
     <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;expect ISO formatted dates&quot;&quot;&quot;</span>
         <span class="n">format</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">format</span>
 
         <span class="k">if</span> <span class="n">format</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="n">match</span> <span class="o">=</span> <span class="n">_utc_re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">match</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="n">pytz</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span>
-
-            <span class="n">match</span> <span class="o">=</span> <span class="n">_offset_re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
-                <span class="n">tz_hr</span><span class="p">,</span> <span class="n">tz_min</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&quot;tz_hr&quot;</span><span class="p">,</span> <span class="s">&quot;tz_min&quot;</span><span class="p">)]</span>
-                <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">match</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="n">FixedOffset</span><span class="p">(</span><span class="n">tz_hr</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">+</span> <span class="n">tz_min</span><span class="p">,</span> <span class="p">{}))</span>
-
-            <span class="n">match</span> <span class="o">=</span> <span class="n">_local_re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">match</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
-
-            <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">match</span><span class="p">)</span>
-
+            <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">default_parse</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">format</span><span class="p">)</span>
 
@@ -721,37 +759,52 @@
         <span class="k">return</span> <span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;true&#39;</span><span class="p">,</span> <span class="s">&#39;1&#39;</span><span class="p">])</span>
 
 <span class="c"># a class that is really a namespace</span>
-<span class="k">class</span> <span class="nc">Mandatory</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span></div>
+<span class="k">class</span> <span class="nc">Mandatory</span><span class="p">:</span></div>
 <div class="viewcode-block" id="Mandatory"><a class="viewcode-back" href="../../../reference/model.html#spyne.model.primitive.Mandatory">[docs]</a>    <span class="sd">&quot;&quot;&quot;Class that contains mandatory variants of primitives.&quot;&quot;&quot;</span>
 
-    <span class="n">String</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;mandatory_string&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">min_len</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">Unicode</span> <span class="o">=</span> <span class="n">Unicode</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;mandatory_string&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">min_len</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">Decimal</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;mandatory_integer&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-    <span class="n">Integer</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;mandatory_integer&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-    <span class="n">Date</span> <span class="o">=</span> <span class="n">Date</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;mandatory_date&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-    <span class="n">DateTime</span> <span class="o">=</span> <span class="n">DateTime</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;mandatory_date_time&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-    <span class="n">UnsignedInteger</span> <span class="o">=</span> <span class="n">UnsignedInteger</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;mandatory_unsigned_integer&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-    <span class="n">UnsignedLong</span> <span class="o">=</span> <span class="n">UnsignedLong</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;mandatory_unsigned_integer&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">Unicode</span> <span class="o">=</span> <span class="n">Unicode</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;MandatoryString&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">min_len</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">String</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;MandatoryString&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">min_len</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">AnyXml</span> <span class="o">=</span> <span class="n">AnyXml</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;MandatoryXml&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">min_len</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">AnyDict</span> <span class="o">=</span> <span class="n">AnyDict</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;MandatoryDict&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">min_len</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">AnyUri</span> <span class="o">=</span> <span class="n">AnyUri</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;MandatoryUri&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">min_len</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ImageUri</span> <span class="o">=</span> <span class="n">ImageUri</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;MandatoryImageUri&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">min_len</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">Boolean</span> <span class="o">=</span> <span class="n">Boolean</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;MandatoryBoolean&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+    <span class="n">Date</span> <span class="o">=</span> <span class="n">Date</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;MandatoryDate&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">Time</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;MandatoryTime&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">DateTime</span> <span class="o">=</span> <span class="n">DateTime</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;MandatoryDateTime&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">Duration</span> <span class="o">=</span> <span class="n">Duration</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;MandatoryDuration&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+    <span class="n">Decimal</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;MandatoryDecimal&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">Double</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;MandatoryDouble&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">Float</span> <span class="o">=</span> <span class="n">Double</span>
+
+    <span class="n">Integer</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;MandatoryInteger&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">Integer64</span> <span class="o">=</span> <span class="n">Integer64</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;MandatoryLong&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">Integer32</span> <span class="o">=</span> <span class="n">Integer32</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;MandatoryInt&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">Integer16</span> <span class="o">=</span> <span class="n">Integer16</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;MandatoryShort&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">Integer8</span> <span class="o">=</span> <span class="n">Integer8</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;MandatoryByte&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+    <span class="n">Long</span> <span class="o">=</span> <span class="n">Integer64</span>
+    <span class="n">Int</span> <span class="o">=</span> <span class="n">Integer32</span>
+    <span class="n">Short</span> <span class="o">=</span> <span class="n">Integer16</span>
+    <span class="n">Byte</span> <span class="o">=</span> <span class="n">Integer8</span>
+
+    <span class="n">UnsignedInteger</span> <span class="o">=</span> <span class="n">UnsignedInteger</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;MandatoryUnsignedInteger&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">UnsignedInteger64</span> <span class="o">=</span> <span class="n">UnsignedInteger64</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;MandatoryUnsignedLong&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">UnsignedInteger32</span> <span class="o">=</span> <span class="n">UnsignedInteger32</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;MandatoryUnsignedInt&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">UnsignedInteger16</span> <span class="o">=</span> <span class="n">UnsignedInteger16</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;MandatoryUnsignedShort&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">UnsignedInteger8</span> <span class="o">=</span> <span class="n">UnsignedInteger8</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;MandatoryUnsignedByte&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+    <span class="n">UnsignedLong</span> <span class="o">=</span> <span class="n">UnsignedInteger64</span>
+    <span class="n">UnsignedInt</span> <span class="o">=</span> <span class="n">UnsignedInteger32</span>
+    <span class="n">UnsignedShort</span> <span class="o">=</span> <span class="n">UnsignedInteger16</span>
+    <span class="n">UnsignedByte</span> <span class="o">=</span> <span class="n">UnsignedInteger8</span>
 </pre></div></div>
 
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>

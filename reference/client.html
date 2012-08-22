@@ -10,7 +10,7 @@
     
     <title>Client Transports &mdash; spyne 2.8.0-rc documentation</title>
     
-    <link rel="stylesheet" href="../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -28,7 +28,7 @@
     <link rel="top" title="spyne 2.8.0-rc documentation" href="../index.html" />
     <link rel="up" title="Spyne API Reference" href="index.html" />
     <link rel="next" title="Server Transports" href="server.html" />
-    <link rel="prev" title="Protocols" href="protocol.html" /> 
+    <link rel="prev" title="MessagePack" href="protocol/msgpack.html" /> 
   </head>
   <body>
     <div class="related">
@@ -44,12 +44,50 @@
           <a href="server.html" title="Server Transports"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="protocol.html" title="Protocols"
+          <a href="protocol/msgpack.html" title="MessagePack"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Spyne API Reference</a> &raquo;</li> 
       </ul>
-    </div>  
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Client Transports</a><ul>
+<li><a class="reference internal" href="#module-spyne.client._base">Client Base Class</a></li>
+<li><a class="reference internal" href="#module-spyne.client.http">HTTP</a></li>
+<li><a class="reference internal" href="#module-spyne.client.zeromq">ZeroMQ</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="protocol/msgpack.html"
+                        title="previous chapter">MessagePack</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="server.html"
+                        title="next chapter">Server Transports</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../sources/reference/client.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -60,12 +98,12 @@
 <h1>Client Transports<a class="headerlink" href="#client-transports" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="module-spyne.client._base">
 <span id="client-base-class"></span><h2>Client Base Class<a class="headerlink" href="#module-spyne.client._base" title="Permalink to this headline">¶</a></h2>
-<p>This module contains the ClientBase class and its helper objects.</p>
+<p>Contains the ClientBase class and its helper objects.</p>
 <dl class="class">
 <dt id="spyne.client._base.ClientBase">
 <em class="property">class </em><tt class="descclassname">spyne.client._base.</tt><tt class="descname">ClientBase</tt><big>(</big><em>url</em>, <em>app</em><big>)</big><a class="reference internal" href="../modules/spyne/client/_base.html#ClientBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.client._base.ClientBase" title="Permalink to this definition">¶</a></dt>
-<dd><p>The base class for all client applications. <tt class="docutils literal"><span class="pre">self.service</span></tt>
-attribute should be initialized in the constructor of the child class.</p>
+<dd><p>The base class for all client applications. <tt class="docutils literal"><span class="pre">self.service</span></tt> attribute
+should be initialized in the constructor of the child class.</p>
 <dl class="method">
 <dt id="spyne.client._base.ClientBase.set_options">
 <tt class="descname">set_options</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../modules/spyne/client/_base.html#ClientBase.set_options"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.client._base.ClientBase.set_options" title="Permalink to this definition">¶</a></dt>
@@ -205,44 +243,6 @@ the remote procedure call.</li>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Client Transports</a><ul>
-<li><a class="reference internal" href="#module-spyne.client._base">Client Base Class</a></li>
-<li><a class="reference internal" href="#module-spyne.client.http">HTTP</a></li>
-<li><a class="reference internal" href="#module-spyne.client.zeromq">ZeroMQ</a></li>
-</ul>
-</li>
-</ul>
-
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="protocol.html"
-                        title="previous chapter">Protocols</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="server.html"
-                        title="next chapter">Server Transports</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../sources/reference/client.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
       <div class="clearer"></div>
     </div>
     <div class="related">
@@ -258,7 +258,7 @@ the remote procedure call.</li>
           <a href="server.html" title="Server Transports"
              >next</a> |</li>
         <li class="right" >
-          <a href="protocol.html" title="Protocols"
+          <a href="protocol/msgpack.html" title="MessagePack"
              >previous</a> |</li>
         <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
           <li><a href="index.html" >Spyne API Reference</a> &raquo;</li> 

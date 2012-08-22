@@ -10,7 +10,7 @@
     
     <title>RPC Decorators &mdash; spyne 2.8.0-rc documentation</title>
     
-    <link rel="stylesheet" href="../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../static/doctools.js"></script>
     <link rel="top" title="spyne 2.8.0-rc documentation" href="../index.html" />
     <link rel="up" title="Spyne API Reference" href="index.html" />
-    <link rel="next" title="Models" href="model.html" />
+    <link rel="next" title="Common Exceptions" href="error.html" />
     <link rel="prev" title="Service Definition" href="service.html" /> 
   </head>
   <body>
@@ -41,7 +41,7 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="model.html" title="Models"
+          <a href="error.html" title="Common Exceptions"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="service.html" title="Service Definition"
@@ -49,7 +49,35 @@
         <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Spyne API Reference</a> &raquo;</li> 
       </ul>
-    </div>  
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="service.html"
+                        title="previous chapter">Service Definition</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="error.html"
+                        title="next chapter">Common Exceptions</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../sources/reference/decorator.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -58,19 +86,29 @@
             
   <div class="section" id="module-spyne.decorator">
 <span id="rpc-decorators"></span><h1>RPC Decorators<a class="headerlink" href="#module-spyne.decorator" title="Permalink to this headline">¶</a></h1>
-<p>This module contains the the &#64;srpc decorator and its helper methods. The
-&#64;srpc decorator is responsible for tagging methods as remote procedure calls,
-and also for dynamically defining complex objects that carry the method&#8217;s input
-parameters and output value(s).</p>
+<p>The <tt class="docutils literal"><span class="pre">spyne.decorator</span></tt> module contains the the &#64;srpc decorator and its
+helper methods. The &#64;srpc decorator is responsible for tagging methods as remote
+procedure calls extracting method&#8217;s input and output types.</p>
 <p>It&#8217;s possible to create custom decorators that wrap the &#64;srpc decorator in order
 to have a more elegant way of passing frequently-used parameter values. The &#64;rpc
 decorator is a simple example of this.</p>
+<dl class="function">
+<dt id="spyne.decorator.rpc">
+<tt class="descclassname">spyne.decorator.</tt><tt class="descname">rpc</tt><big>(</big><em>*params</em>, <em>**kparams</em><big>)</big><a class="reference internal" href="../modules/spyne/decorator.html#rpc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.decorator.rpc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method decorator to tag a method as a remote procedure call. See
+<a class="reference internal" href="#spyne.decorator.srpc" title="spyne.decorator.srpc"><tt class="xref py py-func docutils literal"><span class="pre">spyne.decorator.srpc()</span></tt></a> for detailed information.</p>
+<p>This decorator enables passing <a class="reference internal" href="base.html#spyne.MethodContext" title="spyne.MethodContext"><tt class="xref py py-class docutils literal"><span class="pre">spyne.MethodContext</span></tt></a> instance as an
+implicit first argument to the user callable.</p>
+</dd></dl>
+
 <dl class="function">
 <dt id="spyne.decorator.srpc">
 <tt class="descclassname">spyne.decorator.</tt><tt class="descname">srpc</tt><big>(</big><em>*params</em>, <em>**kparams</em><big>)</big><a class="reference internal" href="../modules/spyne/decorator.html#srpc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.decorator.srpc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method decorator to tag a method as a remote procedure call.</p>
 <p>The methods tagged with this decorator do not behave like a normal python
 method but return &#8216;MethodDescriptor&#8217; object when called.</p>
+<p>The initial &#8220;s&#8221; stands for &#8220;static&#8221;. In Spyne&#8217;s context, that means no
+implicit first argument is passed to the user callable.</p>
 <p>You should use the <a class="reference internal" href="server.html#spyne.server.null.NullServer" title="spyne.server.null.NullServer"><tt class="xref py py-class docutils literal"><span class="pre">spyne.server.null.NullServer</span></tt></a> transport if you
 want to call the methods directly. You can also use the &#8216;function&#8217; attribute
 of the returned object to call the function itself.</p>
@@ -101,34 +139,6 @@ method with arbitrary metadata.</li>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="service.html"
-                        title="previous chapter">Service Definition</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="model.html"
-                        title="next chapter">Models</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../sources/reference/decorator.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
       <div class="clearer"></div>
     </div>
     <div class="related">
@@ -141,7 +151,7 @@ method with arbitrary metadata.</li>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="model.html" title="Models"
+          <a href="error.html" title="Common Exceptions"
              >next</a> |</li>
         <li class="right" >
           <a href="service.html" title="Service Definition"

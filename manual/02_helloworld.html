@@ -10,7 +10,7 @@
     
     <title>Hello World &mdash; spyne 2.8.0-rc documentation</title>
     
-    <link rel="stylesheet" href="../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -27,8 +27,8 @@
     <script type="text/javascript" src="../static/doctools.js"></script>
     <link rel="top" title="spyne 2.8.0-rc documentation" href="../index.html" />
     <link rel="up" title="Spyne Manual" href="index.html" />
-    <link rel="next" title="User Manager" href="usermanager.html" />
-    <link rel="prev" title="High-Level Introduction to Spyne" href="highlevel.html" /> 
+    <link rel="next" title="User Manager" href="03_usermanager.html" />
+    <link rel="prev" title="High-Level Introduction to Spyne" href="01_highlevel.html" /> 
   </head>
   <body>
     <div class="related">
@@ -41,15 +41,56 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="usermanager.html" title="User Manager"
+          <a href="03_usermanager.html" title="User Manager"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="highlevel.html" title="High-Level Introduction to Spyne"
+          <a href="01_highlevel.html" title="High-Level Introduction to Spyne"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Spyne Manual</a> &raquo;</li> 
       </ul>
-    </div>  
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Hello World</a><ul>
+<li><a class="reference internal" href="#defining-an-spyne-service">Defining an Spyne Service</a></li>
+<li><a class="reference internal" href="#deploying-the-service-using-soap-via-wsgi">Deploying the service using Soap via Wsgi</a></li>
+<li><a class="reference internal" href="#deploying-service-using-httprpc-via-wsgi">Deploying service using HttpRpc via Wsgi</a><ul>
+<li><a class="reference internal" href="#what-s-next">What&#8217;s next?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="01_highlevel.html"
+                        title="previous chapter">High-Level Introduction to Spyne</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="03_usermanager.html"
+                        title="next chapter">User Manager</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../sources/manual/02_helloworld.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -63,54 +104,9 @@ should probably use a full-fledged server when deploying your service for
 production purposes.</p>
 <div class="section" id="defining-an-spyne-service">
 <h2>Defining an Spyne Service<a class="headerlink" href="#defining-an-spyne-service" title="Permalink to this headline">¶</a></h2>
-<p>Here we introduce the fundamental mechanisms the spyne offers to expose your
+<p>Here we introduce the fundamental mechanisms Spyne offers to expose your
 services.</p>
 <p>The simpler version of this example is available here: <a class="reference external" href="http://github.com/arskom/spyne/blob/master/examples/helloworld_soap.py">http://github.com/arskom/spyne/blob/master/examples/helloworld_soap.py</a></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">logging</span>
-
-<span class="kn">from</span> <span class="nn">spyne.application</span> <span class="kn">import</span> <span class="n">Application</span>
-<span class="kn">from</span> <span class="nn">spyne.decorator</span> <span class="kn">import</span> <span class="n">srpc</span>
-<span class="kn">from</span> <span class="nn">spyne.protocol.soap</span> <span class="kn">import</span> <span class="n">Soap11</span>
-<span class="kn">from</span> <span class="nn">spyne.service</span> <span class="kn">import</span> <span class="n">ServiceBase</span>
-<span class="kn">from</span> <span class="nn">spyne.model.complex</span> <span class="kn">import</span> <span class="n">Iterable</span>
-<span class="kn">from</span> <span class="nn">spyne.model.primitive</span> <span class="kn">import</span> <span class="n">Integer</span>
-<span class="kn">from</span> <span class="nn">spyne.model.primitive</span> <span class="kn">import</span> <span class="n">String</span>
-<span class="kn">from</span> <span class="nn">spyne.server.wsgi</span> <span class="kn">import</span> <span class="n">WsgiApplication</span>
-
-<span class="k">class</span> <span class="nc">HelloWorldService</span><span class="p">(</span><span class="n">ServiceBase</span><span class="p">):</span>
-    <span class="nd">@srpc</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">_returns</span><span class="o">=</span><span class="n">Iterable</span><span class="p">(</span><span class="n">String</span><span class="p">))</span>
-    <span class="k">def</span> <span class="nf">say_hello</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">times</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        Docstrings for service methods appear as documentation in the wsdl.</span>
-<span class="sd">        &lt;b&gt;what fun&lt;/b&gt;</span>
-<span class="sd">        @param name the name to say hello to</span>
-<span class="sd">        @param the number of times to say hello</span>
-<span class="sd">        @return the completed array</span>
-<span class="sd">        &#39;&#39;&#39;</span>
-
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">times</span><span class="p">):</span>
-            <span class="k">yield</span> <span class="s">&#39;Hello, </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">name</span>
-
-<span class="k">if</span> <span class="n">__name__</span><span class="o">==</span><span class="s">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">wsgiref.simple_server</span> <span class="kn">import</span> <span class="n">make_server</span>
-    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-        <span class="k">print</span> <span class="s">&quot;Error: example server code requires Python &gt;= 2.5&quot;</span>
-
-    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
-    <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;spyne.protocol.xml&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
-
-    <span class="n">application</span> <span class="o">=</span> <span class="n">Application</span><span class="p">([</span><span class="n">HelloWorldService</span><span class="p">],</span> <span class="s">&#39;spyne.examples.hello.soap&#39;</span><span class="p">,</span>
-                                <span class="n">in_protocol</span><span class="o">=</span><span class="n">Soap11</span><span class="p">(),</span> <span class="n">out_protocol</span><span class="o">=</span><span class="n">Soap11</span><span class="p">())</span>
-
-    <span class="n">server</span> <span class="o">=</span> <span class="n">make_server</span><span class="p">(</span><span class="s">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">7789</span><span class="p">,</span> <span class="n">WsgiApplication</span><span class="p">(</span><span class="n">application</span><span class="p">))</span>
-
-    <span class="k">print</span> <span class="s">&quot;listening to http://127.0.0.1:7789&quot;</span>
-    <span class="k">print</span> <span class="s">&quot;wsdl is at: http://localhost:7789/?wsdl&quot;</span>
-
-    <span class="n">server</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">()</span>
-</pre></div>
-</div>
 <p>Dissecting this example: Application is the glue between one or more service definitions,
 interface and protocol choices.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">spyne.application</span> <span class="kn">import</span> <span class="n">Application</span>
@@ -228,17 +224,17 @@ pure-python soap clients. To learn more visit the project&#8217;s page:
 <p>So here&#8217;s how you can use suds to test your new spyne service:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">suds.client</span> <span class="kn">import</span> <span class="n">Client</span>
 <span class="n">hello_client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s">&#39;http://localhost:7789/?wsdl&#39;</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">hello_client</span><span class="o">.</span><span class="n">service</span><span class="o">.</span><span class="n">say_hello</span><span class="p">(</span><span class="s">&quot;Punk&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">hello_client</span><span class="o">.</span><span class="n">service</span><span class="o">.</span><span class="n">say_hello</span><span class="p">(</span><span class="s">&quot;Dave&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The script&#8217;s output would be as follows:</p>
 <div class="highlight-python"><pre>(stringArray){
     string[] =
-        "Hello, Punk",
-        "Hello, Punk",
-        "Hello, Punk",
-        "Hello, Punk",
-        "Hello, Punk",
+        "Hello, Dave",
+        "Hello, Dave",
+        "Hello, Dave",
+        "Hello, Dave",
+        "Hello, Dave",
     }</pre>
 </div>
 </div>
@@ -246,7 +242,7 @@ pure-python soap clients. To learn more visit the project&#8217;s page:
 <h2>Deploying service using HttpRpc via Wsgi<a class="headerlink" href="#deploying-service-using-httprpc-via-wsgi" title="Permalink to this headline">¶</a></h2>
 <p>This example is available here: <a class="reference external" href="http://github.com/arskom/spyne/blob/master/examples/helloworld_http.py">http://github.com/arskom/spyne/blob/master/examples/helloworld_http.py</a>.</p>
 <p>For the sake of this tutorial, we are going to use HttpRpc as well. HttpRpc is
-a rest-like protocol, but it doesn&#8217;t care about HTTP verbs (yet).</p>
+a Rest-like protocol, but it doesn&#8217;t care about HTTP verbs (yet).</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">spyne.protocol.http</span> <span class="kn">import</span> <span class="n">HttpRpc</span>
 </pre></div>
 </div>
@@ -263,28 +259,28 @@ is the application instantiation line:</p>
 </pre></div>
 </div>
 <p>Here&#8217;s how you can test your service using curl:</p>
-<div class="highlight-python"><pre>curl "http://localhost:7789/say_hello?times=5&amp;name=Punk"</pre>
+<div class="highlight-python"><pre>curl "http://localhost:7789/say_hello?times=5&amp;name=Dave"</pre>
 </div>
 <p>If you have HtmlTidy installed, you can use this command to get a more readable
 output.</p>
-<div class="highlight-python"><pre>curl "http://localhost:7789/say_hello?times=5&amp;name=Punk" | tidy -xml -indent</pre>
+<div class="highlight-python"><pre>curl "http://localhost:7789/say_hello?times=5&amp;name=Dave" | tidy -xml -indent</pre>
 </div>
 <p>The command&#8217;s output would be as follows:</p>
 <div class="highlight-python"><pre>&lt;?xml version='1.0' encoding='utf8'?&gt;
 &lt;ns1:say_helloResponse xmlns:ns1="spyne.examples.hello.http"
 xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/"&gt;
   &lt;ns1:say_helloResult&gt;
-    &lt;ns1:string&gt;Hello, Punk&lt;/ns1:string&gt;
-    &lt;ns1:string&gt;Hello, Punk&lt;/ns1:string&gt;
-    &lt;ns1:string&gt;Hello, Punk&lt;/ns1:string&gt;
-    &lt;ns1:string&gt;Hello, Punk&lt;/ns1:string&gt;
-    &lt;ns1:string&gt;Hello, Punk&lt;/ns1:string&gt;
+    &lt;ns1:string&gt;Hello, Dave&lt;/ns1:string&gt;
+    &lt;ns1:string&gt;Hello, Dave&lt;/ns1:string&gt;
+    &lt;ns1:string&gt;Hello, Dave&lt;/ns1:string&gt;
+    &lt;ns1:string&gt;Hello, Dave&lt;/ns1:string&gt;
+    &lt;ns1:string&gt;Hello, Dave&lt;/ns1:string&gt;
   &lt;/ns1:say_helloResult&gt;
 &lt;/ns1:say_helloResponse&gt;</pre>
 </div>
 <div class="section" id="what-s-next">
 <h3>What&#8217;s next?<a class="headerlink" href="#what-s-next" title="Permalink to this headline">¶</a></h3>
-<p>See the <a class="reference internal" href="usermanager.html#manual-user-manager"><em>User Manager</em></a> tutorial that will walk you through
+<p>See the <a class="reference internal" href="03_usermanager.html#manual-user-manager"><em>User Manager</em></a> tutorial that will walk you through
 defining complex objects and using events.</p>
 </div>
 </div>
@@ -292,47 +288,6 @@ defining complex objects and using events.</p>
 
 
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Hello World</a><ul>
-<li><a class="reference internal" href="#defining-an-spyne-service">Defining an Spyne Service</a></li>
-<li><a class="reference internal" href="#deploying-the-service-using-soap-via-wsgi">Deploying the service using Soap via Wsgi</a></li>
-<li><a class="reference internal" href="#deploying-service-using-httprpc-via-wsgi">Deploying service using HttpRpc via Wsgi</a><ul>
-<li><a class="reference internal" href="#what-s-next">What&#8217;s next?</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="highlevel.html"
-                        title="previous chapter">High-Level Introduction to Spyne</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="usermanager.html"
-                        title="next chapter">User Manager</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../sources/manual/helloworld.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -347,10 +302,10 @@ defining complex objects and using events.</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="usermanager.html" title="User Manager"
+          <a href="03_usermanager.html" title="User Manager"
              >next</a> |</li>
         <li class="right" >
-          <a href="highlevel.html" title="High-Level Introduction to Spyne"
+          <a href="01_highlevel.html" title="High-Level Introduction to Spyne"
              >previous</a> |</li>
         <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
           <li><a href="index.html" >Spyne Manual</a> &raquo;</li> 

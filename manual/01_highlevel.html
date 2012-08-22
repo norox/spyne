@@ -10,7 +10,7 @@
     
     <title>High-Level Introduction to Spyne &mdash; spyne 2.8.0-rc documentation</title>
     
-    <link rel="stylesheet" href="../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../static/doctools.js"></script>
     <link rel="top" title="spyne 2.8.0-rc documentation" href="../index.html" />
     <link rel="up" title="Spyne Manual" href="index.html" />
-    <link rel="next" title="Hello World" href="helloworld.html" />
+    <link rel="next" title="Hello World" href="02_helloworld.html" />
     <link rel="prev" title="Spyne Manual" href="index.html" /> 
   </head>
   <body>
@@ -41,7 +41,7 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="helloworld.html" title="Hello World"
+          <a href="02_helloworld.html" title="Hello World"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="index.html" title="Spyne Manual"
@@ -49,7 +49,48 @@
         <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Spyne Manual</a> &raquo;</li> 
       </ul>
-    </div>  
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">High-Level Introduction to Spyne</a><ul>
+<li><a class="reference internal" href="#concepts">Concepts</a></li>
+<li><a class="reference internal" href="#how-your-code-is-wrapped">How your code is wrapped</a><ul>
+<li><a class="reference internal" href="#in-a-nutshell">In a nutshell</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#what-s-next">What&#8217;s next?</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Spyne Manual</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="02_helloworld.html"
+                        title="next chapter">Hello World</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../sources/manual/01_highlevel.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -69,7 +110,7 @@ that illustrates the following concepts by examples.</p>
 <li><dl class="first docutils">
 <dt><strong>Protocols:</strong></dt>
 <dd><p class="first">Protocols define the rules for transmission of structured data. They are
-children of <a class="reference internal" href="../reference/protocol.html#spyne.protocol._base.ProtocolBase" title="spyne.protocol._base.ProtocolBase"><tt class="xref py py-class docutils literal"><span class="pre">spyne.protocol._base.ProtocolBase</span></tt></a> class. In an MVC
+subclasses of <a class="reference internal" href="../reference/protocol/base.html#spyne.protocol._base.ProtocolBase" title="spyne.protocol._base.ProtocolBase"><tt class="xref py py-class docutils literal"><span class="pre">spyne.protocol._base.ProtocolBase</span></tt></a> class. In an MVC
 world, you would call them &#8220;Views&#8221;.</p>
 <p class="last">For example: Spyne implements a subset of the Soap 1.1 protocol.</p>
 </dd>
@@ -84,7 +125,7 @@ free-form data sections. They are subclasses of either
 <p>For example, Http is used as a transport for Soap, by
 tucking a Soap message in the arbitrary byte-stream part of a Http POST
 request. The same Http is exposed as a protocol via the
-<a class="reference internal" href="../reference/protocol.html#spyne.protocol.http.HttpRpc" title="spyne.protocol.http.HttpRpc"><tt class="xref py py-class docutils literal"><span class="pre">spyne.protocol.http.HttpRpc</span></tt></a>
+<a class="reference internal" href="../reference/protocol/http.html#spyne.protocol.http.HttpRpc" title="spyne.protocol.http.HttpRpc"><tt class="xref py py-class docutils literal"><span class="pre">spyne.protocol.http.HttpRpc</span></tt></a>
 class. One could use Soap as a transport by tucking a protocol message in
 its base64-encoded ByteArray container.</p>
 <p class="last">Transports appear under two packages in Spyne source code:
@@ -98,7 +139,7 @@ its base64-encoded ByteArray container.</p>
 very little amount of serialization logic. They are subclasses of
 <a class="reference internal" href="../reference/model.html#spyne.model._base.ModelBase" title="spyne.model._base.ModelBase"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.ModelBase</span></tt></a>.</p>
 <p class="last">Types like <tt class="docutils literal"><span class="pre">Unicode</span></tt>, <tt class="docutils literal"><span class="pre">Integer</span></tt> or <tt class="docutils literal"><span class="pre">ByteArray</span></tt> are all models. They
-reside in the <a class="reference internal" href="../reference/model.html#module-spyne.model" title="spyne.model"><tt class="xref py py-mod docutils literal"><span class="pre">spyne.model</span></tt></a> package.</p>
+reside in the <tt class="xref py py-mod docutils literal"><span class="pre">spyne.model</span></tt> package.</p>
 </dd>
 </dl>
 </li>
@@ -118,7 +159,7 @@ subclasses of <tt class="xref py py-class docutils literal"><span class="pre">sp
 protocol-specific representations of a serialized Python object.</p>
 <p class="last">They can be anything between an lxml.etree.Element instance to a gzipped
 byte stream. Apis around pickle, simplejson, YaML and the like that serialize
-dynamic hieararchies of <a href="#id1"><span class="problematic" id="id2">`</span></a>dict`s also fall in this category.</p>
+dynamic hieararchies of &#8220;dict&#8221;s also fall in this category.</p>
 </dd>
 </dl>
 </li>
@@ -171,7 +212,7 @@ class, so you can do more general, application-wide customizations like
 exception management.</p>
 <div class="last admonition note">
 <p class="first admonition-title">Note</p>
-<p>You may know that spyne is a generalized version of a soap library.
+<p>You may know that Spyne is a generalized version of a Soap library.
 So inevitably, some artifacts of the Soap world creep in from here and
 there.</p>
 <p>One of those artifacts is the namespace feature of Xml. There are
@@ -188,7 +229,7 @@ application, you can put <tt class="docutils literal"><span class="pre">tns=&quo
 just be done with it.</p>
 <p class="last">Every object in the Spyne world has a name and belongs to a namespace.
 Public functions (and the implicit <a class="reference internal" href="../reference/model.html#spyne.model.complex.ComplexModel" title="spyne.model.complex.ComplexModel"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.complex.ComplexModel</span></tt></a>
-children that are created for the input and output types of the
+subclasses that are created for the input and output types of the
 functions you defined) are forced to be in the tns of the <cite>Application</cite>
 and have whatever you give them as <cite>public_name</cite> in the
 <a class="reference internal" href="../reference/decorator.html#spyne.decorator.srpc" title="spyne.decorator.srpc"><tt class="xref py py-func docutils literal"><span class="pre">spyne.decorator.srpc()</span></tt></a> decorator. Spyne-defined types generally
@@ -205,62 +246,21 @@ by default.</p>
 <p>Your code is inside &#64;rpc-wrapped methods in <cite>ServiceBase</cite> subclasses. The
 <cite>ServiceBase</cite> subclasses in turn are wrapped by an Application instance. The
 <cite>Application</cite> instantiation is used to assign input and output protocols to the
-exposed methods. The <cite>Application</cite> is finally wrapped by a client or server
-transport that takes the responsibility of moving the bits around.</p>
+exposed methods. The <cite>Application</cite> instance is finally wrapped by a client or
+server transport that takes the responsibility of moving the bits around.</p>
 <p>In case you&#8217;d like to read about how <em>exactly</em> your code is wrapped, you can
-refer to the relevant part in the <a class="reference internal" href="t_and_p.html#manual-t-and-p"><em>Implementing Transports and Protocols</em></a> section.</p>
+refer to the relevant part in the <a class="reference internal" href="06_t_and_p.html#manual-t-and-p"><em>Implementing Transports and Protocols</em></a> section.</p>
 </div>
 </div>
 <div class="section" id="what-s-next">
 <h2>What&#8217;s next?<a class="headerlink" href="#what-s-next" title="Permalink to this headline">¶</a></h2>
 <p>Now that you have a general idea about how Spyne is supposed to work, let&#8217;s get
-coding. You can start by <a class="reference internal" href="helloworld.html#manual-helloworld"><em>Hello World</em></a> tutorial right now.</p>
+coding. You can start by <a class="reference internal" href="02_helloworld.html#manual-helloworld"><em>Hello World</em></a> tutorial right now.</p>
 </div>
 </div>
 
 
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">High-Level Introduction to Spyne</a><ul>
-<li><a class="reference internal" href="#concepts">Concepts</a></li>
-<li><a class="reference internal" href="#how-your-code-is-wrapped">How your code is wrapped</a><ul>
-<li><a class="reference internal" href="#in-a-nutshell">In a nutshell</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#what-s-next">What&#8217;s next?</a></li>
-</ul>
-</li>
-</ul>
-
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="index.html"
-                        title="previous chapter">Spyne Manual</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="helloworld.html"
-                        title="next chapter">Hello World</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../sources/manual/highlevel.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -275,7 +275,7 @@ coding. You can start by <a class="reference internal" href="helloworld.html#man
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="helloworld.html" title="Hello World"
+          <a href="02_helloworld.html" title="Hello World"
              >next</a> |</li>
         <li class="right" >
           <a href="index.html" title="Spyne Manual"

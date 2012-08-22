@@ -10,7 +10,7 @@
     
     <title>spyne.protocol.soap.soap11 &mdash; spyne 2.8.0-rc documentation</title>
     
-    <link rel="stylesheet" href="../../../../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../../static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -42,7 +42,24 @@
           <li><a href="../../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../../spyne.html" accesskey="U">spyne</a> &raquo;</li> 
       </ul>
-    </div>  
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -68,8 +85,13 @@
 <span class="c"># Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301</span>
 <span class="c">#</span>
 
-<span class="sd">&quot;&quot;&quot;This module contains the implementation of a subset of the SOAP 1.1 remote</span>
-<span class="sd">procedure call standard.</span>
+<span class="sd">&quot;&quot;&quot;The ``spyne.protoco.soap.soap11`` module contains the implementation of a</span>
+<span class="sd">subset of the Soap 1.1 standard.</span>
+
+<span class="sd">Except the binary optimizations that mostly **do not work**, this protocol is</span>
+<span class="sd">production quality.</span>
+
+<span class="sd">Initially released in soaplib-0.8.0.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">logging</span>
@@ -89,7 +111,10 @@
 <span class="kn">from</span> <span class="nn">spyne.const.ansi_color</span> <span class="kn">import</span> <span class="n">END_COLOR</span>
 <span class="kn">from</span> <span class="nn">spyne.error</span> <span class="kn">import</span> <span class="n">RequestNotAllowed</span>
 <span class="kn">from</span> <span class="nn">spyne.model.fault</span> <span class="kn">import</span> <span class="n">Fault</span>
+<span class="kn">from</span> <span class="nn">spyne.model.primitive</span> <span class="kn">import</span> <span class="n">DateTime</span>
 <span class="kn">from</span> <span class="nn">spyne.protocol.xml</span> <span class="kn">import</span> <span class="n">XmlObject</span>
+<span class="kn">from</span> <span class="nn">spyne.protocol.xml.model</span> <span class="kn">import</span> <span class="n">nillable_value</span>
+<span class="kn">from</span> <span class="nn">spyne.protocol.xml.model</span> <span class="kn">import</span> <span class="n">TBaseFromElement</span>
 <span class="kn">from</span> <span class="nn">spyne.protocol.soap.mime</span> <span class="kn">import</span> <span class="n">collapse_swa</span>
 
 <span class="k">def</span> <span class="nf">_from_soap</span><span class="p">(</span><span class="n">in_envelope_xml</span><span class="p">,</span> <span class="n">xmlids</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
@@ -174,30 +199,42 @@
 
     <span class="k">return</span> <span class="n">element</span>
 
+<span class="nd">@nillable_value</span>
+<span class="k">def</span> <span class="nf">_datetime_to_parent_element</span><span class="p">(</span><span class="n">prot</span><span class="p">,</span> <span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">tns</span><span class="p">,</span> <span class="n">parent_elt</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;retval&#39;</span><span class="p">):</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">parent_elt</span><span class="p">,</span> <span class="s">&#39;{</span><span class="si">%s</span><span class="s">}</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">tns</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+    <span class="n">e</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+
+<span class="n">_datetime_from_element</span> <span class="o">=</span> <span class="n">TBaseFromElement</span><span class="p">(</span><span class="k">lambda</span> <span class="n">cls</span><span class="p">,</span><span class="n">s</span><span class="p">:</span> <span class="n">cls</span><span class="o">.</span><span class="n">default_parse</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+
 <span class="k">class</span> <span class="nc">Soap11</span><span class="p">(</span><span class="n">XmlObject</span><span class="p">):</span>
-<div class="viewcode-block" id="Soap11"><a class="viewcode-back" href="../../../../reference/protocol.html#spyne.protocol.soap.soap11.Soap11">[docs]</a>    <span class="sd">&#39;&#39;&#39;The base implementation of the Soap 1.1 protocol.&#39;&#39;&#39;</span>
+<div class="viewcode-block" id="Soap11"><a class="viewcode-back" href="../../../../reference/protocol/soap.html#spyne.protocol.soap.soap11.Soap11">[docs]</a>    <span class="sd">&quot;&quot;&quot;The base implementation of a subset of the Soap 1.1 standard. The</span>
+<span class="sd">    document is available here: http://www.w3.org/TR/soap11/</span>
+
+<span class="sd">    :param app: A spyne.application.Application instance.</span>
+<span class="sd">    :param validator: The validator to use. Currently the only supported</span>
+<span class="sd">        value is &#39;lxml&#39;</span>
+<span class="sd">    :param wrapped: Whether the return type should be wrapped in another</span>
+<span class="sd">        object. Default is &#39;True&#39;.</span>
+<span class="sd">    :param xml_declaration: Whether to add xml_declaration to the responses</span>
+<span class="sd">        Default is &#39;True&#39;.</span>
+<span class="sd">    :param cleanup_namespaces: Whether to add clean up namespace declarations</span>
+<span class="sd">        in the response document. Default is &#39;False&#39;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">allowed_http_verbs</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;POST&#39;</span><span class="p">]</span>
     <span class="n">mime_type</span> <span class="o">=</span> <span class="s">&#39;text/xml; charset=utf-8&#39;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">validator</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">wrapped</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
                                 <span class="n">xml_declaration</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">cleanup_namespaces</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Soap 1.1 Protocol with validators.</span>
-
-<span class="sd">        :param app: A spyne.application.Application instance.</span>
-<span class="sd">        :param validator: The validator to use. Currently the only supported</span>
-<span class="sd">            value is &#39;lxml&#39;</span>
-<span class="sd">        :param wrapped: Whether the return type should be wrapped in another</span>
-<span class="sd">            object. Default is &#39;True&#39;.</span>
-<span class="sd">        :param xml_declaration: Whether to add xml_declaration to the responses</span>
-<span class="sd">            Default is &#39;True&#39;.</span>
-<span class="sd">        :param cleanup_namespaces: Whether to add clean up namespace declarations</span>
-<span class="sd">            in the response document. Default is &#39;False&#39;.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">XmlObject</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">validator</span><span class="p">,</span> <span class="n">xml_declaration</span><span class="p">,</span>
                                                              <span class="n">cleanup_namespaces</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">__wrapped</span> <span class="o">=</span> <span class="n">wrapped</span>
+
+        <span class="c"># SOAP requires DateTime strings to be in iso format. This function</span>
+        <span class="c"># bypasses datetime formatting via DateTime(format=&quot;...&quot;) string.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">serialization_handlers</span><span class="p">[</span><span class="n">DateTime</span><span class="p">]</span> <span class="o">=</span> <span class="n">_datetime_to_parent_element</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deserialization_handlers</span><span class="p">[</span><span class="n">DateTime</span><span class="p">]</span> <span class="o">=</span> <span class="n">_datetime_from_element</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">wrapped</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -236,7 +273,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">validate_body</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">deserialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
-<div class="viewcode-block" id="Soap11.deserialize"><a class="viewcode-back" href="../../../../reference/protocol.html#spyne.protocol.soap.soap11.Soap11.deserialize">[docs]</a>        <span class="sd">&quot;&quot;&quot;Takes a MethodContext instance and a string containing ONE soap</span>
+<div class="viewcode-block" id="Soap11.deserialize"><a class="viewcode-back" href="../../../../reference/protocol/soap.html#spyne.protocol.soap.soap11.Soap11.deserialize">[docs]</a>        <span class="sd">&quot;&quot;&quot;Takes a MethodContext instance and a string containing ONE soap</span>
 <span class="sd">        message.</span>
 <span class="sd">        Returns the corresponding native python object</span>
 
@@ -284,7 +321,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">event_manager</span><span class="o">.</span><span class="n">fire_event</span><span class="p">(</span><span class="s">&#39;after_deserialize&#39;</span><span class="p">,</span> <span class="n">ctx</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span></div>
-<div class="viewcode-block" id="Soap11.serialize"><a class="viewcode-back" href="../../../../reference/protocol.html#spyne.protocol.soap.soap11.Soap11.serialize">[docs]</a>        <span class="sd">&quot;&quot;&quot;Uses ctx.out_object, ctx.out_header or ctx.out_error to set</span>
+<div class="viewcode-block" id="Soap11.serialize"><a class="viewcode-back" href="../../../../reference/protocol/soap.html#spyne.protocol.soap.soap11.Soap11.serialize">[docs]</a>        <span class="sd">&quot;&quot;&quot;Uses ctx.out_object, ctx.out_header or ctx.out_error to set</span>
 <span class="sd">        ctx.out_body_doc, ctx.out_header_doc and ctx.out_document as an</span>
 <span class="sd">        lxml.etree._Element instance.</span>
 
@@ -395,23 +432,6 @@
 </pre></div></div>
 
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="../../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>

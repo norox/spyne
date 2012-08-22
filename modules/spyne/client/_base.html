@@ -10,7 +10,7 @@
     
     <title>spyne.client._base &mdash; spyne 2.8.0-rc documentation</title>
     
-    <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -42,7 +42,24 @@
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../spyne.html" accesskey="U">spyne</a> &raquo;</li> 
       </ul>
-    </div>  
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -68,7 +85,7 @@
 <span class="c"># Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301</span>
 <span class="c">#</span>
 
-<span class="sd">&quot;&quot;&quot;This module contains the ClientBase class and its helper objects.&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;Contains the ClientBase class and its helper objects.&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">spyne._base</span> <span class="kn">import</span> <span class="n">MethodContext</span>
 <span class="kn">from</span> <span class="nn">spyne.model.primitive</span> <span class="kn">import</span> <span class="n">string_encoding</span>
@@ -119,7 +136,7 @@
 
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Serializes its arguments, sends them, receives and deserializes the</span>
-<span class="sd">        response.&quot;&quot;&quot;</span>
+<span class="sd">        response and returns it.&quot;&quot;&quot;</span>
 
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
 
@@ -207,8 +224,8 @@
 
 
 <span class="k">class</span> <span class="nc">ClientBase</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span></div></div>
-<div class="viewcode-block" id="ClientBase"><a class="viewcode-back" href="../../../reference/client.html#spyne.client._base.ClientBase">[docs]</a>    <span class="sd">&quot;&quot;&quot;The base class for all client applications. ``self.service``</span>
-<span class="sd">    attribute should be initialized in the constructor of the child class.</span>
+<div class="viewcode-block" id="ClientBase"><a class="viewcode-back" href="../../../reference/client.html#spyne.client._base.ClientBase">[docs]</a>    <span class="sd">&quot;&quot;&quot;The base class for all client applications. ``self.service`` attribute</span>
+<span class="sd">    should be initialized in the constructor of the child class.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">app</span><span class="p">):</span>
@@ -232,23 +249,6 @@
 </pre></div></div></div>
 
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
