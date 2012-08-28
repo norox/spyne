@@ -373,19 +373,22 @@ inheritance hierarchy into one dict.</p>
 <dl class="classmethod">
 <dt id="spyne.model.complex.ComplexModelBase.get_serialization_instance">
 <em class="property">classmethod </em><tt class="descname">get_serialization_instance</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="../modules/spyne/model/complex.html#ComplexModelBase.get_serialization_instance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.complex.ComplexModelBase.get_serialization_instance" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
+<dd><p>Returns the native object corresponding to the serialized form passed
+in the <tt class="docutils literal"><span class="pre">value</span></tt> argument.</p>
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> &#8211; This argument can be:</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> &#8211; <p>This argument can be:
+* A list or tuple of native types aligned with cls._type_info.
+* A dict of native types.
+* The native type itself.</p>
+<p>If the value type is not a <tt class="docutils literal"><span class="pre">list</span></tt>, <tt class="docutils literal"><span class="pre">tuple</span></tt> or <tt class="docutils literal"><span class="pre">dict</span></tt>, the
+value is returned untouched.</p>
+</td>
 </tr>
 </tbody>
 </table>
-<ul class="simple">
-<li>A list of native types aligned with cls._type_info.</li>
-<li>A dict of native types</li>
-<li>The native type itself.</li>
-</ul>
 </dd></dl>
 
 <dl class="staticmethod">
@@ -455,6 +458,11 @@ implementation, this is just a marker.</p>
 </div>
 <div class="section" id="enum">
 <h2>Enum<a class="headerlink" href="#enum" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="spyne.model.complex.spyne.model.enum.Enum">
+<tt class="descclassname">spyne.model.enum.</tt><tt class="descname">Enum</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.model.complex.spyne.model.enum.Enum" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
 <div class="section" id="fault">
 <h2>Fault<a class="headerlink" href="#fault" title="Permalink to this headline">¶</a></h2>

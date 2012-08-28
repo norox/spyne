@@ -288,10 +288,16 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">get_serialization_instance</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-<div class="viewcode-block" id="ComplexModelBase.get_serialization_instance"><a class="viewcode-back" href="../../../reference/model.html#spyne.model.complex.ComplexModelBase.get_serialization_instance">[docs]</a>        <span class="sd">&quot;&quot;&quot;:param value: This argument can be:</span>
-<span class="sd">            * A list of native types aligned with cls._type_info.</span>
-<span class="sd">            * A dict of native types</span>
+<div class="viewcode-block" id="ComplexModelBase.get_serialization_instance"><a class="viewcode-back" href="../../../reference/model.html#spyne.model.complex.ComplexModelBase.get_serialization_instance">[docs]</a>        <span class="sd">&quot;&quot;&quot;Returns the native object corresponding to the serialized form passed</span>
+<span class="sd">        in the ``value`` argument.</span>
+
+<span class="sd">        :param value: This argument can be:</span>
+<span class="sd">            * A list or tuple of native types aligned with cls._type_info.</span>
+<span class="sd">            * A dict of native types.</span>
 <span class="sd">            * The native type itself.</span>
+
+<span class="sd">            If the value type is not a ``list``, ``tuple`` or ``dict``, the</span>
+<span class="sd">            value is returned untouched.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c"># if the instance is a list, convert it to a cls instance.</span>
