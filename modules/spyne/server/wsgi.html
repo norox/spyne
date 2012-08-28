@@ -159,7 +159,7 @@
 
 
 <span class="k">class</span> <span class="nc">WsgiApplication</span><span class="p">(</span><span class="n">HttpBase</span><span class="p">):</span></div>
-<div class="viewcode-block" id="WsgiApplication"><a class="viewcode-back" href="../../../reference/server.html#spyne.server.wsgi.WsgiApplication">[docs]</a>    <span class="sd">&#39;&#39;&#39;A `PEP-3333 &lt;http://www.python.org/dev/peps/pep-3333/#preface-for-readers-of-pep-333&gt;`_</span>
+<div class="viewcode-block" id="WsgiApplication"><a class="viewcode-back" href="../../../reference/server.html#spyne.server.wsgi.WsgiApplication">[docs]</a>    <span class="sd">&#39;&#39;&#39;A `PEP-3333 &lt;http://www.python.org/dev/peps/pep-3333&gt;`_</span>
 <span class="sd">    compliant callable class.</span>
 
 <span class="sd">    Supported events:</span>
@@ -179,6 +179,10 @@
 
 <span class="sd">        * ``wsgi_error``</span>
 <span class="sd">            Called right before returning the exception to the client.</span>
+
+<span class="sd">        * ``wsgi_close``</span>
+<span class="sd">            Called after the whole data has been returned to the client. It&#39;s</span>
+<span class="sd">            called both from success and error cases.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">chunked</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
@@ -364,16 +368,17 @@
             <span class="n">start_response</span><span class="p">(</span><span class="n">p_ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">resp_code</span><span class="p">,</span>
                                             <span class="n">p_ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">resp_headers</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
 
-            <span class="n">retval</span> <span class="o">=</span> <span class="n">p_ctx</span><span class="o">.</span><span class="n">out_string</span>
+            <span class="n">retval</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span><span class="n">p_ctx</span><span class="o">.</span><span class="n">out_string</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__finalize</span><span class="p">(</span><span class="n">p_ctx</span><span class="p">))</span>
 
         <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
             <span class="n">retval_iter</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">p_ctx</span><span class="o">.</span><span class="n">out_string</span><span class="p">)</span>
-            <span class="n">retval</span> <span class="o">=</span> <span class="n">retval_iter</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+            <span class="n">first_chunk</span> <span class="o">=</span> <span class="n">retval_iter</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
 
             <span class="n">start_response</span><span class="p">(</span><span class="n">p_ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">resp_code</span><span class="p">,</span>
                                             <span class="n">p_ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">resp_headers</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
 
-            <span class="n">retval</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">([</span><span class="n">retval</span><span class="p">],</span> <span class="n">retval_iter</span><span class="p">)</span>
+            <span class="n">retval</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">([</span><span class="n">first_chunk</span><span class="p">],</span> <span class="n">retval_iter</span><span class="p">,</span>
+                                                        <span class="bp">self</span><span class="o">.</span><span class="n">__finalize</span><span class="p">(</span><span class="n">p_ctx</span><span class="p">))</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="n">process_contexts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">others</span><span class="p">,</span> <span class="n">p_ctx</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
@@ -383,7 +388,13 @@
 
         <span class="k">return</span> <span class="n">retval</span>
 
-    <span class="k">def</span> <span class="nf">__reconstruct_wsgi_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">http_env</span><span class="p">):</span></div>
+    <span class="k">def</span> <span class="nf">__finalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p_ctx</span><span class="p">):</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">event_manager</span><span class="o">.</span><span class="n">fire_event</span><span class="p">(</span><span class="s">&#39;wsgi_close&#39;</span><span class="p">,</span> <span class="n">p_ctx</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">[]</span>
+
+
+    <span class="k">def</span> <span class="nf">__reconstruct_wsgi_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">http_env</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Reconstruct http payload using information in the http header.&quot;&quot;&quot;</span>
 
         <span class="c"># fyi, here&#39;s what the parse_header function returns:</span>

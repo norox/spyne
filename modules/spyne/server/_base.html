@@ -150,6 +150,8 @@
                                         <span class="n">message</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">in_protocol</span><span class="o">.</span><span class="n">REQUEST</span><span class="p">)</span>
 
         <span class="k">except</span> <span class="n">Fault</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
             <span class="n">ctx</span><span class="o">.</span><span class="n">in_object</span> <span class="o">=</span> <span class="bp">None</span>
             <span class="n">ctx</span><span class="o">.</span><span class="n">in_error</span> <span class="o">=</span> <span class="n">e</span>
             <span class="n">ctx</span><span class="o">.</span><span class="n">out_error</span> <span class="o">=</span> <span class="n">e</span>

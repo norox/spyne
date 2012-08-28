@@ -108,7 +108,7 @@
 
 
 <span class="k">def</span> <span class="nf">get_stream_factory</span><span class="p">(</span><span class="nb">dir</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">delete</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">stream_factory</span><span class="p">(</span><span class="n">total_content_length</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">content_type</span><span class="p">,</span>
+<div class="viewcode-block" id="get_stream_factory"><a class="viewcode-back" href="../../../reference/protocol/http.html#spyne.protocol.http.get_stream_factory">[docs]</a>    <span class="k">def</span> <span class="nf">stream_factory</span><span class="p">(</span><span class="n">total_content_length</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">content_type</span><span class="p">,</span>
                                                            <span class="n">content_length</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">total_content_length</span> <span class="o">&gt;=</span> <span class="mi">512</span> <span class="o">*</span> <span class="mi">1024</span> <span class="ow">or</span> <span class="n">delete</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">delete</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
@@ -122,7 +122,7 @@
     <span class="k">return</span> <span class="n">stream_factory</span>
 
 
-<span class="k">class</span> <span class="nc">HttpRpc</span><span class="p">(</span><span class="n">DictObject</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">HttpRpc</span><span class="p">(</span><span class="n">DictObject</span><span class="p">):</span></div>
 <div class="viewcode-block" id="HttpRpc"><a class="viewcode-back" href="../../../reference/protocol/http.html#spyne.protocol.http.HttpRpc">[docs]</a>    <span class="sd">&quot;&quot;&quot;The so-called ReST-ish HttpRpc protocol implementation. It only works</span>
 <span class="sd">    with Http (wsgi and twisted) transports.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -138,39 +138,39 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">tmp_delete_on_close</span> <span class="o">=</span> <span class="n">tmp_delete_on_close</span>
 
     <span class="k">def</span> <span class="nf">get_tmp_delete_on_close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__tmp_delete_on_close</span>
+<div class="viewcode-block" id="HttpRpc.get_tmp_delete_on_close"><a class="viewcode-back" href="../../../reference/protocol/http.html#spyne.protocol.http.HttpRpc.get_tmp_delete_on_close">[docs]</a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__tmp_delete_on_close</span>
 
-    <span class="k">def</span> <span class="nf">set_tmp_delete_on_close</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__tmp_delete_on_close</span> <span class="o">=</span> <span class="n">val</span>
+    <span class="k">def</span> <span class="nf">set_tmp_delete_on_close</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span></div>
+<div class="viewcode-block" id="HttpRpc.set_tmp_delete_on_close"><a class="viewcode-back" href="../../../reference/protocol/http.html#spyne.protocol.http.HttpRpc.set_tmp_delete_on_close">[docs]</a>        <span class="bp">self</span><span class="o">.</span><span class="n">__tmp_delete_on_close</span> <span class="o">=</span> <span class="n">val</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">stream_factory</span> <span class="o">=</span> <span class="n">get_stream_factory</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tmp_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__tmp_delete_on_close</span><span class="p">)</span>
 
-    <span class="n">tmp_delete_on_close</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_tmp_delete_on_close</span><span class="p">,</span> <span class="n">set_tmp_delete_on_close</span><span class="p">)</span>
+    <span class="n">tmp_delete_on_close</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_tmp_delete_on_close</span><span class="p">,</span> <span class="n">set_tmp_delete_on_close</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">set_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">validator</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">validator</span> <span class="o">==</span> <span class="s">&#39;soft&#39;</span> <span class="ow">or</span> <span class="n">validator</span> <span class="ow">is</span> <span class="bp">self</span><span class="o">.</span><span class="n">SOFT_VALIDATION</span><span class="p">:</span>
+<div class="viewcode-block" id="HttpRpc.set_validator"><a class="viewcode-back" href="../../../reference/protocol/http.html#spyne.protocol.http.HttpRpc.set_validator">[docs]</a>        <span class="k">if</span> <span class="n">validator</span> <span class="o">==</span> <span class="s">&#39;soft&#39;</span> <span class="ow">or</span> <span class="n">validator</span> <span class="ow">is</span> <span class="bp">self</span><span class="o">.</span><span class="n">SOFT_VALIDATION</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">validator</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">SOFT_VALIDATION</span>
         <span class="k">elif</span> <span class="n">validator</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">validator</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">validator</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">create_in_document</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">in_string_encoding</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="k">assert</span> <span class="n">ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">&#39;http&#39;</span><span class="p">),</span> \
+    <span class="k">def</span> <span class="nf">create_in_document</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">in_string_encoding</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span></div>
+<div class="viewcode-block" id="HttpRpc.create_in_document"><a class="viewcode-back" href="../../../reference/protocol/http.html#spyne.protocol.http.HttpRpc.create_in_document">[docs]</a>        <span class="k">assert</span> <span class="n">ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">&#39;http&#39;</span><span class="p">),</span> \
             <span class="p">(</span><span class="s">&quot;This protocol only works with an http transport, not: </span><span class="si">%s</span><span class="s">, (in </span><span class="si">%r</span><span class="s">)&quot;</span>
                                           <span class="o">%</span> <span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">transport</span><span class="p">))</span>
 
         <span class="n">ctx</span><span class="o">.</span><span class="n">in_document</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">req</span>
 
-    <span class="k">def</span> <span class="nf">decompose_incoming_envelope</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
-        <span class="k">assert</span> <span class="n">message</span> <span class="o">==</span> <span class="n">DictObject</span><span class="o">.</span><span class="n">REQUEST</span>
+    <span class="k">def</span> <span class="nf">decompose_incoming_envelope</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span></div>
+<div class="viewcode-block" id="HttpRpc.decompose_incoming_envelope"><a class="viewcode-back" href="../../../reference/protocol/http.html#spyne.protocol.http.HttpRpc.decompose_incoming_envelope">[docs]</a>        <span class="k">assert</span> <span class="n">message</span> <span class="o">==</span> <span class="n">DictObject</span><span class="o">.</span><span class="n">REQUEST</span>
 
         <span class="n">ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">itself</span><span class="o">.</span><span class="n">decompose_incoming_envelope</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
 
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\t</span><span class="s">header : </span><span class="si">%r</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">in_header_doc</span><span class="p">))</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\t</span><span class="s">body   : </span><span class="si">%r</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">in_body_doc</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">deserialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
-        <span class="k">assert</span> <span class="n">message</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">REQUEST</span><span class="p">,)</span>
+    <span class="k">def</span> <span class="nf">deserialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span></div>
+<div class="viewcode-block" id="HttpRpc.deserialize"><a class="viewcode-back" href="../../../reference/protocol/http.html#spyne.protocol.http.HttpRpc.deserialize">[docs]</a>        <span class="k">assert</span> <span class="n">message</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">REQUEST</span><span class="p">,)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">event_manager</span><span class="o">.</span><span class="n">fire_event</span><span class="p">(</span><span class="s">&#39;before_deserialize&#39;</span><span class="p">,</span> <span class="n">ctx</span><span class="p">)</span>
 
@@ -183,8 +183,8 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">event_manager</span><span class="o">.</span><span class="n">fire_event</span><span class="p">(</span><span class="s">&#39;after_deserialize&#39;</span><span class="p">,</span> <span class="n">ctx</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
-        <span class="k">assert</span> <span class="n">message</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">RESPONSE</span><span class="p">,)</span>
+    <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span></div>
+<div class="viewcode-block" id="HttpRpc.serialize"><a class="viewcode-back" href="../../../reference/protocol/http.html#spyne.protocol.http.HttpRpc.serialize">[docs]</a>        <span class="k">assert</span> <span class="n">message</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">RESPONSE</span><span class="p">,)</span>
 
         <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">out_error</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">result_message_class</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">descriptor</span><span class="o">.</span><span class="n">out_message</span>
@@ -215,9 +215,9 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">event_manager</span><span class="o">.</span><span class="n">fire_event</span><span class="p">(</span><span class="s">&#39;serialize&#39;</span><span class="p">,</span> <span class="n">ctx</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">create_out_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">out_string_encoding</span><span class="o">=</span><span class="s">&#39;utf8&#39;</span><span class="p">):</span>
-        <span class="n">ctx</span><span class="o">.</span><span class="n">out_string</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">out_document</span>
-</pre></div></div>
+    <span class="k">def</span> <span class="nf">create_out_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">out_string_encoding</span><span class="o">=</span><span class="s">&#39;utf8&#39;</span><span class="p">):</span></div>
+<div class="viewcode-block" id="HttpRpc.create_out_string"><a class="viewcode-back" href="../../../reference/protocol/http.html#spyne.protocol.http.HttpRpc.create_out_string">[docs]</a>        <span class="n">ctx</span><span class="o">.</span><span class="n">out_string</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">out_document</span>
+</pre></div></div></div>
 
           </div>
         </div>

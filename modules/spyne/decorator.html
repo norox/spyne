@@ -227,11 +227,30 @@
 <span class="sd">        accepts as incoming header.</span>
 <span class="sd">    :param _out_header: A type or an iterable of types that that this method</span>
 <span class="sd">        sends as outgoing header.</span>
-<span class="sd">    :param _port_type: SOAP Port type.</span>
+<span class="sd">    :param _in_message_name: The public name of the function.</span>
+<span class="sd">    :param _in_variable_names: The public names of the function arguments. It&#39;s</span>
+<span class="sd">        a dict that maps argument names in the code to public ones.</span>
+<span class="sd">    :param _out_variable_name: The public name of the function response object.</span>
+<span class="sd">        It&#39;s a string. Ignored when ``_body_style != &#39;wrapped&#39;`` or ``_returns``</span>
+<span class="sd">        is a sequence.</span>
+<span class="sd">    :param _out_variable_names: The public name of the function response object.</span>
+<span class="sd">        It&#39;s a sequence of strings. Ignored when ``_body_style != &#39;wrapped&#39;`` or</span>
+<span class="sd">        or ``_returns`` is not a sequence. Must be the same length as</span>
+<span class="sd">        ``_returns``.</span>
+<span class="sd">    :param _body_style: One of ``(&#39;bare&#39;, &#39;wrapped&#39;)``. Default: ``&#39;wrapped&#39;``.</span>
+<span class="sd">        In wrapped mode, wraps response objects in an additional class for</span>
+<span class="sd">        protocols that support it. (e.g. Soap)</span>
+<span class="sd">    :param _soap_body_style: One of (&#39;rpc&#39;, &#39;document&#39;). Default ``&#39;document&#39;``.</span>
+<span class="sd">        ``_soap_body_style=&#39;document&#39;`` is an alias for ``_body_style=&#39;wrapped&#39;``.</span>
+<span class="sd">        ``_soap_body_style=&#39;rpc&#39;`` is an alias for ``_body_style=&#39;bare&#39;``.</span>
+<span class="sd">    :param _port_type: Soap port type string.</span>
 <span class="sd">    :param _no_ctx: Don&#39;t pass implicit ctx object to the user method.</span>
 <span class="sd">    :param _udp: Short for UserDefinedProperties, you can use this to mark the</span>
 <span class="sd">        method with arbitrary metadata.</span>
-<span class="sd">    :param _aux: The auxiliary backend to run this method.</span>
+<span class="sd">    :param _aux: The auxiliary backend to run this method. ``None`` if primary.</span>
+<span class="sd">    :param _throws: A sequence of exceptions that this function can throw. No</span>
+<span class="sd">        real functionality besides publishing this information in interface</span>
+<span class="sd">        documents.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="k">def</span> <span class="nf">explain</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>

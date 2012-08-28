@@ -95,7 +95,67 @@ implementation. This is not exactly Rest.</p>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">spyne.protocol.dictobj.DictObject</span></tt></p>
 <p>The so-called ReST-ish HttpRpc protocol implementation. It only works
 with Http (wsgi and twisted) transports.</p>
+<dl class="attribute">
+<dt id="spyne.protocol.http.HttpRpc.allowed_http_verbs">
+<tt class="descname">allowed_http_verbs</tt><em class="property"> = None</em><a class="headerlink" href="#spyne.protocol.http.HttpRpc.allowed_http_verbs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="spyne.protocol.http.HttpRpc.create_in_document">
+<tt class="descname">create_in_document</tt><big>(</big><em>ctx</em>, <em>in_string_encoding=None</em><big>)</big><a class="reference internal" href="../../modules/spyne/protocol/http.html#HttpRpc.create_in_document"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.protocol.http.HttpRpc.create_in_document" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="spyne.protocol.http.HttpRpc.create_out_string">
+<tt class="descname">create_out_string</tt><big>(</big><em>ctx</em>, <em>out_string_encoding='utf8'</em><big>)</big><a class="reference internal" href="../../modules/spyne/protocol/http.html#HttpRpc.create_out_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.protocol.http.HttpRpc.create_out_string" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="spyne.protocol.http.HttpRpc.decompose_incoming_envelope">
+<tt class="descname">decompose_incoming_envelope</tt><big>(</big><em>ctx</em>, <em>message</em><big>)</big><a class="reference internal" href="../../modules/spyne/protocol/http.html#HttpRpc.decompose_incoming_envelope"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.protocol.http.HttpRpc.decompose_incoming_envelope" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="spyne.protocol.http.HttpRpc.deserialize">
+<tt class="descname">deserialize</tt><big>(</big><em>ctx</em>, <em>message</em><big>)</big><a class="reference internal" href="../../modules/spyne/protocol/http.html#HttpRpc.deserialize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.protocol.http.HttpRpc.deserialize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="spyne.protocol.http.HttpRpc.get_tmp_delete_on_close">
+<tt class="descname">get_tmp_delete_on_close</tt><big>(</big><big>)</big><a class="reference internal" href="../../modules/spyne/protocol/http.html#HttpRpc.get_tmp_delete_on_close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.protocol.http.HttpRpc.get_tmp_delete_on_close" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="spyne.protocol.http.HttpRpc.mime_type">
+<tt class="descname">mime_type</tt><em class="property"> = 'text/plain'</em><a class="headerlink" href="#spyne.protocol.http.HttpRpc.mime_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="spyne.protocol.http.HttpRpc.serialize">
+<tt class="descname">serialize</tt><big>(</big><em>ctx</em>, <em>message</em><big>)</big><a class="reference internal" href="../../modules/spyne/protocol/http.html#HttpRpc.serialize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.protocol.http.HttpRpc.serialize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="spyne.protocol.http.HttpRpc.set_tmp_delete_on_close">
+<tt class="descname">set_tmp_delete_on_close</tt><big>(</big><em>val</em><big>)</big><a class="reference internal" href="../../modules/spyne/protocol/http.html#HttpRpc.set_tmp_delete_on_close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.protocol.http.HttpRpc.set_tmp_delete_on_close" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="spyne.protocol.http.HttpRpc.set_validator">
+<tt class="descname">set_validator</tt><big>(</big><em>validator</em><big>)</big><a class="reference internal" href="../../modules/spyne/protocol/http.html#HttpRpc.set_validator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.protocol.http.HttpRpc.set_validator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="spyne.protocol.http.HttpRpc.tmp_delete_on_close">
+<tt class="descname">tmp_delete_on_close</tt><a class="headerlink" href="#spyne.protocol.http.HttpRpc.tmp_delete_on_close" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
+
+<dl class="function">
+<dt id="spyne.protocol.http.get_stream_factory">
+<tt class="descclassname">spyne.protocol.http.</tt><tt class="descname">get_stream_factory</tt><big>(</big><em>dir=None</em>, <em>delete=True</em><big>)</big><a class="reference internal" href="../../modules/spyne/protocol/http.html#get_stream_factory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.protocol.http.get_stream_factory" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </div>
 

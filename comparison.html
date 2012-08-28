@@ -100,39 +100,36 @@ of information:</p>
 issues as Spyne.</p>
 <p>Discussion thread: <a class="reference external" href="https://answers.launchpad.net/ladon/+question/171664">https://answers.launchpad.net/ladon/+question/171664</a></p>
 <ul>
-<li><dl class="first docutils">
-<dt>Supports JsonWSP protocol, which Spyne does not support.</dt>
-<dd><p class="first last">The main motive for designing JSON-WSP was the need for a JSON-based RPC
-protocol with a service description specification with built-in service /
-method documentation.</p>
-</dd>
-</dl>
+<li><p class="first">Supports JsonWSP protocol, which is JsonRpc with interface description. Spyne
+supports JsonObject which serializes complex object hierarchies as nested
+dict objects.</p>
 </li>
-<li><p class="first">Supports both Python 2 and Python 3.</p>
+<li><p class="first">Supports both Python 2 and Python 3. Spyne is Python 2 only.</p>
 </li>
 <li><p class="first">Auto-generates human-readable API documentation.
 (example: <a class="reference external" href="http://ladonize.org/python-demos/AlbumService">http://ladonize.org/python-demos/AlbumService</a>) In Spyne, you need
 to do with the ugliness of a raw wsdl document.</p>
 </li>
-<li><p class="first">Does not support ZeroMQ.</p>
-</li>
 <li><p class="first">Uses standard python tools for xml parsing which is good for pure-python
 deployments. Spyne uses lxml, due to its excellent xml namespace support and
-speed. So Spyne-based solutions are easier to develop and faster to work with
-but more difficult to deploy.</p>
+speed. So Spyne is faster but more difficult to deploy.</p>
+</li>
+<li><p class="first">Does not support ZeroMQ as transport.</p>
+</li>
+<li><p class="first">Does not support MessagePack.</p>
+</li>
+<li><p class="first">Does not support HttpRpc.</p>
 </li>
 <li><p class="first">Does not do declarative input validation. Traditional (imperative) input
 validation is possible via a code injection mechanism similar to Spyne&#8217;s
 events.</p>
 </li>
-<li><p class="first">Does not support HttpRpc.</p>
-</li>
-<li><dl class="first docutils">
-<dt>Does not have a Soap client.</dt>
-<dd><p class="first last">In fact, Ladon is pure server-side software - the whole idea of supporting a
+<li><p class="first">Does not have a Soap client. Spyne does, but it&#8217;s not that useful as it does
+not parse Wsdl documents.</p>
+<blockquote>
+<div><p>In fact, Ladon is pure server-side software - the whole idea of supporting a
 standard protocol like SOAP is that clients are already out there.</p>
-</dd>
-</dl>
+</div></blockquote>
 </li>
 <li><p class="first">Spyne uses own classes for denoting types, whereas ladon uses Python
 callables. This lets ladon api to be simpler, but gives the Spyne api the
@@ -140,7 +137,7 @@ power to have declarative restrictions on input types.</p>
 </li>
 <li><p class="first">Does not test against ws-i.org deliverables for testing soap compatibility.</p>
 </li>
-<li><p class="first">Does not support parsing and/or modifying protocol &amp; transport headers.</p>
+<li><p class="first">Does not support parsing and/or modifying protocol or transport headers.</p>
 </li>
 </ul>
 </div>

@@ -88,7 +88,7 @@
   <div class="section" id="module-spyne.protocol.json">
 <span id="json"></span><span id="reference-protocol-json"></span><h1>Json<a class="headerlink" href="#module-spyne.protocol.json" title="Permalink to this headline">¶</a></h1>
 <p>The <tt class="docutils literal"><span class="pre">spyne.protocol.json</span></tt> package contains the Json-related protocols.
-Currently, only :class:spyne.protocol.json.JsonObject is supported.</p>
+Currently, only <a class="reference internal" href="#spyne.protocol.json.JsonObject" title="spyne.protocol.json.JsonObject"><tt class="xref py py-class docutils literal"><span class="pre">spyne.protocol.json.JsonObject</span></tt></a> is supported.</p>
 <p>Initially released in 2.8.0-rc.</p>
 <p>This module is EXPERIMENTAL. You may not recognize the code here next time you
 look at it.</p>
@@ -96,12 +96,18 @@ look at it.</p>
 <dt id="spyne.protocol.json.JsonObject">
 <em class="property">class </em><tt class="descclassname">spyne.protocol.json.</tt><tt class="descname">JsonObject</tt><big>(</big><em>app=None</em>, <em>validator=None</em>, <em>mime_type=None</em>, <em>skip_depth=0</em><big>)</big><a class="reference internal" href="../../modules/spyne/protocol/json.html#JsonObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.protocol.json.JsonObject" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">spyne.protocol.dictobj.DictObject</span></tt></p>
-<p>An implementation of the json protocol that uses simplejson or json
-packages.</p>
+<p>An implementation of the json protocol that uses simplejson package when
+available, json package otherwise.</p>
 <dl class="method">
 <dt id="spyne.protocol.json.JsonObject.create_in_document">
 <tt class="descname">create_in_document</tt><big>(</big><em>ctx</em>, <em>in_string_encoding=None</em><big>)</big><a class="reference internal" href="../../modules/spyne/protocol/json.html#JsonObject.create_in_document"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.protocol.json.JsonObject.create_in_document" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets <tt class="docutils literal"><span class="pre">ctx.in_document</span></tt>,  using <tt class="docutils literal"><span class="pre">ctx.in_string</span></tt>.</p>
+<dd><p>Sets <tt class="docutils literal"><span class="pre">ctx.in_document</span></tt>  using <tt class="docutils literal"><span class="pre">ctx.in_string</span></tt>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spyne.protocol.json.JsonObject.create_out_string">
+<tt class="descname">create_out_string</tt><big>(</big><em>ctx</em>, <em>out_string_encoding='utf8'</em><big>)</big><a class="reference internal" href="../../modules/spyne/protocol/json.html#JsonObject.create_out_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.protocol.json.JsonObject.create_out_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets <tt class="docutils literal"><span class="pre">ctx.out_string</span></tt> using <tt class="docutils literal"><span class="pre">ctx.out_document</span></tt>.</p>
 </dd></dl>
 
 </dd></dl>

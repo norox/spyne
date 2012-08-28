@@ -109,37 +109,25 @@ Called before after the serialization operation is attempted.</li>
 Called after the serialization operation is finished.</li>
 </ul>
 <p>The arguments the constructor takes are as follows:</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param app:</th><td class="field-body">The application this protocol belongs to.</td>
-</tr>
-<tr class="field-even field"><th class="field-name" colspan="2">param validator:</th></tr>
-<tr class="field-even field"><td>&nbsp;</td><td class="field-body">The type of validation this protocol should do on
-incoming data.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name" colspan="2">param mime_type:</th></tr>
-<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">The mime_type this protocol should set for transports
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>app</strong> &#8211; The application this protocol belongs to.</li>
+<li><strong>validator</strong> &#8211; The type of validation this protocol should do on
+incoming data.</li>
+<li><strong>mime_type</strong> &#8211; The mime_type this protocol should set for transports
 that support this. This is a quick way to override the mime_type by
-default instead of subclassing the releavant protocol implementation.</td>
-</tr>
-<tr class="field-even field"><th class="field-name" colspan="2">param skip_depth:</th></tr>
-<tr class="field-even field"><td>&nbsp;</td><td class="field-body">Number of wrapper classes to ignore. This is</td>
+default instead of subclassing the releavant protocol implementation.</li>
+<li><strong>skip_depth</strong> &#8211; Number of wrapper classes to ignore. This is
+typically one of (0, 1, 2) but higher numbers may also work for your
+case.</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
-<p>typically one of (0, 1, 2) but higher numbers may also work for your
-case.</p>
-</div></blockquote>
-<dl class="attribute">
-<dt id="spyne.protocol._base.ProtocolBase.app">
-<tt class="descname">app</tt><a class="reference internal" href="../../modules/spyne/protocol/_base.html#ProtocolBase.app"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.protocol._base.ProtocolBase.app" title="Permalink to this definition">¶</a></dt>
-<dd><p>The <a class="reference internal" href="../application.html#spyne.application.Application" title="spyne.application.Application"><tt class="xref py py-class docutils literal"><span class="pre">spyne.application.Application</span></tt></a> instance this protocol
-belongs to.</p>
-</dd></dl>
-
 <dl class="method">
 <dt id="spyne.protocol._base.ProtocolBase.create_in_document">
 <tt class="descname">create_in_document</tt><big>(</big><em>ctx</em>, <em>in_string_encoding=None</em><big>)</big><a class="reference internal" href="../../modules/spyne/protocol/_base.html#ProtocolBase.create_in_document"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.protocol._base.ProtocolBase.create_in_document" title="Permalink to this definition">¶</a></dt>

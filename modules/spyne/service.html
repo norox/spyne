@@ -144,9 +144,12 @@
 
 
 <span class="k">class</span> <span class="nc">ServiceBase</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span></div>
-<div class="viewcode-block" id="ServiceBase"><a class="viewcode-back" href="../../reference/service.html#spyne.service.ServiceBase">[docs]</a>    <span class="sd">&#39;&#39;&#39;This class serves as the base for all service definitions. Subclasses of</span>
-<span class="sd">    this class will use the srpc decorator or its wrappers to flag methods to be</span>
-<span class="sd">    exposed.</span>
+<div class="viewcode-block" id="ServiceBase"><a class="viewcode-back" href="../../reference/service.html#spyne.service.ServiceBase">[docs]</a>    <span class="sd">&#39;&#39;&#39;The ``ServiceBase`` class is the base class for all service definitions.</span>
+
+<span class="sd">    The convention is to have public methods defined under a subclass of this</span>
+<span class="sd">    class along with common properties of public methods like header classes or</span>
+<span class="sd">    auxiliary processors. The :func:`spyne.decorator.srpc` decorator or its</span>
+<span class="sd">    wrappers should be used to flag public methods.</span>
 
 <span class="sd">    It is a natural abstract base class, because it&#39;s of no use without any</span>
 <span class="sd">    method definitions, hence the &#39;Base&#39; suffix in the name.</span>
@@ -186,8 +189,9 @@
     <span class="n">__metaclass__</span> <span class="o">=</span> <span class="n">ServiceBaseMeta</span>
 
     <span class="n">__tns__</span> <span class="o">=</span> <span class="bp">None</span>
-    <span class="sd">&quot;&quot;&quot;For internal use only. You should use the tns argument to the Application</span>
-<span class="sd">    constructor to define the target namespace.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;For internal use only. You should use the ``tns`` argument to the</span>
+<span class="sd">    :class:`spyne.application.Application` constructor to define the target</span>
+<span class="sd">    namespace.&quot;&quot;&quot;</span>
 
     <span class="n">__in_header__</span> <span class="o">=</span> <span class="bp">None</span>
     <span class="sd">&quot;&quot;&quot;The incoming header object that the methods under this service definition</span>

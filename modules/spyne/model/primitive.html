@@ -192,7 +192,7 @@
 
 
 <span class="k">class</span> <span class="nc">Unicode</span><span class="p">(</span><span class="n">SimpleModel</span><span class="p">):</span></div>
-<div class="viewcode-block" id="Unicode"><a class="viewcode-back" href="../../../reference/model.html#spyne.model.primitive.Unicode">[docs]</a>    <span class="sd">&quot;&quot;&quot;The type to represent human-readable data. Its native format is `unicode`.</span>
+<div class="viewcode-block" id="Unicode"><a class="viewcode-back" href="../../../reference/model.html#spyne.model.primitive.Unicode">[docs]</a>    <span class="sd">&quot;&quot;&quot;The type to represent human-readable data. Its native format is `unicode`</span>
 <span class="sd">    or `str` with given encoding.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -206,8 +206,8 @@
         <span class="sd">&quot;&quot;&quot;Minimum length of string. Can be set to any positive integer&quot;&quot;&quot;</span>
 
         <span class="n">max_len</span> <span class="o">=</span> <span class="n">decimal</span><span class="o">.</span><span class="n">Decimal</span><span class="p">(</span><span class="s">&#39;inf&#39;</span><span class="p">)</span>
-        <span class="sd">&quot;&quot;&quot;Maximum length of string. Can be set to ``decimal.Decimal(&#39;inf&#39;)`` to accept</span>
-<span class="sd">        strings of arbitrary length.</span>
+        <span class="sd">&quot;&quot;&quot;Maximum length of string. Can be set to ``decimal.Decimal(&#39;inf&#39;)`` to</span>
+<span class="sd">        accept strings of arbitrary length. Also note</span>
 <span class="sd">        :const:`spyne.server.wsgi.MAX_CONTENT_LENGTH`.&quot;&quot;&quot;</span>
 
         <span class="n">pattern</span> <span class="o">=</span> <span class="bp">None</span>
@@ -218,8 +218,8 @@
         <span class="sd">&quot;&quot;&quot;The encoding of `str` objects this class may have to deal with.&quot;&quot;&quot;</span>
 
         <span class="n">unicode_errors</span> <span class="o">=</span> <span class="s">&#39;strict&#39;</span>
-        <span class="sd">&quot;&quot;&quot;The argument to the ``unicode`` builtin; one of &#39;strict&#39;, &#39;replace&#39; or</span>
-<span class="sd">        &#39;ignore&#39;.&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;The argument to the ``unicode`` builtin; one of &#39;strict&#39;, &#39;replace&#39;</span>
+<span class="sd">        or &#39;ignore&#39;.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span></div>
         <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span>
@@ -295,15 +295,15 @@
         <span class="n">text</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="sd">&quot;&quot;&quot;The text shown in link. This is an object-wide constant.&quot;&quot;&quot;</span>
 
-    <span class="k">class</span> <span class="nc">UriValue</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<div class="viewcode-block" id="AnyUri.UriValue"><a class="viewcode-back" href="../../../reference/model.html#spyne.model.primitive.AnyUri.UriValue">[docs]</a>        <span class="sd">&quot;&quot;&quot;A special object that is just a better way of carrying the</span>
+    <span class="k">class</span> <span class="nc">Value</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="AnyUri.Value"><a class="viewcode-back" href="../../../reference/model.html#spyne.model.primitive.AnyUri.Value">[docs]</a>        <span class="sd">&quot;&quot;&quot;A special object that is just a better way of carrying the</span>
 <span class="sd">        information carried with a link.</span>
 
 <span class="sd">        :param href: The uri string.</span>
 <span class="sd">        :param text: The text data that goes with the link. This is an</span>
 <span class="sd">            `lxml.etree._Element` instance.</span>
 <span class="sd">        :param content: The structured data that goes with the link. This is a</span>
-<span class="sd">        ``str`` or a ``unicode`` instance.</span>
+<span class="sd">            ``str`` or a ``unicode`` instance.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">href</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
@@ -387,7 +387,7 @@
             <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
 
 <span class="k">class</span> <span class="nc">Double</span><span class="p">(</span><span class="n">Decimal</span><span class="p">):</span></div>
-<div class="viewcode-block" id="Double"><a class="viewcode-back" href="../../../reference/model.html#spyne.model.primitive.Double">[docs]</a>    <span class="sd">&quot;&quot;&quot;This is serialized as the python float. So this type comes with its</span>
+<div class="viewcode-block" id="Double"><a class="viewcode-back" href="../../../reference/model.html#spyne.model.primitive.Double">[docs]</a>    <span class="sd">&quot;&quot;&quot;This is serialized as the python ``float``. So this type comes with its</span>
 <span class="sd">     gotchas.&quot;&quot;&quot;</span>
 
     <span class="n">__type_name__</span> <span class="o">=</span> <span class="s">&#39;double&#39;</span>
@@ -410,7 +410,7 @@
             <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
 
 <span class="k">class</span> <span class="nc">Float</span><span class="p">(</span><span class="n">Double</span><span class="p">):</span></div>
-<div class="viewcode-block" id="Float"><a class="viewcode-back" href="../../../reference/model.html#spyne.model.primitive.Float">[docs]</a>    <span class="sd">&quot;&quot;&quot;Synonym for Double. This is here for compatibility purposes.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Float"><a class="viewcode-back" href="../../../reference/model.html#spyne.model.primitive.Float">[docs]</a>    <span class="sd">&quot;&quot;&quot;Synonym for Double. It&#39;s here for compatibility reasons.&quot;&quot;&quot;</span>
 
     <span class="n">__type_name__</span> <span class="o">=</span> <span class="s">&#39;float&#39;</span>
 
@@ -642,7 +642,6 @@
 
         <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">match</span><span class="p">)</span>
 
-
     <span class="nd">@classmethod</span>
     <span class="nd">@nillable_string</span>
     <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
@@ -656,7 +655,7 @@
 
 
 <span class="k">class</span> <span class="nc">Date</span><span class="p">(</span><span class="n">DateTime</span><span class="p">):</span></div>
-<div class="viewcode-block" id="Date"><a class="viewcode-back" href="../../../reference/model.html#spyne.model.primitive.Date">[docs]</a>    <span class="sd">&quot;&quot;&quot;Just that, Date. It also supports time zones.</span>
+<div class="viewcode-block" id="Date"><a class="viewcode-back" href="../../../reference/model.html#spyne.model.primitive.Date">[docs]</a>    <span class="sd">&quot;&quot;&quot;Just that, Date. No time zone support.</span>
 
 <span class="sd">    Native type is :class:`datetime.date`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -667,10 +666,22 @@
     <span class="n">__type_name__</span> <span class="o">=</span> <span class="s">&#39;date&#39;</span>
 
     <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">default_parse</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="s">&#39;%Y-%m-</span><span class="si">%d</span><span class="s">&#39;</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
     <span class="nd">@nillable_string</span>
     <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
-        <span class="n">d</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">day</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">day</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
 
 
 <span class="c"># this object tries to follow ISO 8601 standard.</span>

@@ -50,11 +50,7 @@
   <ul>
 <li><a class="reference internal" href="#">History and Future</a><ul>
 <li><a class="reference internal" href="#versioning">Versioning</a></li>
-<li><a class="reference internal" href="#roadmap-and-criticism">Roadmap and Criticism</a><ul>
-<li><a class="reference internal" href="#serializer-support">Serializer Support</a></li>
-<li><a class="reference internal" href="#miscellanous">Miscellanous</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#roadmap-and-criticism">Roadmap and Criticism</a></li>
 <li><a class="reference internal" href="#comparison-with-other-rpc-frameworks">Comparison with other rpc frameworks</a><ul>
 <li><a class="reference internal" href="#ladon">Ladon</a></li>
 <li><a class="reference internal" href="#wsme">WSME</a></li>
@@ -179,43 +175,19 @@ clearly denote experimental code in its documentation.</p>
 </div>
 <div class="section" id="roadmap-and-criticism">
 <h2>Roadmap and Criticism<a class="headerlink" href="#roadmap-and-criticism" title="Permalink to this headline">¶</a></h2>
-<p>This is an attempt to make a free-for-all area to display opinions about the
-feature direction of spyne. Doing it in a text file in the source repository
-may not be the best approach for the job, but it should be enough to at least
-spark a discussion around this topic.</p>
-<p>So the following is missing in Spyne:</p>
-<div class="section" id="serializer-support">
-<h3>Serializer Support<a class="headerlink" href="#serializer-support" title="Permalink to this headline">¶</a></h3>
-<p>See the <a class="reference internal" href="manual/01_highlevel.html#manual-highlevel"><em>High-Level Introduction to Spyne</em></a> section for a small introductory paragraph about
-serializers.</p>
-<p>Currently, serializers are not distinguished in the spyne source code. Making
-them pluggable would make it easy to share code between protocols.</p>
-<p>An initial attempt to make them pluggable would result in the lxml dependency
-for Soap being relaxed, which would make it possible to deploy spyne in
-pure-python environments. However, this is comparatively easy to do, given
-the fact that the ElementTree api is a well-known de-facto standard in the
-Python world.</p>
-<p>Adding other serializers like json to the mix would certainly be a nice
-exercise in oo interface design, but this may be a solution in search of a
-problem. Would anybody be interested using Soap over Json instead of Xml?
-Probably not :)</p>
-<p>It would, however, help newer serialization formats by reusing code from their
-more mature cousins. E.g. Xml already has a well-defined security protocol
-(XmlSec). If the serializer is abstracted away (and if somebody actually
-implements XmlSec in spyne) it could be easier to port security code from
-XmlObject to JsonObject.</p>
-</div>
-<div class="section" id="miscellanous">
-<h3>Miscellanous<a class="headerlink" href="#miscellanous" title="Permalink to this headline">¶</a></h3>
+<p>This is an attempt to make a free-for-all area to display opinions about
+possible feature directions of Spyne. Doing it in a text file in the source
+repository may not be the best approach for the job, but it should be enough to
+at least spark a discussion around this topic.</p>
 <p>The following would definitely be nice to have, but are just modules that should
-not cause a change in unrelated areas of spyne. Those would increment the minor
-version number of the Spyne version once implemented.</p>
+not cause a change in unrelated areas of Spyne.</p>
 <ul class="simple">
 <li>Support for polymorphism in XML Schema.</li>
 <li>Support for the JsonRpc protocol.</li>
 <li>Support for the JsonSchema interface document standard.</li>
 <li>Support for the Thrift binary protocol.</li>
 <li>Support for the Thrift IDL &#8211; The Thrift Interface Definition Language.</li>
+<li>Support for the MessagePack IDL.</li>
 <li>Support for the XmlRpc standard.</li>
 <li>Support for EXI &#8211; The Efficient Xml Interchange as a serializer.</li>
 <li>SMTP as client/server transport.</li>
@@ -223,10 +195,11 @@ version number of the Spyne version once implemented.</p>
 <li>Support security extensions to Soap (maybe using <a class="reference external" href="http://pypi.python.org/pypi/PyXMLSec/0.3.0">PyXMLSec</a> ?)</li>
 <li>Support addressing (routing) extensions to Soap</li>
 <li>Add WSDL Parsing support to Soap client.</li>
+<li>Implement Soap 1.2 standard.</li>
+<li>Implement Wsdl 2.0 standard.</li>
 <li>Reflect transport and protocol pairs other than Soap/Http to the Wsdl.</li>
 <li>etc.</li>
 </ul>
-</div>
 </div>
 <div class="section" id="comparison-with-other-rpc-frameworks">
 <span id="manual-comparison"></span><h2>Comparison with other rpc frameworks<a class="headerlink" href="#comparison-with-other-rpc-frameworks" title="Permalink to this headline">¶</a></h2>
@@ -244,39 +217,36 @@ of information:</p>
 issues as Spyne.</p>
 <p>Discussion thread: <a class="reference external" href="https://answers.launchpad.net/ladon/+question/171664">https://answers.launchpad.net/ladon/+question/171664</a></p>
 <ul>
-<li><dl class="first docutils">
-<dt>Supports JsonWSP protocol, which Spyne does not support.</dt>
-<dd><p class="first last">The main motive for designing JSON-WSP was the need for a JSON-based RPC
-protocol with a service description specification with built-in service /
-method documentation.</p>
-</dd>
-</dl>
+<li><p class="first">Supports JsonWSP protocol, which is JsonRpc with interface description. Spyne
+supports JsonObject which serializes complex object hierarchies as nested
+dict objects.</p>
 </li>
-<li><p class="first">Supports both Python 2 and Python 3.</p>
+<li><p class="first">Supports both Python 2 and Python 3. Spyne is Python 2 only.</p>
 </li>
 <li><p class="first">Auto-generates human-readable API documentation.
 (example: <a class="reference external" href="http://ladonize.org/python-demos/AlbumService">http://ladonize.org/python-demos/AlbumService</a>) In Spyne, you need
 to do with the ugliness of a raw wsdl document.</p>
 </li>
-<li><p class="first">Does not support ZeroMQ.</p>
-</li>
 <li><p class="first">Uses standard python tools for xml parsing which is good for pure-python
 deployments. Spyne uses lxml, due to its excellent xml namespace support and
-speed. So Spyne-based solutions are easier to develop and faster to work with
-but more difficult to deploy.</p>
+speed. So Spyne is faster but more difficult to deploy.</p>
+</li>
+<li><p class="first">Does not support ZeroMQ as transport.</p>
+</li>
+<li><p class="first">Does not support MessagePack.</p>
+</li>
+<li><p class="first">Does not support HttpRpc.</p>
 </li>
 <li><p class="first">Does not do declarative input validation. Traditional (imperative) input
 validation is possible via a code injection mechanism similar to Spyne&#8217;s
 events.</p>
 </li>
-<li><p class="first">Does not support HttpRpc.</p>
-</li>
-<li><dl class="first docutils">
-<dt>Does not have a Soap client.</dt>
-<dd><p class="first last">In fact, Ladon is pure server-side software - the whole idea of supporting a
+<li><p class="first">Does not have a Soap client. Spyne does, but it&#8217;s not that useful as it does
+not parse Wsdl documents.</p>
+<blockquote>
+<div><p>In fact, Ladon is pure server-side software - the whole idea of supporting a
 standard protocol like SOAP is that clients are already out there.</p>
-</dd>
-</dl>
+</div></blockquote>
 </li>
 <li><p class="first">Spyne uses own classes for denoting types, whereas ladon uses Python
 callables. This lets ladon api to be simpler, but gives the Spyne api the
@@ -284,7 +254,7 @@ power to have declarative restrictions on input types.</p>
 </li>
 <li><p class="first">Does not test against ws-i.org deliverables for testing soap compatibility.</p>
 </li>
-<li><p class="first">Does not support parsing and/or modifying protocol &amp; transport headers.</p>
+<li><p class="first">Does not support parsing and/or modifying protocol or transport headers.</p>
 </li>
 </ul>
 </div>

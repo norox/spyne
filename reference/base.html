@@ -204,7 +204,7 @@ by the remote procedure call.</p>
 <dl class="docutils">
 <dt>It&#8217;s always a sequence of objects:</dt>
 <dd><ul class="first last simple">
-<li>[None] when the function has no output (client)/input (server)
+<li><tt class="docutils literal"><span class="pre">[None]</span></tt> when the function has no output (client)/input (server)
 types.</li>
 <li>A single-element list that wraps the return value when the
 function has one return type defined,</li>
@@ -220,7 +220,7 @@ one return value.</li>
 <dl class="attribute">
 <dt id="spyne.MethodContext.in_string">
 <tt class="descname">in_string</tt><em class="property"> = None</em><a class="headerlink" href="#spyne.MethodContext.in_string" title="Permalink to this definition">¶</a></dt>
-<dd><p>Incoming bytestream as iterable of <tt class="docutils literal"><span class="pre">str</span></tt> or <tt class="docutils literal"><span class="pre">bytes</span></tt> instances.</p>
+<dd><p>Incoming bytestream as a sequence of <tt class="docutils literal"><span class="pre">str</span></tt> or <tt class="docutils literal"><span class="pre">bytes</span></tt> instances.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -279,14 +279,14 @@ class.</p>
 <dl class="attribute">
 <dt id="spyne.MethodContext.out_object">
 <tt class="descname">out_object</tt><em class="property"> = None</em><a class="headerlink" href="#spyne.MethodContext.out_object" title="Permalink to this definition">¶</a></dt>
-<dd><p>In the request (i.e. server) case, this contains the native python
+<dd><p>In the response (i.e. server) case, this contains the native python
 object(s) returned by the function in the service definition class.
-In the response (i.e. client) case, this contains the function arguments
+In the request (i.e. client) case, this contains the function arguments
 passed to the function call wrapper.</p>
 <dl class="docutils">
-<dt>It&#8217;s always an sequence of objects:</dt>
+<dt>It&#8217;s always a sequence of objects:</dt>
 <dd><ul class="first last simple">
-<li>[None] when the function has no output (server)/input (client)
+<li><tt class="docutils literal"><span class="pre">[None]</span></tt> when the function has no output (server)/input (client)
 types.</li>
 <li>A single-element list that wraps the return value when the
 function has one return type defined,</li>
@@ -302,7 +302,7 @@ one return value.</li>
 <dl class="attribute">
 <dt id="spyne.MethodContext.out_string">
 <tt class="descname">out_string</tt><em class="property"> = None</em><a class="headerlink" href="#spyne.MethodContext.out_string" title="Permalink to this definition">¶</a></dt>
-<dd><p>Outgoing bytestream (i.e. an iterable of strings)</p>
+<dd><p>Outgoing bytestream (i.e. a sequence of strings)</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -438,10 +438,13 @@ decorator.</p>
 </div>
 <div class="section" id="eventmanager">
 <span id="reference-eventmanager"></span><h2>EventManager<a class="headerlink" href="#eventmanager" title="Permalink to this headline">¶</a></h2>
-<p>Spyne supports a simple event system that can be used to have repetitive
-boilerplate code that has to run for every method call nicely tucked away in one
-or more event handlers. The popular use-cases include tasks like database
-transaction management, logging and measuring performance.</p>
+<dl class="class">
+<dt id="spyne.EventManager">
+<em class="property">class </em><tt class="descclassname">spyne.</tt><tt class="descname">EventManager</tt><big>(</big><em>parent</em>, <em>handlers={}</em><big>)</big><a class="headerlink" href="#spyne.EventManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Spyne supports a simple event system that can be used to have repetitive
+boiler plate code that has to run for every method call nicely tucked away
+in one or more event handlers. The popular use-cases include things like
+database transaction management, logging and measuring performance.</p>
 <p>Various Spyne components support firing events at various stages during the
 processing of the request, which are documented in the relevant classes.</p>
 <dl class="docutils">
@@ -454,13 +457,9 @@ processing of the request, which are documented in the relevant classes.</p>
 </ul>
 </dd>
 </dl>
-<dl class="class">
-<dt id="spyne.EventManager">
-<em class="property">class </em><tt class="descclassname">spyne.</tt><tt class="descname">EventManager</tt><big>(</big><em>parent</em>, <em>handlers={}</em><big>)</big><a class="headerlink" href="#spyne.EventManager" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>The event manager for all spyne events. The events are stored in an
-ordered set &#8211; so the events are ran in the order they were added and
-adding a handler twice does not cause it to run twice.</p>
+<p>The events are stored in an ordered set. This means that the events are ran
+in the order they were added and adding a handler twice does not cause it to
+run twice.</p>
 <dl class="method">
 <dt id="spyne.EventManager.add_listener">
 <tt class="descname">add_listener</tt><big>(</big><em>event_name</em>, <em>handler</em><big>)</big><a class="headerlink" href="#spyne.EventManager.add_listener" title="Permalink to this definition">¶</a></dt>

@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../static/doctools.js"></script>
     <link rel="top" title="spyne 2.8.0-rc documentation" href="../index.html" />
     <link rel="up" title="Spyne API Reference" href="index.html" />
-    <link rel="next" title="Common Exceptions" href="error.html" />
+    <link rel="next" title="Models" href="model.html" />
     <link rel="prev" title="Service Definition" href="service.html" /> 
   </head>
   <body>
@@ -41,7 +41,7 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="error.html" title="Common Exceptions"
+          <a href="model.html" title="Models"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="service.html" title="Service Definition"
@@ -56,8 +56,8 @@
   <p class="topless"><a href="service.html"
                         title="previous chapter">Service Definition</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="error.html"
-                        title="next chapter">Common Exceptions</a></p>
+  <p class="topless"><a href="model.html"
+                        title="next chapter">Models</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../sources/reference/decorator.txt"
@@ -121,11 +121,30 @@ of the returned object to call the function itself.</p>
 accepts as incoming header.</li>
 <li><strong>_out_header</strong> &#8211; A type or an iterable of types that that this method
 sends as outgoing header.</li>
-<li><strong>_port_type</strong> &#8211; SOAP Port type.</li>
+<li><strong>_in_message_name</strong> &#8211; The public name of the function.</li>
+<li><strong>_in_variable_names</strong> &#8211; The public names of the function arguments. It&#8217;s
+a dict that maps argument names in the code to public ones.</li>
+<li><strong>_out_variable_name</strong> &#8211; The public name of the function response object.
+It&#8217;s a string. Ignored when <tt class="docutils literal"><span class="pre">_body_style</span> <span class="pre">!=</span> <span class="pre">'wrapped'</span></tt> or <tt class="docutils literal"><span class="pre">_returns</span></tt>
+is a sequence.</li>
+<li><strong>_out_variable_names</strong> &#8211; The public name of the function response object.
+It&#8217;s a sequence of strings. Ignored when <tt class="docutils literal"><span class="pre">_body_style</span> <span class="pre">!=</span> <span class="pre">'wrapped'</span></tt> or
+or <tt class="docutils literal"><span class="pre">_returns</span></tt> is not a sequence. Must be the same length as
+<tt class="docutils literal"><span class="pre">_returns</span></tt>.</li>
+<li><strong>_body_style</strong> &#8211; One of <tt class="docutils literal"><span class="pre">('bare',</span> <span class="pre">'wrapped')</span></tt>. Default: <tt class="docutils literal"><span class="pre">'wrapped'</span></tt>.
+In wrapped mode, wraps response objects in an additional class for
+protocols that support it. (e.g. Soap)</li>
+<li><strong>_soap_body_style</strong> &#8211; One of (&#8216;rpc&#8217;, &#8216;document&#8217;). Default <tt class="docutils literal"><span class="pre">'document'</span></tt>.
+<tt class="docutils literal"><span class="pre">_soap_body_style='document'</span></tt> is an alias for <tt class="docutils literal"><span class="pre">_body_style='wrapped'</span></tt>.
+<tt class="docutils literal"><span class="pre">_soap_body_style='rpc'</span></tt> is an alias for <tt class="docutils literal"><span class="pre">_body_style='bare'</span></tt>.</li>
+<li><strong>_port_type</strong> &#8211; Soap port type string.</li>
 <li><strong>_no_ctx</strong> &#8211; Don&#8217;t pass implicit ctx object to the user method.</li>
 <li><strong>_udp</strong> &#8211; Short for UserDefinedProperties, you can use this to mark the
 method with arbitrary metadata.</li>
-<li><strong>_aux</strong> &#8211; The auxiliary backend to run this method.</li>
+<li><strong>_aux</strong> &#8211; The auxiliary backend to run this method. <tt class="docutils literal"><span class="pre">None</span></tt> if primary.</li>
+<li><strong>_throws</strong> &#8211; A sequence of exceptions that this function can throw. No
+real functionality besides publishing this information in interface
+documents.</li>
 </ul>
 </td>
 </tr>
@@ -151,7 +170,7 @@ method with arbitrary metadata.</li>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="error.html" title="Common Exceptions"
+          <a href="model.html" title="Models"
              >next</a> |</li>
         <li class="right" >
           <a href="service.html" title="Service Definition"

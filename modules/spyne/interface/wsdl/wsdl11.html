@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../../../static/underscore.js"></script>
     <script type="text/javascript" src="../../../../static/doctools.js"></script>
     <link rel="top" title="spyne 2.8.0-rc documentation" href="../../../../index.html" />
-    <link rel="up" title="spyne" href="../../../spyne.html" /> 
+    <link rel="up" title="spyne.interface" href="../../interface.html" /> 
   </head>
   <body>
     <div class="related">
@@ -40,7 +40,8 @@
              >modules</a> |</li>
         <li><a href="../../../../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
           <li><a href="../../../index.html" >Module code</a> &raquo;</li>
-          <li><a href="../../../spyne.html" accesskey="U">spyne</a> &raquo;</li> 
+          <li><a href="../../../spyne.html" >spyne</a> &raquo;</li>
+          <li><a href="../../interface.html" accesskey="U">spyne.interface</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar">
@@ -192,13 +193,15 @@
     <span class="k">return</span> <span class="n">cb_port_type</span>
 
 <span class="k">class</span> <span class="nc">Wsdl11</span><span class="p">(</span><span class="n">XmlSchema</span><span class="p">):</span>
-<div class="viewcode-block" id="Wsdl11"><a class="viewcode-back" href="../../../../reference/interface.html#spyne.interface.wsdl.wsdl11.Wsdl11">[docs]</a>    <span class="sd">&quot;&quot;&quot;The implementation of the Wsdl 1.1 interface definition document standard.</span>
+<div class="viewcode-block" id="Wsdl11"><a class="viewcode-back" href="../../../../reference/interface.html#spyne.interface.wsdl.wsdl11.Wsdl11">[docs]</a>    <span class="sd">&quot;&quot;&quot;The implementation of the Wsdl 1.1 interface definition document</span>
+<span class="sd">    standard which is avaible here: http://www.w3.org/TR/wsdl</span>
 
 <span class="sd">    :param app: The parent application.</span>
-<span class="sd">    :param import_base_namespaces: Include imports for base namespaces like</span>
-<span class="sd">        xsd, xsi, wsdl, etc.</span>
 <span class="sd">    :param _with_partnerlink: Include the partnerLink tag in the wsdl.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c">#:param import_base_namespaces: Include imports for base namespaces like</span>
+    <span class="c">#    xsd, xsi, wsdl, etc.</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interface</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">_with_partnerlink</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="n">XmlSchema</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interface</span><span class="p">)</span>
@@ -624,7 +627,8 @@
              >modules</a> |</li>
         <li><a href="../../../../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
           <li><a href="../../../index.html" >Module code</a> &raquo;</li>
-          <li><a href="../../../spyne.html" >spyne</a> &raquo;</li> 
+          <li><a href="../../../spyne.html" >spyne</a> &raquo;</li>
+          <li><a href="../../interface.html" >spyne.interface</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

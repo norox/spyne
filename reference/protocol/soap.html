@@ -117,6 +117,21 @@ in the response document. Default is &#8216;False&#8217;.</li>
 </tr>
 </tbody>
 </table>
+<dl class="attribute">
+<dt id="spyne.protocol.soap.soap11.Soap11.allowed_http_verbs">
+<tt class="descname">allowed_http_verbs</tt><em class="property"> = ['POST']</em><a class="headerlink" href="#spyne.protocol.soap.soap11.Soap11.allowed_http_verbs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="spyne.protocol.soap.soap11.Soap11.create_in_document">
+<tt class="descname">create_in_document</tt><big>(</big><em>ctx</em>, <em>charset=None</em><big>)</big><a class="reference internal" href="../../modules/spyne/protocol/soap/soap11.html#Soap11.create_in_document"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.protocol.soap.soap11.Soap11.create_in_document" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="spyne.protocol.soap.soap11.Soap11.decompose_incoming_envelope">
+<tt class="descname">decompose_incoming_envelope</tt><big>(</big><em>ctx</em>, <em>message=&lt;class 'spyne.protocol._base.Request'&gt;</em><big>)</big><a class="reference internal" href="../../modules/spyne/protocol/soap/soap11.html#Soap11.decompose_incoming_envelope"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.protocol.soap.soap11.Soap11.decompose_incoming_envelope" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="spyne.protocol.soap.soap11.Soap11.deserialize">
 <tt class="descname">deserialize</tt><big>(</big><em>ctx</em>, <em>message</em><big>)</big><a class="reference internal" href="../../modules/spyne/protocol/soap/soap11.html#Soap11.deserialize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.protocol.soap.soap11.Soap11.deserialize" title="Permalink to this definition">¶</a></dt>
@@ -127,6 +142,16 @@ Returns the corresponding native python object</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="spyne.protocol.soap.soap11.Soap11.fault_to_http_response_code">
+<tt class="descname">fault_to_http_response_code</tt><big>(</big><em>fault</em><big>)</big><a class="reference internal" href="../../modules/spyne/protocol/soap/soap11.html#Soap11.fault_to_http_response_code"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.protocol.soap.soap11.Soap11.fault_to_http_response_code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="spyne.protocol.soap.soap11.Soap11.mime_type">
+<tt class="descname">mime_type</tt><em class="property"> = 'text/xml; charset=utf-8'</em><a class="headerlink" href="#spyne.protocol.soap.soap11.Soap11.mime_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="spyne.protocol.soap.soap11.Soap11.serialize">
 <tt class="descname">serialize</tt><big>(</big><em>ctx</em>, <em>message</em><big>)</big><a class="reference internal" href="../../modules/spyne/protocol/soap/soap11.html#Soap11.serialize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.protocol.soap.soap11.Soap11.serialize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Uses ctx.out_object, ctx.out_header or ctx.out_error to set
@@ -135,7 +160,17 @@ lxml.etree._Element instance.</p>
 <p>Not meant to be overridden.</p>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="spyne.protocol.soap.soap11.Soap11.wrapped">
+<tt class="descname">wrapped</tt><a class="reference internal" href="../../modules/spyne/protocol/soap/soap11.html#Soap11.wrapped"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.protocol.soap.soap11.Soap11.wrapped" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
+
+<dl class="function">
+<dt id="spyne.protocol.soap.soap11.resolve_hrefs">
+<tt class="descclassname">spyne.protocol.soap.soap11.</tt><tt class="descname">resolve_hrefs</tt><big>(</big><em>element</em>, <em>xmlids</em><big>)</big><a class="reference internal" href="../../modules/spyne/protocol/soap/soap11.html#resolve_hrefs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.protocol.soap.soap11.resolve_hrefs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </div>
 

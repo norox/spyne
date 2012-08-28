@@ -89,9 +89,11 @@
 <dl class="class">
 <dt id="spyne.service.ServiceBase">
 <em class="property">class </em><tt class="descclassname">spyne.service.</tt><tt class="descname">ServiceBase</tt><a class="reference internal" href="../modules/spyne/service.html#ServiceBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.service.ServiceBase" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class serves as the base for all service definitions. Subclasses of
-this class will use the srpc decorator or its wrappers to flag methods to be
-exposed.</p>
+<dd><p>The <tt class="docutils literal"><span class="pre">ServiceBase</span></tt> class is the base class for all service definitions.</p>
+<p>The convention is to have public methods defined under a subclass of this
+class along with common properties of public methods like header classes or
+auxiliary processors. The <a class="reference internal" href="decorator.html#spyne.decorator.srpc" title="spyne.decorator.srpc"><tt class="xref py py-func docutils literal"><span class="pre">spyne.decorator.srpc()</span></tt></a> decorator or its
+wrappers should be used to flag public methods.</p>
 <p>It is a natural abstract base class, because it&#8217;s of no use without any
 method definitions, hence the &#8216;Base&#8217; suffix in the name.</p>
 <dl class="docutils">

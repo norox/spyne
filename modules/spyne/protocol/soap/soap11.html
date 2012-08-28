@@ -175,7 +175,7 @@
 <span class="c"># see http://www.w3.org/TR/2000/NOTE-SOAP-20000508/</span>
 <span class="c"># section 5.2.1 for an example of how the id and href attributes are used.</span>
 <span class="k">def</span> <span class="nf">resolve_hrefs</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">xmlids</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">element</span><span class="p">:</span>
+<div class="viewcode-block" id="resolve_hrefs"><a class="viewcode-back" href="../../../../reference/protocol/soap.html#spyne.protocol.soap.soap11.resolve_hrefs">[docs]</a>    <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">element</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;id&#39;</span><span class="p">):</span>
             <span class="k">continue</span> <span class="c"># don&#39;t need to resolve this element</span>
 
@@ -199,7 +199,7 @@
 
     <span class="k">return</span> <span class="n">element</span>
 
-<span class="nd">@nillable_value</span>
+<span class="nd">@nillable_value</span></div>
 <span class="k">def</span> <span class="nf">_datetime_to_parent_element</span><span class="p">(</span><span class="n">prot</span><span class="p">,</span> <span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">tns</span><span class="p">,</span> <span class="n">parent_elt</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;retval&#39;</span><span class="p">):</span>
     <span class="n">e</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">parent_elt</span><span class="p">,</span> <span class="s">&#39;{</span><span class="si">%s</span><span class="s">}</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">tns</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
     <span class="n">e</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
@@ -238,10 +238,10 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">wrapped</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__wrapped</span>
+<div class="viewcode-block" id="Soap11.wrapped"><a class="viewcode-back" href="../../../../reference/protocol/soap.html#spyne.protocol.soap.soap11.Soap11.wrapped">[docs]</a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__wrapped</span>
 
-    <span class="k">def</span> <span class="nf">create_in_document</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">charset</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s">&#39;wsgi&#39;</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">create_in_document</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">charset</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Soap11.create_in_document"><a class="viewcode-back" href="../../../../reference/protocol/soap.html#spyne.protocol.soap.soap11.Soap11.create_in_document">[docs]</a>        <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s">&#39;wsgi&#39;</span><span class="p">:</span>
             <span class="c"># according to the soap via http standard, soap requests must only</span>
             <span class="c"># work with proper POST requests.</span>
             <span class="n">content_type</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">req_env</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;CONTENT_TYPE&quot;</span><span class="p">)</span>
@@ -257,8 +257,8 @@
 
         <span class="n">ctx</span><span class="o">.</span><span class="n">in_document</span> <span class="o">=</span> <span class="n">_parse_xml_string</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">in_string</span><span class="p">,</span> <span class="n">charset</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">decompose_incoming_envelope</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">XmlObject</span><span class="o">.</span><span class="n">REQUEST</span><span class="p">):</span>
-        <span class="n">envelope_xml</span><span class="p">,</span> <span class="n">xmlids</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">in_document</span>
+    <span class="k">def</span> <span class="nf">decompose_incoming_envelope</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">XmlObject</span><span class="o">.</span><span class="n">REQUEST</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Soap11.decompose_incoming_envelope"><a class="viewcode-back" href="../../../../reference/protocol/soap.html#spyne.protocol.soap.soap11.Soap11.decompose_incoming_envelope">[docs]</a>        <span class="n">envelope_xml</span><span class="p">,</span> <span class="n">xmlids</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">in_document</span>
         <span class="n">header_document</span><span class="p">,</span> <span class="n">body_document</span> <span class="o">=</span> <span class="n">_from_soap</span><span class="p">(</span><span class="n">envelope_xml</span><span class="p">,</span> <span class="n">xmlids</span><span class="p">)</span>
 
         <span class="n">ctx</span><span class="o">.</span><span class="n">in_document</span> <span class="o">=</span> <span class="n">envelope_xml</span>
@@ -272,7 +272,7 @@
             <span class="n">ctx</span><span class="o">.</span><span class="n">method_request_string</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">in_body_doc</span><span class="o">.</span><span class="n">tag</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">validate_body</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">deserialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">deserialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span></div>
 <div class="viewcode-block" id="Soap11.deserialize"><a class="viewcode-back" href="../../../../reference/protocol/soap.html#spyne.protocol.soap.soap11.Soap11.deserialize">[docs]</a>        <span class="sd">&quot;&quot;&quot;Takes a MethodContext instance and a string containing ONE soap</span>
 <span class="sd">        message.</span>
 <span class="sd">        Returns the corresponding native python object</span>
@@ -428,8 +428,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">event_manager</span><span class="o">.</span><span class="n">fire_event</span><span class="p">(</span><span class="s">&#39;after_serialize&#39;</span><span class="p">,</span> <span class="n">ctx</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">fault_to_http_response_code</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fault</span><span class="p">):</span></div>
-        <span class="k">return</span> <span class="n">HTTP_500</span>
-</pre></div></div>
+<div class="viewcode-block" id="Soap11.fault_to_http_response_code"><a class="viewcode-back" href="../../../../reference/protocol/soap.html#spyne.protocol.soap.soap11.Soap11.fault_to_http_response_code">[docs]</a>        <span class="k">return</span> <span class="n">HTTP_500</span>
+</pre></div></div></div>
 
           </div>
         </div>

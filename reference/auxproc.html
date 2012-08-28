@@ -94,8 +94,22 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="auxiliary-processors">
-<span id="reference-auxproc-base"></span><h1>Auxiliary Processors<a class="headerlink" href="#auxiliary-processors" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-spyne.auxproc">
+<span id="auxiliary-processors"></span><span id="reference-auxproc-base"></span><h1>Auxiliary Processors<a class="headerlink" href="#module-spyne.auxproc" title="Permalink to this headline">¶</a></h1>
+<p>The <tt class="docutils literal"><span class="pre">spyne.auxproc</span></tt> package contains backends to process auxiliary method
+contexts.</p>
+<p>&#8220;Auxiliary Methods&#8221; are methods that run asyncronously once the
+primary method returns (either successfully or not). There can be only one
+primary method for a given method identifier but zero or more auxiliary methods.</p>
+<p>To define multiple auxiliary methods for a given main method, you must use
+separate <tt class="xref py py-class docutils literal"><span class="pre">ServiceBase</span></tt> subclasses that you pass to the
+<a class="reference internal" href="application.html#spyne.application.Application" title="spyne.application.Application"><tt class="xref py py-class docutils literal"><span class="pre">spyne.application.Application</span></tt></a> constructor.</p>
+<p>Auxiliary methods are a useful abstraction for a variety of asyncronous
+execution methods like persistent or non-persistent queueing, async execution
+in another thread, process or node.</p>
+<p>Classes from this package will have the <tt class="docutils literal"><span class="pre">AuxProc</span></tt> suffix, short for
+&#8220;Auxiliary Processor&#8221;.</p>
+<p>This package is EXPERIMENTAL.</p>
 <div class="section" id="auxprocbase">
 <h2>AuxProcBase<a class="headerlink" href="#auxprocbase" title="Permalink to this headline">¶</a></h2>
 <dl class="class">

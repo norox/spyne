@@ -85,6 +85,10 @@
 <span class="c"># Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301</span>
 <span class="c">#</span>
 
+<span class="sd">&quot;&quot;&quot;The ``spyne.protocol.xml`` package contains an xml-based protocol that</span>
+<span class="sd">serializes python objects to xml using Xml Schema conventions.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;spyne.protocol.xml&#39;</span><span class="p">)</span>
 
@@ -141,13 +145,13 @@
 
 
 <span class="k">class</span> <span class="nc">XmlObject</span><span class="p">(</span><span class="n">ProtocolBase</span><span class="p">):</span></div>
-<div class="viewcode-block" id="XmlObject"><a class="viewcode-back" href="../../../../reference/protocol/xml.html#spyne.protocol.xml._base.XmlObject">[docs]</a>    <span class="sd">&quot;&quot;&quot;The protocol that serializes python objects to xml using schema</span>
-<span class="sd">    conventions.</span>
+<div class="viewcode-block" id="XmlObject"><a class="viewcode-back" href="../../../../reference/protocol/xml.html#spyne.protocol.xml._base.XmlObject">[docs]</a>    <span class="sd">&quot;&quot;&quot;The Xml Schema serialization protocol.</span>
 
 <span class="sd">    See the following material for more (much much more!) information.</span>
-<span class="sd">    http://www.w3.org/TR/xmlschema-0/</span>
-<span class="sd">    http://www.w3.org/TR/xmlschema-1/</span>
-<span class="sd">    http://www.w3.org/TR/xmlschema-2/</span>
+
+<span class="sd">    * http://www.w3.org/TR/xmlschema-0/</span>
+<span class="sd">    * http://www.w3.org/TR/xmlschema-1/</span>
+<span class="sd">    * http://www.w3.org/TR/xmlschema-2/</span>
 
 <span class="sd">    :param app: The owner application instance.</span>
 <span class="sd">    :param validator: One of (None, &#39;soft&#39;, &#39;lxml&#39;, &#39;schema&#39;,</span>

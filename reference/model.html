@@ -28,7 +28,7 @@
     <link rel="top" title="spyne 2.8.0-rc documentation" href="../index.html" />
     <link rel="up" title="Spyne API Reference" href="index.html" />
     <link rel="next" title="Interfaces" href="interface.html" />
-    <link rel="prev" title="Common Exceptions" href="error.html" /> 
+    <link rel="prev" title="RPC Decorators" href="decorator.html" /> 
   </head>
   <body>
     <div class="related">
@@ -44,7 +44,7 @@
           <a href="interface.html" title="Interfaces"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="error.html" title="Common Exceptions"
+          <a href="decorator.html" title="RPC Decorators"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Spyne API Reference</a> &raquo;</li> 
@@ -67,8 +67,8 @@
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="error.html"
-                        title="previous chapter">Common Exceptions</a></p>
+  <p class="topless"><a href="decorator.html"
+                        title="previous chapter">RPC Decorators</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="interface.html"
                         title="next chapter">Interfaces</a></p>
@@ -288,27 +288,19 @@ native python value.</p>
 <dt id="spyne.model.binary.ByteArray">
 <em class="property">class </em><tt class="descclassname">spyne.model.binary.</tt><tt class="descname">ByteArray</tt><a class="reference internal" href="../modules/spyne/model/binary.html#ByteArray"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.binary.ByteArray" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#spyne.model._base.SimpleModel" title="spyne.model._base.SimpleModel"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.SimpleModel</span></tt></a></p>
-<p>Every protocol has a different way to handle arbitrary data.
-E.g. xml-based protocols encode this as base64, while HttpRpc just hands it over.</p>
-<p>Its native python format is an sequence of <tt class="docutils literal"><span class="pre">str</span></tt> objects for Python 2.x
+<p>Canonical container for arbitrary data. Every protocol has a different
+way of encapsulating this type. E.g. xml-based protocols encode this as
+base64, while HttpRpc just hands it over.</p>
+<p>Its native python format is a sequence of <tt class="docutils literal"><span class="pre">str</span></tt> objects for Python 2.x
 and a sequence of <tt class="docutils literal"><span class="pre">bytes</span></tt> objects for Python 3.x.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="spyne.model.binary.File">
-<em class="property">class </em><tt class="descclassname">spyne.model.binary.</tt><tt class="descname">File</tt><big>(</big><em>name=None</em>, <em>path=None</em>, <em>type='application/octet-stream'</em>, <em>data=None</em>, <em>handle=None</em><big>)</big><a class="reference internal" href="../modules/spyne/model/binary.html#File"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.binary.File" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#spyne.model._base.ModelBase" title="spyne.model._base.ModelBase"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.ModelBase</span></tt></a></p>
-<p>This type is needed because some protocols prefer to transport file data
-almost out-of-band.</p>
-<dl class="method">
-<dt id="spyne.model.binary.File.rollover">
-<tt class="descname">rollover</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/spyne/model/binary.html#File.rollover"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.binary.File.rollover" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method normalizes the file object by making <tt class="docutils literal"><span class="pre">path</span></tt>, <tt class="docutils literal"><span class="pre">name</span></tt>
-and <tt class="docutils literal"><span class="pre">handle</span></tt> properties consistent. It then writes incoming data to
-the file object and points the <tt class="docutils literal"><span class="pre">data</span></tt> iterable to the contents of
-this file.</p>
-</dd></dl>
-
+<em class="property">class </em><tt class="descclassname">spyne.model.binary.</tt><tt class="descname">File</tt><a class="reference internal" href="../modules/spyne/model/binary.html#File"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.binary.File" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#spyne.model._base.SimpleModel" title="spyne.model._base.SimpleModel"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.SimpleModel</span></tt></a></p>
+<p>A compact way of dealing with incoming files for protocols with a
+standard way of encoding file metadata along with binary data. (E.g. Http)</p>
 </dd></dl>
 
 </div>
@@ -521,8 +513,8 @@ values.</p>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.String</span></tt></p>
 <p>A special kind of String type designed to hold an uri.</p>
 <dl class="class">
-<dt id="spyne.model.primitive.AnyUri.UriValue">
-<em class="property">class </em><tt class="descname">UriValue</tt><big>(</big><em>href</em>, <em>text=None</em>, <em>content=None</em><big>)</big><a class="reference internal" href="../modules/spyne/model/primitive.html#AnyUri.UriValue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.primitive.AnyUri.UriValue" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.model.primitive.AnyUri.Value">
+<em class="property">class </em><tt class="descname">Value</tt><big>(</big><em>href</em>, <em>text=None</em>, <em>content=None</em><big>)</big><a class="reference internal" href="../modules/spyne/model/primitive.html#AnyUri.Value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.primitive.AnyUri.Value" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
 <p>A special object that is just a better way of carrying the
 information carried with a link.</p>
@@ -534,13 +526,13 @@ information carried with a link.</p>
 <li><strong>href</strong> &#8211; The uri string.</li>
 <li><strong>text</strong> &#8211; The text data that goes with the link. This is an
 <cite>lxml.etree._Element</cite> instance.</li>
-<li><strong>content</strong> &#8211; The structured data that goes with the link. This is a</li>
+<li><strong>content</strong> &#8211; The structured data that goes with the link. This is a
+<tt class="docutils literal"><span class="pre">str</span></tt> or a <tt class="docutils literal"><span class="pre">unicode</span></tt> instance.</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
-<p><tt class="docutils literal"><span class="pre">str</span></tt> or a <tt class="docutils literal"><span class="pre">unicode</span></tt> instance.</p>
 </dd></dl>
 
 </dd></dl>
@@ -570,7 +562,7 @@ an ElementTree object.</p>
 <dt id="spyne.model.primitive.Date">
 <em class="property">class </em><tt class="descclassname">spyne.model.primitive.</tt><tt class="descname">Date</tt><a class="reference internal" href="../modules/spyne/model/primitive.html#Date"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.primitive.Date" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#spyne.model.primitive.DateTime" title="spyne.model.primitive.DateTime"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.DateTime</span></tt></a></p>
-<p>Just that, Date. It also supports time zones.</p>
+<p>Just that, Date. No time zone support.</p>
 <p>Native type is <a class="reference external" href="http://docs.python.org/library/datetime.html#datetime.date" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">datetime.date</span></tt></a>.</p>
 </dd></dl>
 
@@ -662,7 +654,7 @@ type.</p>
 <dt id="spyne.model.primitive.Double">
 <em class="property">class </em><tt class="descclassname">spyne.model.primitive.</tt><tt class="descname">Double</tt><a class="reference internal" href="../modules/spyne/model/primitive.html#Double"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.primitive.Double" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#spyne.model.primitive.Decimal" title="spyne.model.primitive.Decimal"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.Decimal</span></tt></a></p>
-<p>This is serialized as the python float. So this type comes with its
+<p>This is serialized as the python <tt class="docutils literal"><span class="pre">float</span></tt>. So this type comes with its
 gotchas.</p>
 </dd></dl>
 
@@ -677,7 +669,7 @@ gotchas.</p>
 <dt id="spyne.model.primitive.Float">
 <em class="property">class </em><tt class="descclassname">spyne.model.primitive.</tt><tt class="descname">Float</tt><a class="reference internal" href="../modules/spyne/model/primitive.html#Float"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.primitive.Float" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#spyne.model.primitive.Double" title="spyne.model.primitive.Double"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.Double</span></tt></a></p>
-<p>Synonym for Double. This is here for compatibility purposes.</p>
+<p>Synonym for Double. It&#8217;s here for compatibility reasons.</p>
 </dd></dl>
 
 <dl class="class">
@@ -764,7 +756,7 @@ gotchas.</p>
 <dt id="spyne.model.primitive.Unicode">
 <em class="property">class </em><tt class="descclassname">spyne.model.primitive.</tt><tt class="descname">Unicode</tt><a class="reference internal" href="../modules/spyne/model/primitive.html#Unicode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.primitive.Unicode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#spyne.model._base.SimpleModel" title="spyne.model._base.SimpleModel"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.SimpleModel</span></tt></a></p>
-<p>The type to represent human-readable data. Its native format is <cite>unicode</cite>.
+<p>The type to represent human-readable data. Its native format is <cite>unicode</cite>
 or <cite>str</cite> with given encoding.</p>
 <dl class="class">
 <dt id="spyne.model.primitive.Unicode.Attributes">
@@ -781,8 +773,8 @@ type.</p>
 <dl class="attribute">
 <dt id="spyne.model.primitive.Unicode.Attributes.max_len">
 <tt class="descname">max_len</tt><em class="property"> = Decimal('Infinity')</em><a class="headerlink" href="#spyne.model.primitive.Unicode.Attributes.max_len" title="Permalink to this definition">¶</a></dt>
-<dd><p>Maximum length of string. Can be set to <tt class="docutils literal"><span class="pre">decimal.Decimal('inf')</span></tt> to accept
-strings of arbitrary length.
+<dd><p>Maximum length of string. Can be set to <tt class="docutils literal"><span class="pre">decimal.Decimal('inf')</span></tt> to
+accept strings of arbitrary length. Also note
 <tt class="xref py py-const docutils literal"><span class="pre">spyne.server.wsgi.MAX_CONTENT_LENGTH</span></tt>.</p>
 </dd></dl>
 
@@ -802,8 +794,8 @@ info: <a class="reference external" href="http://www.regular-expressions.info/xm
 <dl class="attribute">
 <dt id="spyne.model.primitive.Unicode.Attributes.unicode_errors">
 <tt class="descname">unicode_errors</tt><em class="property"> = 'strict'</em><a class="headerlink" href="#spyne.model.primitive.Unicode.Attributes.unicode_errors" title="Permalink to this definition">¶</a></dt>
-<dd><p>The argument to the <tt class="docutils literal"><span class="pre">unicode</span></tt> builtin; one of &#8216;strict&#8217;, &#8216;replace&#8217; or
-&#8216;ignore&#8217;.</p>
+<dd><p>The argument to the <tt class="docutils literal"><span class="pre">unicode</span></tt> builtin; one of &#8216;strict&#8217;, &#8216;replace&#8217;
+or &#8216;ignore&#8217;.</p>
 </dd></dl>
 
 </dd></dl>
@@ -929,7 +921,7 @@ SQLAlchemy and its information alone.</p>
           <a href="interface.html" title="Interfaces"
              >next</a> |</li>
         <li class="right" >
-          <a href="error.html" title="Common Exceptions"
+          <a href="decorator.html" title="RPC Decorators"
              >previous</a> |</li>
         <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
           <li><a href="index.html" >Spyne API Reference</a> &raquo;</li> 

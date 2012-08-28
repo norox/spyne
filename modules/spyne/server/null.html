@@ -113,12 +113,12 @@
 <span class="sd">    It implicitly uses the &#39;sync&#39; auxiliary processing mode.</span>
 
 <span class="sd">    Note that:</span>
-<span class="sd">        1) **kwargs overwrite **args.</span>
+<span class="sd">        1) ``**kwargs`` overwrite ``*args``.</span>
 <span class="sd">        2) You can do: ::</span>
 
-<span class="sd">                logging.getLogger(&#39;spyne.server.null&#39;).setLevel(logging.CRITICAL)</span>
+<span class="sd">            logging.getLogger(&#39;spyne.server.null&#39;).setLevel(logging.CRITICAL)</span>
 
-<span class="sd">            to hide context delimiters in logs.</span>
+<span class="sd">        to hide context delimiters in logs.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">transport</span> <span class="o">=</span> <span class="s">&#39;noconn://null.spyne&#39;</span>
