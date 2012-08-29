@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Models &mdash; spyne 2.8.0-rc documentation</title>
+    <title>Models &mdash; spyne 2.8.1-rc documentation</title>
     
     <link rel="stylesheet" href="../static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.8.0-rc',
+        VERSION:     '2.8.1-rc',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="spyne 2.8.0-rc documentation" href="../index.html" />
+    <link rel="top" title="spyne 2.8.1-rc documentation" href="../index.html" />
     <link rel="up" title="Spyne API Reference" href="index.html" />
     <link rel="next" title="Interfaces" href="interface.html" />
     <link rel="prev" title="Common Exceptions" href="error.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="error.html" title="Common Exceptions"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
+        <li><a href="../index.html">spyne 2.8.1-rc documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Spyne API Reference</a> &raquo;</li> 
       </ul>
     </div>
@@ -461,7 +461,8 @@ implementation, this is just a marker.</p>
 <dl class="function">
 <dt id="spyne.model.enum.Enum">
 <tt class="descclassname">spyne.model.enum.</tt><tt class="descname">Enum</tt><big>(</big><em>*values</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../modules/spyne/model/enum.html#Enum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.model.enum.Enum" title="Permalink to this definition">¶</a></dt>
-<dd><p>The enum type that only returns true when compared to types of own type.</p>
+<dd><p>The enum type that can only return <tt class="docutils literal"><span class="pre">True</span></tt> when compared to types of
+own type.</p>
 <p>Here&#8217;s how it&#8217;s supposed to work:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">spyne.model.enum</span> <span class="kn">import</span> <span class="n">Enum</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">SomeEnum</span> <span class="o">=</span> <span class="n">Enum</span><span class="p">(</span><span class="s">&quot;SomeValue&quot;</span><span class="p">,</span> <span class="s">&quot;SomeOtherValue&quot;</span><span class="p">,</span> <span class="n">type_name</span><span class="o">=</span><span class="s">&quot;SomeEnum&quot;</span><span class="p">)</span>
@@ -550,10 +551,10 @@ information carried with a link.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>href</strong> &#8211; The uri string.</li>
-<li><strong>text</strong> &#8211; The text data that goes with the link. This is an
-<cite>lxml.etree._Element</cite> instance.</li>
-<li><strong>content</strong> &#8211; The structured data that goes with the link. This is a
+<li><strong>text</strong> &#8211; The text data that goes with the link. This is a
 <tt class="docutils literal"><span class="pre">str</span></tt> or a <tt class="docutils literal"><span class="pre">unicode</span></tt> instance.</li>
+<li><strong>content</strong> &#8211; The structured data that goes with the link. This is an
+<cite>lxml.etree.Element</cite> instance.</li>
 </ul>
 </td>
 </tr>
@@ -949,7 +950,7 @@ SQLAlchemy and its information alone.</p>
         <li class="right" >
           <a href="error.html" title="Common Exceptions"
              >previous</a> |</li>
-        <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
+        <li><a href="../index.html">spyne 2.8.1-rc documentation</a> &raquo;</li>
           <li><a href="index.html" >Spyne API Reference</a> &raquo;</li> 
       </ul>
     </div>
