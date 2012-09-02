@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Running Tests &mdash; spyne 2.8.1-rc documentation</title>
+    <title>Running Tests &mdash; spyne 2.8.2-rc documentation</title>
     
     <link rel="stylesheet" href="static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '2.8.1-rc',
+        VERSION:     '2.8.2-rc',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="static/jquery.js"></script>
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
-    <link rel="top" title="spyne 2.8.1-rc documentation" href="index.html" />
+    <link rel="top" title="spyne 2.8.2-rc documentation" href="index.html" />
     <link rel="next" title="Spyne FAQ" href="faq.html" />
     <link rel="prev" title="Miscellanous Spyne Utilities" href="reference/util.html" /> 
   </head>
@@ -45,7 +45,7 @@
         <li class="right" >
           <a href="reference/util.html" title="Miscellanous Spyne Utilities"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">spyne 2.8.1-rc documentation</a> &raquo;</li> 
+        <li><a href="index.html">spyne 2.8.2-rc documentation</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar">
@@ -53,8 +53,6 @@
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Running Tests</a><ul>
-<li><a class="reference internal" href="#run-tests-sh">run_tests.sh</a></li>
-<li><a class="reference internal" href="#requirements">Requirements</a></li>
 <li><a class="reference internal" href="#soap-interoperability-tests">SOAP Interoperability Tests</a><ul>
 <li><a class="reference internal" href="#python">Python</a></li>
 <li><a class="reference internal" href="#ruby">Ruby</a></li>
@@ -106,32 +104,20 @@ use-case is working fine! Given the nature of open-source projects, Spyne may
 shift focus or change maintainers in the future. This can result in patches
 which may cause incompatibilities with your existing code base. The only way to
 detect such corner cases is to have a great test suite.</p>
-<div class="section" id="run-tests-sh">
-<h2>run_tests.sh<a class="headerlink" href="#run-tests-sh" title="Permalink to this headline">¶</a></h2>
-<p>This is a shell script to make it easier to run all tests in one go. Twisted
-tests need to be run using trial. Interop tests start their own servers in the
-background, so they (currently) need to be run one by one in separate
-processes. This simple script considers all these little things and is the
-recommended way of running spyne tests.</p>
+<p>Spyne&#8217;s master repository is already integrated with travis-ci.org. Head over to
+<a class="reference external" href="http://travis-ci.org/arskom/spyne">http://travis-ci.org/arskom/spyne</a> to see it for yourself.</p>
+<p>As the necessary configuration is already done, It&#8217;s very simple to integrate
+your own fork of Spyne. Just sign in with your Github account and follow
+instructions.</p>
+<p>If you want to run the tests yourself, <a class="reference external" href="http://pytest.org/latest/">pytest</a> :</p>
+<div class="highlight-python"><pre>python setup.py test</pre>
 </div>
-<div class="section" id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
-<p>While simply executing test modules is normally enough to run Python tests,
-using py.test from pytest package is just a more pleasant way to run them.
-Simply easy_install pytest to get it. You can run the following command in the
-test directory:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">py</span><span class="o">.</span><span class="n">test</span> <span class="o">-</span><span class="n">v</span> <span class="o">--</span><span class="n">tb</span><span class="o">=</span><span class="n">short</span>
+<p>or you can run individiual tests with py.test:</p>
+<div class="highlight-python"><pre>py.test -v --tb=short spyne/test/protocol/test_json.py</pre>
+</div>
+<p>or directly by executing them:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">spyne</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">protocol</span><span class="o">/</span><span class="n">test_json</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
-</div>
-<p>You can use the module name as an argument:</p>
-<div class="highlight-python"><pre>py.test -v --tb=short test_sqla.py</pre>
-</div>
-<p>You can also choose which test to run:</p>
-<div class="highlight-python"><pre>py.test -v --tb=short test_sqla.py -k test_same_table_inheritance</pre>
-</div>
-<p>See <a class="reference external" href="http://pytest.org/latest/">pytest documentation</a> for more info.</p>
-<p>Note that you need to do several other preparations to have the interop tests
-working. See the next section for the specifics.</p>
 </div>
 <div class="section" id="soap-interoperability-tests">
 <h2>SOAP Interoperability Tests<a class="headerlink" href="#soap-interoperability-tests" title="Permalink to this headline">¶</a></h2>
@@ -205,7 +191,7 @@ well, you should get a new wsi-report-spyne.xml file in the same directory.</p>
         <li class="right" >
           <a href="reference/util.html" title="Miscellanous Spyne Utilities"
              >previous</a> |</li>
-        <li><a href="index.html">spyne 2.8.1-rc documentation</a> &raquo;</li> 
+        <li><a href="index.html">spyne 2.8.2-rc documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
