@@ -285,6 +285,8 @@ def fault_to_parent_element(prot, cls, value, tns, parent_elt, name=None):
     if value.detail != None:
         etree.SubElement(element, 'detail').append(value.detail)
 
+    # add other nonstandard fault subelements
+    get_members_etree(prot, cls, value, element)
 
 def fault_from_element(prot, cls, element):
     code = element.find('faultcode').text
